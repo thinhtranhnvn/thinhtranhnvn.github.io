@@ -5357,8 +5357,8 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$application = _Browser_application;
-var $author$project$Component$Navigator$GotData = function (a) {
-	return {$: 'GotData', a: a};
+var $author$project$Component$Navigator$GotResponse = function (a) {
+	return {$: 'GotResponse', a: a};
 };
 var $author$project$Component$Navigator$Model = F4(
 	function (key, url, topicList, pageTitle) {
@@ -6170,7 +6170,7 @@ var $author$project$Component$Navigator$init = F3(
 			{
 				expect: A2(
 					$elm$http$Http$expectJson,
-					$author$project$Component$Navigator$GotData,
+					$author$project$Component$Navigator$GotResponse,
 					$elm$json$Json$Decode$list($author$project$Data$Topic$jsonDecoder)),
 				url: $author$project$Config$dataUrl + '/topic-list.json'
 			});
@@ -6242,21 +6242,6 @@ var $elm$url$Url$toString = function (url) {
 var $author$project$Component$Navigator$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
-			case 'GotData':
-				if (msg.a.$ === 'Err') {
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{pageTitle: 'Error Loading Data'}),
-						$elm$core$Platform$Cmd$none);
-				} else {
-					var data = msg.a.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{topicList: data}),
-						$elm$core$Platform$Cmd$none);
-				}
 			case 'UrlChanged':
 				var newURL = msg.a;
 				return _Utils_Tuple2(
@@ -6264,7 +6249,7 @@ var $author$project$Component$Navigator$update = F2(
 						model,
 						{url: newURL}),
 					$elm$core$Platform$Cmd$none);
-			default:
+			case 'LinkClicked':
 				var request = msg.a;
 				if (request.$ === 'Internal') {
 					var url = request.a;
@@ -6279,6 +6264,22 @@ var $author$project$Component$Navigator$update = F2(
 					return _Utils_Tuple2(
 						model,
 						$elm$browser$Browser$Navigation$load(href));
+				}
+			default:
+				var response = msg.a;
+				if (response.$ === 'Err') {
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{pageTitle: 'Error Loading Data'}),
+						$elm$core$Platform$Cmd$none);
+				} else {
+					var data = response.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{topicList: data}),
+						$elm$core$Platform$Cmd$none);
 				}
 		}
 	});
@@ -6332,93 +6333,96 @@ var $author$project$Component$Navigator$topicLink = function (topic) {
 			]));
 };
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $author$project$Component$Navigator$bodyHtml = function (model) {
+	return _List_fromArray(
+		[
+			A2(
+			$elm$html$Html$nav,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('Navigator Base')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$a,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('Navigator Avatar'),
+							$elm$html$Html$Attributes$href('/')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$img,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$src($author$project$Config$avatarUrl)
+								]),
+							_List_Nil),
+							$elm$html$Html$text($author$project$Config$siteTitle)
+						])),
+					A2(
+					$elm$html$Html$input,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('Navigator Search'),
+							$elm$html$Html$Attributes$type_('text'),
+							$elm$html$Html$Attributes$placeholder('Search with Google...')
+						]),
+					_List_Nil),
+					A2(
+					$elm$html$Html$input,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$id('folder-0'),
+							$elm$html$Html$Attributes$type_('checkbox')
+						]),
+					_List_Nil),
+					A2(
+					$elm$html$Html$label,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$for('folder-0')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Topics')
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('Navigator Folder')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('Folder Container')
+								]),
+							A2($elm$core$List$map, $author$project$Component$Navigator$topicLink, model.topicList))
+						])),
+					A2(
+					$elm$html$Html$a,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('Navigator GitHub'),
+							$elm$html$Html$Attributes$href($author$project$Config$gitHubUrl),
+							$elm$html$Html$Attributes$target('_blank')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('GitHub')
+						]))
+				]))
+		]);
+};
 var $author$project$Component$Navigator$view = function (model) {
 	return {
-		body: _List_fromArray(
-			[
-				A2(
-				$elm$html$Html$nav,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('Navigator Base')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$a,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('Navigator Avatar'),
-								$elm$html$Html$Attributes$href('/')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$img,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$src($author$project$Config$avatarUrl)
-									]),
-								_List_Nil),
-								$elm$html$Html$text($author$project$Config$siteTitle)
-							])),
-						A2(
-						$elm$html$Html$input,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('Navigator Search'),
-								$elm$html$Html$Attributes$type_('text'),
-								$elm$html$Html$Attributes$placeholder('Search with Google...')
-							]),
-						_List_Nil),
-						A2(
-						$elm$html$Html$input,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$id('folder-0'),
-								$elm$html$Html$Attributes$type_('checkbox')
-							]),
-						_List_Nil),
-						A2(
-						$elm$html$Html$label,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$for('folder-0')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Topics')
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('Navigator Folder')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('Folder Container')
-									]),
-								A2($elm$core$List$map, $author$project$Component$Navigator$topicLink, model.topicList))
-							])),
-						A2(
-						$elm$html$Html$a,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('Navigator GitHub'),
-								$elm$html$Html$Attributes$href($author$project$Config$gitHubUrl),
-								$elm$html$Html$Attributes$target('_blank')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('GitHub')
-							]))
-					]))
-			]),
+		body: $author$project$Component$Navigator$bodyHtml(model),
 		title: model.pageTitle
 	};
 };
