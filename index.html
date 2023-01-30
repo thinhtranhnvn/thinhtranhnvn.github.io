@@ -5364,7 +5364,6 @@ var $author$project$Model$Model = F4(
 var $author$project$Component$Navigator$TopicListResponse = function (a) {
 	return {$: 'TopicListResponse', a: a};
 };
-var $author$project$Config$dataUrl = '/data';
 var $elm$json$Json$Decode$decodeString = _Json_runOnString;
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
@@ -6152,17 +6151,16 @@ var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
 		{body: $elm$http$Http$emptyBody, expect: r.expect, headers: _List_Nil, method: 'GET', timeout: $elm$core$Maybe$Nothing, tracker: $elm$core$Maybe$Nothing, url: r.url});
 };
-var $author$project$Model$Topic$Topic = F6(
-	function (title, path, keywords, description, markdown, active) {
-		return {active: active, description: description, keywords: keywords, markdown: markdown, path: path, title: title};
+var $author$project$Model$Topic$Topic = F5(
+	function (title, path, keywords, description, markdown) {
+		return {description: description, keywords: keywords, markdown: markdown, path: path, title: title};
 	});
-var $elm$json$Json$Decode$bool = _Json_decodeBool;
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$list = _Json_decodeList;
-var $elm$json$Json$Decode$map6 = _Json_map6;
+var $elm$json$Json$Decode$map5 = _Json_map5;
 var $elm$json$Json$Decode$string = _Json_decodeString;
-var $author$project$Model$Topic$jsonDecoder = A7(
-	$elm$json$Json$Decode$map6,
+var $author$project$Model$Topic$jsonDecoder = A6(
+	$elm$json$Json$Decode$map5,
 	$author$project$Model$Topic$Topic,
 	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'path', $elm$json$Json$Decode$string),
@@ -6171,9 +6169,8 @@ var $author$project$Model$Topic$jsonDecoder = A7(
 		'keywords',
 		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
 	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'markdown', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'active', $elm$json$Json$Decode$bool));
-var $author$project$Model$Topic$none = {active: false, description: 'None', keywords: _List_Nil, markdown: 'None', path: '#', title: 'None'};
+	A2($elm$json$Json$Decode$field, 'markdown', $elm$json$Json$Decode$string));
+var $author$project$Model$Topic$none = {description: 'None', keywords: _List_Nil, markdown: 'None', path: '#', title: 'None'};
 var $author$project$Model$Data$none = {currentTopic: $author$project$Model$Topic$none, topicList: _List_Nil};
 var $author$project$Model$Navigator$none = {expanded: false};
 var $author$project$Model$State$none = {navigator: $author$project$Model$Navigator$none};
@@ -6185,7 +6182,7 @@ var $author$project$Component$Navigator$init = F3(
 					$elm$http$Http$expectJson,
 					$author$project$Component$Navigator$TopicListResponse,
 					$elm$json$Json$Decode$list($author$project$Model$Topic$jsonDecoder)),
-				url: $author$project$Config$dataUrl + '/topic-list.json'
+				url: 'https://thinhtranhnvn.github.io/data/topic-list.json'
 			});
 		return _Utils_Tuple2(
 			A4($author$project$Model$Model, url, key, $author$project$Model$Data$none, $author$project$Model$State$none),
@@ -6287,7 +6284,18 @@ var $author$project$Component$Navigator$update = F2(
 			default:
 				var response = msg.a;
 				if (response.$ === 'Err') {
-					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					var oldData = model.data;
+					var newData = _Utils_update(
+						oldData,
+						{
+							topicList: _List_fromArray(
+								[$author$project$Model$Topic$none])
+						});
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{data: newData}),
+						$elm$core$Platform$Cmd$none);
 				} else {
 					var result = response.a;
 					var oldData = model.data;
