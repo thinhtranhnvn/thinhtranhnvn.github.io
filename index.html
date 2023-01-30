@@ -1,14 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-   <title> Simplicity SPA Elm </title>
-
-   <meta charset="utf-8" />
-   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-
-   <link rel="stylesheet" href="/mockup/master.css" />
-   <style> /* page overrides */ </style>
+  <meta charset="UTF-8">
+  <title>Component.Navigator</title>
+  <style>body { padding: 0; margin: 0; }</style>
 </head>
 
 <body>
@@ -5357,13 +5352,13 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$application = _Browser_application;
-var $author$project$Component$Navigator$GotResponse = function (a) {
-	return {$: 'GotResponse', a: a};
-};
-var $author$project$Component$Navigator$Model = F4(
-	function (url, key, topicList, expanded) {
-		return {expanded: expanded, key: key, topicList: topicList, url: url};
+var $author$project$Model$Model = F4(
+	function (url, key, data, state) {
+		return {data: data, key: key, state: state, url: url};
 	});
+var $author$project$Component$Navigator$TopicListResponse = function (a) {
+	return {$: 'TopicListResponse', a: a};
+};
 var $author$project$Config$dataUrl = '/data';
 var $elm$json$Json$Decode$decodeString = _Json_runOnString;
 var $elm$http$Http$BadStatus_ = F2(
@@ -6152,30 +6147,43 @@ var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
 		{body: $elm$http$Http$emptyBody, expect: r.expect, headers: _List_Nil, method: 'GET', timeout: $elm$core$Maybe$Nothing, tracker: $elm$core$Maybe$Nothing, url: r.url});
 };
-var $author$project$Data$Topic$Topic = F2(
-	function (title, path) {
-		return {path: path, title: title};
+var $author$project$Model$Topic$Topic = F6(
+	function (title, path, keywords, description, markdown, active) {
+		return {active: active, description: description, keywords: keywords, markdown: markdown, path: path, title: title};
 	});
+var $elm$json$Json$Decode$bool = _Json_decodeBool;
 var $elm$json$Json$Decode$field = _Json_decodeField;
-var $elm$json$Json$Decode$string = _Json_decodeString;
-var $author$project$Data$Topic$jsonDecoder = A3(
-	$elm$json$Json$Decode$map2,
-	$author$project$Data$Topic$Topic,
-	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'path', $elm$json$Json$Decode$string));
 var $elm$json$Json$Decode$list = _Json_decodeList;
+var $elm$json$Json$Decode$map6 = _Json_map6;
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $author$project$Model$Topic$jsonDecoder = A7(
+	$elm$json$Json$Decode$map6,
+	$author$project$Model$Topic$Topic,
+	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'path', $elm$json$Json$Decode$string),
+	A2(
+		$elm$json$Json$Decode$field,
+		'keywords',
+		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
+	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'markdown', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'active', $elm$json$Json$Decode$bool));
+var $author$project$Model$Topic$none = {active: false, description: 'None', keywords: _List_Nil, markdown: 'None', path: '#', title: 'None'};
+var $author$project$Model$Data$none = {currentTopic: $author$project$Model$Topic$none, topicList: _List_Nil};
+var $author$project$Model$Navigator$none = {expanded: false};
+var $author$project$Model$State$none = {navigator: $author$project$Model$Navigator$none};
 var $author$project$Component$Navigator$init = F3(
 	function (_v0, url, key) {
 		var cmd = $elm$http$Http$get(
 			{
 				expect: A2(
 					$elm$http$Http$expectJson,
-					$author$project$Component$Navigator$GotResponse,
-					$elm$json$Json$Decode$list($author$project$Data$Topic$jsonDecoder)),
+					$author$project$Component$Navigator$TopicListResponse,
+					$elm$json$Json$Decode$list($author$project$Model$Topic$jsonDecoder)),
 				url: $author$project$Config$dataUrl + '/topic-list.json'
 			});
 		return _Utils_Tuple2(
-			A4($author$project$Component$Navigator$Model, url, key, _List_Nil, false),
+			A4($author$project$Model$Model, url, key, $author$project$Model$Data$none, $author$project$Model$State$none),
 			cmd);
 	});
 var $author$project$Component$Navigator$UrlChanged = function (a) {
@@ -6192,7 +6200,6 @@ var $author$project$Component$Navigator$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
 var $elm$browser$Browser$Navigation$load = _Browser_load;
-var $author$project$Data$Topic$none = A2($author$project$Data$Topic$Topic, 'None', '#');
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
@@ -6245,10 +6252,16 @@ var $author$project$Component$Navigator$update = F2(
 		switch (msg.$) {
 			case 'UrlChanged':
 				var newURL = msg.a;
+				var oldState = model.state;
+				var newState = _Utils_update(
+					oldState,
+					{
+						navigator: {expanded: false}
+					});
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{expanded: false, url: newURL}),
+						{state: newState, url: newURL}),
 					$elm$core$Platform$Cmd$none);
 			case 'LinkClicked':
 				var request = msg.a;
@@ -6269,20 +6282,17 @@ var $author$project$Component$Navigator$update = F2(
 			default:
 				var response = msg.a;
 				if (response.$ === 'Err') {
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								topicList: _List_fromArray(
-									[$author$project$Data$Topic$none])
-							}),
-						$elm$core$Platform$Cmd$none);
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 				} else {
-					var data = response.a;
+					var result = response.a;
+					var oldData = model.data;
+					var newData = _Utils_update(
+						oldData,
+						{topicList: result});
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{topicList: data}),
+							{data: newData}),
 						$elm$core$Platform$Cmd$none);
 				}
 		}
@@ -6322,7 +6332,7 @@ var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$nav = _VirtualDom_node('nav');
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
-var $author$project$Config$siteTitle = 'Semi Dev_';
+var $author$project$Config$siteTitle = 'Semi Dev_ \'s Blog';
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -6390,7 +6400,7 @@ var $author$project$Component$Navigator$bodyHtml = function (model) {
 						[
 							$elm$html$Html$Attributes$id('folder-0'),
 							$elm$html$Html$Attributes$type_('checkbox'),
-							$elm$html$Html$Attributes$checked(model.expanded)
+							$elm$html$Html$Attributes$checked(model.state.navigator.expanded)
 						]),
 					_List_Nil),
 					A2(
@@ -6417,7 +6427,7 @@ var $author$project$Component$Navigator$bodyHtml = function (model) {
 								[
 									$elm$html$Html$Attributes$class('Folder Container')
 								]),
-							A2($elm$core$List$map, $author$project$Component$Navigator$topicLink, model.topicList))
+							A2($elm$core$List$map, $author$project$Component$Navigator$topicLink, model.data.topicList))
 						])),
 					A2(
 					$elm$html$Html$a,

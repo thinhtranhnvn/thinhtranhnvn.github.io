@@ -52,7 +52,7 @@ input#folder-0
    ; color: white
    }
 .Navigator.Link:hover
-   { background: lightgrey }
+   { background: dimgrey }
 .Navigator.Link
    { display: inline-block
    ; padding: 9px 15px
