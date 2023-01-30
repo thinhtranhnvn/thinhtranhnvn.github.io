@@ -1,0 +1,41 @@
+@charset "utf-8";
+  
+
+.Reader.Base
+   { font-family: "Times New Roman", "Times", serif
+   ; font-size: 18px
+   }
+.Reader.Base
+   { background: white
+   ; color: black
+   }
+.Reader.Base
+   { display: block
+   ; width: 100%
+   }
+
+.Reader.Container
+   { display: block
+   ; width: 100%
+   ; max-width: 960px
+   ; margin: 0 auto
+   ; padding: 60px 39px
+   }
+
+.Reader.Container > span
+   { background: silver
+   ; color: white
+   }
+.Reader.Container > span
+   { display: inline-block
+   ; padding: 3px 9px
+   ; margin-right: 3px
+   ; margin-bottom: 9px
+   ; border-radius: 15px
+   }
+
+@media screen and (max-width: 510px)
+   { .Reader.Container
+        { padding: 60px 15px }
+   }
+

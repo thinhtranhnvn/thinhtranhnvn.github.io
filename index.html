@@ -1,10 +1,15 @@
-<<<<<<< HEAD
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Main</title>
-  <style>body { padding: 0; margin: 0; }</style>
+   <title> Simplicity SPA Elm </title>
+
+   <meta charset="utf-8" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+
+   <link rel="stylesheet" href="/mockup/master.css" />
+   <style> /* page overrides */ </style>
+  <link />
 </head>
 
 <body>
@@ -4560,7 +4565,7 @@ function _Http_track(router, xhr, tracker)
 			size: event.lengthComputable ? $elm$core$Maybe$Just(event.total) : $elm$core$Maybe$Nothing
 		}))));
 	});
-}var $author$project$Main$SPA = F6(
+}var $author$project$Component$Navigator$SPA = F6(
 	function (init, view, update, subscriptions, onUrlRequest, onUrlChange) {
 		return {init: init, onUrlChange: onUrlChange, onUrlRequest: onUrlRequest, subscriptions: subscriptions, update: update, view: view};
 	});
@@ -5353,26 +5358,13 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$application = _Browser_application;
-var $author$project$Main$GotData = function (a) {
+var $author$project$Component$Navigator$GotData = function (a) {
 	return {$: 'GotData', a: a};
 };
-var $author$project$Main$Model = F3(
-	function (url, key, topicList) {
-		return {key: key, topicList: topicList, url: url};
+var $author$project$Component$Navigator$Model = F4(
+	function (key, url, topicList, pageTitle) {
+		return {key: key, pageTitle: pageTitle, topicList: topicList, url: url};
 	});
-var $elm$json$Json$Decode$list = _Json_decodeList;
-var $author$project$Main$Topic = F2(
-	function (title, path) {
-		return {path: path, title: title};
-	});
-var $elm$json$Json$Decode$field = _Json_decodeField;
-var $elm$json$Json$Decode$string = _Json_decodeString;
-var $author$project$Main$topicDecoder = A3(
-	$elm$json$Json$Decode$map2,
-	$author$project$Main$Topic,
-	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'path', $elm$json$Json$Decode$string));
-var $author$project$Main$dataDecoder = $elm$json$Json$Decode$list($author$project$Main$topicDecoder);
 var $elm$json$Json$Decode$decodeString = _Json_runOnString;
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
@@ -6160,28 +6152,43 @@ var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
 		{body: $elm$http$Http$emptyBody, expect: r.expect, headers: _List_Nil, method: 'GET', timeout: $elm$core$Maybe$Nothing, tracker: $elm$core$Maybe$Nothing, url: r.url});
 };
-var $author$project$Main$init = F3(
+var $author$project$Data$Topic$Topic = F2(
+	function (title, path) {
+		return {path: path, title: title};
+	});
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $author$project$Data$Topic$jsonDecoder = A3(
+	$elm$json$Json$Decode$map2,
+	$author$project$Data$Topic$Topic,
+	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'path', $elm$json$Json$Decode$string));
+var $elm$json$Json$Decode$list = _Json_decodeList;
+var $author$project$Component$Navigator$init = F3(
 	function (_v0, url, key) {
 		var cmd = $elm$http$Http$get(
 			{
-				expect: A2($elm$http$Http$expectJson, $author$project$Main$GotData, $author$project$Main$dataDecoder),
-				url: '/topic-list.json'
+				expect: A2(
+					$elm$http$Http$expectJson,
+					$author$project$Component$Navigator$GotData,
+					$elm$json$Json$Decode$list($author$project$Data$Topic$jsonDecoder)),
+				url: 'topic-list.json'
 			});
 		return _Utils_Tuple2(
-			A3($author$project$Main$Model, url, key, _List_Nil),
+			A4($author$project$Component$Navigator$Model, key, url, _List_Nil, 'Empty'),
 			cmd);
 	});
-var $author$project$Main$UrlChanged = function (a) {
+var $author$project$Component$Navigator$UrlChanged = function (a) {
 	return {$: 'UrlChanged', a: a};
 };
-var $author$project$Main$onUrlChange = $author$project$Main$UrlChanged;
-var $author$project$Main$LinkClicked = function (a) {
+var $author$project$Component$Navigator$onUrlChange = $author$project$Component$Navigator$UrlChanged;
+var $author$project$Component$Navigator$LinkClicked = function (a) {
 	return {$: 'LinkClicked', a: a};
 };
-var $author$project$Main$onUrlRequest = $author$project$Main$LinkClicked;
+var $author$project$Component$Navigator$onUrlRequest = $author$project$Component$Navigator$LinkClicked;
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $author$project$Main$subscriptions = function (model) {
+var $author$project$Component$Navigator$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
 var $elm$browser$Browser$Navigation$load = _Browser_load;
@@ -6232,19 +6239,15 @@ var $elm$url$Url$toString = function (url) {
 					_Utils_ap(http, url.host)),
 				url.path)));
 };
-var $author$project$Main$update = F2(
+var $author$project$Component$Navigator$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
 			case 'GotData':
 				if (msg.a.$ === 'Err') {
-					var errMsg = A2($author$project$Main$Topic, 'Error Loading Data ...', '#');
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{
-								topicList: _List_fromArray(
-									[errMsg])
-							}),
+							{pageTitle: 'Error Loading Data'}),
 						$elm$core$Platform$Cmd$none);
 				} else {
 					var data = msg.a.a;
@@ -6254,10 +6257,17 @@ var $author$project$Main$update = F2(
 							{topicList: data}),
 						$elm$core$Platform$Cmd$none);
 				}
-			case 'LinkClicked':
-				var request = msg.a;
-				if (request.$ === 'Internal') {
-					var url = request.a;
+			case 'UrlChanged':
+				var newURL = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{url: newURL}),
+					$elm$core$Platform$Cmd$none);
+			default:
+				var urlRequest = msg.a;
+				if (urlRequest.$ === 'Internal') {
+					var url = urlRequest.a;
 					return _Utils_Tuple2(
 						model,
 						A2(
@@ -6265,23 +6275,15 @@ var $author$project$Main$update = F2(
 							model.key,
 							$elm$url$Url$toString(url)));
 				} else {
-					var href = request.a;
+					var href = urlRequest.a;
 					return _Utils_Tuple2(
 						model,
 						$elm$browser$Browser$Navigation$load(href));
 				}
-			default:
-				var newUrl = msg.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{url: newUrl}),
-					$elm$core$Platform$Cmd$none);
 		}
 	});
 var $elm$html$Html$a = _VirtualDom_node('a');
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $author$project$Config$avatarUrl = 'http://localhost:8000/mockup/Component/Navigator/avatar.jpg';
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6290,66 +6292,145 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			$elm$json$Json$Encode$string(string));
 	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$html$Html$Attributes$for = $elm$html$Html$Attributes$stringProperty('htmlFor');
+var $author$project$Config$gitHubUrl = 'https://github.com/thinhtranhnvn';
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
 		'href',
 		_VirtualDom_noJavaScriptUri(url));
 };
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$html$Html$img = _VirtualDom_node('img');
+var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$html$Html$label = _VirtualDom_node('label');
+var $elm$html$Html$nav = _VirtualDom_node('nav');
+var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
+var $author$project$Config$siteTitle = 'Semi Dev_';
+var $elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
+var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Main$entry = function (topic) {
+var $author$project$Config$siteUrl = 'http://localhost:8000';
+var $author$project$Component$Navigator$topicLink = function (topic) {
 	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
+		$elm$html$Html$a,
 		_List_fromArray(
 			[
+				$elm$html$Html$Attributes$class('Navigator Link'),
+				$elm$html$Html$Attributes$href(
+				_Utils_ap($author$project$Config$siteUrl, topic.path))
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text(topic.title)
+			]));
+};
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $author$project$Component$Navigator$view = function (model) {
+	return {
+		body: _List_fromArray(
+			[
 				A2(
-				$elm$html$Html$h2,
-				_List_Nil,
+				$elm$html$Html$nav,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(topic.title)
-					])),
-				A2(
-				$elm$html$Html$a,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$href(topic.path)
+						$elm$html$Html$Attributes$class('Navigator Base')
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text('[ read more ]')
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('Navigator Avatar'),
+								$elm$html$Html$Attributes$href('/')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$img,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$src($author$project$Config$avatarUrl)
+									]),
+								_List_Nil),
+								$elm$html$Html$text($author$project$Config$siteTitle)
+							])),
+						A2(
+						$elm$html$Html$input,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('Navigator Search'),
+								$elm$html$Html$Attributes$type_('text'),
+								$elm$html$Html$Attributes$placeholder('Search with Google...')
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$label,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('Active'),
+								$elm$html$Html$Attributes$for('folder-0')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Topics')
+							])),
+						A2(
+						$elm$html$Html$input,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$id('folder-0'),
+								$elm$html$Html$Attributes$type_('checkbox')
+							]),
+						_List_Nil),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('Navigator Folder')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('Folder Container')
+									]),
+								A2($elm$core$List$map, $author$project$Component$Navigator$topicLink, model.topicList))
+							])),
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('Navigator GitHub'),
+								$elm$html$Html$Attributes$href($author$project$Config$gitHubUrl),
+								$elm$html$Html$Attributes$target('_blank')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('GitHub')
+							]))
 					]))
-			]));
-};
-var $elm$html$Html$h1 = _VirtualDom_node('h1');
-var $author$project$Main$view = function (model) {
-	return {
-		body: function () {
-			var heading = A2(
-				$elm$html$Html$h1,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(
-						$elm$url$Url$toString(model.url))
-					]));
-			var entryList = A2($elm$core$List$map, $author$project$Main$entry, model.topicList);
-			return _Utils_ap(
-				_List_fromArray(
-					[heading]),
-				entryList);
-		}(),
-		title: 'Parsing Json'
+			]),
+		title: model.pageTitle
 	};
 };
-var $author$project$Main$main = $elm$browser$Browser$application(
-	A6($author$project$Main$SPA, $author$project$Main$init, $author$project$Main$view, $author$project$Main$update, $author$project$Main$subscriptions, $author$project$Main$onUrlRequest, $author$project$Main$onUrlChange));
-_Platform_export({'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
+var $author$project$Component$Navigator$main = $elm$browser$Browser$application(
+	A6($author$project$Component$Navigator$SPA, $author$project$Component$Navigator$init, $author$project$Component$Navigator$view, $author$project$Component$Navigator$update, $author$project$Component$Navigator$subscriptions, $author$project$Component$Navigator$onUrlRequest, $author$project$Component$Navigator$onUrlChange));
+_Platform_export({'Component':{'Navigator':{'init':$author$project$Component$Navigator$main(
+	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}}});}(this));
 
-  var app = Elm.Main.init({ node: document.getElementById("elm") });
+  var app = Elm.Component.Navigator.init({ node: document.getElementById("elm") });
 }
 catch (e)
 {
@@ -6366,6 +6447,3 @@ catch (e)
 
 </body>
 </html>
-=======
-<h1> Being constructed ... </h1>
->>>>>>> 601d2cb25b4c29fbdf3b7f7c51c734d286029904
