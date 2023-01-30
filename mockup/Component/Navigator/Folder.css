@@ -9,8 +9,7 @@ input#folder-0
    { background: inherit
    ; color: white
    }
-[for="folder-0"]:hover,
-[for="folder-0"].Active
+[for="folder-0"]:hover
    { background: dimgrey }
 [for="folder-0"]
    { cursor: pointer }
@@ -68,18 +67,20 @@ input#folder-0
    ; transition: all 0.45s
    }
 
-input#folder-0:checked + .Navigator.Folder
+input#folder-0:checked + [for="folder-0"]
+   { background: dimgrey }
+input#folder-0:checked ~ .Navigator.Folder
    { border-top: 1px solid dimgrey
    ; border-bottom: 1px solid dimgrey
    }
-input#folder-0:checked + .Navigator.Folder
+input#folder-0:checked ~ .Navigator.Folder
    { max-height: 240px }
 
 @media screen and (max-width: 900px)
    {  .Folder.Container
          { grid-template-columns: 1fr 1fr 1fr 1fr }
          
-      input#folder-0:checked + .Navigator.Folder
+      input#folder-0:checked ~ .Navigator.Folder
          { max-height: 300px }
    }
 
@@ -87,7 +88,7 @@ input#folder-0:checked + .Navigator.Folder
    {  .Folder.Container
          { grid-template-columns: 1fr 1fr 1fr }
          
-      input#folder-0:checked + .Navigator.Folder
+      input#folder-0:checked ~ .Navigator.Folder
          { max-height: 390px }
    }
 
@@ -95,7 +96,7 @@ input#folder-0:checked + .Navigator.Folder
    {  .Folder.Container
          { grid-template-columns: 1fr 1fr }
          
-      input#folder-0:checked + .Navigator.Folder
+      input#folder-0:checked ~ .Navigator.Folder
          { max-height: 510px }
    }
 

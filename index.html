@@ -1,14 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-   <title> Simplicity SPA Elm </title>
-
-   <meta charset="utf-8" />
-   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-
-   <link rel="stylesheet" href="/mockup/master.css" />
-   <style> /* page overrides */ </style>
+  <meta charset="UTF-8">
+  <title>Component.Navigator</title>
+  <style>body { padding: 0; margin: 0; }</style>
 </head>
 
 <body>
@@ -6373,17 +6368,6 @@ var $author$project$Component$Navigator$view = function (model) {
 							]),
 						_List_Nil),
 						A2(
-						$elm$html$Html$label,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('Active'),
-								$elm$html$Html$Attributes$for('folder-0')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Topics')
-							])),
-						A2(
 						$elm$html$Html$input,
 						_List_fromArray(
 							[
@@ -6391,6 +6375,16 @@ var $author$project$Component$Navigator$view = function (model) {
 								$elm$html$Html$Attributes$type_('checkbox')
 							]),
 						_List_Nil),
+						A2(
+						$elm$html$Html$label,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$for('folder-0')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Topics')
+							])),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
