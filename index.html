@@ -9,7 +9,6 @@
 
    <link rel="stylesheet" href="/mockup/master.css" />
    <style> /* page overrides */ </style>
-  <link />
 </head>
 
 <body>
@@ -6172,7 +6171,7 @@ var $author$project$Component$Navigator$init = F3(
 					$elm$http$Http$expectJson,
 					$author$project$Component$Navigator$GotData,
 					$elm$json$Json$Decode$list($author$project$Data$Topic$jsonDecoder)),
-				url: 'topic-list.json'
+				url: '/topic-list.json'
 			});
 		return _Utils_Tuple2(
 			A4($author$project$Component$Navigator$Model, key, url, _List_Nil, 'Empty'),
@@ -6283,7 +6282,7 @@ var $author$project$Component$Navigator$update = F2(
 		}
 	});
 var $elm$html$Html$a = _VirtualDom_node('a');
-var $author$project$Config$avatarUrl = 'http://localhost:8000/mockup/Component/Navigator/avatar.jpg';
+var $author$project$Config$avatarUrl = '/mockup/Component/Navigator/avatar.jpg';
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6318,7 +6317,7 @@ var $elm$html$Html$Attributes$src = function (url) {
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Config$siteUrl = 'http://localhost:8000';
+var $author$project$Config$siteUrl = 'https://thinhtranhnvn.github.io/';
 var $author$project$Component$Navigator$topicLink = function (topic) {
 	return A2(
 		$elm$html$Html$a,
