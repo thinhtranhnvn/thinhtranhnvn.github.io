@@ -5364,6 +5364,7 @@ var $author$project$Component$Navigator$Model = F4(
 	function (key, url, topicList, pageTitle) {
 		return {key: key, pageTitle: pageTitle, topicList: topicList, url: url};
 	});
+var $author$project$Config$dataUrl = '/data';
 var $elm$json$Json$Decode$decodeString = _Json_runOnString;
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
@@ -6171,7 +6172,7 @@ var $author$project$Component$Navigator$init = F3(
 					$elm$http$Http$expectJson,
 					$author$project$Component$Navigator$GotData,
 					$elm$json$Json$Decode$list($author$project$Data$Topic$jsonDecoder)),
-				url: '/topic-list.json'
+				url: $author$project$Config$dataUrl + '/topic-list.json'
 			});
 		return _Utils_Tuple2(
 			A4($author$project$Component$Navigator$Model, key, url, _List_Nil, 'Empty'),
@@ -6264,9 +6265,9 @@ var $author$project$Component$Navigator$update = F2(
 						{url: newURL}),
 					$elm$core$Platform$Cmd$none);
 			default:
-				var urlRequest = msg.a;
-				if (urlRequest.$ === 'Internal') {
-					var url = urlRequest.a;
+				var request = msg.a;
+				if (request.$ === 'Internal') {
+					var url = request.a;
 					return _Utils_Tuple2(
 						model,
 						A2(
@@ -6274,7 +6275,7 @@ var $author$project$Component$Navigator$update = F2(
 							model.key,
 							$elm$url$Url$toString(url)));
 				} else {
-					var href = urlRequest.a;
+					var href = request.a;
 					return _Utils_Tuple2(
 						model,
 						$elm$browser$Browser$Navigation$load(href));
@@ -6317,15 +6318,13 @@ var $elm$html$Html$Attributes$src = function (url) {
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Config$siteUrl = 'https://thinhtranhnvn.github.io/';
 var $author$project$Component$Navigator$topicLink = function (topic) {
 	return A2(
 		$elm$html$Html$a,
 		_List_fromArray(
 			[
 				$elm$html$Html$Attributes$class('Navigator Link'),
-				$elm$html$Html$Attributes$href(
-				_Utils_ap($author$project$Config$siteUrl, topic.path))
+				$elm$html$Html$Attributes$href(topic.path)
 			]),
 		_List_fromArray(
 			[
