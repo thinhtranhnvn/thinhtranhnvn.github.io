@@ -5361,8 +5361,8 @@ var $author$project$Component$Navigator$GotResponse = function (a) {
 	return {$: 'GotResponse', a: a};
 };
 var $author$project$Component$Navigator$Model = F4(
-	function (key, url, topicList, pageTitle) {
-		return {key: key, pageTitle: pageTitle, topicList: topicList, url: url};
+	function (url, key, topicList, expanded) {
+		return {expanded: expanded, key: key, topicList: topicList, url: url};
 	});
 var $author$project$Config$dataUrl = '/data';
 var $elm$json$Json$Decode$decodeString = _Json_runOnString;
@@ -6175,7 +6175,7 @@ var $author$project$Component$Navigator$init = F3(
 				url: $author$project$Config$dataUrl + '/topic-list.json'
 			});
 		return _Utils_Tuple2(
-			A4($author$project$Component$Navigator$Model, key, url, _List_Nil, 'Empty'),
+			A4($author$project$Component$Navigator$Model, url, key, _List_Nil, false),
 			cmd);
 	});
 var $author$project$Component$Navigator$UrlChanged = function (a) {
@@ -6192,6 +6192,7 @@ var $author$project$Component$Navigator$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
 var $elm$browser$Browser$Navigation$load = _Browser_load;
+var $author$project$Data$Topic$none = A2($author$project$Data$Topic$Topic, 'None', '#');
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
@@ -6247,7 +6248,7 @@ var $author$project$Component$Navigator$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{url: newURL}),
+						{expanded: false, url: newURL}),
 					$elm$core$Platform$Cmd$none);
 			case 'LinkClicked':
 				var request = msg.a;
@@ -6271,7 +6272,10 @@ var $author$project$Component$Navigator$update = F2(
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{pageTitle: 'Error Loading Data'}),
+							{
+								topicList: _List_fromArray(
+									[$author$project$Data$Topic$none])
+							}),
 						$elm$core$Platform$Cmd$none);
 				} else {
 					var data = response.a;
@@ -6285,6 +6289,15 @@ var $author$project$Component$Navigator$update = F2(
 	});
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $author$project$Config$avatarUrl = '/mockup/Component/Navigator/avatar.jpg';
+var $elm$json$Json$Encode$bool = _Json_wrap;
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$bool(bool));
+	});
+var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6376,7 +6389,8 @@ var $author$project$Component$Navigator$bodyHtml = function (model) {
 					_List_fromArray(
 						[
 							$elm$html$Html$Attributes$id('folder-0'),
-							$elm$html$Html$Attributes$type_('checkbox')
+							$elm$html$Html$Attributes$type_('checkbox'),
+							$elm$html$Html$Attributes$checked(model.expanded)
 						]),
 					_List_Nil),
 					A2(
@@ -6423,7 +6437,7 @@ var $author$project$Component$Navigator$bodyHtml = function (model) {
 var $author$project$Component$Navigator$view = function (model) {
 	return {
 		body: $author$project$Component$Navigator$bodyHtml(model),
-		title: model.pageTitle
+		title: $author$project$Config$siteTitle
 	};
 };
 var $author$project$Component$Navigator$main = $elm$browser$Browser$application(
