@@ -1,0 +1,79 @@
+[
+   {
+      "title": "Ada",
+      "path": "/ada"
+   },
+   {
+      "title": "Bash",
+      "path": "/bash"
+   },
+   {
+      "title": "C",
+      "path": "/c"
+   },
+   {
+      "title": "Crystal",
+      "path": "/crystal"
+   },
+   {
+      "title": "CSS",
+      "path": "/css"
+   },
+   {
+      "title": "Elm",
+      "path": "/elm"
+   },
+   {
+      "title": "Haskell",
+      "path": "/haskell"
+   },
+   {
+      "title": "HTML",
+      "path": "/html"
+   },
+   {
+      "title": "JavaScript",
+      "path": "/javascript"
+   },
+   {
+      "title": "Kotlin",
+      "path": "/kotlin"
+   },
+   {
+      "title": "Lua",
+      "path": "/lua"
+   },
+   {
+      "title": "Java",
+      "path": "/java"
+   },
+   {
+      "title": "PHP",
+      "path": "/php"
+   },
+   {
+      "title": "Python",
+      "path": "/python"
+   },
+   {
+      "title": "Ruby",
+      "path": "/ruby"
+   },
+   {
+      "title": "Scala",
+      "path": "/scala"
+   },
+   {
+      "title": "TypeScript",
+      "path": "/typescript"
+   },
+   {
+      "title": "VB.NET",
+      "path": "/vbnet"
+   },
+   {
+      "title": "XML",
+      "path": "/xml"
+   }
+]
+
