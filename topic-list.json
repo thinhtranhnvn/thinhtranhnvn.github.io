@@ -1,79 +1,79 @@
 [
    {
       "title": "Ada",
-      "path": "/ada"
+      "path": "ada"
    },
    {
       "title": "Bash",
-      "path": "/bash"
+      "path": "bash"
    },
    {
       "title": "C",
-      "path": "/c"
+      "path": "c"
    },
    {
       "title": "Crystal",
-      "path": "/crystal"
+      "path": "crystal"
    },
    {
       "title": "CSS",
-      "path": "/css"
+      "path": "css"
    },
    {
       "title": "Elm",
-      "path": "/elm"
+      "path": "elm"
    },
    {
       "title": "Haskell",
-      "path": "/haskell"
+      "path": "haskell"
    },
    {
       "title": "HTML",
-      "path": "/html"
+      "path": "html"
    },
    {
       "title": "JavaScript",
-      "path": "/javascript"
+      "path": "javascript"
    },
    {
       "title": "Kotlin",
-      "path": "/kotlin"
+      "path": "kotlin"
    },
    {
       "title": "Lua",
-      "path": "/lua"
+      "path": "lua"
    },
    {
       "title": "Java",
-      "path": "/java"
+      "path": "java"
    },
    {
       "title": "PHP",
-      "path": "/php"
+      "path": "php"
    },
    {
       "title": "Python",
-      "path": "/python"
+      "path": "python"
    },
    {
       "title": "Ruby",
-      "path": "/ruby"
+      "path": "ruby"
    },
    {
       "title": "Scala",
-      "path": "/scala"
+      "path": "scala"
    },
    {
       "title": "TypeScript",
-      "path": "/typescript"
+      "path": "typescript"
    },
    {
       "title": "VB.NET",
-      "path": "/vbnet"
+      "path": "vbnet"
    },
    {
       "title": "XML",
-      "path": "/xml"
+      "path": "xml"
    }
 ]
 
