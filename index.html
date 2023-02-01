@@ -6581,7 +6581,11 @@ var $author$project$Update$Navigator$update = F2(
 								$elm$json$Json$Decode$list($author$project$Model$Topic$jsonDecoder)),
 							url: $author$project$Config$topicListUrl
 						});
-					return _Utils_Tuple2(model, cmd);
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{title: 'Request Sent'}),
+						cmd);
 				case 'TopicListResponse':
 					var response = msg.a;
 					if (response.$ === 'Ok') {
