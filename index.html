@@ -6584,7 +6584,7 @@ var $author$project$Update$Navigator$update = F2(
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{title: 'Request Sent'}),
+							{title: 'Requesting Topic-list'}),
 						cmd);
 				case 'TopicListResponse':
 					var response = msg.a;
@@ -6656,19 +6656,25 @@ var $author$project$Update$Navigator$update = F2(
 	});
 var $author$project$Update$update = F2(
 	function (msg, model) {
-		if (msg.$ === 'SelectLayout') {
-			var newModel = _Utils_update(
-				model,
-				{
-					layout: $author$project$Route$route(model.url)
-				});
-			var cmd = A2(
-				$elm$core$Platform$Cmd$map,
-				$elm$core$Basics$always($author$project$Msg$RequestData),
-				$elm$core$Platform$Cmd$none);
-			return _Utils_Tuple2(newModel, cmd);
-		} else {
-			return A2($author$project$Update$Navigator$update, msg, model);
+		switch (msg.$) {
+			case 'SelectLayout':
+				var newModel = _Utils_update(
+					model,
+					{
+						layout: $author$project$Route$route(model.url)
+					});
+				var cmd = A2(
+					$elm$core$Platform$Cmd$map,
+					$elm$core$Basics$always($author$project$Msg$RequestData),
+					$elm$core$Platform$Cmd$none);
+				return _Utils_Tuple2(newModel, cmd);
+			case 'RequestData':
+				var newModel = _Utils_update(
+					model,
+					{title: 'Requesting data...'});
+				return _Utils_Tuple2(newModel, $elm$core$Platform$Cmd$none);
+			default:
+				return A2($author$project$Update$Navigator$update, msg, model);
 		}
 	});
 var $elm$html$Html$a = _VirtualDom_node('a');
