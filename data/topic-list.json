@@ -1,126 +1,126 @@
 [
    {
+      "id": "ada",
       "title": "Ada",
-      "path": "/ada",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "bash",
       "title": "Bash",
-      "path": "/bash",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "c",
       "title": "C",
-      "path": "/c",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "css",
       "title": "CSS",
-      "path": "/css",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "elm",
       "title": "Elm",
-      "path": "/elm",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "haskell",
       "title": "Haskell",
-      "path": "/haskell",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "html",
       "title": "HTML",
-      "path": "/html",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "javascript",
       "title": "JavaScript",
-      "path": "/javascript",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "kotlin",
       "title": "Kotlin",
-      "path": "/kotlin",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "lua",
       "title": "Lua",
-      "path": "/lua",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "java",
       "title": "Java",
-      "path": "/java",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "php",
       "title": "PHP",
-      "path": "/php",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "python",
       "title": "Python",
-      "path": "/python",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "ruby",
       "title": "Ruby",
-      "path": "/ruby",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "scala",
       "title": "Scala",
-      "path": "/scala",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "typescript",
       "title": "TypeScript",
-      "path": "/typescript",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "vbnet",
       "title": "VB.NET",
-      "path": "/vbnet",
       "keywords": [],
       "description": "",
       "markdown": ""
    },
    {
+      "id": "xml",
       "title": "XML",
-      "path": "/xml",
       "keywords": [],
       "description": "",
       "markdown": ""

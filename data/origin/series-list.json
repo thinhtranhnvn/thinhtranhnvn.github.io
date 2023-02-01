@@ -1,0 +1,24 @@
+[
+   {
+      "title" : "Lao Tzu",
+      "path" : "/lao-tzu",
+      "keywords" : [ "wisdom", "spirituality", "lao tzu", "laotse", "laozi", "dao de jing", "tao te ching", "daoism", "taoism" ],
+      "description" : "A precious book of wisdom and spirituality by Master Lao Tzu.",
+      "markdown" : ""
+   },
+   {
+      "title" : "Yoga Sutra",
+      "path" : "/yoga-sutra",
+      "keywords" : [ "yoga", "spirituality", "patanjali", "jnana yoga", "yoga of the mind", "bhakti yoga", "yoga of the devotion" ],
+      "description" : "Ancient texts about yoga of Master Patanjali.",
+      "markdown" : ""
+   },
+   {
+      "title" : "Heart Sutra",
+      "path" : "/heart-sutra",
+      "keywords" : [ "buddhism", "prajnaparamitahrdaya", "avalokitesvara" ],
+      "description" : "A passionate explaination of Prajnaparamitahrdaya Sutra.",
+      "markdown" : ""
+   },
+]
+
