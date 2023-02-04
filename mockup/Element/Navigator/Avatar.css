@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+
+.Navigator.Avatar
+   { text-decoration: none
+   ; font-weight: bold
+   }
+.Navigator.Avatar
+   { background: inherit
+   ; color: white
+   }
+.Navigator.Avatar:hover
+   { background: dimgrey }
+.Navigator.Avatar
+   { display: inline-block
+   ; padding: 9px 15px
+   ; border-radius: 19px
+   }
+.Navigator.Avatar > img
+   { display: inline-block
+   ; height: 38px
+   ; width: auto
+   ; border-radius: 50%
+   }
+.Navigator.Avatar
+   { position: relative
+   ; padding-left: 51px
+   }
+.Navigator.Avatar > img
+   { position: absolute
+   ; top: 0
+   ; left: 0
+   }
+

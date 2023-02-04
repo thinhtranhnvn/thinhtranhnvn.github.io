@@ -1,0 +1,101 @@
+@charset "utf-8";
+
+
+.Navigator.Toggler
+   { font-weight: bold }
+.Navigator.Toggler
+   { background: inherit
+   ; color: white
+   }
+.Navigator.Toggler:focus
+   { outline: none }
+.Navigator.Toggler:hover,
+.Navigator.Toggler.Active
+   { background: dimgrey }
+.Navigator.Toggler
+   { cursor: pointer }
+.Navigator.Toggler
+   { display: inline-block
+   ; padding: 9px 15px
+   ; border-radius: 19px
+   }
+
+.Navigator.Folder
+   { background: inherit
+   ; color: white
+   }
+.Navigator.Folder
+   { display: block
+   ; width: 100%
+   }
+.Navigator.Folder
+   { position: fixed
+   ; top: 60px
+   ; left: 0
+   }
+
+.Folder.Container
+   { display: grid
+   ; grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+   ; gap: 12px
+   ; width: 100%
+   ; max-width: 1150px
+   ; padding: 0 39px
+   ; margin: 18px auto
+   }
+
+.Navigator.Link
+   { font-weight: bold
+   ; text-decoration: none
+   }
+.Navigator.Link
+   { background: inherit
+   ; color: white
+   }
+.Navigator.Link:hover,
+.Navigator.Link.Current
+   { background: dimgrey }
+.Navigator.Link
+   { display: inline-block
+   ; padding: 9px 15px
+   ; border-radius: 19px
+   }
+
+.Navigator.Folder
+   { max-height: 0
+   ; overflow: hidden
+   ; transition: all 0.45s
+   }
+
+.Navigator.Folder.Expanded
+   { border-top: 1px solid dimgrey
+   ; border-bottom: 1px solid dimgrey
+   }
+.Navigator.Folder.Expanded
+   { max-height: 240px }
+
+@media screen and (max-width: 900px)
+   {  .Folder.Container
+         { grid-template-columns: 1fr 1fr 1fr 1fr }
+         
+      .Navigator.Folder.Expanded
+         { max-height: 300px }
+   }
+
+@media screen and (max-width: 750px)
+   {  .Folder.Container
+         { grid-template-columns: 1fr 1fr 1fr }
+         
+      .Navigator.Folder.Expanded
+         { max-height: 390px }
+   }
+
+@media screen and (max-width: 570px)
+   {  .Folder.Container
+         { grid-template-columns: 1fr 1fr }
+         
+      .Navigator.Folder.Expanded
+         { max-height: 510px }
+   }
+
+

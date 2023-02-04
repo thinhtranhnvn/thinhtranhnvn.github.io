@@ -1,0 +1,80 @@
+[
+   {
+      "slug" : "00-introduction",
+      "title" : "Introduction",
+      "keywords" : [ "yoga sutra", "patanjali", "introduction", "yoga of the mind" ],
+      "description" : "Introduction to the book Yoga Sutra of Master Patanjali.",
+      "content": ""
+   },
+   {
+      "slug" : "01-the-first-corner-stone",
+      "title" : "The First Corner Stone",
+      "keywords" : [ "yoga sutra", "patanjali", "the first corner stone", "begin", "meditation" ],
+      "description" : "Introduction to the first chapter of the book - The Chapter on Meditation.",
+      "content": ""
+   },
+   {
+      "slug" : "02-the-power-of-compassion",
+      "title" : "The Power of Compassion",
+      "keywords" : [ "yoga sutra", "patanjali", "the power of compassion", "review", "to become whole" ],
+      "description" : "Short review of how we can become whole in term of being.",
+      "content": ""
+   },
+   {
+      "slug" : "03-to-become-whole",
+      "title" : "To Become Whole",
+      "keywords" : [ "yoga sutra", "patanjali", "to become whole", "the great mistake", "stop the mind from turning" ],
+      "description" : "Practice of the mind to become whole in term of being.",
+      "content": ""
+   },
+   {
+      "slug" : "04-the-seer",
+      "title" : "The Seer",
+      "keywords" : [ "yoga sutra", "patanjali", "the seer", "the ultimate reality", "the path of seeing" ],
+      "description" : "The experience of first time seeing the ultimate reality when we are in deep metation.",
+      "content": ""
+   },
+   {
+      "slug" : "05-a-day-in-the-mind",
+      "title" : "A Day in The Mind",
+      "keywords" : [ "yoga sutra", "patanjali", "a day in the mind", "the goal of yoga" ],
+      "description" : "The goal of Yoga is not to stop all thoughts. We simply want to stop the Great Mistake, and all the unhappiness it causes.",
+      "content": ""
+   },
+   {
+      "slug" : "06-pictures-in-the-mind",
+      "title" : "Pictures in The Mind",
+      "keywords" : [ "yoga sutra", "patanjali", "pictures in the mind", "" ],
+      "description" : "Imaginations and Recollections are just mental pictures in the mind without corresponded concrete outer object.",
+      "content": ""
+   },
+   {
+      "slug" : "07-approaching-the-door",
+      "title" : "Approaching The Door",
+      "keywords" : [ "yoga sutra", "patanjali", "approaching the door", "three steps of daily practice" ],
+      "description" : "Stopping the Great Mistake requires constant practice, giving up attachments, and striving to be there - the first nirvana.",
+      "content": ""
+   },
+   {
+      "slug" : "08-the-power-of-daily-practice",
+      "title" : "The Power of Daily Practice",
+      "keywords" : [ "yoga sutra", "patanjali", "the power of daily practice", "daily practice", "power of the mind" ],
+      "description" : "Our spiritual practice must become a regular part of our day. The mind is infinitely powerful. We can learn to be good at anything, if only we give it an hour of two practices a day. But every day.",
+      "content": ""
+   },
+   {
+      "slug" : "09-attachment-to-distraction",
+      "title" : "Attachment to Distraction",
+      "keywords" : [ "yoga sutra", "patanjali", "attachment to distraction", "decision to control", "the path of accumulation", "accumulate good karmic seeds" ],
+      "description" : "Giving up attachment to distraction consists of decision to gain control over craving for experiences, seen, or only heard of.",
+      "content": ""
+   },
+   {
+      "slug" : "",
+      "title" : "",
+      "keywords" : [ "yoga sutra", "patanjali" ],
+      "description" : "",
+      "content": ""
+   }
+]
+

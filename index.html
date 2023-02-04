@@ -4581,7 +4581,106 @@ function _Http_track(router, xhr, tracker)
 			size: event.lengthComputable ? $elm$core$Maybe$Just(event.total) : $elm$core$Maybe$Nothing
 		}))));
 	});
-}var $author$project$App$App = F6(
+}
+
+
+
+// VIRTUAL-DOM WIDGETS
+
+
+var _Markdown_toHtml = F3(function(options, factList, rawMarkdown)
+{
+	return _VirtualDom_custom(
+		factList,
+		{
+			a: options,
+			b: rawMarkdown
+		},
+		_Markdown_render,
+		_Markdown_diff
+	);
+});
+
+
+
+// WIDGET IMPLEMENTATION
+
+
+function _Markdown_render(model)
+{
+	return A2(_Markdown_replace, model, _VirtualDom_doc.createElement('div'));
+}
+
+
+function _Markdown_diff(x, y)
+{
+	return x.b === y.b && x.a === y.a
+		? false
+		: _Markdown_replace(y);
+}
+
+
+var _Markdown_replace = F2(function(model, div)
+{
+	div.innerHTML = _Markdown_marked(model.b, _Markdown_formatOptions(model.a));
+	return div;
+});
+
+
+
+// ACTUAL MARKDOWN PARSER
+
+
+var _Markdown_marked = function() {
+	// catch the `marked` object regardless of the outer environment.
+	// (ex. a CommonJS module compatible environment.)
+	// note that this depends on marked's implementation of environment detection.
+	var module = {};
+	var exports = module.exports = {};
+
+	/**
+	 * marked - a markdown parser
+	 * Copyright (c) 2011-2014, Christopher Jeffrey. (MIT Licensed)
+	 * https://github.com/chjj/marked
+	 * commit cd2f6f5b7091154c5526e79b5f3bfb4d15995a51
+	 */
+	(function(){var block={newline:/^\n+/,code:/^( {4}[^\n]+\n*)+/,fences:noop,hr:/^( *[-*_]){3,} *(?:\n+|$)/,heading:/^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/,nptable:noop,lheading:/^([^\n]+)\n *(=|-){2,} *(?:\n+|$)/,blockquote:/^( *>[^\n]+(\n(?!def)[^\n]+)*\n*)+/,list:/^( *)(bull) [\s\S]+?(?:hr|def|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,html:/^ *(?:comment *(?:\n|\s*$)|closed *(?:\n{2,}|\s*$)|closing *(?:\n{2,}|\s*$))/,def:/^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,table:noop,paragraph:/^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+)\n*/,text:/^[^\n]+/};block.bullet=/(?:[*+-]|\d+\.)/;block.item=/^( *)(bull) [^\n]*(?:\n(?!\1bull )[^\n]*)*/;block.item=replace(block.item,"gm")(/bull/g,block.bullet)();block.list=replace(block.list)(/bull/g,block.bullet)("hr","\\n+(?=\\1?(?:[-*_] *){3,}(?:\\n+|$))")("def","\\n+(?="+block.def.source+")")();block.blockquote=replace(block.blockquote)("def",block.def)();block._tag="(?!(?:"+"a|em|strong|small|s|cite|q|dfn|abbr|data|time|code"+"|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo"+"|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|[^\\w\\s@]*@)\\b";block.html=replace(block.html)("comment",/<!--[\s\S]*?-->/)("closed",/<(tag)[\s\S]+?<\/\1>/)("closing",/<tag(?:"[^"]*"|'[^']*'|[^'">])*?>/)(/tag/g,block._tag)();block.paragraph=replace(block.paragraph)("hr",block.hr)("heading",block.heading)("lheading",block.lheading)("blockquote",block.blockquote)("tag","<"+block._tag)("def",block.def)();block.normal=merge({},block);block.gfm=merge({},block.normal,{fences:/^ *(`{3,}|~{3,})[ \.]*(\S+)? *\n([\s\S]*?)\s*\1 *(?:\n+|$)/,paragraph:/^/,heading:/^ *(#{1,6}) +([^\n]+?) *#* *(?:\n+|$)/});block.gfm.paragraph=replace(block.paragraph)("(?!","(?!"+block.gfm.fences.source.replace("\\1","\\2")+"|"+block.list.source.replace("\\1","\\3")+"|")();block.tables=merge({},block.gfm,{nptable:/^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,table:/^ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/});function Lexer(options){this.tokens=[];this.tokens.links={};this.options=options||marked.defaults;this.rules=block.normal;if(this.options.gfm){if(this.options.tables){this.rules=block.tables}else{this.rules=block.gfm}}}Lexer.rules=block;Lexer.lex=function(src,options){var lexer=new Lexer(options);return lexer.lex(src)};Lexer.prototype.lex=function(src){src=src.replace(/\r\n|\r/g,"\n").replace(/\t/g,"    ").replace(/\u00a0/g," ").replace(/\u2424/g,"\n");return this.token(src,true)};Lexer.prototype.token=function(src,top,bq){var src=src.replace(/^ +$/gm,""),next,loose,cap,bull,b,item,space,i,l;while(src){if(cap=this.rules.newline.exec(src)){src=src.substring(cap[0].length);if(cap[0].length>1){this.tokens.push({type:"space"})}}if(cap=this.rules.code.exec(src)){src=src.substring(cap[0].length);cap=cap[0].replace(/^ {4}/gm,"");this.tokens.push({type:"code",text:!this.options.pedantic?cap.replace(/\n+$/,""):cap});continue}if(cap=this.rules.fences.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"code",lang:cap[2],text:cap[3]||""});continue}if(cap=this.rules.heading.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"heading",depth:cap[1].length,text:cap[2]});continue}if(top&&(cap=this.rules.nptable.exec(src))){src=src.substring(cap[0].length);item={type:"table",header:cap[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:cap[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:cap[3].replace(/\n$/,"").split("\n")};for(i=0;i<item.align.length;i++){if(/^ *-+: *$/.test(item.align[i])){item.align[i]="right"}else if(/^ *:-+: *$/.test(item.align[i])){item.align[i]="center"}else if(/^ *:-+ *$/.test(item.align[i])){item.align[i]="left"}else{item.align[i]=null}}for(i=0;i<item.cells.length;i++){item.cells[i]=item.cells[i].split(/ *\| */)}this.tokens.push(item);continue}if(cap=this.rules.lheading.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"heading",depth:cap[2]==="="?1:2,text:cap[1]});continue}if(cap=this.rules.hr.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"hr"});continue}if(cap=this.rules.blockquote.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"blockquote_start"});cap=cap[0].replace(/^ *> ?/gm,"");this.token(cap,top,true);this.tokens.push({type:"blockquote_end"});continue}if(cap=this.rules.list.exec(src)){src=src.substring(cap[0].length);bull=cap[2];this.tokens.push({type:"list_start",ordered:bull.length>1});cap=cap[0].match(this.rules.item);next=false;l=cap.length;i=0;for(;i<l;i++){item=cap[i];space=item.length;item=item.replace(/^ *([*+-]|\d+\.) +/,"");if(~item.indexOf("\n ")){space-=item.length;item=!this.options.pedantic?item.replace(new RegExp("^ {1,"+space+"}","gm"),""):item.replace(/^ {1,4}/gm,"")}if(this.options.smartLists&&i!==l-1){b=block.bullet.exec(cap[i+1])[0];if(bull!==b&&!(bull.length>1&&b.length>1)){src=cap.slice(i+1).join("\n")+src;i=l-1}}loose=next||/\n\n(?!\s*$)/.test(item);if(i!==l-1){next=item.charAt(item.length-1)==="\n";if(!loose)loose=next}this.tokens.push({type:loose?"loose_item_start":"list_item_start"});this.token(item,false,bq);this.tokens.push({type:"list_item_end"})}this.tokens.push({type:"list_end"});continue}if(cap=this.rules.html.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:this.options.sanitize?"paragraph":"html",pre:!this.options.sanitizer&&(cap[1]==="pre"||cap[1]==="script"||cap[1]==="style"),text:cap[0]});continue}if(!bq&&top&&(cap=this.rules.def.exec(src))){src=src.substring(cap[0].length);this.tokens.links[cap[1].toLowerCase()]={href:cap[2],title:cap[3]};continue}if(top&&(cap=this.rules.table.exec(src))){src=src.substring(cap[0].length);item={type:"table",header:cap[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:cap[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:cap[3].replace(/(?: *\| *)?\n$/,"").split("\n")};for(i=0;i<item.align.length;i++){if(/^ *-+: *$/.test(item.align[i])){item.align[i]="right"}else if(/^ *:-+: *$/.test(item.align[i])){item.align[i]="center"}else if(/^ *:-+ *$/.test(item.align[i])){item.align[i]="left"}else{item.align[i]=null}}for(i=0;i<item.cells.length;i++){item.cells[i]=item.cells[i].replace(/^ *\| *| *\| *$/g,"").split(/ *\| */)}this.tokens.push(item);continue}if(top&&(cap=this.rules.paragraph.exec(src))){src=src.substring(cap[0].length);this.tokens.push({type:"paragraph",text:cap[1].charAt(cap[1].length-1)==="\n"?cap[1].slice(0,-1):cap[1]});continue}if(cap=this.rules.text.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"text",text:cap[0]});continue}if(src){throw new Error("Infinite loop on byte: "+src.charCodeAt(0))}}return this.tokens};var inline={escape:/^\\([\\`*{}\[\]()#+\-.!_>])/,autolink:/^<([^ >]+(@|:\/)[^ >]+)>/,url:noop,tag:/^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,link:/^!?\[(inside)\]\(href\)/,reflink:/^!?\[(inside)\]\s*\[([^\]]*)\]/,nolink:/^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/,strong:/^_\_([\s\S]+?)_\_(?!_)|^\*\*([\s\S]+?)\*\*(?!\*)/,em:/^\b_((?:[^_]|_\_)+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,code:/^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,br:/^ {2,}\n(?!\s*$)/,del:noop,text:/^[\s\S]+?(?=[\\<!\[_*`]| {2,}\n|$)/};inline._inside=/(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;inline._href=/\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;inline.link=replace(inline.link)("inside",inline._inside)("href",inline._href)();inline.reflink=replace(inline.reflink)("inside",inline._inside)();inline.normal=merge({},inline);inline.pedantic=merge({},inline.normal,{strong:/^_\_(?=\S)([\s\S]*?\S)_\_(?!_)|^\*\*(?=\S)([\s\S]*?\S)\*\*(?!\*)/,em:/^_(?=\S)([\s\S]*?\S)_(?!_)|^\*(?=\S)([\s\S]*?\S)\*(?!\*)/});inline.gfm=merge({},inline.normal,{escape:replace(inline.escape)("])","~|])")(),url:/^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,del:/^~~(?=\S)([\s\S]*?\S)~~/,text:replace(inline.text)("]|","~]|")("|","|https?://|")()});inline.breaks=merge({},inline.gfm,{br:replace(inline.br)("{2,}","*")(),text:replace(inline.gfm.text)("{2,}","*")()});function InlineLexer(links,options){this.options=options||marked.defaults;this.links=links;this.rules=inline.normal;this.renderer=this.options.renderer||new Renderer;this.renderer.options=this.options;if(!this.links){throw new Error("Tokens array requires a `links` property.")}if(this.options.gfm){if(this.options.breaks){this.rules=inline.breaks}else{this.rules=inline.gfm}}else if(this.options.pedantic){this.rules=inline.pedantic}}InlineLexer.rules=inline;InlineLexer.output=function(src,links,options){var inline=new InlineLexer(links,options);return inline.output(src)};InlineLexer.prototype.output=function(src){var out="",link,text,href,cap;while(src){if(cap=this.rules.escape.exec(src)){src=src.substring(cap[0].length);out+=cap[1];continue}if(cap=this.rules.autolink.exec(src)){src=src.substring(cap[0].length);if(cap[2]==="@"){text=cap[1].charAt(6)===":"?this.mangle(cap[1].substring(7)):this.mangle(cap[1]);href=this.mangle("mailto:")+text}else{text=escape(cap[1]);href=text}out+=this.renderer.link(href,null,text);continue}if(!this.inLink&&(cap=this.rules.url.exec(src))){src=src.substring(cap[0].length);text=escape(cap[1]);href=text;out+=this.renderer.link(href,null,text);continue}if(cap=this.rules.tag.exec(src)){if(!this.inLink&&/^<a /i.test(cap[0])){this.inLink=true}else if(this.inLink&&/^<\/a>/i.test(cap[0])){this.inLink=false}src=src.substring(cap[0].length);out+=this.options.sanitize?this.options.sanitizer?this.options.sanitizer(cap[0]):escape(cap[0]):cap[0];continue}if(cap=this.rules.link.exec(src)){src=src.substring(cap[0].length);this.inLink=true;out+=this.outputLink(cap,{href:cap[2],title:cap[3]});this.inLink=false;continue}if((cap=this.rules.reflink.exec(src))||(cap=this.rules.nolink.exec(src))){src=src.substring(cap[0].length);link=(cap[2]||cap[1]).replace(/\s+/g," ");link=this.links[link.toLowerCase()];if(!link||!link.href){out+=cap[0].charAt(0);src=cap[0].substring(1)+src;continue}this.inLink=true;out+=this.outputLink(cap,link);this.inLink=false;continue}if(cap=this.rules.strong.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.strong(this.output(cap[2]||cap[1]));continue}if(cap=this.rules.em.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.em(this.output(cap[2]||cap[1]));continue}if(cap=this.rules.code.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.codespan(escape(cap[2],true));continue}if(cap=this.rules.br.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.br();continue}if(cap=this.rules.del.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.del(this.output(cap[1]));continue}if(cap=this.rules.text.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.text(escape(this.smartypants(cap[0])));continue}if(src){throw new Error("Infinite loop on byte: "+src.charCodeAt(0))}}return out};InlineLexer.prototype.outputLink=function(cap,link){var href=escape(link.href),title=link.title?escape(link.title):null;return cap[0].charAt(0)!=="!"?this.renderer.link(href,title,this.output(cap[1])):this.renderer.image(href,title,escape(cap[1]))};InlineLexer.prototype.smartypants=function(text){if(!this.options.smartypants)return text;return text.replace(/---/g,"—").replace(/--/g,"–").replace(/(^|[-\u2014\/(\[{"\s])'/g,"$1‘").replace(/'/g,"’").replace(/(^|[-\u2014\/(\[{\u2018\s])"/g,"$1“").replace(/"/g,"”").replace(/\.{3}/g,"…")};InlineLexer.prototype.mangle=function(text){if(!this.options.mangle)return text;var out="",l=text.length,i=0,ch;for(;i<l;i++){ch=text.charCodeAt(i);if(Math.random()>.5){ch="x"+ch.toString(16)}out+="&#"+ch+";"}return out};function Renderer(options){this.options=options||{}}Renderer.prototype.code=function(code,lang,escaped){if(this.options.highlight){var out=this.options.highlight(code,lang);if(out!=null&&out!==code){escaped=true;code=out}}if(!lang){return"<pre><code>"+(escaped?code:escape(code,true))+"\n</code></pre>"}return'<pre><code class="'+this.options.langPrefix+escape(lang,true)+'">'+(escaped?code:escape(code,true))+"\n</code></pre>\n"};Renderer.prototype.blockquote=function(quote){return"<blockquote>\n"+quote+"</blockquote>\n"};Renderer.prototype.html=function(html){return html};Renderer.prototype.heading=function(text,level,raw){return"<h"+level+' id="'+this.options.headerPrefix+raw.toLowerCase().replace(/[^\w]+/g,"-")+'">'+text+"</h"+level+">\n"};Renderer.prototype.hr=function(){return this.options.xhtml?"<hr/>\n":"<hr>\n"};Renderer.prototype.list=function(body,ordered){var type=ordered?"ol":"ul";return"<"+type+">\n"+body+"</"+type+">\n"};Renderer.prototype.listitem=function(text){return"<li>"+text+"</li>\n"};Renderer.prototype.paragraph=function(text){return"<p>"+text+"</p>\n"};Renderer.prototype.table=function(header,body){return"<table>\n"+"<thead>\n"+header+"</thead>\n"+"<tbody>\n"+body+"</tbody>\n"+"</table>\n"};Renderer.prototype.tablerow=function(content){return"<tr>\n"+content+"</tr>\n"};Renderer.prototype.tablecell=function(content,flags){var type=flags.header?"th":"td";var tag=flags.align?"<"+type+' style="text-align:'+flags.align+'">':"<"+type+">";return tag+content+"</"+type+">\n"};Renderer.prototype.strong=function(text){return"<strong>"+text+"</strong>"};Renderer.prototype.em=function(text){return"<em>"+text+"</em>"};Renderer.prototype.codespan=function(text){return"<code>"+text+"</code>"};Renderer.prototype.br=function(){return this.options.xhtml?"<br/>":"<br>"};Renderer.prototype.del=function(text){return"<del>"+text+"</del>"};Renderer.prototype.link=function(href,title,text){if(this.options.sanitize){try{var prot=decodeURIComponent(unescape(href)).replace(/[^\w:]/g,"").toLowerCase()}catch(e){return""}if(prot.indexOf("javascript:")===0||prot.indexOf("vbscript:")===0||prot.indexOf("data:")===0){return""}}var out='<a href="'+href+'"';if(title){out+=' title="'+title+'"'}out+=">"+text+"</a>";return out};Renderer.prototype.image=function(href,title,text){var out='<img src="'+href+'" alt="'+text+'"';if(title){out+=' title="'+title+'"'}out+=this.options.xhtml?"/>":">";return out};Renderer.prototype.text=function(text){return text};function Parser(options){this.tokens=[];this.token=null;this.options=options||marked.defaults;this.options.renderer=this.options.renderer||new Renderer;this.renderer=this.options.renderer;this.renderer.options=this.options}Parser.parse=function(src,options,renderer){var parser=new Parser(options,renderer);return parser.parse(src)};Parser.prototype.parse=function(src){this.inline=new InlineLexer(src.links,this.options,this.renderer);this.tokens=src.reverse();var out="";while(this.next()){out+=this.tok()}return out};Parser.prototype.next=function(){return this.token=this.tokens.pop()};Parser.prototype.peek=function(){return this.tokens[this.tokens.length-1]||0};Parser.prototype.parseText=function(){var body=this.token.text;while(this.peek().type==="text"){body+="\n"+this.next().text}return this.inline.output(body)};Parser.prototype.tok=function(){switch(this.token.type){case"space":{return""}case"hr":{return this.renderer.hr()}case"heading":{return this.renderer.heading(this.inline.output(this.token.text),this.token.depth,this.token.text)}case"code":{return this.renderer.code(this.token.text,this.token.lang,this.token.escaped)}case"table":{var header="",body="",i,row,cell,flags,j;cell="";for(i=0;i<this.token.header.length;i++){flags={header:true,align:this.token.align[i]};cell+=this.renderer.tablecell(this.inline.output(this.token.header[i]),{header:true,align:this.token.align[i]})}header+=this.renderer.tablerow(cell);for(i=0;i<this.token.cells.length;i++){row=this.token.cells[i];cell="";for(j=0;j<row.length;j++){cell+=this.renderer.tablecell(this.inline.output(row[j]),{header:false,align:this.token.align[j]})}body+=this.renderer.tablerow(cell)}return this.renderer.table(header,body)}case"blockquote_start":{var body="";while(this.next().type!=="blockquote_end"){body+=this.tok()}return this.renderer.blockquote(body)}case"list_start":{var body="",ordered=this.token.ordered;while(this.next().type!=="list_end"){body+=this.tok()}return this.renderer.list(body,ordered)}case"list_item_start":{var body="";while(this.next().type!=="list_item_end"){body+=this.token.type==="text"?this.parseText():this.tok()}return this.renderer.listitem(body)}case"loose_item_start":{var body="";while(this.next().type!=="list_item_end"){body+=this.tok()}return this.renderer.listitem(body)}case"html":{var html=!this.token.pre&&!this.options.pedantic?this.inline.output(this.token.text):this.token.text;return this.renderer.html(html)}case"paragraph":{return this.renderer.paragraph(this.inline.output(this.token.text))}case"text":{return this.renderer.paragraph(this.parseText())}}};function escape(html,encode){return html.replace(!encode?/&(?!#?\w+;)/g:/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}function unescape(html){return html.replace(/&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/g,function(_,n){n=n.toLowerCase();if(n==="colon")return":";if(n.charAt(0)==="#"){return n.charAt(1)==="x"?String.fromCharCode(parseInt(n.substring(2),16)):String.fromCharCode(+n.substring(1))}return""})}function replace(regex,opt){regex=regex.source;opt=opt||"";return function self(name,val){if(!name)return new RegExp(regex,opt);val=val.source||val;val=val.replace(/(^|[^\[])\^/g,"$1");regex=regex.replace(name,val);return self}}function noop(){}noop.exec=noop;function merge(obj){var i=1,target,key;for(;i<arguments.length;i++){target=arguments[i];for(key in target){if(Object.prototype.hasOwnProperty.call(target,key)){obj[key]=target[key]}}}return obj}function marked(src,opt,callback){if(callback||typeof opt==="function"){if(!callback){callback=opt;opt=null}opt=merge({},marked.defaults,opt||{});var highlight=opt.highlight,tokens,pending,i=0;try{tokens=Lexer.lex(src,opt)}catch(e){return callback(e)}pending=tokens.length;var done=function(err){if(err){opt.highlight=highlight;return callback(err)}var out;try{out=Parser.parse(tokens,opt)}catch(e){err=e}opt.highlight=highlight;return err?callback(err):callback(null,out)};if(!highlight||highlight.length<3){return done()}delete opt.highlight;if(!pending)return done();for(;i<tokens.length;i++){(function(token){if(token.type!=="code"){return--pending||done()}return highlight(token.text,token.lang,function(err,code){if(err)return done(err);if(code==null||code===token.text){return--pending||done()}token.text=code;token.escaped=true;--pending||done()})})(tokens[i])}return}try{if(opt)opt=merge({},marked.defaults,opt);return Parser.parse(Lexer.lex(src,opt),opt)}catch(e){e.message+="\nPlease report this to https://github.com/chjj/marked.";if((opt||marked.defaults).silent){return"<p>An error occured:</p><pre>"+escape(e.message+"",true)+"</pre>"}throw e}}marked.options=marked.setOptions=function(opt){merge(marked.defaults,opt);return marked};marked.defaults={gfm:true,tables:true,breaks:false,pedantic:false,sanitize:false,sanitizer:null,mangle:true,smartLists:false,silent:false,highlight:null,langPrefix:"lang-",smartypants:false,headerPrefix:"",renderer:new Renderer,xhtml:false};marked.Parser=Parser;marked.parser=Parser.parse;marked.Renderer=Renderer;marked.Lexer=Lexer;marked.lexer=Lexer.lex;marked.InlineLexer=InlineLexer;marked.inlineLexer=InlineLexer.output;marked.parse=marked;if(typeof module!=="undefined"&&typeof exports==="object"){module.exports=marked}else if(typeof define==="function"&&define.amd){define(function(){return marked})}else{this.marked=marked}}).call(function(){return this||(typeof window!=="undefined"?window:global)}());
+
+	return module.exports;
+}();
+
+
+// FORMAT OPTIONS FOR MARKED IMPLEMENTATION
+
+function _Markdown_formatOptions(options)
+{
+	function toHighlight(code, lang)
+	{
+		if (!lang && $elm$core$Maybe$isJust(options.defaultHighlighting))
+		{
+			lang = options.defaultHighlighting.a;
+		}
+
+		if (typeof hljs !== 'undefined' && lang && hljs.listLanguages().indexOf(lang) >= 0)
+		{
+			return hljs.highlight(lang, code, true).value;
+		}
+
+		return code;
+	}
+
+	var gfm = options.githubFlavored.a;
+
+	return {
+		highlight: toHighlight,
+		gfm: gfm,
+		tables: gfm && gfm.tables,
+		breaks: gfm && gfm.breaks,
+		sanitize: options.sanitize,
+		smartypants: options.smartypants
+	};
+}
+var $author$project$App$App = F6(
 	function (init, view, update, subscriptions, onUrlRequest, onUrlChange) {
 		return {init: init, onUrlChange: onUrlChange, onUrlRequest: onUrlRequest, subscriptions: subscriptions, update: update, view: view};
 	});
@@ -5374,54 +5473,13 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$application = _Browser_application;
-var $author$project$Model$Layout$EmptyPage = {$: 'EmptyPage'};
-var $author$project$Msg$SelectLayout = {$: 'SelectLayout'};
-var $elm$core$Basics$always = F2(
-	function (a, _v0) {
-		return a;
+var $author$project$App$Model = F8(
+	function (url, key, route, navigator, overview, reader, indexer, seriesList) {
+		return {indexer: indexer, key: key, navigator: navigator, overview: overview, reader: reader, route: route, seriesList: seriesList, url: url};
 	});
-var $author$project$Model$Navigator$default = {expanded: false};
-var $author$project$Model$Post$empty = {slug: 'empty'};
-var $author$project$Model$Series$empty = {description: 'Empty', id: 'empty', keywords: _List_Nil, title: 'Empty'};
-var $author$project$Model$Topic$empty = {
-	description: 'Empty',
-	id: 'empty',
-	keywords: _List_fromArray(
-		['empty']),
-	markdown: 'Empty',
-	title: 'Empty'
-};
-var $elm$core$Platform$Cmd$map = _Platform_map;
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Init$init = F3(
-	function (_v0, url, key) {
-		var model = {currentPost: $author$project$Model$Post$empty, currentSeries: $author$project$Model$Series$empty, currentTopic: $author$project$Model$Topic$empty, key: key, layout: $author$project$Model$Layout$EmptyPage, navigator: $author$project$Model$Navigator$default, postList: _List_Nil, seriesList: _List_Nil, title: 'Empty', topicList: _List_Nil, url: url};
-		var cmd = A2(
-			$elm$core$Platform$Cmd$map,
-			$elm$core$Basics$always($author$project$Msg$SelectLayout),
-			$elm$core$Platform$Cmd$none);
-		return _Utils_Tuple2(model, cmd);
-	});
-var $author$project$Msg$UrlChanged = function (a) {
-	return {$: 'UrlChanged', a: a};
-};
-var $author$project$OnUrlChange$onUrlChange = function (url) {
-	return $author$project$Msg$UrlChanged(url);
-};
-var $author$project$Msg$LinkClicked = function (a) {
-	return {$: 'LinkClicked', a: a};
-};
-var $author$project$OnUrlRequest$onUrlRequest = function (request) {
-	return $author$project$Msg$LinkClicked(request);
-};
-var $elm$core$Platform$Sub$batch = _Platform_batch;
-var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $author$project$Subscriptions$subscriptions = function (_v0) {
-	return $elm$core$Platform$Sub$none;
-};
-var $author$project$Msg$RequestData = {$: 'RequestData'};
-var $author$project$Model$Layout$HomePage = {$: 'HomePage'};
+var $author$project$Data$Series$empty = {description: 'Empty', id: 'empty', keywords: _List_Nil, title: 'Empty'};
+var $author$project$Route$HomePage = {$: 'HomePage'};
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
 		return {frag: frag, params: params, unvisited: unvisited, value: value, visited: visited};
@@ -6056,15 +6114,15 @@ var $elm$url$Url$Parser$parse = F2(
 					url.fragment,
 					$elm$core$Basics$identity)));
 	});
-var $author$project$Model$Layout$PostPage = F3(
+var $author$project$Route$PostPage = F3(
 	function (a, b, c) {
 		return {$: 'PostPage', a: a, b: b, c: c};
 	});
-var $author$project$Model$Layout$SeriesPage = F2(
+var $author$project$Route$SeriesPage = F2(
 	function (a, b) {
 		return {$: 'SeriesPage', a: a, b: b};
 	});
-var $author$project$Model$Layout$TopicPage = function (a) {
+var $author$project$Route$TopicPage = function (a) {
 	return {$: 'TopicPage', a: a};
 };
 var $elm$url$Url$Parser$Parser = function (a) {
@@ -6176,17 +6234,23 @@ var $elm$url$Url$Parser$custom = F2(
 			});
 	});
 var $elm$url$Url$Parser$string = A2($elm$url$Url$Parser$custom, 'STRING', $elm$core$Maybe$Just);
-var $author$project$Route$routeParser = $elm$url$Url$Parser$oneOf(
+var $elm$url$Url$Parser$top = $elm$url$Url$Parser$Parser(
+	function (state) {
+		return _List_fromArray(
+			[state]);
+	});
+var $author$project$Route$urlParser = $elm$url$Url$Parser$oneOf(
 	_List_fromArray(
 		[
-			A2($elm$url$Url$Parser$map, $author$project$Model$Layout$TopicPage, $elm$url$Url$Parser$string),
+			A2($elm$url$Url$Parser$map, $author$project$Route$HomePage, $elm$url$Url$Parser$top),
+			A2($elm$url$Url$Parser$map, $author$project$Route$TopicPage, $elm$url$Url$Parser$string),
 			A2(
 			$elm$url$Url$Parser$map,
-			$author$project$Model$Layout$SeriesPage,
+			$author$project$Route$SeriesPage,
 			A2($elm$url$Url$Parser$slash, $elm$url$Url$Parser$string, $elm$url$Url$Parser$string)),
 			A2(
 			$elm$url$Url$Parser$map,
-			$author$project$Model$Layout$PostPage,
+			$author$project$Route$PostPage,
 			A2(
 				$elm$url$Url$Parser$slash,
 				$elm$url$Url$Parser$string,
@@ -6201,17 +6265,15 @@ var $elm$core$Maybe$withDefault = F2(
 			return _default;
 		}
 	});
-var $author$project$Route$route = function (url) {
+var $author$project$Route$fromUrl = function (url) {
 	return A2(
 		$elm$core$Maybe$withDefault,
-		$author$project$Model$Layout$HomePage,
-		A2($elm$url$Url$Parser$parse, $author$project$Route$routeParser, url));
+		$author$project$Route$HomePage,
+		A2($elm$url$Url$Parser$parse, $author$project$Route$urlParser, url));
 };
-var $author$project$Msg$RequestTopicList = {$: 'RequestTopicList'};
-var $author$project$Msg$TopicListResponse = function (a) {
-	return {$: 'TopicListResponse', a: a};
+var $author$project$App$GotPostContentResponse = function (a) {
+	return {$: 'GotPostContentResponse', a: a};
 };
-var $elm$json$Json$Decode$decodeString = _Json_runOnString;
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
 		return {$: 'BadStatus_', a: a, b: b};
@@ -6252,17 +6314,6 @@ var $elm$http$Http$expectStringResponse = F2(
 			$elm$core$Basics$identity,
 			A2($elm$core$Basics$composeR, toResult, toMsg));
 	});
-var $elm$core$Result$mapError = F2(
-	function (f, result) {
-		if (result.$ === 'Ok') {
-			var v = result.a;
-			return $elm$core$Result$Ok(v);
-		} else {
-			var e = result.a;
-			return $elm$core$Result$Err(
-				f(e));
-		}
-	});
 var $elm$http$Http$BadBody = function (a) {
 	return {$: 'BadBody', a: a};
 };
@@ -6274,6 +6325,17 @@ var $elm$http$Http$BadUrl = function (a) {
 };
 var $elm$http$Http$NetworkError = {$: 'NetworkError'};
 var $elm$http$Http$Timeout = {$: 'Timeout'};
+var $elm$core$Result$mapError = F2(
+	function (f, result) {
+		if (result.$ === 'Ok') {
+			var v = result.a;
+			return $elm$core$Result$Ok(v);
+		} else {
+			var e = result.a;
+			return $elm$core$Result$Err(
+				f(e));
+		}
+	});
 var $elm$http$Http$resolve = F2(
 	function (toResult, response) {
 		switch (response.$) {
@@ -6297,19 +6359,12 @@ var $elm$http$Http$resolve = F2(
 					toResult(body));
 		}
 	});
-var $elm$http$Http$expectJson = F2(
-	function (toMsg, decoder) {
-		return A2(
-			$elm$http$Http$expectStringResponse,
-			toMsg,
-			$elm$http$Http$resolve(
-				function (string) {
-					return A2(
-						$elm$core$Result$mapError,
-						$elm$json$Json$Decode$errorToString,
-						A2($elm$json$Json$Decode$decodeString, decoder, string));
-				}));
-	});
+var $elm$http$Http$expectString = function (toMsg) {
+	return A2(
+		$elm$http$Http$expectStringResponse,
+		toMsg,
+		$elm$http$Http$resolve($elm$core$Result$Ok));
+};
 var $elm$http$Http$emptyBody = _Http_emptyBody;
 var $elm$http$Http$Request = function (a) {
 	return {$: 'Request', a: a};
@@ -6483,17 +6538,189 @@ var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
 		{body: $elm$http$Http$emptyBody, expect: r.expect, headers: _List_Nil, method: 'GET', timeout: $elm$core$Maybe$Nothing, tracker: $elm$core$Maybe$Nothing, url: r.url});
 };
-var $author$project$Model$Topic$Topic = F5(
-	function (id, title, keywords, description, markdown) {
-		return {description: description, id: id, keywords: keywords, markdown: markdown, title: title};
+var $author$project$Config$dataFolderUrl = '/data';
+var $author$project$Config$postContentFileUrl = F3(
+	function (topicId, seriesId, postSlug) {
+		return $author$project$Config$dataFolderUrl + ('/' + (topicId + ('/' + (seriesId + ('/' + (postSlug + '.txt'))))));
+	});
+var $author$project$Extension$Url$toPostSlug = function (url) {
+	var _v0 = $author$project$Route$fromUrl(url);
+	switch (_v0.$) {
+		case 'HomePage':
+			return '';
+		case 'TopicPage':
+			return '';
+		case 'SeriesPage':
+			return '';
+		default:
+			var postSlug = _v0.c;
+			return postSlug;
+	}
+};
+var $author$project$Extension$Url$toSeriesId = function (url) {
+	var _v0 = $author$project$Route$fromUrl(url);
+	switch (_v0.$) {
+		case 'HomePage':
+			return '';
+		case 'TopicPage':
+			return '';
+		case 'SeriesPage':
+			var seriesId = _v0.b;
+			return seriesId;
+		default:
+			var seriesId = _v0.b;
+			return seriesId;
+	}
+};
+var $author$project$Config$defaultTopicId = 'origin';
+var $author$project$Extension$Url$toTopicId = function (url) {
+	var _v0 = $author$project$Route$fromUrl(url);
+	switch (_v0.$) {
+		case 'HomePage':
+			return $author$project$Config$defaultTopicId;
+		case 'TopicPage':
+			var topicId = _v0.a;
+			return topicId;
+		case 'SeriesPage':
+			var topicId = _v0.a;
+			return topicId;
+		default:
+			var topicId = _v0.a;
+			return topicId;
+	}
+};
+var $author$project$App$getPostContent = function (url) {
+	var topicId = $author$project$Extension$Url$toTopicId(url);
+	var seriesId = $author$project$Extension$Url$toSeriesId(url);
+	var postSlug = $author$project$Extension$Url$toPostSlug(url);
+	return $elm$http$Http$get(
+		{
+			expect: $elm$http$Http$expectString($author$project$App$GotPostContentResponse),
+			url: A3($author$project$Config$postContentFileUrl, topicId, seriesId, postSlug)
+		});
+};
+var $author$project$App$GotTopicOverviewResponse = function (a) {
+	return {$: 'GotTopicOverviewResponse', a: a};
+};
+var $author$project$Config$topicOverviewFileUrl = function (topicId) {
+	return $author$project$Config$dataFolderUrl + ('/' + (topicId + ('/' + 'overview.txt')));
+};
+var $author$project$App$getTopicOverview = function (url) {
+	var topicId = $author$project$Extension$Url$toTopicId(url);
+	return $elm$http$Http$get(
+		{
+			expect: $elm$http$Http$expectString($author$project$App$GotTopicOverviewResponse),
+			url: $author$project$Config$topicOverviewFileUrl(topicId)
+		});
+};
+var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $author$project$App$getMarkdown = function (url) {
+	var route = $author$project$Route$fromUrl(url);
+	switch (route.$) {
+		case 'HomePage':
+			return $author$project$App$getTopicOverview(url);
+		case 'TopicPage':
+			return $author$project$App$getTopicOverview(url);
+		case 'PostPage':
+			return $author$project$App$getPostContent(url);
+		default:
+			return $elm$core$Platform$Cmd$none;
+	}
+};
+var $author$project$App$GotPostListResponse = function (a) {
+	return {$: 'GotPostListResponse', a: a};
+};
+var $elm$json$Json$Decode$decodeString = _Json_runOnString;
+var $elm$http$Http$expectJson = F2(
+	function (toMsg, decoder) {
+		return A2(
+			$elm$http$Http$expectStringResponse,
+			toMsg,
+			$elm$http$Http$resolve(
+				function (string) {
+					return A2(
+						$elm$core$Result$mapError,
+						$elm$json$Json$Decode$errorToString,
+						A2($elm$json$Json$Decode$decodeString, decoder, string));
+				}));
+	});
+var $author$project$Data$Post$Post = F5(
+	function (slug, title, keywords, description, content) {
+		return {content: content, description: description, keywords: keywords, slug: slug, title: title};
 	});
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$list = _Json_decodeList;
 var $elm$json$Json$Decode$map5 = _Json_map5;
 var $elm$json$Json$Decode$string = _Json_decodeString;
-var $author$project$Model$Topic$jsonDecoder = A6(
+var $author$project$Data$Post$jsonDecoder = A6(
 	$elm$json$Json$Decode$map5,
-	$author$project$Model$Topic$Topic,
+	$author$project$Data$Post$Post,
+	A2($elm$json$Json$Decode$field, 'slug', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
+	A2(
+		$elm$json$Json$Decode$field,
+		'keywords',
+		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
+	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'content', $elm$json$Json$Decode$string));
+var $author$project$Config$postListFileUrl = F2(
+	function (topicId, seriesId) {
+		return $author$project$Config$dataFolderUrl + ('/' + (topicId + ('/' + (seriesId + 'post-list.json'))));
+	});
+var $author$project$App$getPostList = function (url) {
+	var topicId = $author$project$Extension$Url$toTopicId(url);
+	var seriesId = $author$project$Extension$Url$toSeriesId(url);
+	return $elm$http$Http$get(
+		{
+			expect: A2(
+				$elm$http$Http$expectJson,
+				$author$project$App$GotPostListResponse,
+				$elm$json$Json$Decode$list($author$project$Data$Post$jsonDecoder)),
+			url: A2($author$project$Config$postListFileUrl, topicId, seriesId)
+		});
+};
+var $author$project$App$GotSeriesListResponse = function (a) {
+	return {$: 'GotSeriesListResponse', a: a};
+};
+var $author$project$Data$Series$Series = F4(
+	function (id, title, keywords, description) {
+		return {description: description, id: id, keywords: keywords, title: title};
+	});
+var $elm$json$Json$Decode$map4 = _Json_map4;
+var $author$project$Data$Series$jsonDecoder = A5(
+	$elm$json$Json$Decode$map4,
+	$author$project$Data$Series$Series,
+	A2($elm$json$Json$Decode$field, 'id', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
+	A2(
+		$elm$json$Json$Decode$field,
+		'keywords',
+		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
+	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string));
+var $author$project$Config$seriesListFileUrl = function (topicId) {
+	return $author$project$Config$dataFolderUrl + ('/' + (topicId + ('/' + 'series-list.json')));
+};
+var $author$project$App$getSeriesList = function (url) {
+	var topicId = $author$project$Extension$Url$toTopicId(url);
+	return $elm$http$Http$get(
+		{
+			expect: A2(
+				$elm$http$Http$expectJson,
+				$author$project$App$GotSeriesListResponse,
+				$elm$json$Json$Decode$list($author$project$Data$Series$jsonDecoder)),
+			url: $author$project$Config$seriesListFileUrl(topicId)
+		});
+};
+var $author$project$App$GotTopicListResponse = function (a) {
+	return {$: 'GotTopicListResponse', a: a};
+};
+var $author$project$Data$Topic$Topic = F5(
+	function (id, title, keywords, description, overview) {
+		return {description: description, id: id, keywords: keywords, overview: overview, title: title};
+	});
+var $author$project$Data$Topic$jsonDecoder = A6(
+	$elm$json$Json$Decode$map5,
+	$author$project$Data$Topic$Topic,
 	A2($elm$json$Json$Decode$field, 'id', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
 	A2(
@@ -6501,9 +6728,225 @@ var $author$project$Model$Topic$jsonDecoder = A6(
 		'keywords',
 		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
 	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'markdown', $elm$json$Json$Decode$string));
+	A2($elm$json$Json$Decode$field, 'overview', $elm$json$Json$Decode$string));
+var $author$project$Config$topicListFileUrl = $author$project$Config$dataFolderUrl + ('/' + 'topic-list.json');
+var $author$project$App$getTopicList = function (_v0) {
+	return $elm$http$Http$get(
+		{
+			expect: A2(
+				$elm$http$Http$expectJson,
+				$author$project$App$GotTopicListResponse,
+				$elm$json$Json$Decode$list($author$project$Data$Topic$jsonDecoder)),
+			url: $author$project$Config$topicListFileUrl
+		});
+};
+var $author$project$Data$Post$empty = {
+	content: 'Empty',
+	description: 'Empty',
+	keywords: _List_fromArray(
+		['empty']),
+	slug: 'empty',
+	title: 'Empty'
+};
+var $author$project$Element$Indexer$Model = function (flags) {
+	return {flags: flags};
+};
+var $author$project$Element$Indexer$init = function (flags) {
+	return _Utils_Tuple2(
+		$author$project$Element$Indexer$Model(flags),
+		$elm$core$Platform$Cmd$none);
+};
+var $author$project$App$initIndexer = function () {
+	var flags = {
+		postList: _List_fromArray(
+			[$author$project$Data$Post$empty]),
+		series: $author$project$Data$Series$empty,
+		topicId: 'empty'
+	};
+	return $author$project$Element$Indexer$init(flags);
+}();
+var $author$project$Config$avatarUrl = '/mockup/Element/Navigator/avatar.jpg';
+var $author$project$Data$Topic$empty = {
+	description: 'Empty',
+	id: 'empty',
+	keywords: _List_fromArray(
+		['empty']),
+	overview: 'Empty',
+	title: 'Empty'
+};
+var $author$project$Config$gitHubUrl = 'https://github.com/thinhtranhnvn';
+var $author$project$Element$Navigator$Model = F2(
+	function (collapsed, flags) {
+		return {collapsed: collapsed, flags: flags};
+	});
+var $author$project$Element$Navigator$init = function (flags) {
+	var collapsed = true;
+	return _Utils_Tuple2(
+		A2($author$project$Element$Navigator$Model, collapsed, flags),
+		$elm$core$Platform$Cmd$none);
+};
+var $author$project$Config$siteAuthor = 'Semi Dev_';
+var $author$project$App$initNavigator = function () {
+	var flags = {
+		avatarName: $author$project$Config$siteAuthor,
+		avatarUrl: $author$project$Config$avatarUrl,
+		gitHubUrl: $author$project$Config$gitHubUrl,
+		topicId: '',
+		topicList: _List_fromArray(
+			[$author$project$Data$Topic$empty])
+	};
+	return $author$project$Element$Navigator$init(flags);
+}();
+var $author$project$Element$Overview$Model = function (flags) {
+	return {flags: flags};
+};
+var $author$project$Element$Overview$init = function (flags) {
+	return _Utils_Tuple2(
+		$author$project$Element$Overview$Model(flags),
+		$elm$core$Platform$Cmd$none);
+};
+var $author$project$App$initOverview = function () {
+	var flags = {
+		seriesId: '',
+		seriesList: _List_fromArray(
+			[$author$project$Data$Series$empty]),
+		topicId: ''
+	};
+	return $author$project$Element$Overview$init(flags);
+}();
+var $author$project$Element$Reader$Model = function (flags) {
+	return {flags: flags};
+};
+var $author$project$Element$Reader$init = function (flags) {
+	return _Utils_Tuple2(
+		$author$project$Element$Reader$Model(flags),
+		$elm$core$Platform$Cmd$none);
+};
+var $author$project$App$initReader = function () {
+	var flags = {markdown: 'Empty', topicId: 'empty'};
+	return $author$project$Element$Reader$init(flags);
+}();
+var $author$project$App$init = F3(
+	function (_v0, url, key) {
+		var seriesList = _List_fromArray(
+			[$author$project$Data$Series$empty]);
+		var route = $author$project$Route$fromUrl(url);
+		var cmd = $elm$core$Platform$Cmd$batch(
+			_List_fromArray(
+				[
+					$author$project$App$getTopicList(url),
+					$author$project$App$getSeriesList(url),
+					$author$project$App$getMarkdown(url),
+					$author$project$App$getPostList(url)
+				]));
+		var _v1 = $author$project$App$initReader;
+		var reader = _v1.a;
+		var _v2 = $author$project$App$initOverview;
+		var overview = _v2.a;
+		var _v3 = $author$project$App$initNavigator;
+		var navigator = _v3.a;
+		var _v4 = $author$project$App$initIndexer;
+		var indexer = _v4.a;
+		var model = A8($author$project$App$Model, url, key, route, navigator, overview, reader, indexer, seriesList);
+		return _Utils_Tuple2(model, cmd);
+	});
+var $author$project$App$UrlChanged = function (a) {
+	return {$: 'UrlChanged', a: a};
+};
+var $author$project$App$onUrlChange = function (url) {
+	return $author$project$App$UrlChanged(url);
+};
+var $author$project$App$GotUrlRequest = function (a) {
+	return {$: 'GotUrlRequest', a: a};
+};
+var $author$project$App$onUrlRequest = function (req) {
+	return $author$project$App$GotUrlRequest(req);
+};
+var $author$project$App$PortJson = function (a) {
+	return {$: 'PortJson', a: a};
+};
+var $author$project$App$listen = _Platform_incomingPort('listen', $elm$json$Json$Decode$string);
+var $author$project$App$subscriptions = function (_v0) {
+	return $author$project$App$listen($author$project$App$PortJson);
+};
+var $author$project$Element$Navigator$CollapseFolder = {$: 'CollapseFolder'};
+var $author$project$Element$Indexer$DataChanged = F3(
+	function (a, b, c) {
+		return {$: 'DataChanged', a: a, b: b, c: c};
+	});
+var $author$project$Element$Navigator$DataChanged = F2(
+	function (a, b) {
+		return {$: 'DataChanged', a: a, b: b};
+	});
+var $author$project$Element$Overview$DataChanged = F3(
+	function (a, b, c) {
+		return {$: 'DataChanged', a: a, b: b, c: c};
+	});
+var $author$project$Element$Reader$DataChanged = F2(
+	function (a, b) {
+		return {$: 'DataChanged', a: a, b: b};
+	});
+var $author$project$App$IndexerMsg = function (a) {
+	return {$: 'IndexerMsg', a: a};
+};
+var $author$project$App$NavigatorMsg = function (a) {
+	return {$: 'NavigatorMsg', a: a};
+};
+var $author$project$App$OverviewMsg = function (a) {
+	return {$: 'OverviewMsg', a: a};
+};
+var $author$project$App$ReaderMsg = function (a) {
+	return {$: 'ReaderMsg', a: a};
+};
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
 var $elm$browser$Browser$Navigation$load = _Browser_load;
+var $elm$core$Platform$Cmd$map = _Platform_map;
+var $author$project$Data$Series$matchId = F2(
+	function (id, series) {
+		var _v0 = A2($elm$core$Basics$compare, id, series.id);
+		if (_v0.$ === 'EQ') {
+			return true;
+		} else {
+			return false;
+		}
+	});
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
+var $author$project$Extension$Http$Error$toString = function (error) {
+	switch (error.$) {
+		case 'BadUrl':
+			var msg = error.a;
+			return msg;
+		case 'Timeout':
+			return 'Timeout';
+		case 'NetworkError':
+			return 'Network Error';
+		case 'BadStatus':
+			var value = error.a;
+			return 'Bad Status: ' + $elm$core$String$fromInt(value);
+		default:
+			var msg = error.a;
+			return msg;
+	}
+};
 var $elm$url$Url$addPort = F2(
 	function (maybePort, starter) {
 		if (maybePort.$ === 'Nothing') {
@@ -6548,147 +6991,435 @@ var $elm$url$Url$toString = function (url) {
 					_Utils_ap(http, url.host)),
 				url.path)));
 };
-var $author$project$Config$dataUrl = '/data';
-var $author$project$Config$topicListUrl = $author$project$Config$dataUrl + '/topic-list.json';
-var $author$project$Update$Navigator$update = F2(
+var $author$project$Element$Indexer$Flags = F3(
+	function (topicId, series, postList) {
+		return {postList: postList, series: series, topicId: topicId};
+	});
+var $author$project$Element$Indexer$update = F2(
 	function (msg, model) {
-		update:
-		while (true) {
-			switch (msg.$) {
-				case 'SelectLayout':
-					var newModel = _Utils_update(
-						model,
-						{
-							layout: $author$project$Route$route(model.url)
-						});
-					var cmd = A2(
-						$elm$core$Platform$Cmd$map,
-						$elm$core$Basics$always($author$project$Msg$RequestData),
-						$elm$core$Platform$Cmd$none);
-					return _Utils_Tuple2(newModel, cmd);
-				case 'RequestData':
-					var $temp$msg = $author$project$Msg$RequestTopicList,
-						$temp$model = model;
-					msg = $temp$msg;
-					model = $temp$model;
-					continue update;
-				case 'RequestTopicList':
-					var cmd = $elm$http$Http$get(
-						{
-							expect: A2(
-								$elm$http$Http$expectJson,
-								$author$project$Msg$TopicListResponse,
-								$elm$json$Json$Decode$list($author$project$Model$Topic$jsonDecoder)),
-							url: $author$project$Config$topicListUrl
-						});
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{title: 'Requesting Topic-list'}),
-						cmd);
-				case 'TopicListResponse':
-					var response = msg.a;
-					if (response.$ === 'Ok') {
-						var result = response.a;
-						var newModel = _Utils_update(
-							model,
-							{topicList: result});
-						return _Utils_Tuple2(newModel, $elm$core$Platform$Cmd$none);
-					} else {
-						var error = response.a;
-						switch (error.$) {
-							case 'BadUrl':
-								var detail = error.a;
-								return _Utils_Tuple2(
-									_Utils_update(
-										model,
-										{title: detail}),
-									$elm$core$Platform$Cmd$none);
-							case 'Timeout':
-								return _Utils_Tuple2(
-									_Utils_update(
-										model,
-										{title: 'Timeout'}),
-									$elm$core$Platform$Cmd$none);
-							case 'NetworkError':
-								return _Utils_Tuple2(
-									_Utils_update(
-										model,
-										{title: 'Network Error'}),
-									$elm$core$Platform$Cmd$none);
-							case 'BadStatus':
-								return _Utils_Tuple2(
-									_Utils_update(
-										model,
-										{title: 'Bad Status'}),
-									$elm$core$Platform$Cmd$none);
-							default:
-								var detail = error.a;
-								return _Utils_Tuple2(
-									_Utils_update(
-										model,
-										{title: detail}),
-									$elm$core$Platform$Cmd$none);
-						}
-					}
-				case 'UrlChanged':
-					var newURL = msg.a;
-					var newModel = _Utils_update(
-						model,
-						{navigator: $author$project$Model$Navigator$default, url: newURL});
-					return _Utils_Tuple2(newModel, $elm$core$Platform$Cmd$none);
-				default:
-					var request = msg.a;
-					if (request.$ === 'Internal') {
-						var url = request.a;
-						var cmd = A2(
-							$elm$browser$Browser$Navigation$pushUrl,
-							model.key,
-							$elm$url$Url$toString(url));
-						return _Utils_Tuple2(model, cmd);
-					} else {
-						var href = request.a;
-						var cmd = $elm$browser$Browser$Navigation$load(href);
-						return _Utils_Tuple2(model, cmd);
-					}
-			}
+		if (msg.$ === 'DataChanged') {
+			var topicId = msg.a;
+			var series = msg.b;
+			var postList = msg.c;
+			var updatedFlags = A3($author$project$Element$Indexer$Flags, topicId, series, postList);
+			var updatedModel = _Utils_update(
+				model,
+				{flags: updatedFlags});
+			return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+		} else {
+			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
 	});
-var $author$project$Update$update = F2(
+var $elm$core$Basics$not = _Basics_not;
+var $author$project$Element$Navigator$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
-			case 'SelectLayout':
-				var newModel = _Utils_update(
+			case 'ToggleFolder':
+				var updatedModel = _Utils_update(
 					model,
-					{
-						layout: $author$project$Route$route(model.url),
-						title: 'Selected layout'
-					});
-				var cmd = A2(
-					$elm$core$Platform$Cmd$map,
-					$elm$core$Basics$always($author$project$Msg$RequestData),
-					$elm$core$Platform$Cmd$none);
-				return _Utils_Tuple2(newModel, cmd);
-			case 'RequestData':
-				var newModel = _Utils_update(
+					{collapsed: !model.collapsed});
+				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+			case 'CollapseFolder':
+				var updatedModel = _Utils_update(
 					model,
-					{title: 'Requesting data...'});
-				return _Utils_Tuple2(newModel, $elm$core$Platform$Cmd$none);
+					{collapsed: true});
+				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+			case 'DataChanged':
+				var newTopicList = msg.a;
+				var newTopicId = msg.b;
+				var flags = model.flags;
+				var updatedFlags = _Utils_update(
+					flags,
+					{topicId: newTopicId, topicList: newTopicList});
+				var updatedModel = _Utils_update(
+					model,
+					{flags: updatedFlags});
+				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+			case 'TopicChanged':
+				var newTopicId = msg.a;
+				var flags = model.flags;
+				var updatedFlags = _Utils_update(
+					flags,
+					{topicId: newTopicId});
+				var updatedModel = _Utils_update(
+					model,
+					{flags: updatedFlags});
+				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
 			default:
-				return A2($author$project$Update$Navigator$update, msg, model);
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
 	});
-var $elm$html$Html$a = _VirtualDom_node('a');
-var $author$project$Config$avatarUrl = '/mockup/Component/Navigator/avatar.jpg';
-var $elm$json$Json$Encode$bool = _Json_wrap;
-var $elm$html$Html$Attributes$boolProperty = F2(
-	function (key, bool) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$bool(bool));
+var $author$project$Element$Overview$Flags = F3(
+	function (topicId, seriesList, seriesId) {
+		return {seriesId: seriesId, seriesList: seriesList, topicId: topicId};
 	});
-var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
+var $author$project$Element$Overview$update = F2(
+	function (msg, model) {
+		if (msg.$ === 'DataChanged') {
+			var topicId = msg.a;
+			var seriesList = msg.b;
+			var seriesId = msg.c;
+			var updatedFlags = A3($author$project$Element$Overview$Flags, topicId, seriesList, seriesId);
+			var updatedModel = _Utils_update(
+				model,
+				{flags: updatedFlags});
+			return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+		} else {
+			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		}
+	});
+var $author$project$Element$Reader$Flags = F2(
+	function (topicId, markdown) {
+		return {markdown: markdown, topicId: topicId};
+	});
+var $author$project$Element$Reader$update = F2(
+	function (msg, model) {
+		if (msg.$ === 'DataChanged') {
+			var topicId = msg.a;
+			var markdown = msg.b;
+			var updatedFlags = A2($author$project$Element$Reader$Flags, topicId, markdown);
+			var updatedModel = _Utils_update(
+				model,
+				{flags: updatedFlags});
+			return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+		} else {
+			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		}
+	});
+var $author$project$App$updateIndexer = function (model_cmd) {
+	var _v0 = model_cmd;
+	var model = _v0.a;
+	var cmd = _v0.b;
+	var newCmd = $elm$core$Platform$Cmd$batch(
+		_List_fromArray(
+			[
+				cmd,
+				$author$project$App$getTopicList(model.url)
+			]));
+	return _Utils_Tuple2(model, newCmd);
+};
+var $author$project$Element$Navigator$TopicChanged = function (a) {
+	return {$: 'TopicChanged', a: a};
+};
+var $author$project$App$updateNavigator = function (model_cmd) {
+	var _v0 = model_cmd;
+	var model = _v0.a;
+	var cmd = _v0.b;
+	var topicId = $author$project$Extension$Url$toTopicId(model.url);
+	var _v1 = A2(
+		$author$project$Element$Navigator$update,
+		$author$project$Element$Navigator$TopicChanged(topicId),
+		model.navigator);
+	var updatedNavigator = _v1.a;
+	var updatedModel = _Utils_update(
+		model,
+		{navigator: updatedNavigator});
+	return _Utils_Tuple2(updatedModel, cmd);
+};
+var $author$project$App$updateOverview = function (model_cmd) {
+	var _v0 = model_cmd;
+	var model = _v0.a;
+	var cmd = _v0.b;
+	var newCmd = $elm$core$Platform$Cmd$batch(
+		_List_fromArray(
+			[
+				cmd,
+				$author$project$App$getSeriesList(model.url)
+			]));
+	return _Utils_Tuple2(model, newCmd);
+};
+var $author$project$App$updateReader = function (model_cmd) {
+	var _v0 = model_cmd;
+	var model = _v0.a;
+	var cmd = _v0.b;
+	var newCmd = $elm$core$Platform$Cmd$batch(
+		_List_fromArray(
+			[
+				cmd,
+				$author$project$App$getMarkdown(model.url)
+			]));
+	return _Utils_Tuple2(model, newCmd);
+};
+var $author$project$App$updateElements = A2(
+	$elm$core$Basics$composeR,
+	$author$project$App$updateNavigator,
+	A2(
+		$elm$core$Basics$composeR,
+		$author$project$App$updateOverview,
+		A2($elm$core$Basics$composeR, $author$project$App$updateReader, $author$project$App$updateIndexer)));
+var $author$project$App$update = F2(
+	function (msg, model) {
+		switch (msg.$) {
+			case 'NavigatorMsg':
+				var navMsg = msg.a;
+				var _v1 = A2($author$project$Element$Navigator$update, navMsg, model.navigator);
+				var updatedNavigator = _v1.a;
+				var navCmd = _v1.b;
+				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$NavigatorMsg, navCmd);
+				var updatedModel = _Utils_update(
+					model,
+					{navigator: updatedNavigator});
+				return _Utils_Tuple2(updatedModel, cmd);
+			case 'OverviewMsg':
+				var overMsg = msg.a;
+				var _v2 = A2($author$project$Element$Overview$update, overMsg, model.overview);
+				var updatedOverview = _v2.a;
+				var overCmd = _v2.b;
+				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$OverviewMsg, overCmd);
+				var updatedModel = _Utils_update(
+					model,
+					{overview: updatedOverview});
+				return _Utils_Tuple2(updatedModel, cmd);
+			case 'ReaderMsg':
+				var readMsg = msg.a;
+				var _v3 = A2($author$project$Element$Reader$update, readMsg, model.reader);
+				var updatedReader = _v3.a;
+				var readCmd = _v3.b;
+				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$ReaderMsg, readCmd);
+				var updatedModel = _Utils_update(
+					model,
+					{reader: updatedReader});
+				return _Utils_Tuple2(updatedModel, cmd);
+			case 'IndexerMsg':
+				var idxMsg = msg.a;
+				var _v4 = A2($author$project$Element$Indexer$update, idxMsg, model.indexer);
+				var updatedIndexer = _v4.a;
+				var idxCmd = _v4.b;
+				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$IndexerMsg, idxCmd);
+				var updatedModel = _Utils_update(
+					model,
+					{indexer: updatedIndexer});
+				return _Utils_Tuple2(updatedModel, cmd);
+			case 'GotTopicListResponse':
+				var res = msg.a;
+				if (res.$ === 'Ok') {
+					var topicList = res.a;
+					var topicId = $author$project$Extension$Url$toTopicId(model.url);
+					var _v6 = A2(
+						$author$project$Element$Navigator$update,
+						A2($author$project$Element$Navigator$DataChanged, topicList, topicId),
+						model.navigator);
+					var updatedNavigator = _v6.a;
+					var updatedModel = _Utils_update(
+						model,
+						{navigator: updatedNavigator});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				} else {
+					var error = res.a;
+					var topicId = 'error';
+					var emptyTopic = $author$project$Data$Topic$empty;
+					var errorTopic = _Utils_update(
+						emptyTopic,
+						{
+							title: $author$project$Extension$Http$Error$toString(error)
+						});
+					var topicList = _List_fromArray(
+						[errorTopic]);
+					var _v7 = A2(
+						$author$project$Element$Navigator$update,
+						A2($author$project$Element$Navigator$DataChanged, topicList, topicId),
+						model.navigator);
+					var updatedNavigator = _v7.a;
+					var updatedModel = _Utils_update(
+						model,
+						{navigator: updatedNavigator});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				}
+			case 'GotSeriesListResponse':
+				var res = msg.a;
+				if (res.$ === 'Ok') {
+					var newSeriesList = res.a;
+					var topicId = $author$project$Extension$Url$toTopicId(model.url);
+					var seriesId = $author$project$Extension$Url$toSeriesId(model.url);
+					var _v9 = A2(
+						$author$project$Element$Overview$update,
+						A3($author$project$Element$Overview$DataChanged, topicId, newSeriesList, seriesId),
+						model.overview);
+					var updatedOverview = _v9.a;
+					var updatedModel = _Utils_update(
+						model,
+						{overview: updatedOverview, seriesList: newSeriesList});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				} else {
+					var error = res.a;
+					var topicId = 'error';
+					var seriesId = 'error';
+					var emptySeries = $author$project$Data$Series$empty;
+					var errorSeries = _Utils_update(
+						emptySeries,
+						{
+							title: $author$project$Extension$Http$Error$toString(error)
+						});
+					var seriesList = _List_fromArray(
+						[errorSeries, emptySeries]);
+					var _v10 = A2(
+						$author$project$Element$Overview$update,
+						A3($author$project$Element$Overview$DataChanged, topicId, seriesList, seriesId),
+						model.overview);
+					var updatedOverview = _v10.a;
+					var updatedModel = _Utils_update(
+						model,
+						{overview: updatedOverview});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				}
+			case 'GotPostListResponse':
+				var res = msg.a;
+				if (res.$ === 'Ok') {
+					var postList = res.a;
+					var topicId = $author$project$Extension$Url$toTopicId(model.url);
+					var seriesId = $author$project$Extension$Url$toSeriesId(model.url);
+					var series = function () {
+						var maybeSeries = $elm$core$List$head(
+							A2(
+								$elm$core$List$filter,
+								$author$project$Data$Series$matchId(seriesId),
+								model.seriesList));
+						if (maybeSeries.$ === 'Nothing') {
+							return $author$project$Data$Series$empty;
+						} else {
+							var matched = maybeSeries.a;
+							return matched;
+						}
+					}();
+					var _v12 = A2(
+						$author$project$Element$Indexer$update,
+						A3($author$project$Element$Indexer$DataChanged, topicId, series, postList),
+						model.indexer);
+					var updatedIndexer = _v12.a;
+					var updatedModel = _Utils_update(
+						model,
+						{indexer: updatedIndexer});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				} else {
+					var error = res.a;
+					var topicId = $author$project$Extension$Url$toTopicId(model.url);
+					var seriesId = $author$project$Extension$Url$toSeriesId(model.url);
+					var series = function () {
+						var maybeSeries = $elm$core$List$head(
+							A2(
+								$elm$core$List$filter,
+								$author$project$Data$Series$matchId(seriesId),
+								model.seriesList));
+						if (maybeSeries.$ === 'Nothing') {
+							return $author$project$Data$Series$empty;
+						} else {
+							var matched = maybeSeries.a;
+							return matched;
+						}
+					}();
+					var emptyPost = $author$project$Data$Post$empty;
+					var errorPost = _Utils_update(
+						emptyPost,
+						{
+							title: $author$project$Extension$Http$Error$toString(error) + ('<br>' + ('Url : ' + ($elm$url$Url$toString(model.url) + ('<br>' + ('TopicId : ' + (topicId + ('<br>' + ('SeriesId : ' + (seriesId + '<br>')))))))))
+						});
+					var postList = _List_fromArray(
+						[errorPost, emptyPost]);
+					var _v14 = A2(
+						$author$project$Element$Indexer$update,
+						A3($author$project$Element$Indexer$DataChanged, topicId, series, postList),
+						model.indexer);
+					var updatedIndexer = _v14.a;
+					var updatedModel = _Utils_update(
+						model,
+						{indexer: updatedIndexer});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				}
+			case 'GotTopicOverviewResponse':
+				var res = msg.a;
+				if (res.$ === 'Ok') {
+					var markdown = res.a;
+					var topicId = $author$project$Extension$Url$toTopicId(model.url);
+					var _v17 = A2(
+						$author$project$Element$Reader$update,
+						A2($author$project$Element$Reader$DataChanged, topicId, markdown),
+						model.reader);
+					var updatedReader = _v17.a;
+					var updatedModel = _Utils_update(
+						model,
+						{reader: updatedReader});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				} else {
+					var error = res.a;
+					var topicId = $author$project$Extension$Url$toTopicId(model.url);
+					var errorMarkdown = '# Error' + $author$project$Extension$Http$Error$toString(error);
+					var _v18 = A2(
+						$author$project$Element$Reader$update,
+						A2($author$project$Element$Reader$DataChanged, topicId, errorMarkdown),
+						model.reader);
+					var updatedReader = _v18.a;
+					var updatedModel = _Utils_update(
+						model,
+						{reader: updatedReader});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				}
+			case 'GotPostContentResponse':
+				var res = msg.a;
+				if (res.$ === 'Ok') {
+					var markdown = res.a;
+					var topicId = $author$project$Extension$Url$toTopicId(model.url);
+					var _v20 = A2(
+						$author$project$Element$Reader$update,
+						A2($author$project$Element$Reader$DataChanged, topicId, markdown),
+						model.reader);
+					var updatedReader = _v20.a;
+					var updatedModel = _Utils_update(
+						model,
+						{reader: updatedReader});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				} else {
+					var error = res.a;
+					var topicId = $author$project$Extension$Url$toTopicId(model.url);
+					var errorMarkdown = '# Error' + $author$project$Extension$Http$Error$toString(error);
+					var _v21 = A2(
+						$author$project$Element$Reader$update,
+						A2($author$project$Element$Reader$DataChanged, topicId, errorMarkdown),
+						model.reader);
+					var updatedReader = _v21.a;
+					var updatedModel = _Utils_update(
+						model,
+						{reader: updatedReader});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				}
+			case 'GotUrlRequest':
+				var req = msg.a;
+				if (req.$ === 'External') {
+					var href = req.a;
+					return _Utils_Tuple2(
+						model,
+						$elm$browser$Browser$Navigation$load(href));
+				} else {
+					var url = req.a;
+					var cmd2 = A2(
+						$elm$browser$Browser$Navigation$pushUrl,
+						model.key,
+						$elm$url$Url$toString(url));
+					var _v23 = A2(
+						$author$project$App$update,
+						$author$project$App$NavigatorMsg($author$project$Element$Navigator$CollapseFolder),
+						model);
+					var updatedModel = _v23.a;
+					var cmd1 = _v23.b;
+					var cmd = $elm$core$Platform$Cmd$batch(
+						_List_fromArray(
+							[cmd1, cmd2]));
+					return _Utils_Tuple2(updatedModel, cmd);
+				}
+			case 'UrlChanged':
+				var newUrl = msg.a;
+				var newRoute = $author$project$Route$fromUrl(newUrl);
+				var updatedModel = _Utils_update(
+					model,
+					{route: newRoute, url: newUrl});
+				return $author$project$App$updateElements(
+					_Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none));
+			default:
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		}
+	});
+var $elm$virtual_dom$VirtualDom$map = _VirtualDom_map;
+var $elm$html$Html$map = $elm$virtual_dom$VirtualDom$map;
+var $author$project$Config$siteTitle = 'Semi Dev_ \'s Blog';
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6699,21 +7430,113 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$Attributes$for = $elm$html$Html$Attributes$stringProperty('htmlFor');
-var $author$project$Config$gitHubUrl = 'https://github.com/thinhtranhnvn';
+var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$html$Html$header = _VirtualDom_node('header');
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
 		'href',
 		_VirtualDom_noJavaScriptUri(url));
 };
-var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$Element$Indexer$indexLink = F2(
+	function (model, post) {
+		var topicId = model.flags.topicId;
+		var seriesId = model.flags.series.id;
+		var postSlug = post.slug;
+		var linkUrl = '/' + (topicId + ('/' + (seriesId + ('/' + postSlug))));
+		return A2(
+			$elm$html$Html$a,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('Indexer Link'),
+					$elm$html$Html$Attributes$href(linkUrl)
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(post.title)
+				]));
+	});
+var $elm$html$Html$main_ = _VirtualDom_node('main');
+var $elm$html$Html$nav = _VirtualDom_node('nav');
+var $elm$html$Html$p = _VirtualDom_node('p');
+var $author$project$Element$Indexer$view = function (model) {
+	return A2(
+		$elm$html$Html$main_,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('Indexer Base')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('Indexer Container')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$header,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('Indexer Intro')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$h1,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(model.flags.series.title)
+									])),
+								A2(
+								$elm$html$Html$p,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(model.flags.series.description)
+									]))
+							])),
+						A2(
+						$elm$html$Html$nav,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('Indexer Content')
+							]),
+						A2(
+							$elm$core$List$map,
+							$author$project$Element$Indexer$indexLink(model),
+							model.flags.postList))
+					]))
+			]));
+};
+var $author$project$Element$Navigator$ToggleFolder = {$: 'ToggleFolder'};
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
-var $elm$html$Html$nav = _VirtualDom_node('nav');
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var $elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'click',
+		$elm$json$Json$Decode$succeed(msg));
+};
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
-var $author$project$Config$siteTitle = 'Semi Dev_ \'s Blog';
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -6721,125 +7544,250 @@ var $elm$html$Html$Attributes$src = function (url) {
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$View$Navigator$topicLink = function (topic) {
+var $author$project$Element$Navigator$topicLink = F2(
+	function (currentId, topic) {
+		var linkClass = function () {
+			var _v0 = A2($elm$core$Basics$compare, topic.id, currentId);
+			if (_v0.$ === 'EQ') {
+				return 'Navigator Link Current';
+			} else {
+				return 'Navigator Link';
+			}
+		}();
+		return A2(
+			$elm$html$Html$a,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class(linkClass),
+					$elm$html$Html$Attributes$href('/' + topic.id)
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(topic.title)
+				]));
+	});
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $author$project$Element$Navigator$view = function (model) {
+	var togglerClass = model.collapsed ? 'Navigator Toggler' : 'Navigator Toggler Active';
+	var folderClass = model.collapsed ? 'Navigator Folder' : 'Navigator Folder Expanded';
+	return A2(
+		$elm$html$Html$nav,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('Navigator Base')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$a,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('Navigator Avatar'),
+						$elm$html$Html$Attributes$href('/')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$img,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$src(model.flags.avatarUrl)
+							]),
+						_List_Nil),
+						$elm$html$Html$text(model.flags.avatarName)
+					])),
+				A2(
+				$elm$html$Html$input,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('Navigator Search'),
+						$elm$html$Html$Attributes$type_('text'),
+						$elm$html$Html$Attributes$placeholder('Search with Google...')
+					]),
+				_List_Nil),
+				A2(
+				$elm$html$Html$label,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class(togglerClass),
+						$elm$html$Html$Events$onClick($author$project$Element$Navigator$ToggleFolder)
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Topics')
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class(folderClass)
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('Folder Container')
+							]),
+						A2(
+							$elm$core$List$map,
+							$author$project$Element$Navigator$topicLink(model.flags.topicId),
+							model.flags.topicList))
+					])),
+				A2(
+				$elm$html$Html$a,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('Navigator GitHub'),
+						$elm$html$Html$Attributes$href(model.flags.gitHubUrl),
+						$elm$html$Html$Attributes$target('_blank')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('GitHub')
+					]))
+			]));
+};
+var $author$project$Element$Overview$overviewLink = function (model) {
+	var topicUrl = '/' + model.flags.topicId;
+	var linkClass = $elm$core$String$isEmpty(model.flags.seriesId) ? 'Overview Link Current' : 'Overview Link';
 	return A2(
 		$elm$html$Html$a,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('Navigator Link'),
-				$elm$html$Html$Attributes$href('/' + topic.id)
+				$elm$html$Html$Attributes$class(linkClass),
+				$elm$html$Html$Attributes$href(topicUrl)
 			]),
 		_List_fromArray(
 			[
-				$elm$html$Html$text(topic.title)
+				$elm$html$Html$text('Overview')
 			]));
 };
-var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
-var $author$project$View$Navigator$bodyHtml = function (model) {
-	return _List_fromArray(
-		[
-			A2(
-			$elm$html$Html$nav,
+var $author$project$Element$Overview$seriesLink = F2(
+	function (model, series) {
+		var seriesUrl = '/' + (model.flags.topicId + ('/' + series.id));
+		var linkClass = function () {
+			var _v0 = A2($elm$core$Basics$compare, series.id, model.flags.seriesId);
+			if (_v0.$ === 'EQ') {
+				return 'Overview Link Current';
+			} else {
+				return 'Overview Link';
+			}
+		}();
+		return A2(
+			$elm$html$Html$a,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('Navigator Base')
+					$elm$html$Html$Attributes$class(linkClass),
+					$elm$html$Html$Attributes$href(seriesUrl)
 				]),
 			_List_fromArray(
 				[
-					A2(
-					$elm$html$Html$a,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('Navigator Avatar'),
-							$elm$html$Html$Attributes$href('/')
-						]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$img,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$src($author$project$Config$avatarUrl)
-								]),
-							_List_Nil),
-							$elm$html$Html$text($author$project$Config$siteTitle)
-						])),
-					A2(
-					$elm$html$Html$input,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('Navigator Search'),
-							$elm$html$Html$Attributes$type_('text'),
-							$elm$html$Html$Attributes$placeholder('Search with Google...')
-						]),
-					_List_Nil),
-					A2(
-					$elm$html$Html$input,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$id('folder-0'),
-							$elm$html$Html$Attributes$type_('checkbox'),
-							$elm$html$Html$Attributes$checked(model.navigator.expanded)
-						]),
-					_List_Nil),
-					A2(
-					$elm$html$Html$label,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$for('folder-0')
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Topics')
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('Navigator Folder')
-						]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('Folder Container')
-								]),
-							A2($elm$core$List$map, $author$project$View$Navigator$topicLink, model.topicList))
-						])),
-					A2(
-					$elm$html$Html$a,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('Navigator GitHub'),
-							$elm$html$Html$Attributes$href($author$project$Config$gitHubUrl),
-							$elm$html$Html$Attributes$target('_blank')
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('GitHub')
-						]))
-				]))
-		]);
+					$elm$html$Html$text(series.title)
+				]));
+	});
+var $author$project$Element$Overview$seriesLinkList = function (model) {
+	return A2(
+		$elm$core$List$map,
+		$author$project$Element$Overview$seriesLink(model),
+		model.flags.seriesList);
 };
-var $author$project$View$Navigator$view = function (model) {
+var $author$project$Element$Overview$view = function (model) {
+	return A2(
+		$elm$html$Html$nav,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('Overview Base')
+			]),
+		A2(
+			$elm$core$List$cons,
+			$author$project$Element$Overview$overviewLink(model),
+			$author$project$Element$Overview$seriesLinkList(model)));
+};
+var $elm$html$Html$article = _VirtualDom_node('article');
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm_explorations$markdown$Markdown$defaultOptions = {
+	defaultHighlighting: $elm$core$Maybe$Nothing,
+	githubFlavored: $elm$core$Maybe$Just(
+		{breaks: false, tables: false}),
+	sanitize: true,
+	smartypants: false
+};
+var $elm_explorations$markdown$Markdown$toHtmlWith = _Markdown_toHtml;
+var $elm_explorations$markdown$Markdown$toHtml = $elm_explorations$markdown$Markdown$toHtmlWith($elm_explorations$markdown$Markdown$defaultOptions);
+var $author$project$Element$Reader$view = function (model) {
+	return A2(
+		$elm$html$Html$article,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('Reader Base')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('Reader Container')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$span,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(model.flags.topicId)
+							])),
+						A2($elm_explorations$markdown$Markdown$toHtml, _List_Nil, model.flags.markdown)
+					]))
+			]));
+};
+var $author$project$App$view = function (model) {
+	var readerHtml = A2(
+		$elm$html$Html$map,
+		$author$project$App$ReaderMsg,
+		$author$project$Element$Reader$view(model.reader));
+	var overviewHtml = A2(
+		$elm$html$Html$map,
+		$author$project$App$OverviewMsg,
+		$author$project$Element$Overview$view(model.overview));
+	var navigatorHtml = A2(
+		$elm$html$Html$map,
+		$author$project$App$NavigatorMsg,
+		$author$project$Element$Navigator$view(model.navigator));
+	var indexerHtml = A2(
+		$elm$html$Html$map,
+		$author$project$App$IndexerMsg,
+		$author$project$Element$Indexer$view(model.indexer));
 	return {
-		body: $author$project$View$Navigator$bodyHtml(model),
-		title: model.title
+		body: function () {
+			var _v0 = model.route;
+			switch (_v0.$) {
+				case 'HomePage':
+					return _List_fromArray(
+						[navigatorHtml, overviewHtml, readerHtml]);
+				case 'TopicPage':
+					return _List_fromArray(
+						[navigatorHtml, overviewHtml, readerHtml]);
+				case 'SeriesPage':
+					return _List_fromArray(
+						[navigatorHtml, overviewHtml, indexerHtml]);
+				default:
+					return _List_fromArray(
+						[navigatorHtml, overviewHtml, readerHtml]);
+			}
+		}(),
+		title: $author$project$Config$siteTitle
 	};
 };
-var $author$project$View$view = function (model) {
-	return $author$project$View$Navigator$view(model);
-};
-var $author$project$Main$main = $elm$browser$Browser$application(
-	A6($author$project$App$App, $author$project$Init$init, $author$project$View$view, $author$project$Update$update, $author$project$Subscriptions$subscriptions, $author$project$OnUrlRequest$onUrlRequest, $author$project$OnUrlChange$onUrlChange));
-_Platform_export({'Main':{'init':$author$project$Main$main(
+var $author$project$App$main = $elm$browser$Browser$application(
+	A6($author$project$App$App, $author$project$App$init, $author$project$App$view, $author$project$App$update, $author$project$App$subscriptions, $author$project$App$onUrlRequest, $author$project$App$onUrlChange));
+_Platform_export({'App':{'init':$author$project$App$main(
 	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
 
-  var app = Elm.Main.init({ node: document.getElementById("elm") });
+  var app = Elm.App.init({ node: document.getElementById("elm") });
 }
 catch (e)
 {
