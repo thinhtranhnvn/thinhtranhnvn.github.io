@@ -10,5 +10,5 @@ Inbetween its beginning and its end, the roud we travel has five paths. Each one
 
 Thus, it is that the first chapter on the five paths is called "The Chapter on Meditation".
 
-[\[Next\] The Power of Compassion](/content/02-the-power-of-compassion.md)
+Next: [The Power of Compassion](./02-the-power-of-compassion)
 
