@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+
+.Indexer.Content
+   { display: flex
+   ; flex-direction: column
+   ; gap: 3px
+   }
+
+

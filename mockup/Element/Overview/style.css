@@ -1,32 +1,6 @@
 @charset "utf-8";
 
-
-.Overview.Base
-   { background: white
-   ; border-bottom: 1px solid lightgrey
-   }
-.Overview.Base
-   { display: flex
-   ; align-items: end
-   ; justify-content: center
-   ; height: 60px
-   ; white-space: nowrap
-   ; overflow-x: scroll
-   ; overflow-y: hidden
-   }
-
-
-.Overview.Link
-   { text-decoration: none
-   ; color: black
-   ; border-bottom: 2px solid whitesmoke
-   }
-.Overview.Link:hover,
-.Overview.Link.Current
-   { border-bottom: 2px solid black }
-.Overview.Link
-   { display: inline-block
-   ; padding: 9px 15px
-   }
+@import "./Base.css";
+@import "./Link.css";
 
 

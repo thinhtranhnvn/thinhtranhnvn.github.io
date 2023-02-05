@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+
+.Indexer.Link
+   { display: inline-block
+   ; padding: 9px 18px
+   ; background: whitesmoke
+   }
+.Indexer.Link::before
+   { content: "\2218" }
+
+

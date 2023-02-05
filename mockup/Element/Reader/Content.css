@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+
+p  { font-size: 21px
+   ; line-height: 1.617
+   ; margin: 36px 0
+   }
+
+h2 { font-size: 36px
+   ; line-height: 1
+   ; margin-top: 42px
+   }
+
+h1 { font-size: 42px
+   ; line-height: 1.383
+   }
+
+img
+   { width: 100%
+   ; height: auto
+   }
+
+code, [contenteditable]
+   { font-family: "Red Hat Mono", "Noto Sans Mono", "Source Code Pro", monospace
+   ; font-size: 0.81rem
+   ; line-height: 1.617
+   }
+code
+   { background: black
+   ; color: white
+   }
+code
+   { display: inline-block
+   ; padding: 0 4px
+   ; border-radius: 5px
+   }
+
+[contenteditable]
+   { white-space: pre
+   }
+[contenteditable]
+   { background: black
+   ; color: white
+   }
+[contenteditable]
+   { display: block
+   ; width: 100%
+   ; padding: 21px 18px 27px
+   ; margin: 36px 0
+   ; border-radius: 9px
+   }
+
+

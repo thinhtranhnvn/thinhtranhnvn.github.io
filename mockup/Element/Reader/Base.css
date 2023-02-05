@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+
+.Reader.Base
+   { font-family: "Times New Roman", "Times", serif
+   ; font-size: 18px
+   }
+.Reader.Base
+   { background: white
+   ; color: black
+   }
+.Reader.Base
+   { display: block
+   ; width: 100%
+   }
+
+
