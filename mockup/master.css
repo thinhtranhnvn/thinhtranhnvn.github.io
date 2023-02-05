@@ -1,14 +1,8 @@
 @charset "utf-8";
 
-
 @import "./Element/Base/style.css";
 @import "./Element/Navigator/style.css";
 @import "./Element/Overview/style.css";
 @import "./Element/Reader/style.css";
 @import "./Element/Indexer/style.css";
-
-@import "./Layout/Home/style.css";
-@import "./Layout/Series/style.css";
-@import "./Layout/Post/style.css";
-@import "./Layout/Error/style.css";
 

@@ -1,6 +1,13 @@
 @charset "utf-8";
 
 
+ul > li,
+ol > li
+   { font-size: 21px
+   ; line-height: 1.383
+   ; list-style-position: inside
+   }
+
 p  { font-size: 21px
    ; line-height: 1.617
    ; margin: 36px 0
