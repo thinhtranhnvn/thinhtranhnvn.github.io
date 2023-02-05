@@ -1,13 +1,16 @@
 module Extension.Maybe exposing ( map, apply, bind )
 
+import Class
+
+
+instanceMonad : Class.Monad (Maybe a) a (Maybe b) (Maybe (a -> b)) a b
+instanceMonad = Class.Monad bind apply map
+
 
 -- map - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 map : (a -> b) -> Maybe a -> Maybe b
-map = map func maybe =
-   case maybe of
-      Nothing  -> Nothing
-      Just any -> Just (func any)
+map = Maybe.map
 
 
 -- apply - - - - - - - - - - - - - - - - - - - - - - - - - - -
