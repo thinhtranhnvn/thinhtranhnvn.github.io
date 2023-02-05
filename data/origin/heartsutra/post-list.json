@@ -12,6 +12,20 @@
       "keywords" : [ "heart sutra", "prajnaparamitahrudaya", "buddhist sutra", "preface" ],
       "description" : "Prior to his systematic explanation of the Sutra, the master presented in everyday language and with perfect freedom of expression the results of his thorough and exhaustive study, bringing into play all the subtlety of the wondrous and profound Dharma.",
       "content" : ""
+   },
+   {
+      "slug" : "02-translator-s-introduction",
+      "title" : "Translator's Introduction",
+      "keywords" : [ "heart sutra", "prajnamaramitahrudaya", "buddhist sutra", "introduction" ],
+      "description" : "Wonderful Prajna! Mother of all Buddhas and the supreme guide and teacher of sages and saints! All that is comes from Prajna and will returns to Prajna.",
+      "content" : ""
+   },
+   {
+      "slug" : "pending",
+      "title" : "Pending",
+      "keywords" : [],
+      "description" : "",
+      "content" : ""
    }
 ]
 
