@@ -2,22 +2,29 @@
    {
       "slug" : "00-the-first-preface",
       "title" : "The First Preface",
-      "keywords" : [ "heart sutra", "prajnaparamitahrudaya", "buddhist sutra", "preface" ],
+      "keywords" : [ "heart sutra", "prajnaparamitahrdaya", "buddhist sutra", "preface" ],
       "description" : "My great old teacher explained The Heart Sutra by highlighting salient points in a prologue. According to his explanation, all is really Buddhadharma, and every single form and each tiny bit of color is the Middle Way.",
       "content" : ""
    },
    {
       "slug" : "01-the-second-preface",
       "title" : "The Second Preface",
-      "keywords" : [ "heart sutra", "prajnaparamitahrudaya", "buddhist sutra", "preface" ],
+      "keywords" : [ "heart sutra", "prajnaparamitahrdaya", "buddhist sutra", "preface" ],
       "description" : "Prior to his systematic explanation of the Sutra, the master presented in everyday language and with perfect freedom of expression the results of his thorough and exhaustive study, bringing into play all the subtlety of the wondrous and profound Dharma.",
       "content" : ""
    },
    {
       "slug" : "02-translator-s-introduction",
       "title" : "Translator's Introduction",
-      "keywords" : [ "heart sutra", "prajnamaramitahrudaya", "buddhist sutra", "introduction" ],
+      "keywords" : [ "heart sutra", "prajnaparamitahrdaya", "buddhist sutra", "introduction" ],
       "description" : "Wonderful Prajna! Mother of all Buddhas and the supreme guide and teacher of sages and saints! All that is comes from Prajna and will returns to Prajna.",
+      "content" : ""
+   },
+   {
+      "slug" : "03-prologue-by-grand-master-tan-hsu",
+      "title" : "Prologue by Grand Master T'an Hsu",
+      "keywords" : [ "heart sutra", "prajnaparamitahrdaya", "buddhist sutra", "prologue" ],
+      "description" : "The Essential Wisdom - Prajna Paramita Hrdaya - are speaking of is to be distinguished from the awareness of objects or the environment and their use and value, which usually characterized as knowledge by our worldly mind.",
       "content" : ""
    },
    {

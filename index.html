@@ -6644,15 +6644,15 @@ var $elm$http$Http$expectJson = F2(
 						A2($elm$json$Json$Decode$decodeString, decoder, string));
 				}));
 	});
+var $elm$json$Json$Decode$list = _Json_decodeList;
 var $author$project$Data$Post$Post = F5(
 	function (slug, title, keywords, description, content) {
 		return {content: content, description: description, keywords: keywords, slug: slug, title: title};
 	});
 var $elm$json$Json$Decode$field = _Json_decodeField;
-var $elm$json$Json$Decode$list = _Json_decodeList;
 var $elm$json$Json$Decode$map5 = _Json_map5;
 var $elm$json$Json$Decode$string = _Json_decodeString;
-var $author$project$Data$Post$jsonDecoder = A6(
+var $author$project$Extension$Json$Decode$post = A6(
 	$elm$json$Json$Decode$map5,
 	$author$project$Data$Post$Post,
 	A2($elm$json$Json$Decode$field, 'slug', $elm$json$Json$Decode$string),
@@ -6675,7 +6675,7 @@ var $author$project$App$getPostList = function (url) {
 			expect: A2(
 				$elm$http$Http$expectJson,
 				$author$project$App$GotPostListResponse,
-				$elm$json$Json$Decode$list($author$project$Data$Post$jsonDecoder)),
+				$elm$json$Json$Decode$list($author$project$Extension$Json$Decode$post)),
 			url: A2($author$project$Config$postListFileUrl, topicId, seriesId)
 		});
 };
@@ -6687,7 +6687,7 @@ var $author$project$Data$Series$Series = F4(
 		return {description: description, id: id, keywords: keywords, title: title};
 	});
 var $elm$json$Json$Decode$map4 = _Json_map4;
-var $author$project$Data$Series$jsonDecoder = A5(
+var $author$project$Extension$Json$Decode$series = A5(
 	$elm$json$Json$Decode$map4,
 	$author$project$Data$Series$Series,
 	A2($elm$json$Json$Decode$field, 'id', $elm$json$Json$Decode$string),
@@ -6707,7 +6707,7 @@ var $author$project$App$getSeriesList = function (url) {
 			expect: A2(
 				$elm$http$Http$expectJson,
 				$author$project$App$GotSeriesListResponse,
-				$elm$json$Json$Decode$list($author$project$Data$Series$jsonDecoder)),
+				$elm$json$Json$Decode$list($author$project$Extension$Json$Decode$series)),
 			url: $author$project$Config$seriesListFileUrl(topicId)
 		});
 };
@@ -6718,7 +6718,7 @@ var $author$project$Data$Topic$Topic = F5(
 	function (id, title, keywords, description, overview) {
 		return {description: description, id: id, keywords: keywords, overview: overview, title: title};
 	});
-var $author$project$Data$Topic$jsonDecoder = A6(
+var $author$project$Extension$Json$Decode$topic = A6(
 	$elm$json$Json$Decode$map5,
 	$author$project$Data$Topic$Topic,
 	A2($elm$json$Json$Decode$field, 'id', $elm$json$Json$Decode$string),
@@ -6736,7 +6736,7 @@ var $author$project$App$getTopicList = function (_v0) {
 			expect: A2(
 				$elm$http$Http$expectJson,
 				$author$project$App$GotTopicListResponse,
-				$elm$json$Json$Decode$list($author$project$Data$Topic$jsonDecoder)),
+				$elm$json$Json$Decode$list($author$project$Extension$Json$Decode$topic)),
 			url: $author$project$Config$topicListFileUrl
 		});
 };
@@ -7106,10 +7106,8 @@ var $author$project$App$updateNavigator = function (model_cmd) {
 	var model = _v0.a;
 	var cmd = _v0.b;
 	var topicId = $author$project$Extension$Url$toTopicId(model.url);
-	var _v1 = A2(
-		$author$project$Element$Navigator$update,
-		$author$project$Element$Navigator$TopicChanged(topicId),
-		model.navigator);
+	var appMsg = $author$project$Element$Navigator$TopicChanged(topicId);
+	var _v1 = A2($author$project$Element$Navigator$update, appMsg, model.navigator);
 	var updatedNavigator = _v1.a;
 	var updatedModel = _Utils_update(
 		model,
@@ -7195,10 +7193,8 @@ var $author$project$App$update = F2(
 				if (res.$ === 'Ok') {
 					var topicList = res.a;
 					var topicId = $author$project$Extension$Url$toTopicId(model.url);
-					var _v6 = A2(
-						$author$project$Element$Navigator$update,
-						A2($author$project$Element$Navigator$DataChanged, topicList, topicId),
-						model.navigator);
+					var navMsg = A2($author$project$Element$Navigator$DataChanged, topicList, topicId);
+					var _v6 = A2($author$project$Element$Navigator$update, navMsg, model.navigator);
 					var updatedNavigator = _v6.a;
 					var updatedModel = _Utils_update(
 						model,
@@ -7215,10 +7211,8 @@ var $author$project$App$update = F2(
 						});
 					var topicList = _List_fromArray(
 						[errorTopic]);
-					var _v7 = A2(
-						$author$project$Element$Navigator$update,
-						A2($author$project$Element$Navigator$DataChanged, topicList, topicId),
-						model.navigator);
+					var navMsg = A2($author$project$Element$Navigator$DataChanged, topicList, topicId);
+					var _v7 = A2($author$project$Element$Navigator$update, navMsg, model.navigator);
 					var updatedNavigator = _v7.a;
 					var updatedModel = _Utils_update(
 						model,
@@ -7231,10 +7225,8 @@ var $author$project$App$update = F2(
 					var newSeriesList = res.a;
 					var topicId = $author$project$Extension$Url$toTopicId(model.url);
 					var seriesId = $author$project$Extension$Url$toSeriesId(model.url);
-					var _v9 = A2(
-						$author$project$Element$Overview$update,
-						A3($author$project$Element$Overview$DataChanged, topicId, newSeriesList, seriesId),
-						model.overview);
+					var overMsg = A3($author$project$Element$Overview$DataChanged, topicId, newSeriesList, seriesId);
+					var _v9 = A2($author$project$Element$Overview$update, overMsg, model.overview);
 					var updatedOverview = _v9.a;
 					var updatedModel = _Utils_update(
 						model,
@@ -7252,10 +7244,8 @@ var $author$project$App$update = F2(
 						});
 					var seriesList = _List_fromArray(
 						[errorSeries, emptySeries]);
-					var _v10 = A2(
-						$author$project$Element$Overview$update,
-						A3($author$project$Element$Overview$DataChanged, topicId, seriesList, seriesId),
-						model.overview);
+					var overMsg = A3($author$project$Element$Overview$DataChanged, topicId, seriesList, seriesId);
+					var _v10 = A2($author$project$Element$Overview$update, overMsg, model.overview);
 					var updatedOverview = _v10.a;
 					var updatedModel = _Utils_update(
 						model,
@@ -7281,10 +7271,8 @@ var $author$project$App$update = F2(
 							return matched;
 						}
 					}();
-					var _v12 = A2(
-						$author$project$Element$Indexer$update,
-						A3($author$project$Element$Indexer$DataChanged, topicId, series, postList),
-						model.indexer);
+					var idxMsg = A3($author$project$Element$Indexer$DataChanged, topicId, series, postList);
+					var _v12 = A2($author$project$Element$Indexer$update, idxMsg, model.indexer);
 					var updatedIndexer = _v12.a;
 					var updatedModel = _Utils_update(
 						model,
@@ -7311,14 +7299,12 @@ var $author$project$App$update = F2(
 					var errorPost = _Utils_update(
 						emptyPost,
 						{
-							title: $author$project$Extension$Http$Error$toString(error) + ('<br>' + ('Url : ' + ($elm$url$Url$toString(model.url) + ('<br>' + ('TopicId : ' + (topicId + ('<br>' + ('SeriesId : ' + (seriesId + '<br>')))))))))
+							title: $author$project$Extension$Http$Error$toString(error)
 						});
 					var postList = _List_fromArray(
 						[errorPost, emptyPost]);
-					var _v14 = A2(
-						$author$project$Element$Indexer$update,
-						A3($author$project$Element$Indexer$DataChanged, topicId, series, postList),
-						model.indexer);
+					var idxMsg = A3($author$project$Element$Indexer$DataChanged, topicId, series, postList);
+					var _v14 = A2($author$project$Element$Indexer$update, idxMsg, model.indexer);
 					var updatedIndexer = _v14.a;
 					var updatedModel = _Utils_update(
 						model,
@@ -7330,10 +7316,8 @@ var $author$project$App$update = F2(
 				if (res.$ === 'Ok') {
 					var markdown = res.a;
 					var topicId = $author$project$Extension$Url$toTopicId(model.url);
-					var _v17 = A2(
-						$author$project$Element$Reader$update,
-						A2($author$project$Element$Reader$DataChanged, topicId, markdown),
-						model.reader);
+					var readMsg = A2($author$project$Element$Reader$DataChanged, topicId, markdown);
+					var _v17 = A2($author$project$Element$Reader$update, readMsg, model.reader);
 					var updatedReader = _v17.a;
 					var updatedModel = _Utils_update(
 						model,
@@ -7343,10 +7327,8 @@ var $author$project$App$update = F2(
 					var error = res.a;
 					var topicId = $author$project$Extension$Url$toTopicId(model.url);
 					var errorMarkdown = '# Error' + $author$project$Extension$Http$Error$toString(error);
-					var _v18 = A2(
-						$author$project$Element$Reader$update,
-						A2($author$project$Element$Reader$DataChanged, topicId, errorMarkdown),
-						model.reader);
+					var readMsg = A2($author$project$Element$Reader$DataChanged, topicId, errorMarkdown);
+					var _v18 = A2($author$project$Element$Reader$update, readMsg, model.reader);
 					var updatedReader = _v18.a;
 					var updatedModel = _Utils_update(
 						model,
@@ -7358,10 +7340,8 @@ var $author$project$App$update = F2(
 				if (res.$ === 'Ok') {
 					var markdown = res.a;
 					var topicId = $author$project$Extension$Url$toTopicId(model.url);
-					var _v20 = A2(
-						$author$project$Element$Reader$update,
-						A2($author$project$Element$Reader$DataChanged, topicId, markdown),
-						model.reader);
+					var readMsg = A2($author$project$Element$Reader$DataChanged, topicId, markdown);
+					var _v20 = A2($author$project$Element$Reader$update, readMsg, model.reader);
 					var updatedReader = _v20.a;
 					var updatedModel = _Utils_update(
 						model,
@@ -7371,10 +7351,8 @@ var $author$project$App$update = F2(
 					var error = res.a;
 					var topicId = $author$project$Extension$Url$toTopicId(model.url);
 					var errorMarkdown = '# Error' + $author$project$Extension$Http$Error$toString(error);
-					var _v21 = A2(
-						$author$project$Element$Reader$update,
-						A2($author$project$Element$Reader$DataChanged, topicId, errorMarkdown),
-						model.reader);
+					var readMsg = A2($author$project$Element$Reader$DataChanged, topicId, errorMarkdown);
+					var _v21 = A2($author$project$Element$Reader$update, readMsg, model.reader);
 					var updatedReader = _v21.a;
 					var updatedModel = _Utils_update(
 						model,
@@ -7394,16 +7372,15 @@ var $author$project$App$update = F2(
 						$elm$browser$Browser$Navigation$pushUrl,
 						model.key,
 						$elm$url$Url$toString(newUrl));
-					var _v23 = A2(
-						$author$project$App$update,
-						$author$project$App$NavigatorMsg($author$project$Element$Navigator$CollapseFolder),
-						model);
+					var appMsg = $author$project$App$NavigatorMsg($author$project$Element$Navigator$CollapseFolder);
+					var _v23 = A2($author$project$App$update, appMsg, model);
 					var updatedModel = _v23.a;
 					var cmd1 = _v23.b;
-					var cmd = $elm$core$Platform$Cmd$batch(
-						_List_fromArray(
-							[cmd1, cmd2]));
-					return _Utils_Tuple2(updatedModel, cmd);
+					return _Utils_Tuple2(
+						updatedModel,
+						$elm$core$Platform$Cmd$batch(
+							_List_fromArray(
+								[cmd1, cmd2])));
 				}
 			case 'UrlChanged':
 				var newUrl = msg.a;
@@ -7462,6 +7439,7 @@ var $author$project$Element$Indexer$indexLink = F2(
 var $elm$html$Html$main_ = _VirtualDom_node('main');
 var $elm$html$Html$nav = _VirtualDom_node('nav');
 var $elm$html$Html$p = _VirtualDom_node('p');
+var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Element$Indexer$view = function (model) {
 	return A2(
 		$elm$html$Html$main_,
@@ -7479,6 +7457,13 @@ var $author$project$Element$Indexer$view = function (model) {
 					]),
 				_List_fromArray(
 					[
+						A2(
+						$elm$html$Html$span,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(model.flags.topicId)
+							])),
 						A2(
 						$elm$html$Html$header,
 						_List_fromArray(
@@ -7706,7 +7691,6 @@ var $author$project$Element$Overview$view = function (model) {
 			$author$project$Element$Overview$seriesLinkList(model)));
 };
 var $elm$html$Html$article = _VirtualDom_node('article');
-var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm_explorations$markdown$Markdown$defaultOptions = {
 	defaultHighlighting: $elm$core$Maybe$Nothing,
 	githubFlavored: $elm$core$Maybe$Just(

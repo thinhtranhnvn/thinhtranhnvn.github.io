@@ -1,8 +1,8 @@
 [
    {
-      "id" : "heartsutra",
-      "title" : "Heart Sutra",
-      "keywords" : [ "buddhism", "prajnaparamitahrdaya", "avalokitesvara", "sakyamuni", "ksitigarbha", "jnana yoga", "yoga of the mind", "bhakti yoga", "yoga of the devotion" ],
+      "id" : "hrdayasutra",
+      "title" : "Hrdaya Sutra",
+      "keywords" : [ "hrudaya sutra", "heart sutra", "buddhism", "prajnaparamitahrdaya", "avalokitesvara", "sakyamuni", "ksitigarbha", "jnana yoga", "yoga of the mind", "bhakti yoga", "yoga of the devotion" ],
       "description" : "A passionate explaination of Prajnaparamitahrdaya Sutra.",
       "overview": ""
    },
