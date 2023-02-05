@@ -6665,7 +6665,7 @@ var $author$project$Data$Post$jsonDecoder = A6(
 	A2($elm$json$Json$Decode$field, 'content', $elm$json$Json$Decode$string));
 var $author$project$Config$postListFileUrl = F2(
 	function (topicId, seriesId) {
-		return $author$project$Config$dataFolderUrl + ('/' + (topicId + ('/' + (seriesId + 'post-list.json'))));
+		return $author$project$Config$dataFolderUrl + ('/' + (topicId + ('/' + (seriesId + ('/' + 'post-list.json')))));
 	});
 var $author$project$App$getPostList = function (url) {
 	var topicId = $author$project$Extension$Url$toTopicId(url);
@@ -7094,7 +7094,7 @@ var $author$project$App$updateIndexer = function (model_cmd) {
 		_List_fromArray(
 			[
 				cmd,
-				$author$project$App$getTopicList(model.url)
+				$author$project$App$getPostList(model.url)
 			]));
 	return _Utils_Tuple2(model, newCmd);
 };
@@ -7389,11 +7389,11 @@ var $author$project$App$update = F2(
 						model,
 						$elm$browser$Browser$Navigation$load(href));
 				} else {
-					var url = req.a;
+					var newUrl = req.a;
 					var cmd2 = A2(
 						$elm$browser$Browser$Navigation$pushUrl,
 						model.key,
-						$elm$url$Url$toString(url));
+						$elm$url$Url$toString(newUrl));
 					var _v23 = A2(
 						$author$project$App$update,
 						$author$project$App$NavigatorMsg($author$project$Element$Navigator$CollapseFolder),
