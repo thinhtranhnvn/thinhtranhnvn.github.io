@@ -7,25 +7,25 @@
    <meta http-equiv="x-ua-compatible" content="ie=edge" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 
-   <link rel="stylesheet" href="../../master.css" />
+   <link rel="stylesheet" href="../master.css" />
    <style> /* page overrides */ </style>
 </head>
 <body>
    <nav class="Navigator Base">
       <a class="Navigator Avatar" href="/">
-         <img src="../../Component/Navigator/avatar.jpg"
+         <img src="../Element/Navigator/avatar.jpg"
               alt="Semi Dev 's Avatar"
          /><!-- img -->
          Semi Dev_
       </a><!-- .Navigator.Avatar -->
       
-      <input class="Navigator Search" type="text"
-             placeholder="Search with Google..."
+      <input class="Navigator Search" id="search"
+             type="text" placeholder="Search with Google..."
       /><!-- input -->
       
       
-      <button class="Navigator Toggler Active"> Topics </button>
-      <div class="Navigator Folder Expanded">
+      <label class="Navigator Toggler"> Topics </label>
+      <div class="Navigator Folder">
          <div class="Folder Container">
             <a class="Navigator Link Current" href="#"> Ada </a> 
             <a class="Navigator Link" href="#"> Bash </a>
@@ -125,6 +125,9 @@ void function main (_) {
           <a href="#"> Functional Aspects </a> 
       <div><!-- .Reader.Container -->
    </article><!-- .Reader.Base -->
+   
+   <script src="../jquery.min.js"> </script>
+   <script src="../main.js"> </script>
 </body>
 </html>
 
