@@ -1,29 +1,6 @@
 # The Highest of Prayers
 
-> Calling upon their names is the first of all prayers. We must repeat this prayers and think well upon the meaning.
-
-- Northern Trinity
-   - Sakyamuni Tathagata
-   - Manjushri Bodhisattva
-   - Samanthabhadra Bodhisattva
-- Western Trinity
-   - Amitabha Tathagata
-   - Avalokitesvara Bodhisattva
-   - Mahasthamaprapta Bodhisattva
-- Eastern Trinity
-   - Bhaisajyaguru Tathagata
-   - Suryaprabha Bodhisattva
-   - Candraprabha Bodhisattva
-- Southern Trinity
-   - Satnasambhava Tathagata
-   - Akasagarbha Bodhisattva
-   - Ksitigarbha Bodhisattva
-- Inner Guidance
-   - Arya Tara
-   - 6+1 Taras
-   - 108 Taras
-
-> With this, we will gain the ability to focus the mind within, and to avoid all obstacles.
+> Calling upon their names is the first of all prayers. We must repeat this prayers and think well upon the meaning. With this, we will gain the ability to focus the mind within, and to avoid all obstacles.
 
 Those lines are about mantras. A mantra is a short, essential prayer that make wishes come true. And it only works if two conditions are fulfilled:
 
@@ -38,4 +15,5 @@ Because of the extraordinary power that comes when a master and a spiritual disc
 
 We can add the word "Om" before their names. This sacred sound is made of three parts: "a-a", "o-o", "m-m". It represent totally pure actions, words, or thoughts - we will use to help others to reach the end of the five paths.
 
-[\[Next\] Beginning Obstacles](/content/18-beginning-obstacles.md)
+Next: [Beginning Obstacles](./18-beginning-obstacles)
+
