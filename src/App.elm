@@ -1,21 +1,21 @@
-port module App exposing ( main )
+port module App exposing (main)
 
 import Browser exposing ( Document, UrlRequest )
-import Browser.Navigation as Navigation exposing ( Key )
-import Url exposing ( Url )
-import Http exposing ( Error )
+import Browser.Navigation as Navigation exposing (Key)
+import Url exposing (Url)
+import Http exposing (Error)
 import Json.Decode as Json
-import Html exposing ( Html )
+import Html exposing (Html)
 
-import Route exposing ( Route (..) )
+import Route exposing (Route (..))
 import Element.Navigator as Navigator
 import Element.Overview as Overview
 import Element.Reader as Reader
 import Element.Indexer as Indexer
 
-import Data.Topic as Topic exposing ( Topic )
-import Data.Series as Series exposing ( Series )
-import Data.Post as Post exposing ( Post )
+import Data.Topic as Topic exposing (Topic)
+import Data.Series as Series exposing (Series)
+import Data.Post as Post exposing (Post)
 
 import Config
 import Extension.Url as Url
@@ -208,11 +208,11 @@ view model =
        indexerHtml = Html.map (IndexerMsg) ( Indexer.view model.indexer )
        --
    in  { title = Config.siteTitle
-       , body = case ( model.route ) of
-           HomePage ->       [ navigatorHtml, overviewHtml, readerHtml ]
-           TopicPage _ ->    [ navigatorHtml, overviewHtml, readerHtml ]
-           SeriesPage _ _ -> [ navigatorHtml, overviewHtml, indexerHtml ]
-           PostPage _ _ _ -> [ navigatorHtml, overviewHtml, readerHtml ]
+       , body = case (model.route) of
+            HomePage ->       [ navigatorHtml, overviewHtml, readerHtml ]
+            TopicPage _ ->    [ navigatorHtml, overviewHtml, readerHtml ]
+            SeriesPage _ _ -> [ navigatorHtml, overviewHtml, indexerHtml ]
+            PostPage _ _ _ -> [ navigatorHtml, overviewHtml, readerHtml ]
        }
 
 
@@ -251,7 +251,7 @@ update msg model = case msg of
       in  ( updatedModel, cmd )
       
    --
-   GotTopicListResponse res -> case res of
+   GotTopicListResponse res -> case (res) of
       ( Ok topicList ) ->
           let topicId = Url.toTopicId ( model.url )
               --
@@ -274,7 +274,8 @@ update msg model = case msg of
           in  ( updatedModel, Cmd.none )
 
    --
-   GotSeriesListResponse res -> case res of
+   GotSeriesListResponse res -> case (res) of
+      --
       ( Ok newSeriesList ) ->
          let topicId = Url.toTopicId ( model.url )
              seriesId = Url.toSeriesId ( model.url )
@@ -301,14 +302,14 @@ update msg model = case msg of
          in  ( updatedModel, Cmd.none )
    
    --
-   GotPostListResponse res -> case res of
+   GotPostListResponse res -> case (res) of
       ( Ok postList ) ->
          let topicId = Url.toTopicId ( model.url )
              --
              seriesId = Url.toSeriesId ( model.url )
              series = 
                 let maybeSeries = List.head <| List.filter ( Series.matchId seriesId ) ( model.seriesList )
-                in  case ( maybeSeries ) of
+                in  case (maybeSeries) of
                        Nothing -> Series.empty
                        Just matched -> matched
              --

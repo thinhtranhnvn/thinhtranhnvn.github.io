@@ -10,4 +10,5 @@ It's like finding a friend in a crowd at the train station. We check and elimina
 
 Once we reach a single point, we need to stay there, threading that path between thinking of other things and dozing off mentally. Thinking of death fixes the first and thinking of our perfect destiny fixes the second.
 
-[\[Next\] The Clear Light](/content/60-the-clear-light.md)
+Next: [The Clear Light](./60-the-clear-light.txt)
+
