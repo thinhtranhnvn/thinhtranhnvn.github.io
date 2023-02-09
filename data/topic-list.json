@@ -51,8 +51,8 @@
    {
       "id": "html",
       "title": "HTML",
-      "keywords": [],
-      "description": "",
+      "keywords": [ "web development", "beginner", "tutorial", "html" ],
+      "description": "Start learning to code in a natural way - Use the web, wonder the web development, then learn to code the web.",
       "overview": ""
    },
    {
