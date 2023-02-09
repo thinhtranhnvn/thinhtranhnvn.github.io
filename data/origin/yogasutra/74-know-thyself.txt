@@ -10,4 +10,5 @@ The application of the object now does not really come from itself, but rather c
 
 Even the questions of whether we can think these ideas is coming from the karmic seeds. It's about ideas in this book.
 
-[\[Next\] When Two is One](/content/75-when-two-is-one.md)
+Next: [When Two is One](./75-when-two-is-one)
+
