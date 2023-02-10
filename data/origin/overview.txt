@@ -1,6 +1,17 @@
-# Hi there !
+# Chào bạn !
 
-I'm Semi Dev_ and this is my personal blog. Here, I'm sharing coding and common computing knowledge in a natural learning progress. I hope that You'll find some useful information here.
+Đây là blog cá nhân của Semi Dev. Trang blog này bao gồm những bài viết chia sẻ kiến thức căn bản về lập trình và sử dụng phần mềm máy tính nói chung, được sưu tầm và trình bày lại với Lộ Trình Học Tập Tự Nhiên.
 
-So, please let me introduce the general navigation of this website in a few minutes.
+## Lộ Trình Học Tập Tự Nhiên ?
+
+À, để giải thích đơn giản thì kiểu lộ trình này có tên gọi xuất phát từ Series "Tự Học Lập Trình Web Một Cách Thật Tự Nhiên" mà mình đã chia sẻ trên nền tảng blog [Viblo.asia](https://viblo.asia/s/Wj53OQQP56m).
+
+## Blog Semi Dev_
+
+Mặc dù vậy, khi bắt đầu đăng tải lại các bài viết tại trang blog này thì mình đã quyết định tái cấu trúc lại lộ trình học tập để mang đến nhiều ngã rẽ lựa chọn hơn tại mỗi điểm dừng quan trọng sau mỗi chặng.
+
+Cụ thể là đối với chủ đề sử dụng phần mềm máy tính nói chung - `Daily PC` - thì tình huống ở đây là giả định bạn được tặng một chiếc máy tính để bàn với hệ điều hành được cài đặt sẵn là Windows phiên bản dùng thử; Rồi sau đó bạn quyết định tự mò mẫm cách cài đặt một phiên bản hệ điều hành miễn phí để sử dụng và tìm thấy Series Tự Học Cách Sử Dụng Linux ở đây qua Google; Và tiếp theo sau đó là tiến trình học cách sử dụng giao diện người dùng và các phần mềm tiện ích như bộ ứng dụng văn phòng LibreOffice, bộ ứng dụng đồ họa GIMP, Scribus, Inkscape, Blender, v.v...
+
+Hoặc, đối với chủ đề lập trình phần mềm nói chung thì chúng ta có tình huống ở đây là giả định bạn đang lướt web để cập nhật tin tức hàng ngày; Rồi sau đó quyết định tìm hiểu cách thức mà người ta tạo ra một trang web và tìm thấy Series Tự Học Lập Trình Web ở đây; Sau đó là tiến trình học các khái niệm và các ngôn ngữ lập trình liên quan như bộ ba HTML, CSS, JavaScript. Sau khi đã cảm thấy quen với việc viết code thì chúng ta mới tìm hiểu về kiến thức lập trình ở cấp cơ sở như lập trình C căn bản; Và sau đó sẽ là điểm rẽ nhánh tới các mảng ứng dụng và các ngôn ngữ đặc trưng.
+
 

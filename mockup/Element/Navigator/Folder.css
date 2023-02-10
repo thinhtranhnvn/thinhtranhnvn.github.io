@@ -7,32 +7,43 @@
    { background: inherit
    ; color: white
    }
-.Navigator.Toggler:focus
-   { outline: none }
-.Navigator.Toggler:hover,
-.Navigator.Toggler.Active
-   { background: dimgrey }
-.Navigator.Toggler
-   { cursor: pointer }
 .Navigator.Toggler
    { display: inline-block
    ; padding: 9px 15px
    ; border-radius: 19px
    }
+.Navigator.Toggler
+   { cursor: pointer }
+.Navigator.Toggler:focus
+   { outline: none }
+.Navigator.Toggler:hover,
+.Navigator.Toggler.Active
+   { background: dimgrey }
+
 
 .Navigator.Folder
    { background: inherit
    ; color: white
+   ; border-top: 1px solid dimgrey
+   ; border-bottom: 1px solid dimgrey
    }
 .Navigator.Folder
    { display: block
    ; width: 100%
    }
 .Navigator.Folder
+   { max-height: 240px
+   ; overflow: hidden
+   ; transition: all 0.45s
+   }
+.Navigator.Folder
    { position: fixed
    ; top: 60px
    ; left: 0
    }
+.Navigator.Folder.Collapsed
+   { max-height: 0 }
+
 
 .Folder.Container
    { display: grid
@@ -44,58 +55,49 @@
    ; margin: 18px auto
    }
 
+
+.Navigator.Link
+   { background: inherit
+   ; color: white
+   }
 .Navigator.Link
    { font-weight: bold
    ; text-decoration: none
    }
 .Navigator.Link
-   { background: inherit
-   ; color: white
-   }
-.Navigator.Link:hover,
-.Navigator.Link.Current
-   { background: dimgrey }
-.Navigator.Link
    { display: inline-block
    ; padding: 9px 15px
    ; border-radius: 19px
    }
+.Navigator.Link:hover,
+.Navigator.Link.Current
+   { background: dimgrey }
 
-.Navigator.Folder
-   { max-height: 0
-   ; overflow: hidden
-   ; transition: all 0.45s
-   }
-
-.Navigator.Folder.Expanded
-   { border-top: 1px solid dimgrey
-   ; border-bottom: 1px solid dimgrey
-   }
-.Navigator.Folder.Expanded
-   { max-height: 240px }
 
 @media screen and (max-width: 900px)
-   {  .Folder.Container
-         { grid-template-columns: 1fr 1fr 1fr 1fr }
-         
-      .Navigator.Folder.Expanded
+   {  .Navigator.Folder
          { max-height: 300px }
+         
+      .Folder.Container
+         { grid-template-columns: 1fr 1fr 1fr 1fr }
    }
+
 
 @media screen and (max-width: 750px)
-   {  .Folder.Container
-         { grid-template-columns: 1fr 1fr 1fr }
-         
-      .Navigator.Folder.Expanded
+   {  .Navigator.Folder
          { max-height: 390px }
+   
+      .Folder.Container
+         { grid-template-columns: 1fr 1fr 1fr }
    }
 
+
 @media screen and (max-width: 570px)
-   {  .Folder.Container
-         { grid-template-columns: 1fr 1fr }
-         
-      .Navigator.Folder.Expanded
+   {  .Navigator.Folder
          { max-height: 510px }
+         
+      .Folder.Container
+         { grid-template-columns: 1fr 1fr }
    }
 
 

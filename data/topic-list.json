@@ -1,135 +1,16 @@
 [
    {
-      "id": "ada",
-      "title": "Ada",
-      "keywords": [],
-      "description": "",
+      "id": "linuxpc",
+      "title": "Linux PC",
+      "keywords": [ "linux pc", "tutorial", "normal user", "office", "design", "music", "code" ],
+      "description": "Getting started to use Linux OS as alternative to Microsoft Windows",
       "overview": ""
    },
    {
-      "id": "bash",
-      "title": "Bash",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "c",
-      "title": "C",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "cpp",
-      "title": "C++",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "css",
-      "title": "CSS",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "elm",
-      "title": "Elm",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "haskell",
-      "title": "Haskell",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "html",
-      "title": "HTML",
-      "keywords": [ "web development", "beginner", "tutorial", "html" ],
-      "description": "Start learning to code in a natural way - Use the web, wonder the web development, then learn to code the web.",
-      "overview": ""
-   },
-   {
-      "id": "javascript",
-      "title": "JavaScript",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "kotlin",
-      "title": "Kotlin",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "lua",
-      "title": "Lua",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "java",
-      "title": "Java",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "php",
-      "title": "PHP",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "python",
-      "title": "Python",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "ruby",
-      "title": "Ruby",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "scala",
-      "title": "Scala",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "typescript",
-      "title": "TypeScript",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "vbnet",
-      "title": "VB.NET",
-      "keywords": [],
-      "description": "",
-      "overview": ""
-   },
-   {
-      "id": "xml",
-      "title": "XML",
-      "keywords": [],
-      "description": "",
+      "id": "webdev",
+      "title": "Web Dev_",
+      "keywords": [ "web developement", "tutorial", "beginner" ],
+      "description": "Start learning how to code the web in a natural perspective of a web user.",
       "overview": ""
    }
 ]
