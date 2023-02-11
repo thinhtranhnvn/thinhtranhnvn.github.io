@@ -77,8 +77,8 @@ view model =
           then "Navigator Toggler"
           else "Navigator Toggler Active"
        folderClass = if model.collapsed
-          then "Navigator Folder"
-          else "Navigator Folder Expanded"
+          then "Navigator Folder Collapsed"
+          else "Navigator Folder"
    --
    in  nav [ class "Navigator Base" ] [
           a [ class "Navigator Avatar", href "/" ] [
