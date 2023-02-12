@@ -16,7 +16,7 @@ Hoặc, đối với chủ đề lập trình phần mềm nói chung thì chún
 
 ## Sử Dụng Trang Blog Này
 
-Hiện tại, khi đang viết những dòng chữ này thì mình mới chỉ code xong công cụ điều hướng chính của trang blog. Các bài viết ở đây được nhóm lại với hai cấp độ là `Topic` và `Series`. Trong đó thì `Topic` đại diện cho một chủ đề ví dụ như Lập Trình Web `Web Dev_`, hay sử dụng Linux cho máy tính cá nhân `Linux PC`, v.v...
+Hiện tại, khi đang viết những dòng chữ này thì mình mới chỉ code xong công cụ điều hướng chính của trang blog. Các bài viết ở đây được nhóm lại với hai cấp độ là `Topic` và `Series`. Trong đó thì `Topic` đại diện cho một chủ đề ví dụ như Lập Trình Web căn bản `Web Dev_`, hay sử dụng Linux cho máy tính cá nhân `Linux PC`, v.v...
 
 Để chọn một `Topic` thì bạn có thể nhấn vào chữ `Topic` bên cạnh ô tìm kiếm trên thanh điều hướng chính để xem danh sách. Sau khi đã chọn một `Topic` bất kì thì ở thanh điều hướng phụ ngay bên dưới sẽ hiện một bài viết tổng quan `Overview` và các `Series` bài viết thuộc `Topic` đó.
 
