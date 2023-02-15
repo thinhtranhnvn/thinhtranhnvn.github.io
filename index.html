@@ -6625,12 +6625,55 @@ var $author$project$Element$Indexer$getPostList = function (route) {
 			url: $author$project$Route$toPostListFileUrl(route)
 		});
 };
+var $author$project$Element$Indexer$GotSeriesListResponse = function (a) {
+	return {$: 'GotSeriesListResponse', a: a};
+};
+var $author$project$Data$Series$Series = F5(
+	function (id, title, keywords, description, overview) {
+		return {description: description, id: id, keywords: keywords, overview: overview, title: title};
+	});
+var $author$project$Data$Series$jsonDecoder = A6(
+	$elm$json$Json$Decode$map5,
+	$author$project$Data$Series$Series,
+	A2($elm$json$Json$Decode$field, 'id', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
+	A2(
+		$elm$json$Json$Decode$field,
+		'keywords',
+		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
+	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'overview', $elm$json$Json$Decode$string));
+var $author$project$Route$toSeriesListFileUrl = function (route) {
+	var topicId = A2(
+		$author$project$Route$map,
+		F3(
+			function (tId, _v0, _v1) {
+				return tId;
+			}),
+		route);
+	return $author$project$Route$dataFolderUrl + ('/' + (topicId + ('/' + ('series-list' + '.json'))));
+};
+var $author$project$Element$Indexer$getSeriesList = function (route) {
+	return $elm$http$Http$get(
+		{
+			expect: A2(
+				$elm$http$Http$expectJson,
+				$author$project$Element$Indexer$GotSeriesListResponse,
+				$elm$json$Json$Decode$list($author$project$Data$Series$jsonDecoder)),
+			url: $author$project$Route$toSeriesListFileUrl(route)
+		});
+};
 var $author$project$Element$Indexer$init = function (urlStr) {
 	var seriesList = _List_Nil;
 	var route = $author$project$Route$fromUrlString(urlStr);
 	var postList = _List_Nil;
 	var model = A3($author$project$Element$Indexer$Model, route, seriesList, postList);
-	var cmd = $author$project$Element$Indexer$getPostList(route);
+	var cmd = $elm$core$Platform$Cmd$batch(
+		_List_fromArray(
+			[
+				$author$project$Element$Indexer$getPostList(route),
+				$author$project$Element$Indexer$getSeriesList(route)
+			]));
 	return _Utils_Tuple2(model, cmd);
 };
 var $author$project$Element$Navigator$Model = F3(
@@ -6680,31 +6723,6 @@ var $author$project$Element$Overview$Model = F2(
 	});
 var $author$project$Element$Overview$GotSeriesListResponse = function (a) {
 	return {$: 'GotSeriesListResponse', a: a};
-};
-var $author$project$Data$Series$Series = F5(
-	function (id, title, keywords, description, overview) {
-		return {description: description, id: id, keywords: keywords, overview: overview, title: title};
-	});
-var $author$project$Data$Series$jsonDecoder = A6(
-	$elm$json$Json$Decode$map5,
-	$author$project$Data$Series$Series,
-	A2($elm$json$Json$Decode$field, 'id', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
-	A2(
-		$elm$json$Json$Decode$field,
-		'keywords',
-		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
-	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'overview', $elm$json$Json$Decode$string));
-var $author$project$Route$toSeriesListFileUrl = function (route) {
-	var topicId = A2(
-		$author$project$Route$map,
-		F3(
-			function (tId, _v0, _v1) {
-				return tId;
-			}),
-		route);
-	return $author$project$Route$dataFolderUrl + ('/' + (topicId + ('/' + ('series-list' + '.json'))));
 };
 var $author$project$Element$Overview$getSeriesList = function (route) {
 	return $elm$http$Http$get(
@@ -6873,6 +6891,24 @@ var $author$project$Element$Reader$UrlChanged = function (a) {
 var $elm$browser$Browser$Navigation$load = _Browser_load;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
+var $author$project$Data$Series$empty = {description: '', id: '', keywords: _List_Nil, overview: '', title: ''};
+var $author$project$Extension$Http$Error$toString = function (error) {
+	switch (error.$) {
+		case 'BadUrl':
+			var detail = error.a;
+			return detail;
+		case 'Timeout':
+			return 'Timeout Request';
+		case 'NetworkError':
+			return 'Network Error';
+		case 'BadStatus':
+			var stt = error.a;
+			return 'Bad Status: ' + $elm$core$String$fromInt(stt);
+		default:
+			var detail = error.a;
+			return detail;
+	}
+};
 var $author$project$Element$Indexer$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -6883,7 +6919,19 @@ var $author$project$Element$Indexer$update = F2(
 				var res = msg.a;
 				if (res.$ === 'Err') {
 					var error = res.a;
-					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					var emptySeries = $author$project$Data$Series$empty;
+					var errorSeries = _Utils_update(
+						emptySeries,
+						{
+							id: 'hrdayasutra',
+							title: '# ' + $author$project$Extension$Http$Error$toString(error)
+						});
+					var newSeriesList = _List_fromArray(
+						[errorSeries]);
+					var updatedModel = _Utils_update(
+						model,
+						{seriesList: newSeriesList});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
 				} else {
 					var data = res.a;
 					var updatedModel = _Utils_update(
@@ -6940,24 +6988,6 @@ var $author$project$Element$Navigator$update = F2(
 				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
 		}
 	});
-var $author$project$Data$Series$empty = {description: '', id: '', keywords: _List_Nil, overview: '', title: ''};
-var $author$project$Extension$Http$Error$toString = function (error) {
-	switch (error.$) {
-		case 'BadUrl':
-			var detail = error.a;
-			return detail;
-		case 'Timeout':
-			return 'Timeout Request';
-		case 'NetworkError':
-			return 'Network Error';
-		case 'BadStatus':
-			var stt = error.a;
-			return 'Bad Status: ' + $elm$core$String$fromInt(stt);
-		default:
-			var detail = error.a;
-			return detail;
-	}
-};
 var $author$project$Route$toTopicId = function (route) {
 	switch (route.$) {
 		case 'HomePage':

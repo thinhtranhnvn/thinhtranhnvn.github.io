@@ -11,6 +11,8 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events as Events exposing (..)
 
+import Extension.Http.Error as HttpError
+
 
 -- main - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -65,7 +67,9 @@ init urlStr =
       postList = []
       --
       model = Model (route) (seriesList) (postList)
-      cmd = getPostList (route)
+      cmd = Cmd.batch [ getPostList (route)
+                      , getSeriesList (route)
+                      ]
    in
       ( model, cmd )
 
@@ -92,11 +96,12 @@ view model =
    let
       topicId = Route.toTopicId (model.route)
       seriesId = Route.toSeriesId (model.route)
-      series = 
+      --
+      series =
          let
             maybeSeries = List.head <| List.filter (Series.matchId seriesId) (model.seriesList)
          in
-            case ( maybeSeries ) of
+            case (maybeSeries) of
                Nothing -> Series.empty
                Just matched -> matched
    --
@@ -136,7 +141,17 @@ update msg model = case (msg) of
    --
    GotSeriesListResponse res -> case (res) of
       --
-      (Err error) -> ( model, Cmd.none )
+      (Err error) ->
+         let
+            emptySeries = Series.empty
+            errorSeries = { emptySeries | id = "hrdayasutra"
+                          , title = "# " ++ (HttpError.toString error)  
+                          }
+            newSeriesList = [ errorSeries ]
+            --
+            updatedModel = { model | seriesList = newSeriesList }
+         in
+            ( updatedModel, Cmd.none ) 
       --
       (Ok data) ->
          let
