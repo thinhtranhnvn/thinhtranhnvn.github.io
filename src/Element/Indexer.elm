@@ -70,7 +70,7 @@ view model =
          ], -- header.Indexer.Intro
          
          nav [ class "Indexer Content" ]
-            ( List.map ( indexLink model ) model.flags.postList )
+            ( List.map (indexLink model) model.flags.postList )
       ] -- div.Indexer.Container
    ] -- main.Indexer.Base
 
