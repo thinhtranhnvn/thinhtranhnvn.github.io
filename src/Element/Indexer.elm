@@ -1,115 +1,165 @@
-port module Element.Indexer exposing ( Flags, Model, Msg (..), init, view, update, subscriptions )
+module Element.Indexer exposing (..)
+
+import Data.Series as Series exposing (Series)
+import Data.Post as Post exposing (Post)
+import Route exposing (Route)
 
 import Browser
+import Http exposing (Error)
+import Json.Decode as Json
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events as Events exposing (..)
 
-import Data.Series as Series exposing ( Series )
-import Data.Post as Post exposing ( Post )
 
-import Extension.Url as Url
-import Extension.Http.Error as HttpError
+-- main - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
--- main - - - - - - - - - - - - - - - - - - - - - - - - - - -
+main : Program String Model Msg
+main =
+   let
+      idx = Indexer (init) (view) (update) (subscriptions)
+   in
+      Browser.element (idx)
+
+
+-- Indexer - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 type alias Indexer =
-   { init : Flags -> ( Model, Cmd Msg )
+   { init : String -> ( Model, Cmd Msg )
    , view : Model -> Html Msg
    , update : Msg -> Model -> ( Model, Cmd Msg )
    , subscriptions : Model -> Sub Msg
    }
 
 
--- Flags - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-type alias Flags =
-   { topicId : String
-   , series : Series
-   , postList : List Post 
-   }
-
-
--- Model - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- Model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 type alias Model =
-   { flags : Flags }
+   { route : Route
+     --
+   , seriesList : List Series
+   , postList : List Post
+   }
 
 
--- Msg - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- Msg - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-type Msg = DataChanged String Series ( List Post )
+type Msg = UrlChanged String
            --
-         | PortJson String
+         | GotSeriesListResponse (Result (Http.Error) (List Series))
+         | GotPostListResponse (Result (Http.Error) (List Post))
 
 
--- init - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- init - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-init : Flags -> ( Model, Cmd Msg )
-init flags = ( Model flags, Cmd.none )
+init : String -> ( Model, Cmd Msg )
+init urlStr =
+   let
+      route = Route.fromUrlString (urlStr)
+      seriesList = []
+      postList = []
+      --
+      model = Model (route) (seriesList) (postList)
+      cmd = getPostList (route)
+   in
+      ( model, cmd )
+
+--
+getSeriesList : Route -> Cmd Msg
+getSeriesList route =
+   Http.get { url = Route.toSeriesListFileUrl (route)
+            , expect = Http.expectJson (GotSeriesListResponse) (Json.list Series.jsonDecoder)
+            }
+
+--
+getPostList : Route -> Cmd Msg
+getPostList route =
+   Http.get { url = Route.toPostListFileUrl (route)
+            , expect = Http.expectJson (GotPostListResponse) (Json.list Post.jsonDecoder)
+            }
 
 
--- view - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- view - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 view : Model -> Html Msg
 view model =
-   main_ [ class "Indexer Base" ] [
-      div [ class "Indexer Container" ] [
-         span [] [ text model.flags.topicId ],
-      
-         header [ class "Indexer Intro" ] [
-            h1 [] [ text model.flags.series.title ],
-            p [] [ text model.flags.series.description ]
-         ], -- header.Indexer.Intro
-         
-         nav [ class "Indexer Content" ]
-            ( List.map (indexLink model) model.flags.postList )
-      ] -- div.Indexer.Container
-   ] -- main.Indexer.Base
+   let
+      topicId = Route.toTopicId (model.route)
+      seriesId = Route.toSeriesId (model.route)
+      series = 
+         let
+            maybeSeries = List.head <| List.filter (Series.matchId seriesId) (model.seriesList)
+         in
+            case ( maybeSeries ) of
+               Nothing -> Series.empty
+               Just matched -> matched
+   --
+   in
+      main_ [ class "Indexer Base" ] [
+         div [ class "Indexer Container" ] [
+            span [] [ text (topicId) ],
+            
+            header [ class "Indexer Intro" ] [
+               h1 [] [ text (series.title) ],
+               p [] [ text (series.description) ]
+            ], -- header.Indexer.Intro
+            
+            nav [ class "Indexer Content" ] 
+               (List.map (idxLink model.route) (model.postList))
+         ] -- div.Indexer.Container
+      ] -- main.Indexer.Base
+
+--
+idxLink : Route -> Post -> Html Msg
+idxLink route post =
+   let
+      postUrl = (Route.toSeriesUrl route) ++ "/" ++ post.slug
+   in
+      a [ class "Indexer Link", href (postUrl) ] [ text (post.title) ]
 
 
-indexLink : Model -> Post -> Html Msg
-indexLink model post =
-   let topicId = model.flags.topicId
-       seriesId = model.flags.series.id
-       postSlug = post.slug
-       --
-       linkUrl = "/" ++ topicId ++ "/" ++ seriesId ++ "/" ++ postSlug
-       --
-   in  a [ class "Indexer Link", href linkUrl ] [ text post.title ]
-
-
--- update - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- update - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model = case msg of
+update msg model = case (msg) of
+
+   --
+   UrlChanged newUrlStr -> init (newUrlStr)
    
    --
-   DataChanged topicId series postList ->
-      let updatedFlags = Flags ( topicId ) ( series ) ( postList )
-          updatedModel = { model | flags = updatedFlags }
-      in  ( updatedModel, Cmd.none )
+   GotSeriesListResponse res -> case (res) of
+      --
+      (Err error) -> ( model, Cmd.none )
+      --
+      (Ok data) ->
+         let
+            updatedModel = { model | seriesList = data }
+         in
+            ( updatedModel, Cmd.none )
    
    --
-   PortJson _ -> ( model, Cmd.none )
+   GotPostListResponse res -> case (res) of
+      --
+      (Err error) -> ( model, Cmd.none )
+      --
+      (Ok data) ->
+         let
+            updatedModel = { model | postList = data }
+         in
+            ( updatedModel, Cmd.none )
 
 
--- subscriptions - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- subscriptions - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 subscriptions : Model -> Sub Msg
-subscriptions _ = listen PortJson
-
-
-port export : String -> Cmd msg
-port listen : (String -> msg) -> Sub msg
+subscriptions _ = Sub.none
 
 

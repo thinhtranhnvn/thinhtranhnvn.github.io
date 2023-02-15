@@ -1,7 +1,9 @@
-module Data.Topic exposing ( Topic, empty )
+module Data.Topic exposing (..)
+
+import Json.Decode as Json exposing (Decoder, field, string, list)
 
 
--- Topic - - - - - - - - -
+-- Topic - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 type alias Topic =
@@ -13,16 +15,15 @@ type alias Topic =
    }
 
 
--- empty - - - - - - - - -
+-- jsonDecoder - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-empty : Topic
-empty =
-   { id = "empty"
-   , title = "Empty"
-   , keywords = ["empty"]
-   , description = "Empty"
-   , overview = "Empty"
-   }
+jsonDecoder : Decoder Topic
+jsonDecoder = Json.map5 Topic
+   ( field "id" string )
+   ( field "title" string )
+   ( field "keywords" (list string) )
+   ( field "description" string )
+   ( field "overview" string )
 
 

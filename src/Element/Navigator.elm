@@ -1,156 +1,185 @@
-port module Element.Navigator exposing ( Flags, Model, Msg (..), init, view, update, subscriptions )
+module Element.Navigator exposing (..)
+
+import Data.Topic as Topic exposing (Topic)
+import Json.Decode as Json
+import Route exposing (Route)
 
 import Browser
-import Html exposing (.. )
+import Url exposing (Url)
+import Http exposing (Error)
+import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events as Events exposing (..)
 
-import Data.Topic as Topic exposing ( Topic )
+
+-- main - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
--- main - - - - - - - - - - - - - - - - - - - - - - - - - - -
+main : Program String Model Msg
+main =
+   let
+      nav = Navigator (init) (view) (update) (subscriptions)
+   in
+      Browser.element (nav)
 
 
-main : Program Flags Model Msg
-main = Browser.element
-   ( Navigator init view update subscriptions )
+-- Navigator - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 type alias Navigator =
-   { init : Flags -> ( Model, Cmd Msg )
+   { init : String -> ( Model, Cmd Msg )
    , view : Model -> Html Msg
    , update : Msg -> Model -> ( Model, Cmd Msg )
    , subscriptions : Model -> Sub Msg
    }
 
 
--- Flags - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-type alias Flags =
-   { topicList : List Topic
-   , topicId : String
-     --
-   , avatarUrl : String
-   , avatarName : String
-   , gitHubUrl : String
-   }
-
-
--- Model - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- Model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 type alias Model =
-   { collapsed : Bool
-   , flags : Flags
+   { route : Route
+     --
+   , topicList : List Topic
+     --
+   , collapsed : Bool
    }
 
 
--- Msg - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- Msg - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-type Msg = ToggleFolder
+type Msg = UrlChanged String
+           --
+         | GotTopicListResponse (Result (Http.Error) (List Topic))
+           --
+         | ToggleFolder
          | CollapseFolder
-           --
-         | DataChanged ( List Topic ) String
-         | TopicChanged String
-           --
-         | PortJson String
 
 
--- init - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- init - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-init : Flags -> ( Model, Cmd Msg )
-init flags =
-   let collapsed = True
-   in  ( Model collapsed flags, Cmd.none )
+init : String -> ( Model, Cmd Msg )
+init urlStr =
+   let
+      route = Route.fromUrlString (urlStr)
+      --
+      topicList = []
+      collapsed = True
+      --
+      model = Model (route) (topicList) (collapsed)
+      cmd = getTopicList
+   in
+      ( model, cmd )
+
+--
+getTopicList : Cmd Msg
+getTopicList =
+   Http.get { url = Route.toTopicListFileUrl ()
+            , expect = Http.expectJson (GotTopicListResponse) (Json.list Topic.jsonDecoder)
+            }
 
 
--- view - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- view - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 view : Model -> Html Msg
 view model =
+   let
+      togglerClass = if (model.collapsed)
+         then "Navigator Toggler"
+         else "Navigator Toggler Active"
+      --
+      folderClass = if (model.collapsed)
+         then "Navigator Folder Collapsed"
+         else "Navigator Folder"
    --
-   let togglerClass = if model.collapsed 
-          then "Navigator Toggler"
-          else "Navigator Toggler Active"
-       folderClass = if model.collapsed
-          then "Navigator Folder Collapsed"
-          else "Navigator Folder"
-   --
-   in  nav [ class "Navigator Base" ] [
-          a [ class "Navigator Avatar", href "/" ] [
-             img [ src model.flags.avatarUrl ] [],
-             text model.flags.avatarName
-          ],
-          --
-          input [ class "Navigator Search", type_ "text",
-                  placeholder "Search with Google..." ] [],
-          --
-          label [ class togglerClass, onClick ToggleFolder ] [ text "Topics" ],
-          --
-          div [ class folderClass ] [
-             div [ class "Folder Container" ]
-                ( List.map ( topicLink model.flags.topicId ) model.flags.topicList )
-          ],
-          --
-          a [ class "Navigator GitHub", href model.flags.gitHubUrl, target "_blank" ] [
-             text "GitHub"
-          ]
-       ] -- nav.Navigator.Base
+   in
+      nav [ class "Navigator Base" ] [
+         a [ class "Navigator Avatar", href "/" ] [
+            img [ src "/mockup/Element/Navigator/avatar.jpg"
+                , alt "Semi Dev_ 's Avatar" ] [],
+            text "Semi Dev_"
+         ], -- a.Navigator.Avatar
+      
+         input [ class "Navigator Search", id "search"
+               , type_ "text", placeholder "Search with Google..." ] [],
+      
+         label [ class (togglerClass), onClick (ToggleFolder) ] [ text "Topics" ],
+      
+         div [ class (folderClass) ] [
+            div [ class "Folder Container" ]
+               (List.map (navLink model.route) (model.topicList))
+            -- div.Folder.Container
+         ], -- div.Navigator.Folder
+      
+         a [ class "Navigator GitHub"
+           , href "https://github.com/thinhtranhnvn"
+           , target "_blank"
+           ] [ text "GitHub" ] 
+      ] -- nav.Navigator.Base
+
+--
+navLink : Route -> Topic -> Html Msg
+navLink route topic =
+   let
+      currentId = Route.toTopicId (route)
+      --
+      linkClass = case (compare (topic.id) (currentId)) of
+         EQ -> "Navigator Link Current"
+         _  -> "Navigator Link"
+      --
+      topicUrl = "./" ++ topic.id
+   in
+      a [ class (linkClass), href (topicUrl) ] [ text (topic.title) ]
 
 
-topicLink : String -> Topic -> Html Msg
-topicLink currentId topic =
-   let linkClass = case ( compare topic.id currentId ) of
-          EQ -> "Navigator Link Current" 
-          _  -> "Navigator Link"
-   in  a [ class linkClass, href ( "/" ++ topic.id ) ] [ 
-          text topic.title 
-       ] -- a.Navigator.Link
-
-
--- update - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- update - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model = case msg of
+update msg model = case (msg) of
+
+   --
+   UrlChanged newUrlStr ->
+      let
+         newRoute = Route.fromUrlString (newUrlStr)
+         --
+         updatedModel = { model | route = newRoute }
+      in
+         ( updatedModel, Cmd.none )
+   
+   --
+   GotTopicListResponse res -> case (res) of
+      --
+      (Err error) -> ( model, Cmd.none )
+      --
+      (Ok data) ->
+         let
+            updatedModel = { model | topicList = data }
+         in
+            ( updatedModel, Cmd.none )
+   
    --
    ToggleFolder ->
-      let updatedModel = { model | collapsed = not model.collapsed }
-      in  ( updatedModel, Cmd.none )
+      let
+         updatedModel = { model | collapsed = not (model.collapsed) }
+      in
+         ( updatedModel, Cmd.none )
+   
    --
    CollapseFolder ->
-      let updatedModel = { model | collapsed = True }
-      in  ( updatedModel, Cmd.none )
-   --
-   DataChanged newTopicList newTopicId ->
-      let flags = model.flags
-          updatedFlags = { flags | topicList = newTopicList
-                                 , topicId = newTopicId
-                         }
-          updatedModel = { model | flags = updatedFlags }
-      in  ( updatedModel, Cmd.none )
-   --
-   TopicChanged newTopicId ->
-      let flags = model.flags
-          updatedFlags = { flags | topicId = newTopicId }
-          updatedModel = { model | flags = updatedFlags }
-      in  ( updatedModel, Cmd.none )
-   --
-   PortJson _ -> ( model, Cmd.none )
+      let
+         updatedModel = { model | collapsed = True }
+      in
+         ( updatedModel, Cmd.none )
 
 
--- subscriptions - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- subscriptions - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 subscriptions : Model -> Sub Msg
-subscriptions _ = listen PortJson
-
-
-port export : String -> Cmd msg
-port listen : (String -> msg) -> Sub msg
+subscriptions _ = Sub.none
 
 

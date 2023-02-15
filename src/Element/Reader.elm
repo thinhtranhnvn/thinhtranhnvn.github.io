@@ -1,99 +1,128 @@
-port module Element.Reader exposing ( Flags, Model, Msg (..), init, view, update, subscriptions )
+module Element.Reader exposing (..)
+
+import Data.Post as Post exposing (Post)
+import Route exposing (Route)
+import Markdown
 
 import Browser
-import Html exposing (.. )
+import Http exposing (Error)
+import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events as Events exposing (..)
 
-import Markdown
+import Extension.Http.Error as HttpError
 
 
--- main - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- main - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-main : Program Flags Model Msg
-main = Browser.element
-   ( Reader ( init ) ( view ) ( update ) ( subscriptions ) )
+main : Program String Model Msg
+main =
+   let
+      rdr = Reader (init) (view) (update) (subscriptions)
+   in
+      Browser.element (rdr)
 
 
--- Overview - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- Reader - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 type alias Reader =
-   { init : Flags -> ( Model, Cmd Msg )
+   { init : String -> ( Model, Cmd Msg )
    , view : Model -> Html Msg
    , update : Msg -> Model -> ( Model, Cmd Msg )
    , subscriptions : Model -> Sub Msg
    }
 
 
--- Flags - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-type alias Flags =
-   { topicId : String
-   , markdown : String
-   }
-
--- Model - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- Model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 type alias Model =
-   { flags : Flags }
+   { route : Route
+     --
+   , markdown : String
+   }
 
 
--- Msg - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- Msg - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-type Msg = DataChanged String String
+type Msg = UrlChanged String
            --
-         | PortJson String
+         | GotMarkdownResponse (Result Http.Error String)
 
 
--- init - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- init - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-init : Flags -> ( Model, Cmd Msg )
-init flags = ( Model flags, Cmd.none )
+init : String -> ( Model, Cmd Msg )
+init urlStr =
+   let
+      route = Route.fromUrlString (urlStr)
+      markdown = ""
+      --
+      model = Model (route) (markdown)
+      cmd = getMarkdown (route)
+   in
+      ( model, cmd )
+
+--
+getMarkdown : Route -> Cmd Msg
+getMarkdown route =
+   Http.get { url = Route.toMarkdownFileUrl (route)
+            , expect = Http.expectString (GotMarkdownResponse)
+            }
 
 
--- view - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- view - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 view : Model -> Html Msg
 view model =
-   article [ class "Reader Base" ] [
-      div [ class "Reader Container" ] [
-         span [] [ text model.flags.topicId ],
-         Markdown.toHtml [] model.flags.markdown
-      ] -- div.Reader.Container
-   ] -- article.Reader.Base
+   let
+      topicId = Route.toTopicId (model.route)
+   in
+      article [ class "Reader Base" ] [
+         div [ class "Reader Container" ] [
+            span [] [ text (topicId) ],
+            Markdown.toHtml [] (model.markdown)
+         ] -- div.Reader.Container
+      ] -- article.Reader.Base
 
 
--- update - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- update - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model = case msg of
+update msg model = case (msg) of
    
    --
-   DataChanged topicId markdown ->
-      let updatedFlags = Flags ( topicId ) ( markdown )
-          updatedModel = { model | flags = updatedFlags }
-      in  ( updatedModel, Cmd.none )
+   UrlChanged newUrlStr -> init (newUrlStr)
    
    --
-   PortJson _ -> ( model, Cmd.none )
+   GotMarkdownResponse res -> case (res) of
+      --
+      (Err error) ->
+         let
+            errMsg = HttpError.toString (error)
+            content = "# " ++ errMsg
+            --
+            updatedModel = { model | markdown = content }
+         in
+            ( updatedModel, Cmd.none )
+      --
+      (Ok data) ->
+         let
+            updatedModel = { model | markdown = data }
+         in
+            ( updatedModel, Cmd.none )
 
 
--- subscriptions - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- subscriptions - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 subscriptions : Model -> Sub Msg
-subscriptions _ = listen PortJson
-
-
-port export : String -> Cmd msg
-port listen : (String -> msg) -> Sub msg
+subscriptions _ = Sub.none
 
 

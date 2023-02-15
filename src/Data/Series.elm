@@ -1,7 +1,9 @@
-module Data.Series exposing ( Series, empty, matchId )
+module Data.Series exposing (..)
+
+import Json.Decode as Json exposing (Decoder, field, string, list)
 
 
--- Series - - - - - - - - - - - - - - - - - -
+-- Series - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 type alias Series =
@@ -9,22 +11,35 @@ type alias Series =
    , title : String
    , keywords : List String
    , description : String
+   , overview : String
    }
 
 
--- empty - - - - - - - - - - - - - - - - - -
+-- empty - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-empty : Series
 empty =
-   { id = "empty"
-   , title = "Empty"
+   { id = ""
+   , title = ""
    , keywords = []
-   , description = "Empty"
+   , description = ""
+   , overview = ""
    }
 
 
--- matchId - - - - - - - - - - - - - - - - - -
+-- jsonDecoder - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+jsonDecoder : Decoder Series
+jsonDecoder = Json.map5 Series
+   ( field "id" string )
+   ( field "title" string )
+   ( field "keywords" (list string) )
+   ( field "description" string )
+   ( field "overview" string )
+
+
+-- matchId - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 matchId : String -> Series -> Bool

@@ -1,7 +1,9 @@
-module Data.Post exposing ( Post, empty )
+module Data.Post exposing (..)
+
+import Json.Decode as Json exposing (Decoder, field, string, list)
 
 
--- Post - - - - - - - - -
+-- Post - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 type alias Post =
@@ -13,16 +15,15 @@ type alias Post =
    }
 
 
--- empty - - - - - - - - -
+-- jsonDecoder - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-empty : Post
-empty =
-   { slug = "empty"
-   , title = "Empty"
-   , keywords = ["empty"]
-   , description = "Empty"
-   , content = "Empty"
-   }
+jsonDecoder : Decoder Post
+jsonDecoder = Json.map5 Post
+   ( field "slug" string )
+   ( field "title" string )
+   ( field "keywords" (list string) )
+   ( field "description" string )
+   ( field "content" string )
 
 

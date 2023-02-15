@@ -5473,12 +5473,19 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$application = _Browser_application;
-var $author$project$App$Model = F8(
-	function (url, key, route, navigator, overview, reader, indexer, seriesList) {
-		return {indexer: indexer, key: key, navigator: navigator, overview: overview, reader: reader, route: route, seriesList: seriesList, url: url};
-	});
+var $author$project$App$IdxMsg = function (a) {
+	return {$: 'IdxMsg', a: a};
+};
+var $author$project$App$NavMsg = function (a) {
+	return {$: 'NavMsg', a: a};
+};
+var $author$project$App$OvrMsg = function (a) {
+	return {$: 'OvrMsg', a: a};
+};
+var $author$project$App$RdrMsg = function (a) {
+	return {$: 'RdrMsg', a: a};
+};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $author$project$Data$Series$empty = {description: 'Empty', id: 'empty', keywords: _List_Nil, title: 'Empty'};
 var $author$project$Route$HomePage = {$: 'HomePage'};
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
@@ -6239,7 +6246,7 @@ var $elm$url$Url$Parser$top = $elm$url$Url$Parser$Parser(
 		return _List_fromArray(
 			[state]);
 	});
-var $author$project$Route$urlParser = $elm$url$Url$Parser$oneOf(
+var $author$project$Route$parser = $elm$url$Url$Parser$oneOf(
 	_List_fromArray(
 		[
 			A2($elm$url$Url$Parser$map, $author$project$Route$HomePage, $elm$url$Url$Parser$top),
@@ -6266,14 +6273,26 @@ var $elm$core$Maybe$withDefault = F2(
 		}
 	});
 var $author$project$Route$fromUrl = function (url) {
-	return A2(
-		$elm$core$Maybe$withDefault,
-		$author$project$Route$HomePage,
-		A2($elm$url$Url$Parser$parse, $author$project$Route$urlParser, url));
+	var maybeRoute = A2($elm$url$Url$Parser$parse, $author$project$Route$parser, url);
+	return A2($elm$core$Maybe$withDefault, $author$project$Route$HomePage, maybeRoute);
 };
-var $author$project$App$GotPostContentResponse = function (a) {
-	return {$: 'GotPostContentResponse', a: a};
+var $author$project$Element$Indexer$Model = F3(
+	function (route, seriesList, postList) {
+		return {postList: postList, route: route, seriesList: seriesList};
+	});
+var $author$project$Route$fromUrlString = function (urlStr) {
+	var _v0 = $elm$url$Url$fromString(urlStr);
+	if (_v0.$ === 'Nothing') {
+		return $author$project$Route$HomePage;
+	} else {
+		var url = _v0.a;
+		return $author$project$Route$fromUrl(url);
+	}
 };
+var $author$project$Element$Indexer$GotPostListResponse = function (a) {
+	return {$: 'GotPostListResponse', a: a};
+};
+var $elm$json$Json$Decode$decodeString = _Json_runOnString;
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
 		return {$: 'BadStatus_', a: a, b: b};
@@ -6314,17 +6333,6 @@ var $elm$http$Http$expectStringResponse = F2(
 			$elm$core$Basics$identity,
 			A2($elm$core$Basics$composeR, toResult, toMsg));
 	});
-var $elm$http$Http$BadBody = function (a) {
-	return {$: 'BadBody', a: a};
-};
-var $elm$http$Http$BadStatus = function (a) {
-	return {$: 'BadStatus', a: a};
-};
-var $elm$http$Http$BadUrl = function (a) {
-	return {$: 'BadUrl', a: a};
-};
-var $elm$http$Http$NetworkError = {$: 'NetworkError'};
-var $elm$http$Http$Timeout = {$: 'Timeout'};
 var $elm$core$Result$mapError = F2(
 	function (f, result) {
 		if (result.$ === 'Ok') {
@@ -6336,6 +6344,17 @@ var $elm$core$Result$mapError = F2(
 				f(e));
 		}
 	});
+var $elm$http$Http$BadBody = function (a) {
+	return {$: 'BadBody', a: a};
+};
+var $elm$http$Http$BadStatus = function (a) {
+	return {$: 'BadStatus', a: a};
+};
+var $elm$http$Http$BadUrl = function (a) {
+	return {$: 'BadUrl', a: a};
+};
+var $elm$http$Http$NetworkError = {$: 'NetworkError'};
+var $elm$http$Http$Timeout = {$: 'Timeout'};
 var $elm$http$Http$resolve = F2(
 	function (toResult, response) {
 		switch (response.$) {
@@ -6359,12 +6378,19 @@ var $elm$http$Http$resolve = F2(
 					toResult(body));
 		}
 	});
-var $elm$http$Http$expectString = function (toMsg) {
-	return A2(
-		$elm$http$Http$expectStringResponse,
-		toMsg,
-		$elm$http$Http$resolve($elm$core$Result$Ok));
-};
+var $elm$http$Http$expectJson = F2(
+	function (toMsg, decoder) {
+		return A2(
+			$elm$http$Http$expectStringResponse,
+			toMsg,
+			$elm$http$Http$resolve(
+				function (string) {
+					return A2(
+						$elm$core$Result$mapError,
+						$elm$json$Json$Decode$errorToString,
+						A2($elm$json$Json$Decode$decodeString, decoder, string));
+				}));
+	});
 var $elm$http$Http$emptyBody = _Http_emptyBody;
 var $elm$http$Http$Request = function (a) {
 	return {$: 'Request', a: a};
@@ -6538,121 +6564,15 @@ var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
 		{body: $elm$http$Http$emptyBody, expect: r.expect, headers: _List_Nil, method: 'GET', timeout: $elm$core$Maybe$Nothing, tracker: $elm$core$Maybe$Nothing, url: r.url});
 };
-var $author$project$Config$dataFolderUrl = '/data';
-var $author$project$Config$postContentFileUrl = F3(
-	function (topicId, seriesId, postSlug) {
-		return $author$project$Config$dataFolderUrl + ('/' + (topicId + ('/' + (seriesId + ('/' + (postSlug + '.txt'))))));
-	});
-var $author$project$Extension$Url$toPostSlug = function (url) {
-	var _v0 = $author$project$Route$fromUrl(url);
-	switch (_v0.$) {
-		case 'HomePage':
-			return '';
-		case 'TopicPage':
-			return '';
-		case 'SeriesPage':
-			return '';
-		default:
-			var postSlug = _v0.c;
-			return postSlug;
-	}
-};
-var $author$project$Extension$Url$toSeriesId = function (url) {
-	var _v0 = $author$project$Route$fromUrl(url);
-	switch (_v0.$) {
-		case 'HomePage':
-			return '';
-		case 'TopicPage':
-			return '';
-		case 'SeriesPage':
-			var seriesId = _v0.b;
-			return seriesId;
-		default:
-			var seriesId = _v0.b;
-			return seriesId;
-	}
-};
-var $author$project$Config$defaultTopicId = 'origin';
-var $author$project$Extension$Url$toTopicId = function (url) {
-	var _v0 = $author$project$Route$fromUrl(url);
-	switch (_v0.$) {
-		case 'HomePage':
-			return $author$project$Config$defaultTopicId;
-		case 'TopicPage':
-			var topicId = _v0.a;
-			return topicId;
-		case 'SeriesPage':
-			var topicId = _v0.a;
-			return topicId;
-		default:
-			var topicId = _v0.a;
-			return topicId;
-	}
-};
-var $author$project$App$getPostContent = function (url) {
-	var topicId = $author$project$Extension$Url$toTopicId(url);
-	var seriesId = $author$project$Extension$Url$toSeriesId(url);
-	var postSlug = $author$project$Extension$Url$toPostSlug(url);
-	return $elm$http$Http$get(
-		{
-			expect: $elm$http$Http$expectString($author$project$App$GotPostContentResponse),
-			url: A3($author$project$Config$postContentFileUrl, topicId, seriesId, postSlug)
-		});
-};
-var $author$project$App$GotTopicOverviewResponse = function (a) {
-	return {$: 'GotTopicOverviewResponse', a: a};
-};
-var $author$project$Config$topicOverviewFileUrl = function (topicId) {
-	return $author$project$Config$dataFolderUrl + ('/' + (topicId + ('/' + 'overview.txt')));
-};
-var $author$project$App$getTopicOverview = function (url) {
-	var topicId = $author$project$Extension$Url$toTopicId(url);
-	return $elm$http$Http$get(
-		{
-			expect: $elm$http$Http$expectString($author$project$App$GotTopicOverviewResponse),
-			url: $author$project$Config$topicOverviewFileUrl(topicId)
-		});
-};
-var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$App$getMarkdown = function (url) {
-	var route = $author$project$Route$fromUrl(url);
-	switch (route.$) {
-		case 'HomePage':
-			return $author$project$App$getTopicOverview(url);
-		case 'TopicPage':
-			return $author$project$App$getTopicOverview(url);
-		case 'PostPage':
-			return $author$project$App$getPostContent(url);
-		default:
-			return $elm$core$Platform$Cmd$none;
-	}
-};
-var $author$project$App$GotPostListResponse = function (a) {
-	return {$: 'GotPostListResponse', a: a};
-};
-var $elm$json$Json$Decode$decodeString = _Json_runOnString;
-var $elm$http$Http$expectJson = F2(
-	function (toMsg, decoder) {
-		return A2(
-			$elm$http$Http$expectStringResponse,
-			toMsg,
-			$elm$http$Http$resolve(
-				function (string) {
-					return A2(
-						$elm$core$Result$mapError,
-						$elm$json$Json$Decode$errorToString,
-						A2($elm$json$Json$Decode$decodeString, decoder, string));
-				}));
-	});
-var $elm$json$Json$Decode$list = _Json_decodeList;
 var $author$project$Data$Post$Post = F5(
 	function (slug, title, keywords, description, content) {
 		return {content: content, description: description, keywords: keywords, slug: slug, title: title};
 	});
 var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$list = _Json_decodeList;
 var $elm$json$Json$Decode$map5 = _Json_map5;
 var $elm$json$Json$Decode$string = _Json_decodeString;
-var $author$project$Extension$Json$Decode$post = A6(
+var $author$project$Data$Post$jsonDecoder = A6(
 	$elm$json$Json$Decode$map5,
 	$author$project$Data$Post$Post,
 	A2($elm$json$Json$Decode$field, 'slug', $elm$json$Json$Decode$string),
@@ -6663,62 +6583,68 @@ var $author$project$Extension$Json$Decode$post = A6(
 		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
 	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'content', $elm$json$Json$Decode$string));
-var $author$project$Config$postListFileUrl = F2(
-	function (topicId, seriesId) {
-		return $author$project$Config$dataFolderUrl + ('/' + (topicId + ('/' + (seriesId + ('/' + 'post-list.json')))));
+var $author$project$Route$dataFolderUrl = '/' + 'data';
+var $author$project$Route$map = F2(
+	function (func, route) {
+		switch (route.$) {
+			case 'HomePage':
+				return A3(func, 'origin', '', '');
+			case 'TopicPage':
+				var topicId = route.a;
+				return A3(func, topicId, '', '');
+			case 'SeriesPage':
+				var topicId = route.a;
+				var seriesId = route.b;
+				return A3(func, topicId, seriesId, '');
+			default:
+				var topicId = route.a;
+				var seriesId = route.b;
+				var postSlug = route.c;
+				return A3(func, topicId, seriesId, postSlug);
+		}
 	});
-var $author$project$App$getPostList = function (url) {
-	var topicId = $author$project$Extension$Url$toTopicId(url);
-	var seriesId = $author$project$Extension$Url$toSeriesId(url);
+var $author$project$Route$toPostListFileUrl = function (route) {
+	var _v0 = A2(
+		$author$project$Route$map,
+		F3(
+			function (tId, sId, _v1) {
+				return _Utils_Tuple2(tId, sId);
+			}),
+		route);
+	var topicId = _v0.a;
+	var seriesId = _v0.b;
+	return $author$project$Route$dataFolderUrl + ('/' + (topicId + ('/' + (seriesId + ('/' + ('post-list' + '.json'))))));
+};
+var $author$project$Element$Indexer$getPostList = function (route) {
 	return $elm$http$Http$get(
 		{
 			expect: A2(
 				$elm$http$Http$expectJson,
-				$author$project$App$GotPostListResponse,
-				$elm$json$Json$Decode$list($author$project$Extension$Json$Decode$post)),
-			url: A2($author$project$Config$postListFileUrl, topicId, seriesId)
+				$author$project$Element$Indexer$GotPostListResponse,
+				$elm$json$Json$Decode$list($author$project$Data$Post$jsonDecoder)),
+			url: $author$project$Route$toPostListFileUrl(route)
 		});
 };
-var $author$project$App$GotSeriesListResponse = function (a) {
-	return {$: 'GotSeriesListResponse', a: a};
+var $author$project$Element$Indexer$init = function (urlStr) {
+	var seriesList = _List_Nil;
+	var route = $author$project$Route$fromUrlString(urlStr);
+	var postList = _List_Nil;
+	var model = A3($author$project$Element$Indexer$Model, route, seriesList, postList);
+	var cmd = $author$project$Element$Indexer$getPostList(route);
+	return _Utils_Tuple2(model, cmd);
 };
-var $author$project$Data$Series$Series = F4(
-	function (id, title, keywords, description) {
-		return {description: description, id: id, keywords: keywords, title: title};
+var $author$project$Element$Navigator$Model = F3(
+	function (route, topicList, collapsed) {
+		return {collapsed: collapsed, route: route, topicList: topicList};
 	});
-var $elm$json$Json$Decode$map4 = _Json_map4;
-var $author$project$Extension$Json$Decode$series = A5(
-	$elm$json$Json$Decode$map4,
-	$author$project$Data$Series$Series,
-	A2($elm$json$Json$Decode$field, 'id', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
-	A2(
-		$elm$json$Json$Decode$field,
-		'keywords',
-		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
-	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string));
-var $author$project$Config$seriesListFileUrl = function (topicId) {
-	return $author$project$Config$dataFolderUrl + ('/' + (topicId + ('/' + 'series-list.json')));
-};
-var $author$project$App$getSeriesList = function (url) {
-	var topicId = $author$project$Extension$Url$toTopicId(url);
-	return $elm$http$Http$get(
-		{
-			expect: A2(
-				$elm$http$Http$expectJson,
-				$author$project$App$GotSeriesListResponse,
-				$elm$json$Json$Decode$list($author$project$Extension$Json$Decode$series)),
-			url: $author$project$Config$seriesListFileUrl(topicId)
-		});
-};
-var $author$project$App$GotTopicListResponse = function (a) {
+var $author$project$Element$Navigator$GotTopicListResponse = function (a) {
 	return {$: 'GotTopicListResponse', a: a};
 };
 var $author$project$Data$Topic$Topic = F5(
 	function (id, title, keywords, description, overview) {
 		return {description: description, id: id, keywords: keywords, overview: overview, title: title};
 	});
-var $author$project$Extension$Json$Decode$topic = A6(
+var $author$project$Data$Topic$jsonDecoder = A6(
 	$elm$json$Json$Decode$map5,
 	$author$project$Data$Topic$Topic,
 	A2($elm$json$Json$Decode$field, 'id', $elm$json$Json$Decode$string),
@@ -6729,224 +6655,115 @@ var $author$project$Extension$Json$Decode$topic = A6(
 		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
 	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'overview', $elm$json$Json$Decode$string));
-var $author$project$Config$topicListFileUrl = $author$project$Config$dataFolderUrl + ('/' + 'topic-list.json');
-var $author$project$App$getTopicList = function (_v0) {
+var $author$project$Route$toTopicListFileUrl = function (_v0) {
+	return $author$project$Route$dataFolderUrl + ('/' + 'topic-list.json');
+};
+var $author$project$Element$Navigator$getTopicList = $elm$http$Http$get(
+	{
+		expect: A2(
+			$elm$http$Http$expectJson,
+			$author$project$Element$Navigator$GotTopicListResponse,
+			$elm$json$Json$Decode$list($author$project$Data$Topic$jsonDecoder)),
+		url: $author$project$Route$toTopicListFileUrl(_Utils_Tuple0)
+	});
+var $author$project$Element$Navigator$init = function (urlStr) {
+	var topicList = _List_Nil;
+	var route = $author$project$Route$fromUrlString(urlStr);
+	var collapsed = true;
+	var model = A3($author$project$Element$Navigator$Model, route, topicList, collapsed);
+	var cmd = $author$project$Element$Navigator$getTopicList;
+	return _Utils_Tuple2(model, cmd);
+};
+var $author$project$Element$Overview$Model = F2(
+	function (route, seriesList) {
+		return {route: route, seriesList: seriesList};
+	});
+var $author$project$Element$Overview$GotSeriesListResponse = function (a) {
+	return {$: 'GotSeriesListResponse', a: a};
+};
+var $author$project$Data$Series$Series = F5(
+	function (id, title, keywords, description, overview) {
+		return {description: description, id: id, keywords: keywords, overview: overview, title: title};
+	});
+var $author$project$Data$Series$jsonDecoder = A6(
+	$elm$json$Json$Decode$map5,
+	$author$project$Data$Series$Series,
+	A2($elm$json$Json$Decode$field, 'id', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
+	A2(
+		$elm$json$Json$Decode$field,
+		'keywords',
+		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
+	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'overview', $elm$json$Json$Decode$string));
+var $author$project$Route$toSeriesListFileUrl = function (route) {
+	var topicId = A2(
+		$author$project$Route$map,
+		F3(
+			function (tId, _v0, _v1) {
+				return tId;
+			}),
+		route);
+	return $author$project$Route$dataFolderUrl + ('/' + (topicId + ('/' + ('series-list' + '.json'))));
+};
+var $author$project$Element$Overview$getSeriesList = function (route) {
 	return $elm$http$Http$get(
 		{
 			expect: A2(
 				$elm$http$Http$expectJson,
-				$author$project$App$GotTopicListResponse,
-				$elm$json$Json$Decode$list($author$project$Extension$Json$Decode$topic)),
-			url: $author$project$Config$topicListFileUrl
+				$author$project$Element$Overview$GotSeriesListResponse,
+				$elm$json$Json$Decode$list($author$project$Data$Series$jsonDecoder)),
+			url: $author$project$Route$toSeriesListFileUrl(route)
 		});
 };
-var $author$project$Data$Post$empty = {
-	content: 'Empty',
-	description: 'Empty',
-	keywords: _List_fromArray(
-		['empty']),
-	slug: 'empty',
-	title: 'Empty'
+var $author$project$Element$Overview$init = function (urlStr) {
+	var seriesList = _List_Nil;
+	var route = $author$project$Route$fromUrlString(urlStr);
+	var model = A2($author$project$Element$Overview$Model, route, seriesList);
+	var cmd = $author$project$Element$Overview$getSeriesList(route);
+	return _Utils_Tuple2(model, cmd);
 };
-var $author$project$Element$Indexer$Model = function (flags) {
-	return {flags: flags};
-};
-var $author$project$Element$Indexer$init = function (flags) {
-	return _Utils_Tuple2(
-		$author$project$Element$Indexer$Model(flags),
-		$elm$core$Platform$Cmd$none);
-};
-var $author$project$App$initIndexer = function () {
-	var flags = {
-		postList: _List_fromArray(
-			[$author$project$Data$Post$empty]),
-		series: $author$project$Data$Series$empty,
-		topicId: 'empty'
-	};
-	return $author$project$Element$Indexer$init(flags);
-}();
-var $author$project$Config$avatarUrl = '/mockup/Element/Navigator/avatar.jpg';
-var $author$project$Data$Topic$empty = {
-	description: 'Empty',
-	id: 'empty',
-	keywords: _List_fromArray(
-		['empty']),
-	overview: 'Empty',
-	title: 'Empty'
-};
-var $author$project$Config$gitHubUrl = 'https://github.com/thinhtranhnvn';
-var $author$project$Element$Navigator$Model = F2(
-	function (collapsed, flags) {
-		return {collapsed: collapsed, flags: flags};
+var $author$project$Element$Reader$Model = F2(
+	function (route, markdown) {
+		return {markdown: markdown, route: route};
 	});
-var $author$project$Element$Navigator$init = function (flags) {
-	var collapsed = true;
-	return _Utils_Tuple2(
-		A2($author$project$Element$Navigator$Model, collapsed, flags),
-		$elm$core$Platform$Cmd$none);
+var $author$project$Element$Reader$GotMarkdownResponse = function (a) {
+	return {$: 'GotMarkdownResponse', a: a};
 };
-var $author$project$Config$siteAuthor = 'Semi Dev_';
-var $author$project$App$initNavigator = function () {
-	var flags = {
-		avatarName: $author$project$Config$siteAuthor,
-		avatarUrl: $author$project$Config$avatarUrl,
-		gitHubUrl: $author$project$Config$gitHubUrl,
-		topicId: '',
-		topicList: _List_fromArray(
-			[$author$project$Data$Topic$empty])
-	};
-	return $author$project$Element$Navigator$init(flags);
-}();
-var $author$project$Element$Overview$Model = function (flags) {
-	return {flags: flags};
+var $elm$http$Http$expectString = function (toMsg) {
+	return A2(
+		$elm$http$Http$expectStringResponse,
+		toMsg,
+		$elm$http$Http$resolve($elm$core$Result$Ok));
 };
-var $author$project$Element$Overview$init = function (flags) {
-	return _Utils_Tuple2(
-		$author$project$Element$Overview$Model(flags),
-		$elm$core$Platform$Cmd$none);
+var $author$project$Route$toMarkdownFileUrl = function (route) {
+	var _v0 = A2(
+		$author$project$Route$map,
+		F3(
+			function (tId, sId, pSl) {
+				return _Utils_Tuple3(tId, sId, pSl);
+			}),
+		route);
+	var topicId = _v0.a;
+	var seriesId = _v0.b;
+	var postSlug = _v0.c;
+	return $elm$core$String$isEmpty(postSlug) ? ($author$project$Route$dataFolderUrl + ('/' + (topicId + ('/' + ('overview' + '.txt'))))) : ($author$project$Route$dataFolderUrl + ('/' + (topicId + ('/' + (seriesId + ('/' + (postSlug + '.txt')))))));
 };
-var $author$project$App$initOverview = function () {
-	var flags = {
-		seriesId: '',
-		seriesList: _List_fromArray(
-			[$author$project$Data$Series$empty]),
-		topicId: ''
-	};
-	return $author$project$Element$Overview$init(flags);
-}();
-var $author$project$Element$Reader$Model = function (flags) {
-	return {flags: flags};
+var $author$project$Element$Reader$getMarkdown = function (route) {
+	return $elm$http$Http$get(
+		{
+			expect: $elm$http$Http$expectString($author$project$Element$Reader$GotMarkdownResponse),
+			url: $author$project$Route$toMarkdownFileUrl(route)
+		});
 };
-var $author$project$Element$Reader$init = function (flags) {
-	return _Utils_Tuple2(
-		$author$project$Element$Reader$Model(flags),
-		$elm$core$Platform$Cmd$none);
+var $author$project$Element$Reader$init = function (urlStr) {
+	var route = $author$project$Route$fromUrlString(urlStr);
+	var markdown = '';
+	var model = A2($author$project$Element$Reader$Model, route, markdown);
+	var cmd = $author$project$Element$Reader$getMarkdown(route);
+	return _Utils_Tuple2(model, cmd);
 };
-var $author$project$App$initReader = function () {
-	var flags = {markdown: 'Empty', topicId: 'empty'};
-	return $author$project$Element$Reader$init(flags);
-}();
-var $author$project$App$init = F3(
-	function (_v0, url, key) {
-		var seriesList = _List_fromArray(
-			[$author$project$Data$Series$empty]);
-		var route = $author$project$Route$fromUrl(url);
-		var cmd = $elm$core$Platform$Cmd$batch(
-			_List_fromArray(
-				[
-					$author$project$App$getTopicList(url),
-					$author$project$App$getSeriesList(url),
-					$author$project$App$getMarkdown(url),
-					$author$project$App$getPostList(url)
-				]));
-		var _v1 = $author$project$App$initReader;
-		var reader = _v1.a;
-		var _v2 = $author$project$App$initOverview;
-		var overview = _v2.a;
-		var _v3 = $author$project$App$initNavigator;
-		var navigator = _v3.a;
-		var _v4 = $author$project$App$initIndexer;
-		var indexer = _v4.a;
-		var model = A8($author$project$App$Model, url, key, route, navigator, overview, reader, indexer, seriesList);
-		return _Utils_Tuple2(model, cmd);
-	});
-var $author$project$App$UrlChanged = function (a) {
-	return {$: 'UrlChanged', a: a};
-};
-var $author$project$App$onUrlChange = function (url) {
-	return $author$project$App$UrlChanged(url);
-};
-var $author$project$App$GotUrlRequest = function (a) {
-	return {$: 'GotUrlRequest', a: a};
-};
-var $author$project$App$onUrlRequest = function (req) {
-	return $author$project$App$GotUrlRequest(req);
-};
-var $author$project$App$PortJson = function (a) {
-	return {$: 'PortJson', a: a};
-};
-var $author$project$App$listen = _Platform_incomingPort('listen', $elm$json$Json$Decode$string);
-var $author$project$App$subscriptions = function (_v0) {
-	return $author$project$App$listen($author$project$App$PortJson);
-};
-var $author$project$Element$Navigator$CollapseFolder = {$: 'CollapseFolder'};
-var $author$project$Element$Indexer$DataChanged = F3(
-	function (a, b, c) {
-		return {$: 'DataChanged', a: a, b: b, c: c};
-	});
-var $author$project$Element$Navigator$DataChanged = F2(
-	function (a, b) {
-		return {$: 'DataChanged', a: a, b: b};
-	});
-var $author$project$Element$Overview$DataChanged = F3(
-	function (a, b, c) {
-		return {$: 'DataChanged', a: a, b: b, c: c};
-	});
-var $author$project$Element$Reader$DataChanged = F2(
-	function (a, b) {
-		return {$: 'DataChanged', a: a, b: b};
-	});
-var $author$project$App$IndexerMsg = function (a) {
-	return {$: 'IndexerMsg', a: a};
-};
-var $author$project$App$NavigatorMsg = function (a) {
-	return {$: 'NavigatorMsg', a: a};
-};
-var $author$project$App$OverviewMsg = function (a) {
-	return {$: 'OverviewMsg', a: a};
-};
-var $author$project$App$ReaderMsg = function (a) {
-	return {$: 'ReaderMsg', a: a};
-};
-var $elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
-	});
-var $elm$core$List$head = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(x);
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
-var $elm$browser$Browser$Navigation$load = _Browser_load;
 var $elm$core$Platform$Cmd$map = _Platform_map;
-var $author$project$Data$Series$matchId = F2(
-	function (id, series) {
-		var _v0 = A2($elm$core$Basics$compare, id, series.id);
-		if (_v0.$ === 'EQ') {
-			return true;
-		} else {
-			return false;
-		}
-	});
-var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
-var $author$project$Extension$Http$Error$toString = function (error) {
-	switch (error.$) {
-		case 'BadUrl':
-			var msg = error.a;
-			return msg;
-		case 'Timeout':
-			return 'Timeout';
-		case 'NetworkError':
-			return 'Network Error';
-		case 'BadStatus':
-			var value = error.a;
-			return 'Bad Status: ' + $elm$core$String$fromInt(value);
-		default:
-			var msg = error.a;
-			return msg;
-	}
-};
 var $elm$url$Url$addPort = F2(
 	function (maybePort, starter) {
 		if (maybePort.$ === 'Nothing') {
@@ -6991,391 +6808,254 @@ var $elm$url$Url$toString = function (url) {
 					_Utils_ap(http, url.host)),
 				url.path)));
 };
-var $author$project$Element$Indexer$Flags = F3(
-	function (topicId, series, postList) {
-		return {postList: postList, series: series, topicId: topicId};
+var $author$project$App$init = F3(
+	function (_v0, url, key) {
+		var route = $author$project$Route$fromUrl(url);
+		var _v1 = $author$project$Element$Reader$init(
+			$elm$url$Url$toString(url));
+		var rdrModel = _v1.a;
+		var rdrCmd = _v1.b;
+		var _v2 = $author$project$Element$Overview$init(
+			$elm$url$Url$toString(url));
+		var ovrModel = _v2.a;
+		var ovrCmd = _v2.b;
+		var _v3 = $author$project$Element$Navigator$init(
+			$elm$url$Url$toString(url));
+		var navModel = _v3.a;
+		var navCmd = _v3.b;
+		var _v4 = $author$project$Element$Indexer$init(
+			$elm$url$Url$toString(url));
+		var idxModel = _v4.a;
+		var idxCmd = _v4.b;
+		var cmd = $elm$core$Platform$Cmd$batch(
+			_List_fromArray(
+				[
+					A2($elm$core$Platform$Cmd$map, $author$project$App$NavMsg, navCmd),
+					A2($elm$core$Platform$Cmd$map, $author$project$App$OvrMsg, ovrCmd),
+					A2($elm$core$Platform$Cmd$map, $author$project$App$IdxMsg, idxCmd),
+					A2($elm$core$Platform$Cmd$map, $author$project$App$RdrMsg, rdrCmd)
+				]));
+		var model = {indexer: idxModel, key: key, navigator: navModel, overview: ovrModel, reader: rdrModel, route: route, url: url};
+		return _Utils_Tuple2(model, cmd);
 	});
+var $author$project$App$UrlChanged = function (a) {
+	return {$: 'UrlChanged', a: a};
+};
+var $author$project$App$onUrlChange = function (newUrl) {
+	return $author$project$App$UrlChanged(newUrl);
+};
+var $author$project$App$GotUrlRequest = function (a) {
+	return {$: 'GotUrlRequest', a: a};
+};
+var $author$project$App$onUrlRequest = function (req) {
+	return $author$project$App$GotUrlRequest(req);
+};
+var $author$project$App$PortJson = function (a) {
+	return {$: 'PortJson', a: a};
+};
+var $author$project$App$listen = _Platform_incomingPort('listen', $elm$json$Json$Decode$string);
+var $author$project$App$subscriptions = function (_v0) {
+	return $author$project$App$listen($author$project$App$PortJson);
+};
+var $author$project$Element$Navigator$CollapseFolder = {$: 'CollapseFolder'};
+var $author$project$Element$Indexer$UrlChanged = function (a) {
+	return {$: 'UrlChanged', a: a};
+};
+var $author$project$Element$Navigator$UrlChanged = function (a) {
+	return {$: 'UrlChanged', a: a};
+};
+var $author$project$Element$Overview$UrlChanged = function (a) {
+	return {$: 'UrlChanged', a: a};
+};
+var $author$project$Element$Reader$UrlChanged = function (a) {
+	return {$: 'UrlChanged', a: a};
+};
+var $elm$browser$Browser$Navigation$load = _Browser_load;
+var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $author$project$Element$Indexer$update = F2(
 	function (msg, model) {
-		if (msg.$ === 'DataChanged') {
-			var topicId = msg.a;
-			var series = msg.b;
-			var postList = msg.c;
-			var updatedFlags = A3($author$project$Element$Indexer$Flags, topicId, series, postList);
-			var updatedModel = _Utils_update(
-				model,
-				{flags: updatedFlags});
-			return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-		} else {
-			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		switch (msg.$) {
+			case 'UrlChanged':
+				var newUrlStr = msg.a;
+				return $author$project$Element$Indexer$init(newUrlStr);
+			case 'GotSeriesListResponse':
+				var res = msg.a;
+				if (res.$ === 'Err') {
+					var error = res.a;
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				} else {
+					var data = res.a;
+					var updatedModel = _Utils_update(
+						model,
+						{seriesList: data});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				}
+			default:
+				var res = msg.a;
+				if (res.$ === 'Err') {
+					var error = res.a;
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				} else {
+					var data = res.a;
+					var updatedModel = _Utils_update(
+						model,
+						{postList: data});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				}
 		}
 	});
 var $elm$core$Basics$not = _Basics_not;
 var $author$project$Element$Navigator$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
+			case 'UrlChanged':
+				var newUrlStr = msg.a;
+				var newRoute = $author$project$Route$fromUrlString(newUrlStr);
+				var updatedModel = _Utils_update(
+					model,
+					{route: newRoute});
+				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+			case 'GotTopicListResponse':
+				var res = msg.a;
+				if (res.$ === 'Err') {
+					var error = res.a;
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				} else {
+					var data = res.a;
+					var updatedModel = _Utils_update(
+						model,
+						{topicList: data});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+				}
 			case 'ToggleFolder':
 				var updatedModel = _Utils_update(
 					model,
 					{collapsed: !model.collapsed});
 				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-			case 'CollapseFolder':
+			default:
 				var updatedModel = _Utils_update(
 					model,
 					{collapsed: true});
 				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-			case 'DataChanged':
-				var newTopicList = msg.a;
-				var newTopicId = msg.b;
-				var flags = model.flags;
-				var updatedFlags = _Utils_update(
-					flags,
-					{topicId: newTopicId, topicList: newTopicList});
-				var updatedModel = _Utils_update(
-					model,
-					{flags: updatedFlags});
-				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-			case 'TopicChanged':
-				var newTopicId = msg.a;
-				var flags = model.flags;
-				var updatedFlags = _Utils_update(
-					flags,
-					{topicId: newTopicId});
-				var updatedModel = _Utils_update(
-					model,
-					{flags: updatedFlags});
-				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-			default:
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
 	});
-var $author$project$Element$Overview$Flags = F3(
-	function (topicId, seriesList, seriesId) {
-		return {seriesId: seriesId, seriesList: seriesList, topicId: topicId};
-	});
+var $author$project$Data$Series$empty = {description: '', id: '', keywords: _List_Nil, overview: '', title: ''};
+var $author$project$Extension$Http$Error$toString = function (error) {
+	switch (error.$) {
+		case 'BadUrl':
+			var detail = error.a;
+			return detail;
+		case 'Timeout':
+			return 'Timeout Request';
+		case 'NetworkError':
+			return 'Network Error';
+		case 'BadStatus':
+			var stt = error.a;
+			return 'Bad Status: ' + $elm$core$String$fromInt(stt);
+		default:
+			var detail = error.a;
+			return detail;
+	}
+};
+var $author$project$Route$toTopicId = function (route) {
+	switch (route.$) {
+		case 'HomePage':
+			return 'origin';
+		case 'TopicPage':
+			var topicId = route.a;
+			return topicId;
+		case 'SeriesPage':
+			var topicId = route.a;
+			return topicId;
+		default:
+			var topicId = route.a;
+			return topicId;
+	}
+};
 var $author$project$Element$Overview$update = F2(
 	function (msg, model) {
-		if (msg.$ === 'DataChanged') {
-			var topicId = msg.a;
-			var seriesList = msg.b;
-			var seriesId = msg.c;
-			var updatedFlags = A3($author$project$Element$Overview$Flags, topicId, seriesList, seriesId);
-			var updatedModel = _Utils_update(
-				model,
-				{flags: updatedFlags});
-			return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+		if (msg.$ === 'UrlChanged') {
+			var newUrlStr = msg.a;
+			var oldTopicId = $author$project$Route$toTopicId(model.route);
+			var newRoute = $author$project$Route$fromUrlString(newUrlStr);
+			var newTopicId = $author$project$Route$toTopicId(newRoute);
+			var _v1 = A2($elm$core$Basics$compare, newTopicId, oldTopicId);
+			if (_v1.$ === 'EQ') {
+				var updatedModel = _Utils_update(
+					model,
+					{route: newRoute});
+				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+			} else {
+				return $author$project$Element$Overview$init(newUrlStr);
+			}
 		} else {
-			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+			var res = msg.a;
+			if (res.$ === 'Err') {
+				var error = res.a;
+				var errMsg = $author$project$Extension$Http$Error$toString(error);
+				var emptySeries = $author$project$Data$Series$empty;
+				var errorSeries = _Utils_update(
+					emptySeries,
+					{title: errMsg});
+				var newSeriesList = _List_fromArray(
+					[errorSeries, emptySeries]);
+				var updatedModel = _Utils_update(
+					model,
+					{seriesList: newSeriesList});
+				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+			} else {
+				var data = res.a;
+				var updatedModel = _Utils_update(
+					model,
+					{seriesList: data});
+				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+			}
 		}
-	});
-var $author$project$Element$Reader$Flags = F2(
-	function (topicId, markdown) {
-		return {markdown: markdown, topicId: topicId};
 	});
 var $author$project$Element$Reader$update = F2(
 	function (msg, model) {
-		if (msg.$ === 'DataChanged') {
-			var topicId = msg.a;
-			var markdown = msg.b;
-			var updatedFlags = A2($author$project$Element$Reader$Flags, topicId, markdown);
-			var updatedModel = _Utils_update(
-				model,
-				{flags: updatedFlags});
-			return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+		if (msg.$ === 'UrlChanged') {
+			var newUrlStr = msg.a;
+			return $author$project$Element$Reader$init(newUrlStr);
 		} else {
-			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+			var res = msg.a;
+			if (res.$ === 'Err') {
+				var error = res.a;
+				var errMsg = $author$project$Extension$Http$Error$toString(error);
+				var content = '# ' + errMsg;
+				var updatedModel = _Utils_update(
+					model,
+					{markdown: content});
+				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+			} else {
+				var data = res.a;
+				var updatedModel = _Utils_update(
+					model,
+					{markdown: data});
+				return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
+			}
 		}
 	});
-var $author$project$App$updateIndexer = function (model_cmd) {
-	var _v0 = model_cmd;
-	var model = _v0.a;
-	var cmd = _v0.b;
-	var newCmd = $elm$core$Platform$Cmd$batch(
-		_List_fromArray(
-			[
-				cmd,
-				$author$project$App$getPostList(model.url)
-			]));
-	return _Utils_Tuple2(model, newCmd);
-};
-var $author$project$Element$Navigator$TopicChanged = function (a) {
-	return {$: 'TopicChanged', a: a};
-};
-var $author$project$App$updateNavigator = function (model_cmd) {
-	var _v0 = model_cmd;
-	var model = _v0.a;
-	var cmd = _v0.b;
-	var topicId = $author$project$Extension$Url$toTopicId(model.url);
-	var appMsg = $author$project$Element$Navigator$TopicChanged(topicId);
-	var _v1 = A2($author$project$Element$Navigator$update, appMsg, model.navigator);
-	var updatedNavigator = _v1.a;
-	var updatedModel = _Utils_update(
-		model,
-		{navigator: updatedNavigator});
-	return _Utils_Tuple2(updatedModel, cmd);
-};
-var $author$project$App$updateOverview = function (model_cmd) {
-	var _v0 = model_cmd;
-	var model = _v0.a;
-	var cmd = _v0.b;
-	var newCmd = $elm$core$Platform$Cmd$batch(
-		_List_fromArray(
-			[
-				cmd,
-				$author$project$App$getSeriesList(model.url)
-			]));
-	return _Utils_Tuple2(model, newCmd);
-};
-var $author$project$App$updateReader = function (model_cmd) {
-	var _v0 = model_cmd;
-	var model = _v0.a;
-	var cmd = _v0.b;
-	var newCmd = $elm$core$Platform$Cmd$batch(
-		_List_fromArray(
-			[
-				cmd,
-				$author$project$App$getMarkdown(model.url)
-			]));
-	return _Utils_Tuple2(model, newCmd);
-};
-var $author$project$App$updateElements = A2(
-	$elm$core$Basics$composeR,
-	$author$project$App$updateNavigator,
-	A2(
-		$elm$core$Basics$composeR,
-		$author$project$App$updateOverview,
-		A2($elm$core$Basics$composeR, $author$project$App$updateReader, $author$project$App$updateIndexer)));
 var $author$project$App$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
-			case 'NavigatorMsg':
-				var navMsg = msg.a;
-				var _v1 = A2($author$project$Element$Navigator$update, navMsg, model.navigator);
-				var updatedNavigator = _v1.a;
-				var navCmd = _v1.b;
-				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$NavigatorMsg, navCmd);
-				var updatedModel = _Utils_update(
-					model,
-					{navigator: updatedNavigator});
-				return _Utils_Tuple2(updatedModel, cmd);
-			case 'OverviewMsg':
-				var overMsg = msg.a;
-				var _v2 = A2($author$project$Element$Overview$update, overMsg, model.overview);
-				var updatedOverview = _v2.a;
-				var overCmd = _v2.b;
-				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$OverviewMsg, overCmd);
-				var updatedModel = _Utils_update(
-					model,
-					{overview: updatedOverview});
-				return _Utils_Tuple2(updatedModel, cmd);
-			case 'ReaderMsg':
-				var readMsg = msg.a;
-				var _v3 = A2($author$project$Element$Reader$update, readMsg, model.reader);
-				var updatedReader = _v3.a;
-				var readCmd = _v3.b;
-				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$ReaderMsg, readCmd);
-				var updatedModel = _Utils_update(
-					model,
-					{reader: updatedReader});
-				return _Utils_Tuple2(updatedModel, cmd);
-			case 'IndexerMsg':
-				var idxMsg = msg.a;
-				var _v4 = A2($author$project$Element$Indexer$update, idxMsg, model.indexer);
-				var updatedIndexer = _v4.a;
-				var idxCmd = _v4.b;
-				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$IndexerMsg, idxCmd);
-				var updatedModel = _Utils_update(
-					model,
-					{indexer: updatedIndexer});
-				return _Utils_Tuple2(updatedModel, cmd);
-			case 'GotTopicListResponse':
-				var res = msg.a;
-				if (res.$ === 'Ok') {
-					var topicList = res.a;
-					var topicId = $author$project$Extension$Url$toTopicId(model.url);
-					var navMsg = A2($author$project$Element$Navigator$DataChanged, topicList, topicId);
-					var _v6 = A2($author$project$Element$Navigator$update, navMsg, model.navigator);
-					var updatedNavigator = _v6.a;
-					var updatedModel = _Utils_update(
-						model,
-						{navigator: updatedNavigator});
-					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-				} else {
-					var error = res.a;
-					var topicId = 'error';
-					var emptyTopic = $author$project$Data$Topic$empty;
-					var errorTopic = _Utils_update(
-						emptyTopic,
-						{
-							title: $author$project$Extension$Http$Error$toString(error)
-						});
-					var topicList = _List_fromArray(
-						[errorTopic]);
-					var navMsg = A2($author$project$Element$Navigator$DataChanged, topicList, topicId);
-					var _v7 = A2($author$project$Element$Navigator$update, navMsg, model.navigator);
-					var updatedNavigator = _v7.a;
-					var updatedModel = _Utils_update(
-						model,
-						{navigator: updatedNavigator});
-					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-				}
-			case 'GotSeriesListResponse':
-				var res = msg.a;
-				if (res.$ === 'Ok') {
-					var newSeriesList = res.a;
-					var topicId = $author$project$Extension$Url$toTopicId(model.url);
-					var seriesId = $author$project$Extension$Url$toSeriesId(model.url);
-					var overMsg = A3($author$project$Element$Overview$DataChanged, topicId, newSeriesList, seriesId);
-					var _v9 = A2($author$project$Element$Overview$update, overMsg, model.overview);
-					var updatedOverview = _v9.a;
-					var updatedModel = _Utils_update(
-						model,
-						{overview: updatedOverview, seriesList: newSeriesList});
-					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-				} else {
-					var error = res.a;
-					var topicId = 'error';
-					var seriesId = 'error';
-					var emptySeries = $author$project$Data$Series$empty;
-					var errorSeries = _Utils_update(
-						emptySeries,
-						{
-							title: $author$project$Extension$Http$Error$toString(error)
-						});
-					var seriesList = _List_fromArray(
-						[errorSeries, emptySeries]);
-					var overMsg = A3($author$project$Element$Overview$DataChanged, topicId, seriesList, seriesId);
-					var _v10 = A2($author$project$Element$Overview$update, overMsg, model.overview);
-					var updatedOverview = _v10.a;
-					var updatedModel = _Utils_update(
-						model,
-						{overview: updatedOverview});
-					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-				}
-			case 'GotPostListResponse':
-				var res = msg.a;
-				if (res.$ === 'Ok') {
-					var postList = res.a;
-					var topicId = $author$project$Extension$Url$toTopicId(model.url);
-					var seriesId = $author$project$Extension$Url$toSeriesId(model.url);
-					var series = function () {
-						var maybeSeries = $elm$core$List$head(
-							A2(
-								$elm$core$List$filter,
-								$author$project$Data$Series$matchId(seriesId),
-								model.seriesList));
-						if (maybeSeries.$ === 'Nothing') {
-							return $author$project$Data$Series$empty;
-						} else {
-							var matched = maybeSeries.a;
-							return matched;
-						}
-					}();
-					var idxMsg = A3($author$project$Element$Indexer$DataChanged, topicId, series, postList);
-					var _v12 = A2($author$project$Element$Indexer$update, idxMsg, model.indexer);
-					var updatedIndexer = _v12.a;
-					var updatedModel = _Utils_update(
-						model,
-						{indexer: updatedIndexer});
-					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-				} else {
-					var error = res.a;
-					var topicId = $author$project$Extension$Url$toTopicId(model.url);
-					var seriesId = $author$project$Extension$Url$toSeriesId(model.url);
-					var series = function () {
-						var maybeSeries = $elm$core$List$head(
-							A2(
-								$elm$core$List$filter,
-								$author$project$Data$Series$matchId(seriesId),
-								model.seriesList));
-						if (maybeSeries.$ === 'Nothing') {
-							return $author$project$Data$Series$empty;
-						} else {
-							var matched = maybeSeries.a;
-							return matched;
-						}
-					}();
-					var emptyPost = $author$project$Data$Post$empty;
-					var errorPost = _Utils_update(
-						emptyPost,
-						{
-							title: $author$project$Extension$Http$Error$toString(error)
-						});
-					var postList = _List_fromArray(
-						[errorPost, emptyPost]);
-					var idxMsg = A3($author$project$Element$Indexer$DataChanged, topicId, series, postList);
-					var _v14 = A2($author$project$Element$Indexer$update, idxMsg, model.indexer);
-					var updatedIndexer = _v14.a;
-					var updatedModel = _Utils_update(
-						model,
-						{indexer: updatedIndexer});
-					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-				}
-			case 'GotTopicOverviewResponse':
-				var res = msg.a;
-				if (res.$ === 'Ok') {
-					var markdown = res.a;
-					var topicId = $author$project$Extension$Url$toTopicId(model.url);
-					var readMsg = A2($author$project$Element$Reader$DataChanged, topicId, markdown);
-					var _v17 = A2($author$project$Element$Reader$update, readMsg, model.reader);
-					var updatedReader = _v17.a;
-					var updatedModel = _Utils_update(
-						model,
-						{reader: updatedReader});
-					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-				} else {
-					var error = res.a;
-					var topicId = $author$project$Extension$Url$toTopicId(model.url);
-					var errorMarkdown = '# Error' + $author$project$Extension$Http$Error$toString(error);
-					var readMsg = A2($author$project$Element$Reader$DataChanged, topicId, errorMarkdown);
-					var _v18 = A2($author$project$Element$Reader$update, readMsg, model.reader);
-					var updatedReader = _v18.a;
-					var updatedModel = _Utils_update(
-						model,
-						{reader: updatedReader});
-					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-				}
-			case 'GotPostContentResponse':
-				var res = msg.a;
-				if (res.$ === 'Ok') {
-					var markdown = res.a;
-					var topicId = $author$project$Extension$Url$toTopicId(model.url);
-					var readMsg = A2($author$project$Element$Reader$DataChanged, topicId, markdown);
-					var _v20 = A2($author$project$Element$Reader$update, readMsg, model.reader);
-					var updatedReader = _v20.a;
-					var updatedModel = _Utils_update(
-						model,
-						{reader: updatedReader});
-					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-				} else {
-					var error = res.a;
-					var topicId = $author$project$Extension$Url$toTopicId(model.url);
-					var errorMarkdown = '# Error' + $author$project$Extension$Http$Error$toString(error);
-					var readMsg = A2($author$project$Element$Reader$DataChanged, topicId, errorMarkdown);
-					var _v21 = A2($author$project$Element$Reader$update, readMsg, model.reader);
-					var updatedReader = _v21.a;
-					var updatedModel = _Utils_update(
-						model,
-						{reader: updatedReader});
-					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
-				}
+			case 'PortJson':
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			case 'GotUrlRequest':
 				var req = msg.a;
 				if (req.$ === 'External') {
 					var href = req.a;
-					return _Utils_Tuple2(
-						model,
-						$elm$browser$Browser$Navigation$load(href));
+					var cmd = $elm$browser$Browser$Navigation$load(href);
+					return _Utils_Tuple2(model, cmd);
 				} else {
 					var newUrl = req.a;
-					var cmd2 = A2(
-						$elm$browser$Browser$Navigation$pushUrl,
-						model.key,
-						$elm$url$Url$toString(newUrl));
-					var appMsg = $author$project$App$NavigatorMsg($author$project$Element$Navigator$CollapseFolder);
-					var _v23 = A2($author$project$App$update, appMsg, model);
-					var updatedModel = _v23.a;
-					var cmd1 = _v23.b;
+					var urlStr = $elm$url$Url$toString(newUrl);
+					var cmd2 = A2($elm$browser$Browser$Navigation$pushUrl, model.key, urlStr);
+					var appMsg = $author$project$App$NavMsg($author$project$Element$Navigator$CollapseFolder);
+					var _v2 = A2($author$project$App$update, appMsg, model);
+					var updatedModel = _v2.a;
+					var cmd1 = _v2.b;
 					return _Utils_Tuple2(
 						updatedModel,
 						$elm$core$Platform$Cmd$batch(
@@ -7384,19 +7064,88 @@ var $author$project$App$update = F2(
 				}
 			case 'UrlChanged':
 				var newUrl = msg.a;
+				var newUrlStr = $elm$url$Url$toString(newUrl);
 				var newRoute = $author$project$Route$fromUrl(newUrl);
+				var _v3 = A2(
+					$author$project$Element$Reader$update,
+					$author$project$Element$Reader$UrlChanged(newUrlStr),
+					model.reader);
+				var rdrModel = _v3.a;
+				var rdrCmd = _v3.b;
+				var _v4 = A2(
+					$author$project$Element$Overview$update,
+					$author$project$Element$Overview$UrlChanged(newUrlStr),
+					model.overview);
+				var ovrModel = _v4.a;
+				var ovrCmd = _v4.b;
+				var _v5 = A2(
+					$author$project$Element$Navigator$update,
+					$author$project$Element$Navigator$UrlChanged(newUrlStr),
+					model.navigator);
+				var navModel = _v5.a;
+				var navCmd = _v5.b;
+				var _v6 = A2(
+					$author$project$Element$Indexer$update,
+					$author$project$Element$Indexer$UrlChanged(newUrlStr),
+					model.indexer);
+				var idxModel = _v6.a;
+				var idxCmd = _v6.b;
+				var cmd = $elm$core$Platform$Cmd$batch(
+					_List_fromArray(
+						[
+							A2($elm$core$Platform$Cmd$map, $author$project$App$NavMsg, navCmd),
+							A2($elm$core$Platform$Cmd$map, $author$project$App$OvrMsg, ovrCmd),
+							A2($elm$core$Platform$Cmd$map, $author$project$App$IdxMsg, idxCmd),
+							A2($elm$core$Platform$Cmd$map, $author$project$App$RdrMsg, rdrCmd)
+						]));
 				var updatedModel = _Utils_update(
 					model,
-					{route: newRoute, url: newUrl});
-				return $author$project$App$updateElements(
-					_Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none));
+					{indexer: idxModel, navigator: navModel, overview: ovrModel, reader: rdrModel, route: newRoute, url: newUrl});
+				return _Utils_Tuple2(updatedModel, cmd);
+			case 'NavMsg':
+				var navMsg = msg.a;
+				var _v7 = A2($author$project$Element$Navigator$update, navMsg, model.navigator);
+				var updatedNavModel = _v7.a;
+				var navCmd = _v7.b;
+				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$NavMsg, navCmd);
+				var updatedAppModel = _Utils_update(
+					model,
+					{navigator: updatedNavModel});
+				return _Utils_Tuple2(updatedAppModel, cmd);
+			case 'OvrMsg':
+				var ovrMsg = msg.a;
+				var _v8 = A2($author$project$Element$Overview$update, ovrMsg, model.overview);
+				var updatedOvrModel = _v8.a;
+				var ovrCmd = _v8.b;
+				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$OvrMsg, ovrCmd);
+				var updatedAppModel = _Utils_update(
+					model,
+					{overview: updatedOvrModel});
+				return _Utils_Tuple2(updatedAppModel, cmd);
+			case 'IdxMsg':
+				var idxMsg = msg.a;
+				var _v9 = A2($author$project$Element$Indexer$update, idxMsg, model.indexer);
+				var updatedIdxModel = _v9.a;
+				var idxCmd = _v9.b;
+				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$IdxMsg, idxCmd);
+				var updatedAppModel = _Utils_update(
+					model,
+					{indexer: updatedIdxModel});
+				return _Utils_Tuple2(updatedAppModel, cmd);
 			default:
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				var rdrMsg = msg.a;
+				var _v10 = A2($author$project$Element$Reader$update, rdrMsg, model.reader);
+				var updatedRdrModel = _v10.a;
+				var rdrCmd = _v10.b;
+				var cmd = A2($elm$core$Platform$Cmd$map, $author$project$App$RdrMsg, rdrCmd);
+				var updatedAppModel = _Utils_update(
+					model,
+					{reader: updatedRdrModel});
+				return _Utils_Tuple2(updatedAppModel, cmd);
 		}
 	});
 var $elm$virtual_dom$VirtualDom$map = _VirtualDom_map;
 var $elm$html$Html$map = $elm$virtual_dom$VirtualDom$map;
-var $author$project$Config$siteTitle = 'Semi Dev_ \'s Blog';
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -7407,7 +7156,27 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
 var $elm$html$Html$header = _VirtualDom_node('header');
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$html$Html$Attributes$href = function (url) {
@@ -7418,18 +7187,27 @@ var $elm$html$Html$Attributes$href = function (url) {
 };
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Element$Indexer$indexLink = F2(
-	function (model, post) {
-		var topicId = model.flags.topicId;
-		var seriesId = model.flags.series.id;
-		var postSlug = post.slug;
-		var linkUrl = '/' + (topicId + ('/' + (seriesId + ('/' + postSlug))));
+var $author$project$Route$toSeriesUrl = function (route) {
+	var _v0 = A2(
+		$author$project$Route$map,
+		F3(
+			function (tId, sId, _v1) {
+				return _Utils_Tuple2(tId, sId);
+			}),
+		route);
+	var topicId = _v0.a;
+	var seriesId = _v0.b;
+	return '/' + (topicId + ('/' + seriesId));
+};
+var $author$project$Element$Indexer$idxLink = F2(
+	function (route, post) {
+		var postUrl = $author$project$Route$toSeriesUrl(route) + ('/' + post.slug);
 		return A2(
 			$elm$html$Html$a,
 			_List_fromArray(
 				[
 					$elm$html$Html$Attributes$class('Indexer Link'),
-					$elm$html$Html$Attributes$href(linkUrl)
+					$elm$html$Html$Attributes$href(postUrl)
 				]),
 			_List_fromArray(
 				[
@@ -7437,10 +7215,48 @@ var $author$project$Element$Indexer$indexLink = F2(
 				]));
 	});
 var $elm$html$Html$main_ = _VirtualDom_node('main');
+var $author$project$Data$Series$matchId = F2(
+	function (id, series) {
+		var _v0 = A2($elm$core$Basics$compare, id, series.id);
+		if (_v0.$ === 'EQ') {
+			return true;
+		} else {
+			return false;
+		}
+	});
 var $elm$html$Html$nav = _VirtualDom_node('nav');
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $elm$html$Html$span = _VirtualDom_node('span');
+var $author$project$Route$toSeriesId = function (route) {
+	switch (route.$) {
+		case 'HomePage':
+			return '';
+		case 'TopicPage':
+			return '';
+		case 'SeriesPage':
+			var seriesId = route.b;
+			return seriesId;
+		default:
+			var seriesId = route.b;
+			return seriesId;
+	}
+};
 var $author$project$Element$Indexer$view = function (model) {
+	var topicId = $author$project$Route$toTopicId(model.route);
+	var seriesId = $author$project$Route$toSeriesId(model.route);
+	var series = function () {
+		var maybeSeries = $elm$core$List$head(
+			A2(
+				$elm$core$List$filter,
+				$author$project$Data$Series$matchId(seriesId),
+				model.seriesList));
+		if (maybeSeries.$ === 'Nothing') {
+			return $author$project$Data$Series$empty;
+		} else {
+			var matched = maybeSeries.a;
+			return matched;
+		}
+	}();
 	return A2(
 		$elm$html$Html$main_,
 		_List_fromArray(
@@ -7462,7 +7278,7 @@ var $author$project$Element$Indexer$view = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text(model.flags.topicId)
+								$elm$html$Html$text(topicId)
 							])),
 						A2(
 						$elm$html$Html$header,
@@ -7477,14 +7293,14 @@ var $author$project$Element$Indexer$view = function (model) {
 								_List_Nil,
 								_List_fromArray(
 									[
-										$elm$html$Html$text(model.flags.series.title)
+										$elm$html$Html$text(series.title)
 									])),
 								A2(
 								$elm$html$Html$p,
 								_List_Nil,
 								_List_fromArray(
 									[
-										$elm$html$Html$text(model.flags.series.description)
+										$elm$html$Html$text(series.description)
 									]))
 							])),
 						A2(
@@ -7495,15 +7311,41 @@ var $author$project$Element$Indexer$view = function (model) {
 							]),
 						A2(
 							$elm$core$List$map,
-							$author$project$Element$Indexer$indexLink(model),
-							model.flags.postList))
+							$author$project$Element$Indexer$idxLink(model.route),
+							model.postList))
 					]))
 			]));
 };
 var $author$project$Element$Navigator$ToggleFolder = {$: 'ToggleFolder'};
+var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
+var $author$project$Element$Navigator$navLink = F2(
+	function (route, topic) {
+		var topicUrl = './' + topic.id;
+		var currentId = $author$project$Route$toTopicId(route);
+		var linkClass = function () {
+			var _v0 = A2($elm$core$Basics$compare, topic.id, currentId);
+			if (_v0.$ === 'EQ') {
+				return 'Navigator Link Current';
+			} else {
+				return 'Navigator Link';
+			}
+		}();
+		return A2(
+			$elm$html$Html$a,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class(linkClass),
+					$elm$html$Html$Attributes$href(topicUrl)
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(topic.title)
+				]));
+	});
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -7529,28 +7371,6 @@ var $elm$html$Html$Attributes$src = function (url) {
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
-var $author$project$Element$Navigator$topicLink = F2(
-	function (currentId, topic) {
-		var linkClass = function () {
-			var _v0 = A2($elm$core$Basics$compare, topic.id, currentId);
-			if (_v0.$ === 'EQ') {
-				return 'Navigator Link Current';
-			} else {
-				return 'Navigator Link';
-			}
-		}();
-		return A2(
-			$elm$html$Html$a,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class(linkClass),
-					$elm$html$Html$Attributes$href('/' + topic.id)
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text(topic.title)
-				]));
-	});
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $author$project$Element$Navigator$view = function (model) {
 	var togglerClass = model.collapsed ? 'Navigator Toggler' : 'Navigator Toggler Active';
@@ -7576,16 +7396,18 @@ var $author$project$Element$Navigator$view = function (model) {
 						$elm$html$Html$img,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$src(model.flags.avatarUrl)
+								$elm$html$Html$Attributes$src('/mockup/Element/Navigator/avatar.jpg'),
+								$elm$html$Html$Attributes$alt('Semi Dev_ \'s Avatar')
 							]),
 						_List_Nil),
-						$elm$html$Html$text(model.flags.avatarName)
+						$elm$html$Html$text('Semi Dev_')
 					])),
 				A2(
 				$elm$html$Html$input,
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$class('Navigator Search'),
+						$elm$html$Html$Attributes$id('search'),
 						$elm$html$Html$Attributes$type_('text'),
 						$elm$html$Html$Attributes$placeholder('Search with Google...')
 					]),
@@ -7617,15 +7439,15 @@ var $author$project$Element$Navigator$view = function (model) {
 							]),
 						A2(
 							$elm$core$List$map,
-							$author$project$Element$Navigator$topicLink(model.flags.topicId),
-							model.flags.topicList))
+							$author$project$Element$Navigator$navLink(model.route),
+							model.topicList))
 					])),
 				A2(
 				$elm$html$Html$a,
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$class('Navigator GitHub'),
-						$elm$html$Html$Attributes$href(model.flags.gitHubUrl),
+						$elm$html$Html$Attributes$href('https://github.com/thinhtranhnvn'),
 						$elm$html$Html$Attributes$target('_blank')
 					]),
 				_List_fromArray(
@@ -7634,26 +7456,22 @@ var $author$project$Element$Navigator$view = function (model) {
 					]))
 			]));
 };
-var $author$project$Element$Overview$overviewLink = function (model) {
-	var topicUrl = '/' + model.flags.topicId;
-	var linkClass = $elm$core$String$isEmpty(model.flags.seriesId) ? 'Overview Link Current' : 'Overview Link';
-	return A2(
-		$elm$html$Html$a,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class(linkClass),
-				$elm$html$Html$Attributes$href(topicUrl)
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text('Overview')
-			]));
+var $author$project$Route$toTopicUrl = function (route) {
+	var topicId = A2(
+		$author$project$Route$map,
+		F3(
+			function (tId, _v0, _v1) {
+				return tId;
+			}),
+		route);
+	return '/' + topicId;
 };
-var $author$project$Element$Overview$seriesLink = F2(
-	function (model, series) {
-		var seriesUrl = '/' + (model.flags.topicId + ('/' + series.id));
+var $author$project$Element$Overview$ovrLink = F2(
+	function (route, series) {
+		var seriesUrl = $author$project$Route$toTopicUrl(route) + ('/' + series.id);
+		var currentId = $author$project$Route$toSeriesId(route);
 		var linkClass = function () {
-			var _v0 = A2($elm$core$Basics$compare, series.id, model.flags.seriesId);
+			var _v0 = A2($elm$core$Basics$compare, series.id, currentId);
 			if (_v0.$ === 'EQ') {
 				return 'Overview Link Current';
 			} else {
@@ -7672,13 +7490,10 @@ var $author$project$Element$Overview$seriesLink = F2(
 					$elm$html$Html$text(series.title)
 				]));
 	});
-var $author$project$Element$Overview$seriesLinkList = function (model) {
-	return A2(
-		$elm$core$List$map,
-		$author$project$Element$Overview$seriesLink(model),
-		model.flags.seriesList);
-};
 var $author$project$Element$Overview$view = function (model) {
+	var topicUrl = '/' + $author$project$Route$toTopicId(model.route);
+	var seriesId = $author$project$Route$toSeriesId(model.route);
+	var linkClass = $elm$core$String$isEmpty(seriesId) ? 'Overview Link Current' : 'Overview Link';
 	return A2(
 		$elm$html$Html$nav,
 		_List_fromArray(
@@ -7686,9 +7501,25 @@ var $author$project$Element$Overview$view = function (model) {
 				$elm$html$Html$Attributes$class('Overview Base')
 			]),
 		A2(
-			$elm$core$List$cons,
-			$author$project$Element$Overview$overviewLink(model),
-			$author$project$Element$Overview$seriesLinkList(model)));
+			$elm$core$List$append,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$a,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class(linkClass),
+							$elm$html$Html$Attributes$href(topicUrl)
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Overview')
+						]))
+				]),
+			A2(
+				$elm$core$List$map,
+				$author$project$Element$Overview$ovrLink(model.route),
+				model.seriesList)));
 };
 var $elm$html$Html$article = _VirtualDom_node('article');
 var $elm_explorations$markdown$Markdown$defaultOptions = {
@@ -7701,6 +7532,7 @@ var $elm_explorations$markdown$Markdown$defaultOptions = {
 var $elm_explorations$markdown$Markdown$toHtmlWith = _Markdown_toHtml;
 var $elm_explorations$markdown$Markdown$toHtml = $elm_explorations$markdown$Markdown$toHtmlWith($elm_explorations$markdown$Markdown$defaultOptions);
 var $author$project$Element$Reader$view = function (model) {
+	var topicId = $author$project$Route$toTopicId(model.route);
 	return A2(
 		$elm$html$Html$article,
 		_List_fromArray(
@@ -7722,52 +7554,41 @@ var $author$project$Element$Reader$view = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text(model.flags.topicId)
+								$elm$html$Html$text(topicId)
 							])),
-						A2($elm_explorations$markdown$Markdown$toHtml, _List_Nil, model.flags.markdown)
+						A2($elm_explorations$markdown$Markdown$toHtml, _List_Nil, model.markdown)
 					]))
 			]));
 };
 var $author$project$App$view = function (model) {
-	var readerHtml = A2(
-		$elm$html$Html$map,
-		$author$project$App$ReaderMsg,
-		$author$project$Element$Reader$view(model.reader));
-	var overviewHtml = A2(
-		$elm$html$Html$map,
-		$author$project$App$OverviewMsg,
-		$author$project$Element$Overview$view(model.overview));
-	var navigatorHtml = A2(
-		$elm$html$Html$map,
-		$author$project$App$NavigatorMsg,
-		$author$project$Element$Navigator$view(model.navigator));
-	var indexerHtml = A2(
-		$elm$html$Html$map,
-		$author$project$App$IndexerMsg,
-		$author$project$Element$Indexer$view(model.indexer));
-	return {
-		body: function () {
-			var _v0 = model.route;
-			switch (_v0.$) {
-				case 'HomePage':
-					return _List_fromArray(
-						[navigatorHtml, overviewHtml, readerHtml]);
-				case 'TopicPage':
-					return _List_fromArray(
-						[navigatorHtml, overviewHtml, readerHtml]);
-				case 'SeriesPage':
-					return _List_fromArray(
-						[navigatorHtml, overviewHtml, indexerHtml]);
-				default:
-					return _List_fromArray(
-						[navigatorHtml, overviewHtml, readerHtml]);
-			}
-		}(),
-		title: $author$project$Config$siteTitle
-	};
+	var rdrHtml = $author$project$Element$Reader$view(model.reader);
+	var ovrHtml = $author$project$Element$Overview$view(model.overview);
+	var navHtml = $author$project$Element$Navigator$view(model.navigator);
+	var idxHtml = $author$project$Element$Indexer$view(model.indexer);
+	var pageHtml = function () {
+		var _v0 = model.route;
+		if (_v0.$ === 'SeriesPage') {
+			return _List_fromArray(
+				[
+					A2($elm$html$Html$map, $author$project$App$NavMsg, navHtml),
+					A2($elm$html$Html$map, $author$project$App$OvrMsg, ovrHtml),
+					A2($elm$html$Html$map, $author$project$App$IdxMsg, idxHtml)
+				]);
+		} else {
+			return _List_fromArray(
+				[
+					A2($elm$html$Html$map, $author$project$App$NavMsg, navHtml),
+					A2($elm$html$Html$map, $author$project$App$OvrMsg, ovrHtml),
+					A2($elm$html$Html$map, $author$project$App$RdrMsg, rdrHtml)
+				]);
+		}
+	}();
+	return {body: pageHtml, title: 'Semi Dev_ \'s Blog'};
 };
-var $author$project$App$main = $elm$browser$Browser$application(
-	A6($author$project$App$App, $author$project$App$init, $author$project$App$view, $author$project$App$update, $author$project$App$subscriptions, $author$project$App$onUrlRequest, $author$project$App$onUrlChange));
+var $author$project$App$main = function () {
+	var spa = A6($author$project$App$App, $author$project$App$init, $author$project$App$view, $author$project$App$update, $author$project$App$subscriptions, $author$project$App$onUrlRequest, $author$project$App$onUrlChange);
+	return $elm$browser$Browser$application(spa);
+}();
 _Platform_export({'App':{'init':$author$project$App$main(
 	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
 
