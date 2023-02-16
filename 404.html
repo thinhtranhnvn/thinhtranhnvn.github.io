@@ -7198,15 +7198,6 @@ var $elm$core$List$filter = F2(
 			list);
 	});
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
-var $elm$core$List$head = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(x);
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
 var $elm$html$Html$header = _VirtualDom_node('header');
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$html$Html$Attributes$href = function (url) {
@@ -7275,16 +7266,16 @@ var $author$project$Element$Indexer$view = function (model) {
 	var topicId = $author$project$Route$toTopicId(model.route);
 	var seriesId = $author$project$Route$toSeriesId(model.route);
 	var series = function () {
-		var maybeSeries = $elm$core$List$head(
-			A2(
-				$elm$core$List$filter,
-				$author$project$Data$Series$matchId(seriesId),
-				model.seriesList));
-		if (maybeSeries.$ === 'Nothing') {
+		var matchedList = A2(
+			$elm$core$List$filter,
+			$author$project$Data$Series$matchId(seriesId),
+			model.seriesList);
+		if (!matchedList.b) {
 			return $author$project$Data$Series$empty;
 		} else {
-			var matched = maybeSeries.a;
-			return matched;
+			var first = matchedList.a;
+			var restList = matchedList.b;
+			return first;
 		}
 	}();
 	return A2(

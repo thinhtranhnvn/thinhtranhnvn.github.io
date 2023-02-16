@@ -99,11 +99,11 @@ view model =
       --
       series =
          let
-            maybeSeries = List.head <| List.filter (Series.matchId seriesId) (model.seriesList)
+            matchedList = List.filter (Series.matchId seriesId) (model.seriesList)
          in
-            case (maybeSeries) of
-               Nothing -> Series.empty
-               Just matched -> matched
+            case (matchedList) of
+               []              -> Series.empty
+               first::restList -> first
    --
    in
       main_ [ class "Indexer Base" ] [
