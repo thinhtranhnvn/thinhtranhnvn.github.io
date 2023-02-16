@@ -15,6 +15,19 @@ type alias Post =
    }
 
 
+-- empty - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+empty : Post
+empty =
+   { slug = ""
+   , title = ""
+   , keywords = []
+   , description = ""
+   , content = ""
+   }
+
+
 -- jsonDecoder - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 

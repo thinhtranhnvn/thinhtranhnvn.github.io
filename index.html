@@ -6891,7 +6891,22 @@ var $author$project$Element$Reader$UrlChanged = function (a) {
 var $elm$browser$Browser$Navigation$load = _Browser_load;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
+var $author$project$Data$Post$empty = {content: '', description: '', keywords: _List_Nil, slug: '', title: ''};
 var $author$project$Data$Series$empty = {description: '', id: '', keywords: _List_Nil, overview: '', title: ''};
+var $author$project$Route$toSeriesId = function (route) {
+	switch (route.$) {
+		case 'HomePage':
+			return '';
+		case 'TopicPage':
+			return '';
+		case 'SeriesPage':
+			var seriesId = route.b;
+			return seriesId;
+		default:
+			var seriesId = route.b;
+			return seriesId;
+	}
+};
 var $author$project$Extension$Http$Error$toString = function (error) {
 	switch (error.$) {
 		case 'BadUrl':
@@ -6923,11 +6938,11 @@ var $author$project$Element$Indexer$update = F2(
 					var errorSeries = _Utils_update(
 						emptySeries,
 						{
-							id: 'hrdayasutra',
+							id: $author$project$Route$toSeriesId(model.route),
 							title: '# ' + $author$project$Extension$Http$Error$toString(error)
 						});
 					var newSeriesList = _List_fromArray(
-						[errorSeries]);
+						[errorSeries, emptySeries]);
 					var updatedModel = _Utils_update(
 						model,
 						{seriesList: newSeriesList});
@@ -6943,7 +6958,18 @@ var $author$project$Element$Indexer$update = F2(
 				var res = msg.a;
 				if (res.$ === 'Err') {
 					var error = res.a;
-					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					var emptyPost = $author$project$Data$Post$empty;
+					var errorPost = _Utils_update(
+						emptyPost,
+						{
+							title: '# ' + $author$project$Extension$Http$Error$toString(error)
+						});
+					var newPostList = _List_fromArray(
+						[errorPost, emptyPost]);
+					var updatedModel = _Utils_update(
+						model,
+						{postList: newPostList});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
 				} else {
 					var data = res.a;
 					var updatedModel = _Utils_update(
@@ -6953,6 +6979,7 @@ var $author$project$Element$Indexer$update = F2(
 				}
 		}
 	});
+var $author$project$Data$Topic$empty = {description: '', id: '', keywords: _List_Nil, overview: '', title: ''};
 var $elm$core$Basics$not = _Basics_not;
 var $author$project$Element$Navigator$update = F2(
 	function (msg, model) {
@@ -6968,7 +6995,18 @@ var $author$project$Element$Navigator$update = F2(
 				var res = msg.a;
 				if (res.$ === 'Err') {
 					var error = res.a;
-					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					var emptyTopic = $author$project$Data$Topic$empty;
+					var errorTopic = _Utils_update(
+						emptyTopic,
+						{
+							title: '# ' + $author$project$Extension$Http$Error$toString(error)
+						});
+					var newTopicList = _List_fromArray(
+						[errorTopic, emptyTopic]);
+					var updatedModel = _Utils_update(
+						model,
+						{topicList: newTopicList});
+					return _Utils_Tuple2(updatedModel, $elm$core$Platform$Cmd$none);
 				} else {
 					var data = res.a;
 					var updatedModel = _Utils_update(
@@ -7248,20 +7286,6 @@ var $author$project$Data$Series$matchId = F2(
 var $elm$html$Html$nav = _VirtualDom_node('nav');
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $elm$html$Html$span = _VirtualDom_node('span');
-var $author$project$Route$toSeriesId = function (route) {
-	switch (route.$) {
-		case 'HomePage':
-			return '';
-		case 'TopicPage':
-			return '';
-		case 'SeriesPage':
-			var seriesId = route.b;
-			return seriesId;
-		default:
-			var seriesId = route.b;
-			return seriesId;
-	}
-};
 var $author$project$Element$Indexer$view = function (model) {
 	var topicId = $author$project$Route$toTopicId(model.route);
 	var seriesId = $author$project$Route$toSeriesId(model.route);

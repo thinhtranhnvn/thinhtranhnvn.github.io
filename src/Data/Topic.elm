@@ -20,12 +20,12 @@ type alias Topic =
 
 empty : Topic
 empty =
-  { id = ""
-  , title = ""
-  , keywords = []
-  , description = ""
-  , overview = ""
-  }
+   { id = ""
+   , title = ""
+   , keywords = []
+   , description = ""
+   , overview = ""
+   }
 
 
 -- jsonDecoder - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

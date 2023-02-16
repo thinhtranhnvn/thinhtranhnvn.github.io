@@ -11,6 +11,8 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events as Events exposing (..)
 
+import Extension.Http.Error as HttpError
+
 
 -- main - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -140,7 +142,7 @@ navLink route topic =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model = case (msg) of
-
+   
    --
    UrlChanged newUrlStr ->
       let
@@ -153,7 +155,14 @@ update msg model = case (msg) of
    --
    GotTopicListResponse res -> case (res) of
       --
-      (Err error) -> ( model, Cmd.none )
+      (Err error) ->
+         let
+            emptyTopic = Topic.empty
+            errorTopic = { emptyTopic | title = "# " ++ (HttpError.toString error) }
+            newTopicList = [ errorTopic, emptyTopic ]
+            updatedModel = { model | topicList = newTopicList }
+         in
+            ( updatedModel, Cmd.none )
       --
       (Ok data) ->
          let

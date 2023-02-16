@@ -144,10 +144,9 @@ update msg model = case (msg) of
       (Err error) ->
          let
             emptySeries = Series.empty
-            errorSeries = { emptySeries | id = "hrdayasutra"
-                          , title = "# " ++ (HttpError.toString error)  
-                          }
-            newSeriesList = [ errorSeries ]
+            errorSeries = { emptySeries | id = Route.toSeriesId (model.route)
+                                        , title = "# " ++ (HttpError.toString error) }
+            newSeriesList = [ errorSeries, emptySeries ]
             --
             updatedModel = { model | seriesList = newSeriesList }
          in
@@ -162,7 +161,14 @@ update msg model = case (msg) of
    --
    GotPostListResponse res -> case (res) of
       --
-      (Err error) -> ( model, Cmd.none )
+      (Err error) ->
+         let
+            emptyPost = Post.empty
+            errorPost = { emptyPost | title = "# " ++ (HttpError.toString error) }
+            newPostList = [ errorPost, emptyPost ]
+            updatedModel = { model | postList = newPostList }
+         in
+            ( updatedModel, Cmd.none )
       --
       (Ok data) ->
          let
