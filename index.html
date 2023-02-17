@@ -6873,7 +6873,14 @@ var $author$project$Element$Reader$init = function (urlStr) {
 	var route = $author$project$Route$fromUrlString(urlStr);
 	var markdown = '';
 	var model = A2($author$project$Element$Reader$Model, route, markdown);
-	var cmd = $author$project$Element$Reader$getMarkdown(route);
+	var cmd = function () {
+		var _v0 = model.route;
+		if (_v0.$ === 'SeriesPage') {
+			return $elm$core$Platform$Cmd$none;
+		} else {
+			return $author$project$Element$Reader$getMarkdown(route);
+		}
+	}();
 	return _Utils_Tuple2(model, cmd);
 };
 var $elm$core$Platform$Cmd$map = _Platform_map;

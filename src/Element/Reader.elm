@@ -1,7 +1,7 @@
 module Element.Reader exposing (..)
 
 import Data.Post as Post exposing (Post)
-import Route exposing (Route)
+import Route exposing (Route(..))
 import Markdown
 
 import Browser
@@ -63,7 +63,9 @@ init urlStr =
       markdown = ""
       --
       model = Model (route) (markdown)
-      cmd = getMarkdown (route)
+      cmd = case (model.route) of
+         SeriesPage _ _ -> Cmd.none
+         _ -> getMarkdown (route)
    in
       ( model, cmd )
 
