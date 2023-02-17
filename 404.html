@@ -6768,21 +6768,15 @@ var $author$project$Element$Metadata$init = function (urlStr) {
 	};
 	var cmd = function () {
 		var _v0 = model.route;
-		if (_v0.$ === 'SeriesPage') {
-			return $elm$core$Platform$Cmd$batch(
-				_List_fromArray(
-					[
-						$author$project$Element$Metadata$getTopicList,
-						$author$project$Element$Metadata$getSeriesList(model.route),
-						$author$project$Element$Metadata$getPostList(model.route)
-					]));
-		} else {
-			return $elm$core$Platform$Cmd$batch(
-				_List_fromArray(
-					[
-						$author$project$Element$Metadata$getTopicList,
-						$author$project$Element$Metadata$getSeriesList(model.route)
-					]));
+		switch (_v0.$) {
+			case 'HomePage':
+				return $author$project$Element$Metadata$getTopicList;
+			case 'TopicPage':
+				return $author$project$Element$Metadata$getTopicList;
+			case 'SeriesPage':
+				return $author$project$Element$Metadata$getSeriesList(model.route);
+			default:
+				return $author$project$Element$Metadata$getPostList(model.route);
 		}
 	}();
 	return _Utils_Tuple2(model, cmd);

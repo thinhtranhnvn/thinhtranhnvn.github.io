@@ -74,14 +74,10 @@ init urlStr =
          , post = Post.empty
          }
       cmd = case (model.route) of
-         SeriesPage _ _ ->
-            Cmd.batch [ getTopicList
-                      , getSeriesList (model.route)
-                      , getPostList (model.route)
-                      ]
-         _ -> Cmd.batch [ getTopicList
-                        , getSeriesList (model.route)
-                        ]
+         HomePage -> getTopicList
+         TopicPage _ -> getTopicList
+         SeriesPage _ _ -> getSeriesList (model.route)
+         PostPage _ _ _ -> getPostList (model.route)
    --
    in
       ( model, cmd )
