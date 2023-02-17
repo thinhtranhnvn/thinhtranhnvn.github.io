@@ -6688,17 +6688,25 @@ var $author$project$Element$Indexer$getSeriesList = function (route) {
 			url: $author$project$Route$toSeriesListFileUrl(route)
 		});
 };
+var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Element$Indexer$init = function (urlStr) {
 	var seriesList = _List_Nil;
 	var route = $author$project$Route$fromUrlString(urlStr);
 	var postList = _List_Nil;
 	var model = A3($author$project$Element$Indexer$Model, route, seriesList, postList);
-	var cmd = $elm$core$Platform$Cmd$batch(
-		_List_fromArray(
-			[
-				$author$project$Element$Indexer$getPostList(route),
-				$author$project$Element$Indexer$getSeriesList(route)
-			]));
+	var cmd = function () {
+		var _v0 = model.route;
+		if (_v0.$ === 'SeriesPage') {
+			return $elm$core$Platform$Cmd$batch(
+				_List_fromArray(
+					[
+						$author$project$Element$Indexer$getSeriesList(route),
+						$author$project$Element$Indexer$getPostList(route)
+					]));
+		} else {
+			return $elm$core$Platform$Cmd$none;
+		}
+	}();
 	return _Utils_Tuple2(model, cmd);
 };
 var $author$project$Data$Post$empty = {content: '', description: '', keywords: _List_Nil, slug: '', title: ''};
@@ -6982,7 +6990,6 @@ var $author$project$Element$Reader$UrlChanged = function (a) {
 	return {$: 'UrlChanged', a: a};
 };
 var $elm$browser$Browser$Navigation$load = _Browser_load;
-var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $author$project$Route$toSeriesId = function (route) {
 	switch (route.$) {

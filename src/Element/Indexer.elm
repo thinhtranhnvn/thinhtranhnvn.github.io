@@ -2,7 +2,7 @@ module Element.Indexer exposing (..)
 
 import Data.Series as Series exposing (Series)
 import Data.Post as Post exposing (Post)
-import Route exposing (Route)
+import Route exposing (Route(..))
 
 import Browser
 import Http exposing (Error)
@@ -67,9 +67,12 @@ init urlStr =
       postList = []
       --
       model = Model (route) (seriesList) (postList)
-      cmd = Cmd.batch [ getPostList (route)
-                      , getSeriesList (route)
+      cmd = case (model.route) of
+         SeriesPage _ _ ->
+            Cmd.batch [ getSeriesList (route)
+                      , getPostList (route)
                       ]
+         _ -> Cmd.none
    in
       ( model, cmd )
 
