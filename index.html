@@ -6766,13 +6766,25 @@ var $author$project$Element$Metadata$init = function (urlStr) {
 		series: $author$project$Data$Series$empty,
 		topic: $author$project$Data$Topic$empty
 	};
-	var cmd = $elm$core$Platform$Cmd$batch(
-		_List_fromArray(
-			[
-				$author$project$Element$Metadata$getTopicList,
-				$author$project$Element$Metadata$getSeriesList(model.route),
-				$author$project$Element$Metadata$getPostList(model.route)
-			]));
+	var cmd = function () {
+		var _v0 = model.route;
+		if (_v0.$ === 'SeriesPage') {
+			return $elm$core$Platform$Cmd$batch(
+				_List_fromArray(
+					[
+						$author$project$Element$Metadata$getTopicList,
+						$author$project$Element$Metadata$getSeriesList(model.route),
+						$author$project$Element$Metadata$getPostList(model.route)
+					]));
+		} else {
+			return $elm$core$Platform$Cmd$batch(
+				_List_fromArray(
+					[
+						$author$project$Element$Metadata$getTopicList,
+						$author$project$Element$Metadata$getSeriesList(model.route)
+					]));
+		}
+	}();
 	return _Utils_Tuple2(model, cmd);
 };
 var $author$project$Element$Navigator$Model = F3(
