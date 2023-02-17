@@ -40,3 +40,13 @@ jsonDecoder = Json.map5 Post
    ( field "content" string )
 
 
+-- matchSlug - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+matchSlug : String -> Post -> Bool
+matchSlug slug post =
+   case ( compare (slug) (post.slug) ) of
+      EQ -> True
+      _  -> False
+
+

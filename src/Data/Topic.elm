@@ -28,6 +28,19 @@ empty =
    }
 
 
+-- default - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+default : Topic
+default =
+   { id = "origin"
+   , title = "Origin"
+   , keywords = [ "Semi Dev_", "Blog", "Origin", "Buddhism", "Yoga", "Code", "General Computing" ]
+   , description = "Semi Dev_ 's Blog - sharing knowledge of Buddhism, Yoga, Coding, Languist, and General Computing"
+   , overview = ""
+   }
+
+
 -- jsonDecoder - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
@@ -38,5 +51,15 @@ jsonDecoder = Json.map5 Topic
    ( field "keywords" (list string) )
    ( field "description" string )
    ( field "overview" string )
+
+
+-- matchId - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+matchId : String -> Topic -> Bool
+matchId id topic =
+   case ( compare (id) (topic.id) ) of
+      EQ -> True
+      _  -> False
 
 

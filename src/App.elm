@@ -1,4 +1,4 @@
-port module App exposing (main)
+module App exposing (main)
 
 import Route exposing (Route(..))
 --
@@ -6,6 +6,7 @@ import Element.Navigator as Navigator
 import Element.Overview as Overview
 import Element.Indexer as Indexer
 import Element.Reader as Reader
+import Element.Metadata as Metadata
 
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Browser exposing (Key)
@@ -50,6 +51,7 @@ type alias Model =
    , overview  : Overview.Model
    , indexer   : Indexer.Model
    , reader    : Reader.Model
+   , metadata  : Metadata.Model
    }
 
 
@@ -65,6 +67,7 @@ type Msg = PortJson String
          | OvrMsg Overview.Msg
          | IdxMsg Indexer.Msg
          | RdrMsg Reader.Msg
+         | MtdMsg Metadata.Msg
 
 
 -- init - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -79,6 +82,7 @@ init _ url key =
       ( ovrModel, ovrCmd ) = Overview.init (Url.toString url)
       ( idxModel, idxCmd ) = Indexer.init (Url.toString url)
       ( rdrModel, rdrCmd ) = Reader.init (Url.toString url)
+      ( mtdModel, mtdCmd ) = Metadata.init (Url.toString url)
       --
       model =
          { url = url
@@ -90,6 +94,7 @@ init _ url key =
          , overview = ovrModel
          , indexer = idxModel
          , reader = rdrModel
+         , metadata = mtdModel
          }
       --
       cmd =
@@ -97,6 +102,7 @@ init _ url key =
                    , Cmd.map (OvrMsg) (ovrCmd)
                    , Cmd.map (IdxMsg) (idxCmd)
                    , Cmd.map (RdrMsg) (rdrCmd)
+                   , Cmd.map (MtdMsg) (mtdCmd)
                    ]
    --
    in
@@ -113,6 +119,7 @@ view model =
       ovrHtml = Overview.view (model.overview)
       idxHtml = Indexer.view (model.indexer)
       rdrHtml = Reader.view (model.reader)
+      mtdHtml = Metadata.view (model.metadata)
       --
       pageHtml = case (model.route) of
          --
@@ -120,11 +127,13 @@ view model =
             [ Html.map (NavMsg) (navHtml)
             , Html.map (OvrMsg) (ovrHtml)
             , Html.map (IdxMsg) (idxHtml)
+            , Html.map (MtdMsg) (mtdHtml)
             ]
          --
          _ -> [ Html.map (NavMsg) (navHtml)
               , Html.map (OvrMsg) (ovrHtml)
               , Html.map (RdrMsg) (rdrHtml)
+              , Html.map (MtdMsg) (mtdHtml)
               ]
    --
    in
@@ -171,6 +180,7 @@ update msg model = case (msg) of
          ( ovrModel, ovrCmd ) = Overview.update (Overview.UrlChanged newUrlStr) (model.overview)
          ( idxModel, idxCmd ) = Indexer.update (Indexer.UrlChanged newUrlStr) (model.indexer)
          ( rdrModel, rdrCmd ) = Reader.update (Reader.UrlChanged newUrlStr) (model.reader)
+         ( mtdModel, mtdCmd ) = Metadata.update (Metadata.UrlChanged newUrlStr) (model.metadata)
          --
          updatedModel = { model | url = newUrl
                         , route = newRoute
@@ -179,11 +189,13 @@ update msg model = case (msg) of
                         , overview = ovrModel
                         , indexer = idxModel
                         , reader = rdrModel
+                        , metadata = mtdModel
                         }
          cmd = Cmd.batch [ Cmd.map (NavMsg) (navCmd)
                          , Cmd.map (OvrMsg) (ovrCmd)
                          , Cmd.map (IdxMsg) (idxCmd)
                          , Cmd.map (RdrMsg) (rdrCmd)
+                         , Cmd.map (MtdMsg) (mtdCmd)
                          ]
       --
       in
@@ -228,16 +240,23 @@ update msg model = case (msg) of
          cmd = Cmd.map (RdrMsg) (rdrCmd)
       in
          ( updatedAppModel, cmd )
+         
+   --
+   MtdMsg mtdMsg ->
+      let
+         ( updatedMtdModel, mtdCmd ) = Metadata.update (mtdMsg) (model.metadata)
+         --
+         updatedAppModel = { model | metadata = updatedMtdModel }
+         cmd = Cmd.map (MtdMsg) (mtdCmd)
+      in
+         ( updatedAppModel, cmd )
 
 
 -- subscriptions - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 subscriptions : Model -> Sub Msg
-subscriptions _ = listen (PortJson)
-
-port listen : (String -> msg) -> Sub msg
-port export : String -> Cmd msg
+subscriptions _ = Sub.none
 
 
 -- onUrlRequest - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

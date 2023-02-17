@@ -145,7 +145,7 @@ update msg model = case (msg) of
          let
             emptySeries = Series.empty
             errorSeries = { emptySeries | id = Route.toSeriesId (model.route)
-                                        , title = "# " ++ (HttpError.toString error) }
+                                        , title = HttpError.toString error }
             newSeriesList = [ errorSeries, emptySeries ]
             --
             updatedModel = { model | seriesList = newSeriesList }
@@ -164,7 +164,7 @@ update msg model = case (msg) of
       (Err error) ->
          let
             emptyPost = Post.empty
-            errorPost = { emptyPost | title = "# " ++ (HttpError.toString error) }
+            errorPost = { emptyPost | title = HttpError.toString error }
             newPostList = [ errorPost, emptyPost ]
             updatedModel = { model | postList = newPostList }
          in
