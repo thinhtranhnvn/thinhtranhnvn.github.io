@@ -1,16 +1,65 @@
 [
    {
-      "id": "linuxpc",
+      "id": "linux-pc",
       "title": "Linux PC",
-      "keywords": [ "linux pc", "tutorial", "normal user", "office", "design", "music", "code" ],
-      "description": "Getting started to use Linux OS as alternative to Microsoft Windows",
+      "keywords": [ "linux pc", "foss", "tutorial", "daily computing", "normal user", "software", "applications", "office", "design", "photography", "video editing", "code" ],
+      "description": "Tự học cách cài đặt và sử dụng hệ điều hành Linux và các phần mềm ứng dụng thay thế cho hệ sinh thái của Microsoft Windows.",
       "overview": ""
    },
    {
-      "id": "webdev",
+      "id": "web-dev",
       "title": "Web Dev_",
-      "keywords": [ "web developement", "tutorial", "beginner" ],
-      "description": "Start learning how to code the web in a natural perspective of a web user.",
+      "keywords": [ "web developement", "tutorial", "beginner", "html", "css", "javascript", "c" ],
+      "description": "Tự học lập trình Web một cách thật tự nhiên.",
+      "overview": ""
+   },
+   {
+      "id": "app-dev",
+      "title": "App Dev_",
+      "keywords": [ "foss", "app development", "tutorial", "beginner", "java", "awt swing" ],
+      "description": "Tự học lập trình App một cách thật tự nhiên.",
+      "overview": ""
+   },
+   {
+      "id": "android",
+      "title": "Android",
+      "keywords": [ "android user", "phone", "tablet", "software", "application", "office", "design", "photography", "video editing", "code" ],
+      "description" : "Chia sẻ kinh nghiệm sử dụng các thiết bị Android.",
+      "overview": ""
+   },
+   {
+      "id": "imagery",
+      "title": "Imagery",
+      "keywords": [ "fujifilm", "camera", "android", "sony", "phone", "tablet", "photography", "gimp", "image editing", "blender", "video editing" ],
+      "description": "Chia sẻ kiến thức chụp ảnh, quay phim, chỉnh sửa hậu kỳ.",
+      "overview": ""
+   },
+   {
+      "id": "english",
+      "title": "English",
+      "keywords": [],
+      "description": "Chia sẻ kinh nghiệm tự học Tiếng Anh.",
+      "overview": ""
+   },
+   {
+      "id": "nihongo",
+      "title": "Nihongo",
+      "keywords": [],
+      "description": "Chia sẻ kinh nghiệm tự học Tiếng Nhật.",
+      "overview": ""
+   },
+   {
+      "id": "mandarin",
+      "title": "Mandarin",
+      "keywords": [],
+      "description": "Chia sẻ kinh nghiệm tự học Tiếng Trung.",
+      "overview": ""
+   },
+   {
+      "id": "linguist",
+      "title": "Linguist",
+      "keywords": [],
+      "description": "Chia sẻ góc nhìn cá nhân về chủ đề thiết kế ngôn ngữ, chữ viết.",
       "overview": ""
    }
 ]
