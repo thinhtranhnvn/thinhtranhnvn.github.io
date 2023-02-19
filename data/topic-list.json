@@ -3,64 +3,55 @@
       "id": "linux-pc",
       "title": "Linux PC",
       "keywords": [ "linux pc", "foss", "tutorial", "daily computing", "normal user", "software", "applications", "office", "design", "photography", "video editing", "code" ],
-      "description": "Tự học cách cài đặt và sử dụng hệ điều hành Linux và các phần mềm ứng dụng thay thế cho hệ sinh thái của Microsoft Windows.",
-      "overview": ""
+      "description": "Tự học cách cài đặt và sử dụng hệ điều hành Linux và các phần mềm ứng dụng thay thế cho hệ sinh thái của Microsoft Windows."
    },
    {
       "id": "web-dev",
       "title": "Web Dev_",
       "keywords": [ "web developement", "tutorial", "beginner", "html", "css", "javascript", "jquery", "c", "nodejs", "xml", "xquery" ],
-      "description": "Tự học lập trình Web một cách thật tự nhiên.",
-      "overview": ""
+      "description": "Tự học lập trình Web một cách thật tự nhiên."
    },
    {
       "id": "app-dev",
       "title": "App Dev_",
       "keywords": [ "foss", "app development", "tutorial", "beginner", "java", "awt swing" ],
-      "description": "Tự học lập trình App một cách thật tự nhiên.",
-      "overview": ""
+      "description": "Tự học lập trình App một cách thật tự nhiên."
    },
    {
       "id": "android",
       "title": "Android",
       "keywords": [ "android user", "phone", "tablet", "software", "application", "office", "design", "photography", "video editing", "code" ],
-      "description" : "Chia sẻ kinh nghiệm sử dụng các thiết bị Android.",
-      "overview": ""
+      "description" : "Chia sẻ kinh nghiệm sử dụng các thiết bị Android."
    },
    {
       "id": "imagery",
       "title": "Imagery",
       "keywords": [ "fujifilm", "camera", "android", "sony", "phone", "fujitsu", "tablet", "photography", "gimp", "image editing", "blender", "video editing" ],
-      "description": "Chia sẻ kiến thức chụp ảnh, quay phim, chỉnh sửa hậu kỳ.",
-      "overview": ""
+      "description": "Chia sẻ kiến thức chụp ảnh, quay phim, chỉnh sửa hậu kỳ."
    },
    {
       "id": "english",
       "title": "English",
       "keywords": [],
-      "description": "Chia sẻ kinh nghiệm tự học Tiếng Anh.",
-      "overview": ""
+      "description": "Chia sẻ kinh nghiệm tự học Tiếng Anh."
    },
    {
       "id": "nihongo",
       "title": "Nihongo",
       "keywords": [],
-      "description": "Chia sẻ kinh nghiệm tự học Tiếng Nhật.",
-      "overview": ""
+      "description": "Chia sẻ kinh nghiệm tự học Tiếng Nhật."
    },
    {
       "id": "mandarin",
       "title": "Mandarin",
       "keywords": [],
-      "description": "Chia sẻ kinh nghiệm tự học Tiếng Trung.",
-      "overview": ""
+      "description": "Chia sẻ kinh nghiệm tự học Tiếng Trung."
    },
    {
       "id": "linguistic",
       "title": "Linguistic",
       "keywords": [],
-      "description": "Chia sẻ góc nhìn cá nhân về chủ đề thiết kế ngôn ngữ nói, hệ chữ viết, và ngôn ngữ lập trình.",
-      "overview": ""
+      "description": "Chia sẻ góc nhìn cá nhân về chủ đề thiết kế ngôn ngữ nói, hệ chữ viết, và ngôn ngữ lập trình."
    }
 ]
 

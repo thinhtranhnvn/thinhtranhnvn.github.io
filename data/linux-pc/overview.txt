@@ -1,0 +1,43 @@
+# Linux PC
+
+Tiếp theo ngay sau `Origin` thì `Linux PC` là `Topic` đầu tiên trong blog cá nhân này được tạo ra với mục đích chia sẻ những kiến thức mà mình lượm lặt sưu tầm được trong kiếp sống hiện tại. `Topic` này cũng là nơi mình giải phóng ước mơ chia kẻ kiến thức sử dụng các phần mềm mã nguồn mở miễn phí `FOSS - Free and OpenSource Software` để thay thế cho các hệ sinh thái phần mềm của Microsoft và Apple.
+
+Để nhận định một cách trực quan thì bản thân mình không cho rằng các phần mềm miễn phí có thể so sánh được với các phần mềm tương ứng được Microsoft và Apple cung cấp trong hệ sinh thái của họ. Tuy nhiên, điều đáng nói là các `FOSS` thường cung cấp rất đầy đủ số lượng tính năng thiết yếu để hỗ trợ người dùng máy tính cá nhân trong hầu hết các tác vụ phổ thông.
+
+Việc sử dụng các phần mềm mã nguồn mở miễn phí `FOSS` trong hầu hết các tác vụ hằng ngày sẽ giúp ích cho cộng đồng mã nguồn mở tạo ra những phiên bản tiếp theo với tính năng mở rộng và luôn theo sát nhu cầu sử dụng máy tính phổ thông. Và từ khía cạnh bản thân mỗi người dùng, chúng ta luôn luôn có thể tự kiểm tra sự minh bạch trong logic vận hành từ bộ mã nguồn mở hoặc từ những bài viết đánh giá của các lập trình viên có kinh nghiệm.
+
+## Tại Sao Chọn Linux?
+
+Câu chuyện của cá nhân mình khi bắt đầu suy nghĩ về ý tưởng muốn tạo ra `Topic` này trên blog cá nhân xuất phát từ bộ máy tính để bàn được phụ huynh cấp vốn đầu tư để tiếp tục cái ước mơ học tập và chia sẻ kiến thức vô cùng tận.
+
+Hỗ trợ của phía bên nhà phân phối là HaCom cũng rất tuyệt và có cài đặt sẵn cho cây PC mà mình đặt hàng một bản Windows 10 đã được kích hoạt bản quyền đầy đủ. Tuy nhiên, đâu đó ký ức về những khoảng thời gian quá khứ đã từng nhận được những chiếc laptop mới từ tay người thân lại trở về kèm theo với những câu chuyện cũ đại loại như kiểu:
+
+"Có những lần mình tự ý chỉnh sửa một số tệp hệ thống theo hướng dẫn trên mạng để điều chỉnh giao diện người dùng, và kết quả là làm lỗi hệ điều hành rồi không biết cách tự cài đặt lại hệ điều hành như thế nào, và cũng không biết phải lay hoay xử lý vấn đề mua và sử dụng key bản quyền Windows hay các phần mềm có thu phí như thế nào bởi không biết Tiếng Anh."
+
+Và rồi với lượng kiến thức căn bản về cộng đồng `FOSS` hiện tại thì có một chút sự tiếc nuối trong suy nghĩ chợt xuất hiện: "Giá như ngày trước gõ Google mà tìm ra được một trang web nào đấy chia sẻ kiến thức sử dụng `FOSS` từ A đến Z thì đã chẳng phải tốn nhiều thời gian lay hoay với cái laptop không khởi động được vào màn hình Desktop, rồi cũng lại chẳng phải chạy tới chạy lui tìm người nhờ cài đặt lại hệ điều hành với mấy phần mềm phổ dụng."
+
+Vì vậy nên xuất phát điểm của một `Topic` dành riêng cho việc chia sẻ kiến thức sử dụng `FOSS` ở đây chính là cách cài đặt một hệ điều hành `FOSS` cho máy tính cá nhân, để giúp cho những cậu bé, hay cô bé, đâu đó nhác giống với hoàn cảnh sử dụng laptop của mình trong quá khứ.
+
+## Linux Có Gì Hay?
+
+`Linux` là một hệ điều hành - một phần mềm tạo ra nền tảng giúp chúng ta vận hành một chiếc máy tính cá nhân hoặc máy trạm, và ở đây mình xin phép chỉ chia sẻ những kiến thức liên quan tới việc sử dụng máy tính cá nhân `PC - Personal Computer`; Bởi thực tế thì bản thân mình không có công sự liên quan tới việc sử dụng máy trạm và cũng không biết hình thù của một cái máy chủ trông như thế nào để mà tưởng tượng tới việc học và chia sẻ kiến thức theo lối tư duy lý thuyết trên lý thuyết `Theory of Theory`.
+
+Việc sử dụng `Linux` trên máy tính cá nhân bắt đầu bùng nổ và trở nên thực sự phổ biến vào khoảng cuối năm 2019 với các môi trường giao diện đồ họa người dùng xuất hiện ngày một nhiều; Và trong số đó thì [`Gnome`](https://www.gnome.org/) đang là môi trường giao diện đồ họa được sử dụng làm tùy chọn mặc định của phần lớn các bản phân phối Linux phổ biến.
+
+[`Gnome Desktop Environment`](https://www.gnome.org)
+![giao diện đồ họa Desktop Gnome](https://www.gnome.org/wp-content/uploads/2021/03/wgo-splash-40-1024x546.png)
+
+Kèm theo đó là các ứng dụng `FOSS` thay thế cho Microsoft Office hay Adobe Suite cũng đã đạt tới ngưỡng tiêu chuẩn với đầy đủ các tính năng thiết yếu và khả năng tương thích tốt với các sản phẩm của Microsoft và Adobe.
+
+[`LibreOffice Suite`](https://www.libreoffice.org)
+![bộ ứng dụng văn phòng LibreOffice](https://www.libreoffice.org/themes/libreofficenew/img/screenshots.png)
+
+Thật tuyệt! Chúng ta đang có thêm lựa chọn sử dụng một hệ điều hành miễn phí được phát triển bởi các cộng đồng lập trình viên tình nguyện, với giao diện người dùng đẹp mắt, và các ứng dụng có khả năng làm việc với các tệp văn bản, ảnh, audio, video được tạo ra bởi các phần mềm tương tự của `Microsoft`, `Adobe`, và cả những thương hiệu khác nữa.
+
+[`GIMP Image Manipulation Photoshop`](https://www.gimp.org)
+![ứng dụng chỉnh sửa ảnh GIMP]()
+
+Đó là đối với nhu cầu sử dụng PC căn bản. Còn nếu như bạn là một `geeker` luôn có xu hướng tìm học những chủ đề tùy biến giao diện đồ họa người dùng để tự thiết kế môi trường sử dụng riêng thì `Linux` lại càng trở nên tuyệt vời. Lý do đơn giản là bởi vì Microsoft và Apple chỉ cung cấp một số tùy chọn thay đổi áp dụng cho giao diện người dùng như màu sắc chủ đạo và hình nền, vị trí thanh công cụ của Windows và vị trí Dock của Mac. Còn `Linux` thì không có bất kỳ giới hạn nào cả, bạn có thể thực hiện mọi sự tùy chỉnh từ A đến Z cả về mặt giao diện lẫn chức năng của hệ điều hành. 
+
+Next: [Linux PC](./gnome)
+
