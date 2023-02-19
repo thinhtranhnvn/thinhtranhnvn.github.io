@@ -9,7 +9,7 @@
    {
       "id": "web-dev",
       "title": "Web Dev_",
-      "keywords": [ "web developement", "tutorial", "beginner", "html", "css", "javascript", "c" ],
+      "keywords": [ "web developement", "tutorial", "beginner", "html", "css", "javascript", "jquery", "c", "nodejs", "xml", "xquery" ],
       "description": "Tự học lập trình Web một cách thật tự nhiên.",
       "overview": ""
    },
@@ -30,7 +30,7 @@
    {
       "id": "imagery",
       "title": "Imagery",
-      "keywords": [ "fujifilm", "camera", "android", "sony", "phone", "tablet", "photography", "gimp", "image editing", "blender", "video editing" ],
+      "keywords": [ "fujifilm", "camera", "android", "sony", "phone", "fujitsu", "tablet", "photography", "gimp", "image editing", "blender", "video editing" ],
       "description": "Chia sẻ kiến thức chụp ảnh, quay phim, chỉnh sửa hậu kỳ.",
       "overview": ""
    },
@@ -59,7 +59,7 @@
       "id": "linguist",
       "title": "Linguist",
       "keywords": [],
-      "description": "Chia sẻ góc nhìn cá nhân về chủ đề thiết kế ngôn ngữ, chữ viết.",
+      "description": "Chia sẻ góc nhìn cá nhân về chủ đề thiết kế ngôn ngữ nói, hệ chữ viết, và ngôn ngữ lập trình.",
       "overview": ""
    }
 ]
