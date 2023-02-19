@@ -4,7 +4,7 @@
 
 ## Lộ Trình Học Tập Tự Nhiên ?
 
-À, để giải thích đơn giản thì kiểu lộ trình này có tên gọi xuất phát từ Series "Tự Học Lập Trình Web Một Cách Thật Tự Nhiên" mà mình đã chia sẻ trên nền tảng blog [Viblo.asia](https://viblo.asia/s/Wj53OQQP56m).
+À, để giải thích đơn giản thì kiểu lộ trình này có tên gọi xuất phát từ Series "Tự Học Lập Trình Web Một Cách Thật Tự Nhiên" mà mình đã chia sẻ trên nền tảng blog <a href="https://viblo.asia/s/Wj53OQQP56m" target="_blank">Viblo.asia</a>.
 
 ## Blog Cá Nhân Semi Dev_
 
@@ -20,7 +20,7 @@ Hiện tại, khi đang viết những dòng chữ này thì mình mới chỉ c
 
 Để chọn một `Topic` thì bạn có thể nhấn vào chữ `Topic` bên cạnh ô tìm kiếm trên thanh điều hướng chính để xem danh sách. Sau khi đã chọn một `Topic` bất kì thì ở thanh điều hướng phụ ngay bên dưới sẽ hiện một bài viết tổng quan `Overview` và các `Series` bài viết thuộc `Topic` đó.
 
-Đặc biệt, có một `Topic` mặc định tên là `Origin` và không xuất hiện trong danh sách các `Topic` ở thanh điều hướng chính. `Origin` được tải mặc định khi truy cập trang chủ của blog và bài viết này chính là `Overview` của `Origin`. Bên cạnh đó thì `Origin` có bao gồm hai `Series` là `Hrdaya Sutra` và `Yoga Sutra` là hai cuốn sách tâm linh mà mình muốn chia sẻ với bạn đọc.
+Đặc biệt, có một `Topic` mặc định tên là `Origin` và không xuất hiện trong danh sách ở thanh điều hướng chính. `Topic` này được tải mặc định khi truy cập trang chủ của blog và đây chính là bài viết `Overview` của `Origin`. Bên cạnh đó thì `Origin` có bao gồm hai `Series` là `Hrdaya Sutra` và `Yoga Sutra` là hai cuốn sách tâm linh mà mình muốn chia sẻ với bạn đọc.
 
 Ở vị trí kết thúc của mỗi bài viết, bao gồm cả các bài `Overview` thì mình sẽ luôn cố gắng trỏ liên kết tới một bài viết tiếp theo để bạn có thể không cần phải sử dụng nhiều tới các thanh điều hướng. Tuy nhiên, trong trường hợp bạn muốn xem danh sách các bài viết của từng `Series` để chọn lọc bài viết cho phù hợp với kiến thức quan tâm thì bạn có thể nhấn vào tên của các `Series` trên thanh điều hướng phụ.
 
