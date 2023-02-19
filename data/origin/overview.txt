@@ -4,7 +4,7 @@
 
 ## Lộ Trình Học Tập Tự Nhiên ?
 
-À, để giải thích đơn giản thì kiểu lộ trình này có tên gọi xuất phát từ Series "Tự Học Lập Trình Web Một Cách Thật Tự Nhiên" mà mình đã chia sẻ trên nền tảng blog <a href="https://viblo.asia/s/Wj53OQQP56m" target="_blank">Viblo.asia</a>.
+À, để giải thích đơn giản thì kiểu lộ trình này có tên gọi xuất phát từ Series "Tự Học Lập Trình Web Một Cách Thật Tự Nhiên" mà mình đã chia sẻ trên nền tảng blog [Viblo.asia](https://viblo.asia/s/Wj53OQQP56m).
 
 ## Blog Cá Nhân Semi Dev_
 
