@@ -10,9 +10,9 @@
 
 Mặc dù vậy, khi bắt đầu đăng tải lại các bài viết tại trang blog này thì mình đã quyết định tái cấu trúc lại lộ trình học tập để mang đến nhiều ngã rẽ lựa chọn hơn tại mỗi điểm dừng quan trọng sau mỗi chặng.
 
-Cụ thể là đối với chủ đề sử dụng phần mềm máy tính nói chung - `Daily PC` - thì tình huống ở đây là giả định bạn được tặng một chiếc máy tính để bàn với hệ điều hành được cài đặt sẵn là Windows phiên bản dùng thử; Rồi sau đó bạn quyết định tự mò mẫm cách cài đặt một phiên bản hệ điều hành miễn phí để sử dụng và tìm thấy Series Tự Học Cách Sử Dụng Linux ở đây qua Google; Và tiếp theo sau đó là tiến trình học cách sử dụng giao diện người dùng và các phần mềm tiện ích như bộ ứng dụng văn phòng LibreOffice, bộ ứng dụng đồ họa GIMP, Scribus, Inkscape, Blender, v.v...
+Cụ thể là đối với chủ đề sử dụng phần mềm máy tính nói chung - `Linux PC` - thì tình huống ở đây là giả định bạn được tặng một chiếc máy tính để bàn với hệ điều hành được cài đặt sẵn là Windows phiên bản dùng thử; Rồi sau đó bạn quyết định tự mò mẫm cách cài đặt một phiên bản hệ điều hành miễn phí để sử dụng và tìm thấy Series Tự Học Cách Sử Dụng Linux ở đây qua Google; Và tiếp theo sau đó là tiến trình học cách sử dụng giao diện người dùng và các phần mềm tiện ích như bộ ứng dụng văn phòng LibreOffice, bộ ứng dụng đồ họa GIMP, Scribus, Blender, v.v...
 
-Hoặc, đối với chủ đề lập trình phần mềm nói chung thì chúng ta có tình huống ở đây là giả định bạn đang lướt web để cập nhật tin tức hàng ngày; Rồi sau đó quyết định tìm hiểu cách thức mà người ta tạo ra một trang web và tìm thấy Series Tự Học Lập Trình Web ở đây; Sau đó là tiến trình học các khái niệm và các ngôn ngữ lập trình liên quan như bộ ba HTML, CSS, JavaScript. Sau khi đã cảm thấy quen với việc viết code thì chúng ta mới tìm hiểu ngược dòng về kiến thức lập trình ở cấp cơ sở như lập trình C căn bản; Và sau đó sẽ là điểm rẽ nhánh tới các mảng ứng dụng và các ngôn ngữ đặc trưng.
+Hoặc, đối với chủ đề lập trình phần mềm nói chung thì chúng ta có tình huống ở đây là giả định bạn đang lướt web để cập nhật tin tức hàng ngày; Rồi sau đó quyết định tìm hiểu cách thức mà người ta tạo ra một trang web và tìm thấy Series Tự Học Lập Trình - `Web Dev` - ở đây; Sau đó là tiến trình học các khái niệm và các ngôn ngữ lập trình liên quan như bộ ba HTML, CSS, JavaScript. Sau khi đã cảm thấy quen với việc viết code thì chúng ta mới tìm hiểu ngược dòng về kiến thức lập trình ở cấp cơ sở như lập trình C căn bản; Và sau đó sẽ là điểm rẽ nhánh tới các mảng ứng dụng và các ngôn ngữ đặc trưng.
 
 ## Sử Dụng Trang Blog Này
 
@@ -20,11 +20,11 @@ Hiện tại, khi đang viết những dòng chữ này thì mình mới chỉ c
 
 Để chọn một `Topic` thì bạn có thể nhấn vào chữ `Topic` bên cạnh ô tìm kiếm trên thanh điều hướng chính để xem danh sách. Sau khi đã chọn một `Topic` bất kì thì ở thanh điều hướng phụ ngay bên dưới sẽ hiện một bài viết tổng quan `Overview` và các `Series` bài viết thuộc `Topic` đó.
 
-Đặc biệt, có một `Topic` mặc định tên là `Origin` và không xuất hiện trong danh sách các `Topic` ở thanh điều hướng chính. `Origin` được tải mặc định khi truy cập trang chủ của blog và bài viết này chính là `Overview` của `Topic Origin`. Bên cạnh đó thì `Origin` có bao gồm hai `Series` là `Hrdaya Sutra` và `Yoga Sutra` là hai cuốn sách tâm linh mà mình muốn chia sẻ với bạn đọc.
+Đặc biệt, có một `Topic` mặc định tên là `Origin` và không xuất hiện trong danh sách các `Topic` ở thanh điều hướng chính. `Origin` được tải mặc định khi truy cập trang chủ của blog và bài viết này chính là `Overview` của `Origin`. Bên cạnh đó thì `Origin` có bao gồm hai `Series` là `Hrdaya Sutra` và `Yoga Sutra` là hai cuốn sách tâm linh mà mình muốn chia sẻ với bạn đọc.
 
 Ở vị trí kết thúc của mỗi bài viết, bao gồm cả các bài `Overview` thì mình sẽ luôn cố gắng trỏ liên kết tới một bài viết tiếp theo để bạn có thể không cần phải sử dụng nhiều tới các thanh điều hướng. Tuy nhiên, trong trường hợp bạn muốn xem danh sách các bài viết của từng `Series` để chọn lọc bài viết cho phù hợp với kiến thức quan tâm thì bạn có thể nhấn vào tên của các `Series` trên thanh điều hướng phụ.
 
-Chúc bạn đọc vui, học vui, và tìm được những kiến thức liên quan tới chủ đề mà bạn đang quan tâm. Và như đã nói thì điểm kết thúc bài viết `Overview` của `Topic Origin` này là liên kết tới danh sách các bài viết của `Series Hrdaya Sutra`. Một cuốn sách kinh điển của Phật Giáo đại thừa được diễn giải bởi một vị chụ trì người Hong Kong và đăng tải lại từ bản dịch tiếng Anh.
+Chúc bạn đọc vui, học vui, và tìm được những kiến thức liên quan tới chủ đề mà bạn đang quan tâm. Và như đã nói thì điểm kết thúc bài viết `Overview` của `Topic` này là liên kết tới danh sách các bài viết của `Series` đầu tiên. Một cuốn sách kinh điển của Phật Giáo đại thừa được diễn giải bởi một vị chụ trì người Hong Kong và đăng tải lại từ bản dịch tiếng Anh.
 
 Next: [Hrdaya Sutra](./hrdayasutra)
 
