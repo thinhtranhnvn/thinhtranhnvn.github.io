@@ -11,7 +11,6 @@ type alias Series =
    , title : String
    , keywords : List String
    , description : String
-   , overview : String
    }
 
 
@@ -23,7 +22,6 @@ empty =
    , title = ""
    , keywords = []
    , description = ""
-   , overview = ""
    }
 
 
@@ -31,12 +29,11 @@ empty =
 
 
 jsonDecoder : Decoder Series
-jsonDecoder = Json.map5 Series
+jsonDecoder = Json.map4 Series
    ( field "id" string )
    ( field "title" string )
    ( field "keywords" (list string) )
    ( field "description" string )
-   ( field "overview" string )
 
 
 -- matchId - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

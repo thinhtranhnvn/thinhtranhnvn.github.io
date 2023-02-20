@@ -11,7 +11,6 @@ type alias Post =
    , title : String
    , keywords : List String
    , description : String
-   , content : String
    }
 
 
@@ -24,7 +23,6 @@ empty =
    , title = ""
    , keywords = []
    , description = ""
-   , content = ""
    }
 
 
@@ -32,12 +30,11 @@ empty =
 
 
 jsonDecoder : Decoder Post
-jsonDecoder = Json.map5 Post
+jsonDecoder = Json.map4 Post
    ( field "slug" string )
    ( field "title" string )
    ( field "keywords" (list string) )
    ( field "description" string )
-   ( field "content" string )
 
 
 -- matchSlug - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

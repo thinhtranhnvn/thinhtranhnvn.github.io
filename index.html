@@ -30,8 +30,8 @@
    <style> /* page overrides */ </style>
    
    <script type="text/javascript" src="/mockup/jquery.min.js"> </script>
-   <script type="text/javascript" src="/src/Element/metadata.js"> </script>
    <script type="text/javascript" src="/src/Element/searchbox.js"> </script>
+   <script type="text/javascript" src="/src/Element/metadata.js"> </script>
 </head>
 
 <body>
@@ -6590,16 +6590,16 @@ var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
 		{body: $elm$http$Http$emptyBody, expect: r.expect, headers: _List_Nil, method: 'GET', timeout: $elm$core$Maybe$Nothing, tracker: $elm$core$Maybe$Nothing, url: r.url});
 };
-var $author$project$Data$Post$Post = F5(
-	function (slug, title, keywords, description, content) {
-		return {content: content, description: description, keywords: keywords, slug: slug, title: title};
+var $author$project$Data$Post$Post = F4(
+	function (slug, title, keywords, description) {
+		return {description: description, keywords: keywords, slug: slug, title: title};
 	});
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$list = _Json_decodeList;
-var $elm$json$Json$Decode$map5 = _Json_map5;
+var $elm$json$Json$Decode$map4 = _Json_map4;
 var $elm$json$Json$Decode$string = _Json_decodeString;
-var $author$project$Data$Post$jsonDecoder = A6(
-	$elm$json$Json$Decode$map5,
+var $author$project$Data$Post$jsonDecoder = A5(
+	$elm$json$Json$Decode$map4,
 	$author$project$Data$Post$Post,
 	A2($elm$json$Json$Decode$field, 'slug', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
@@ -6607,8 +6607,7 @@ var $author$project$Data$Post$jsonDecoder = A6(
 		$elm$json$Json$Decode$field,
 		'keywords',
 		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
-	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'content', $elm$json$Json$Decode$string));
+	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string));
 var $author$project$Route$dataFolderUrl = '/' + 'data';
 var $author$project$Route$map = F2(
 	function (func, route) {
@@ -6654,12 +6653,12 @@ var $author$project$Element$Indexer$getPostList = function (route) {
 var $author$project$Element$Indexer$GotSeriesListResponse = function (a) {
 	return {$: 'GotSeriesListResponse', a: a};
 };
-var $author$project$Data$Series$Series = F5(
-	function (id, title, keywords, description, overview) {
-		return {description: description, id: id, keywords: keywords, overview: overview, title: title};
+var $author$project$Data$Series$Series = F4(
+	function (id, title, keywords, description) {
+		return {description: description, id: id, keywords: keywords, title: title};
 	});
-var $author$project$Data$Series$jsonDecoder = A6(
-	$elm$json$Json$Decode$map5,
+var $author$project$Data$Series$jsonDecoder = A5(
+	$elm$json$Json$Decode$map4,
 	$author$project$Data$Series$Series,
 	A2($elm$json$Json$Decode$field, 'id', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
@@ -6667,8 +6666,7 @@ var $author$project$Data$Series$jsonDecoder = A6(
 		$elm$json$Json$Decode$field,
 		'keywords',
 		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
-	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'overview', $elm$json$Json$Decode$string));
+	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string));
 var $author$project$Route$toSeriesListFileUrl = function (route) {
 	var topicId = A2(
 		$author$project$Route$map,
@@ -6710,9 +6708,9 @@ var $author$project$Element$Indexer$init = function (urlStr) {
 	}();
 	return _Utils_Tuple2(model, cmd);
 };
-var $author$project$Data$Post$empty = {content: '', description: '', keywords: _List_Nil, slug: '', title: ''};
-var $author$project$Data$Series$empty = {description: '', id: '', keywords: _List_Nil, overview: '', title: ''};
-var $author$project$Data$Topic$empty = {description: '', id: '', keywords: _List_Nil, overview: '', title: ''};
+var $author$project$Data$Post$empty = {description: '', keywords: _List_Nil, slug: '', title: ''};
+var $author$project$Data$Series$empty = {description: '', id: '', keywords: _List_Nil, title: ''};
+var $author$project$Data$Topic$empty = {description: '', id: '', keywords: _List_Nil, title: ''};
 var $author$project$Element$Metadata$GotPostListResponse = function (a) {
 	return {$: 'GotPostListResponse', a: a};
 };
@@ -6742,12 +6740,12 @@ var $author$project$Element$Metadata$getSeriesList = function (route) {
 var $author$project$Element$Metadata$GotTopicListResponse = function (a) {
 	return {$: 'GotTopicListResponse', a: a};
 };
-var $author$project$Data$Topic$Topic = F5(
-	function (id, title, keywords, description, overview) {
-		return {description: description, id: id, keywords: keywords, overview: overview, title: title};
+var $author$project$Data$Topic$Topic = F4(
+	function (id, title, keywords, description) {
+		return {description: description, id: id, keywords: keywords, title: title};
 	});
-var $author$project$Data$Topic$jsonDecoder = A6(
-	$elm$json$Json$Decode$map5,
+var $author$project$Data$Topic$jsonDecoder = A5(
+	$elm$json$Json$Decode$map4,
 	$author$project$Data$Topic$Topic,
 	A2($elm$json$Json$Decode$field, 'id', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'title', $elm$json$Json$Decode$string),
@@ -6755,8 +6753,7 @@ var $author$project$Data$Topic$jsonDecoder = A6(
 		$elm$json$Json$Decode$field,
 		'keywords',
 		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)),
-	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'overview', $elm$json$Json$Decode$string));
+	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string));
 var $author$project$Route$toTopicListFileUrl = function (_v0) {
 	return $author$project$Route$dataFolderUrl + ('/' + 'topic-list.json');
 };
@@ -7090,7 +7087,6 @@ var $author$project$Data$Topic$default = {
 	id: 'origin',
 	keywords: _List_fromArray(
 		['Semi Dev_', 'Blog', 'Origin', 'Buddhism', 'Yoga', 'Code', 'General Computing']),
-	overview: '',
 	title: 'Origin'
 };
 var $elm$core$List$filter = F2(

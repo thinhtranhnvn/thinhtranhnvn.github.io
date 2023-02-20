@@ -11,7 +11,6 @@ type alias Topic =
    , title : String
    , keywords : List String
    , description : String
-   , overview : String
    }
 
 
@@ -24,7 +23,6 @@ empty =
    , title = ""
    , keywords = []
    , description = ""
-   , overview = ""
    }
 
 
@@ -37,7 +35,6 @@ default =
    , title = "Origin"
    , keywords = [ "Semi Dev_", "Blog", "Origin", "Buddhism", "Yoga", "Code", "General Computing" ]
    , description = "Semi Dev_ 's Blog - sharing knowledge of Buddhism, Yoga, Coding, Languist, and General Computing"
-   , overview = ""
    }
 
 
@@ -45,12 +42,11 @@ default =
 
 
 jsonDecoder : Decoder Topic
-jsonDecoder = Json.map5 Topic
+jsonDecoder = Json.map4 Topic
    ( field "id" string )
    ( field "title" string )
    ( field "keywords" (list string) )
    ( field "description" string )
-   ( field "overview" string )
 
 
 -- matchId - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

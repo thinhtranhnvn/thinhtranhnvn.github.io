@@ -39,7 +39,7 @@ Thật tuyệt! Chúng ta đang có thêm lựa chọn sử dụng một hệ đ
 
 Đó là đối với nhu cầu sử dụng PC căn bản. Còn nếu như bạn là một `geeker` luôn có xu hướng tìm học những chủ đề tùy biến giao diện đồ họa người dùng để tự thiết kế môi trường sử dụng riêng thì `Linux` lại càng trở nên tuyệt vời. Lý do đơn giản là bởi vì Microsoft và Apple chỉ cung cấp một số tùy chọn thay đổi áp dụng cho giao diện người dùng như màu sắc chủ đạo và hình nền, vị trí thanh công cụ của Windows và vị trí Dock của Mac. Còn `Linux` thì không có bất kỳ giới hạn nào cả, bạn có thể thực hiện mọi sự tùy chỉnh từ A đến Z cả về mặt giao diện lẫn chức năng của hệ điều hành.
 
-## Cài Đặt Linux Như Thế Nào?
+## Chuẩn Bị Bộ Cài Linux
 
 Phương thức căn bản để cài đặt một hệ điều hành bất kỳ `Linux`, Windows, hay Mac, cho máy tính là chúng ta cần tải về và giải nén bộ cài vào một thiết bị lưu trữ như USB, CD/DVD, để một chiếc máy tính bất kỳ sẽ có thể sử dụng làm điểm khởi động tạm thời khi chưa có hệ điều hành.
 
@@ -53,16 +53,31 @@ Tuy nhiên, nếu như chúng ta chọn một bản phân phối như [`Ubuntu -
 
 Trong loạt ảnh hướng dẫn cài đặt ở đây thì mình sẽ sử dụng bản phân phối `OpenSuse - Novell` và có thao tác cài đặt tương đồng với cả `Ubuntu` và `Fedora` cũng đã được liệt kê ở trên. `Novell` có đưa ra hai phiên bản `OpenSuse` để người dùng lựa chọn là [`Tumbleweed`](https://get.opensuse.org/tumbleweed) và [`Leap`](https://get.opensuse.org/leap/15.4). Khác biệt căn bản giữa hai lựa chọn này là `Leap` có đánh số phiên bản và được cập nhật theo chu kỳ giống như Windows XP, 7, 8, 8.1, 10, 11, v.v..., trong khi đó thì `Tumbleweed` được cập nhật theo tiến trình tự nhiên chứ không có chu kỳ cố định.
 
-Theo mình được biết thì hầu hết các `poweruser` giàu kinh nghiệm sẽ luôn luôn khuyến khích việc cài đặt `Leap` cho những chiếc máy tính ở môi trường công sở, trường học, hoặc máy trạm; Còn `Tumbleweed` thì cũng rất ổn định và được người dùng ưa chuộng dùng cho máy tính cá nhân để luôn sớm được cập nhật giao diện người dùng phiên bản mới nhất. Và vì vậy nên... bạn có thể ra tiệm NET để tải về bộ cài `OpenSuse Tumbleweed` phù hợp với máy tính của bạn tại đây:
+Theo mình được biết thì hầu hết các `poweruser` giàu kinh nghiệm sẽ luôn luôn khuyến khích việc cài đặt `Leap` cho những chiếc máy tính ở môi trường công sở, trường học, hoặc máy trạm; Còn `Tumbleweed` thì cũng rất ổn định và được người dùng ưa chuộng dùng cho máy tính cá nhân để luôn sớm được cập nhật giao diện người dùng phiên bản mới nhất. Và vì vậy nên... bạn có thể ra tiệm NET hoặc nhờ người quen có máy tính khác để tải về bộ cài `OpenSuse Tumbleweed` phù hợp với máy tính của bạn tại đây:
 
 - Dành cho vi xử lý nền tảng x86-64: [Tải về](https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-DVD-x86_64-Current.iso)
 - Dành cho vi xử lý nền tảng ARM: [Tải về](https://download.opensuse.org/ports/aarch64/tumbleweed/iso/openSUSE-Tumbleweed-DVD-aarch64-Current.iso)
 
 Ở thời điểm mà mình đang viết những dòng chữ này thì hầu hết những chiếc laptop và máy tính để bàn phổ thông đều sử dụng vi xử lý nền tảng x86-64; Vì vậy nên chỉ trừ trường hợp bạn sở hữu một chiếc laptop thiết kế lai máy tính bảng như của Microsoft thì mới cần phải chọn bộ cài dành cho vi xử lý ARM.
 
-Sau khi tải về xong bộ cài đặt được nén trong một tệp `.iso` duy nhất thì chúng ta cần chuẩn bị một thiết bị lưu trữ tạm. Ở bước này thì do mình đã ngừng sử dụng ổ đĩa đĩa quang từ lâu nên sẽ chỉ có thể chia sẻ thông tin về phần mềm hỗ trợ giải nén tệp `.iso` vừa tải về vào USB có tên là [`Etcher`](https://www.balena.io/etcher#download-etcher). Yêu cầu mặc định là chúng ta sẽ cần có một chiếc USB có dung lượng lưu trữ tối thiểu là `8GB` hoặc lớn hơn.
+Sau khi tải về xong bộ cài đặt ở dạng được nén trong một tệp `.iso` duy nhất thì chúng ta cần chuẩn bị một thiết bị lưu trữ tạm. Ở bước này thì do mình đã ngừng sử dụng ổ đĩa đĩa quang từ lâu nên sẽ chỉ có thể chia sẻ thông tin về phần mềm hỗ trợ giải nén tệp `.iso` vừa tải về vào USB có tên là [`Etcher`](https://www.balena.io/etcher#download-etcher). Yêu cầu mặc định là chúng ta sẽ cần có một chiếc USB có dung lượng lưu trữ tối thiểu là `8GB` hoặc lớn hơn.
 
+[`Etcher - ISO to USB`](https://www.balena.io/etcher#download-etcher)
+![phần mềm tạo boot usb etcher](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/etcher-balena.jpg)
 
+Giao diện sử dụng của `Etcher` như chúng ta thấy ở đây thì thực sự rất đơn giản và chỉ có ba bước:
+
+- `Flash From File` để chọn tệp đã tải về và lưu trữ trong máy tính đang sử dụng. Ở bước này chúng ta có thêm lựa chọn phụ ở bên dưới là `Flash from URL` để làm tắt bước tải về tệp `.iso` và chúng ta chỉ cần copy/paste liên kết tải bộ cài cho `Etcher` tự động xử lý. Lựa chọn bổ sung tiếp theo `Clone dive` được sử dụng để sao lưu toàn bộ hệ điều hành đang sử dụng và các ứng dụng đã cài đặt vào một ổ cứng khác để nhanh chóng khôi phục khi cần thiết mà không cần thực hiện lại các thao tác cài đặt theo trình tự: cài đặt hệ điều hành mới -> cài đặt các ứng dụng bổ sung.
+
+- `Select Target` để chọn đường dẫn tới USB mà chúng ta muốn giải nén và copy nội dung của tệp `.iso` vào đó.
+
+- `Flash!` để bắt đầu lệnh giải nén và copy nội dung của tệp `.iso` vào USB.
+
+Sau khi nhấn vào nút `Flash!` thì chúng ta chỉ cần chờ đợi cho thanh mô tả tiến trình giải nén tệp `.iso` vào USB chạy đến điểm kết thúc và đóng cửa sổ của phần mềm `Etcher`. Lúc này bạn đã có trong tay bộ cài OpenSuse Tumbleweed được giải nén vào chiếc USB đang sử dụng và đã có thể mang về để làm thiết bị khởi động tạm cho chiếc máy tính ở nhà chưa có hệ điều hành.
+
+## Tiến Hành Cài Đặt Linux
+
+.
 
 Next: [Linux PC](./gnome)
 
