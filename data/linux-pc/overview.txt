@@ -34,10 +34,35 @@ Kèm theo đó là các ứng dụng `FOSS` thay thế cho Microsoft Office hay 
 
 Thật tuyệt! Chúng ta đang có thêm lựa chọn sử dụng một hệ điều hành miễn phí được phát triển bởi các cộng đồng lập trình viên tình nguyện, với giao diện người dùng đẹp mắt, và các ứng dụng có khả năng làm việc với các tệp văn bản, ảnh, audio, video được tạo ra bởi các phần mềm tương tự của `Microsoft`, `Adobe`, và cả những thương hiệu khác nữa.
 
-[`GIMP Image Manipulation Photoshop`](https://www.gimp.org)
-![ứng dụng chỉnh sửa ảnh GIMP]()
+[`GIMP Image Editor`](https://www.gimp.org)
+![ứng dụng chỉnh sửa ảnh GIMP](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gimp-photo-editor.jpg)
 
-Đó là đối với nhu cầu sử dụng PC căn bản. Còn nếu như bạn là một `geeker` luôn có xu hướng tìm học những chủ đề tùy biến giao diện đồ họa người dùng để tự thiết kế môi trường sử dụng riêng thì `Linux` lại càng trở nên tuyệt vời. Lý do đơn giản là bởi vì Microsoft và Apple chỉ cung cấp một số tùy chọn thay đổi áp dụng cho giao diện người dùng như màu sắc chủ đạo và hình nền, vị trí thanh công cụ của Windows và vị trí Dock của Mac. Còn `Linux` thì không có bất kỳ giới hạn nào cả, bạn có thể thực hiện mọi sự tùy chỉnh từ A đến Z cả về mặt giao diện lẫn chức năng của hệ điều hành. 
+Đó là đối với nhu cầu sử dụng PC căn bản. Còn nếu như bạn là một `geeker` luôn có xu hướng tìm học những chủ đề tùy biến giao diện đồ họa người dùng để tự thiết kế môi trường sử dụng riêng thì `Linux` lại càng trở nên tuyệt vời. Lý do đơn giản là bởi vì Microsoft và Apple chỉ cung cấp một số tùy chọn thay đổi áp dụng cho giao diện người dùng như màu sắc chủ đạo và hình nền, vị trí thanh công cụ của Windows và vị trí Dock của Mac. Còn `Linux` thì không có bất kỳ giới hạn nào cả, bạn có thể thực hiện mọi sự tùy chỉnh từ A đến Z cả về mặt giao diện lẫn chức năng của hệ điều hành.
+
+## Cài Đặt Linux Như Thế Nào?
+
+Phương thức căn bản để cài đặt một hệ điều hành bất kỳ `Linux`, Windows, hay Mac, cho máy tính là chúng ta cần tải về và giải nén bộ cài vào một thiết bị lưu trữ như USB, CD/DVD, để một chiếc máy tính bất kỳ sẽ có thể sử dụng làm điểm khởi động tạm thời khi chưa có hệ điều hành.
+
+Bước tiếp theo sau đó là chúng ta chỉ cần khởi động máy tính và chọn thiết bị đang lưu trữ bộ cài đặt để vào tới giao diện hướng dẫn và lần lượt làm theo các chỉ dẫn hiện ra trên màn hình. Ở thời điểm hiện tại thì việc cài đặt các bản phân phối `Linux` phổ biến cũng thực sự rất đơn giản và thậm chí có phần còn nhanh gọn hơn so với việc cài đặt Windows hoặc Mac.
+
+Nói về các bản phân phối `Linux` thì xuất phát điểm là bởi vì hệ điều hành `Linux` là một phần mềm mã nguồn mở miễn phí `FOSS` nên bất kỳ cá nhân hay tổ chức nào cũng đều có thể tải về mã nguồn để tạo ra một bản phân phối với tên gọi tự đặt. Các bản phân phối được tạo ra bởi các cộng đồng tình nguyện hay các tổ chức lớn sẽ được tích hợp đầy đủ hơn các chương trình điều khiển các thiết bị phần cứng.
+
+Ví dụ cụ thể là nếu như chúng ta chọn một bản phân phối có thiết kế đơn giản nhất với tệp cài đặt có kích thước chưa đến `1GB`, thì khả năng cao là chúng ta sẽ phải thêm thao tác tự tìm tên card Wi-Fi mà nhà sản xuất đã gắn bên trong chiếc máy tính của mình để tải về trình điều khiển và thực hiện thao tác cài đặt qua cửa sổ dòng lệnh.
+
+Tuy nhiên, nếu như chúng ta chọn một bản phân phối như [`Ubuntu - Canonical`](https://ubuntu.com/download/desktop), hay [`OpenSuse - Novell`](https://www.opensuse.org), hoặc [`Fedora - Red Hat`](https://getfedora.org) thì chúng ta sẽ có các bộ cài đặt có kích vài `GB` được tích hợp các trình điều khiển phần cứng cho hầu hết các thiết bị phần cứng không quá cũ; Và phần mềm hướng dẫn cài đặt hệ điều hành cũng tự động hóa việc lựa chọn và cài đúng các gói phần mềm điều khiển tương ứng với các thiết bị phần cứng của từng chiếc máy tính riêng. Sau khi làm theo một số bước hướng dẫn đơn giản của phần mềm hướng dẫn cài đặt thì chúng ta chỉ cần khởi động lại máy tính là đã có thể bắt đầu sử dụng máy tính như bình thường.
+
+Trong loạt ảnh hướng dẫn cài đặt ở đây thì mình sẽ sử dụng bản phân phối `OpenSuse - Novell` và có thao tác cài đặt tương đồng với cả `Ubuntu` và `Fedora` cũng đã được liệt kê ở trên. `Novell` có đưa ra hai phiên bản `OpenSuse` để người dùng lựa chọn là [`Tumbleweed`](https://get.opensuse.org/tumbleweed) và [`Leap`](https://get.opensuse.org/leap/15.4). Khác biệt căn bản giữa hai lựa chọn này là `Leap` có đánh số phiên bản và được cập nhật theo chu kỳ giống như Windows XP, 7, 8, 8.1, 10, 11, v.v..., trong khi đó thì `Tumbleweed` được cập nhật theo tiến trình tự nhiên chứ không có chu kỳ cố định.
+
+Theo mình được biết thì hầu hết các `poweruser` giàu kinh nghiệm sẽ luôn luôn khuyến khích việc cài đặt `Leap` cho những chiếc máy tính ở môi trường công sở, trường học, hoặc máy trạm; Còn `Tumbleweed` thì cũng rất ổn định và được người dùng ưa chuộng dùng cho máy tính cá nhân để luôn sớm được cập nhật giao diện người dùng phiên bản mới nhất. Và vì vậy nên... bạn có thể ra tiệm NET để tải về bộ cài `OpenSuse Tumbleweed` phù hợp với máy tính của bạn tại đây:
+
+- Dành cho vi xử lý nền tảng x86-64: [Tải về](https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-DVD-x86_64-Current.iso)
+- Dành cho vi xử lý nền tảng ARM: [Tải về](https://download.opensuse.org/ports/aarch64/tumbleweed/iso/openSUSE-Tumbleweed-DVD-aarch64-Current.iso)
+
+Ở thời điểm mà mình đang viết những dòng chữ này thì hầu hết những chiếc laptop và máy tính để bàn phổ thông đều sử dụng vi xử lý nền tảng x86-64; Vì vậy nên chỉ trừ trường hợp bạn sở hữu một chiếc laptop thiết kế lai máy tính bảng như của Microsoft thì mới cần phải chọn bộ cài dành cho vi xử lý ARM.
+
+Sau khi tải về xong bộ cài đặt được nén trong một tệp `.iso` duy nhất thì chúng ta cần chuẩn bị một thiết bị lưu trữ tạm. Ở bước này thì do mình đã ngừng sử dụng ổ đĩa đĩa quang từ lâu nên sẽ chỉ có thể chia sẻ thông tin về phần mềm hỗ trợ giải nén tệp `.iso` vừa tải về vào USB có tên là [`Etcher`](https://www.balena.io/etcher#download-etcher). Yêu cầu mặc định là chúng ta sẽ cần có một chiếc USB có dung lượng lưu trữ tối thiểu là `8GB` hoặc lớn hơn.
+
+
 
 Next: [Linux PC](./gnome)
 
