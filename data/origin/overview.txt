@@ -26,5 +26,5 @@ Hiện tại, khi đang viết những dòng chữ này thì mình mới chỉ c
 
 Chúc bạn đọc vui, học vui, và tìm được những kiến thức liên quan tới chủ đề mà bạn đang quan tâm. Và như đã nói thì điểm kết thúc bài viết `Overview` của `Topic` này là liên kết tới danh sách các bài viết của `Series` đầu tiên. Một cuốn sách kinh điển của Phật Giáo đại thừa được diễn giải bởi một vị chụ trì người Hong Kong và đăng tải lại từ bản dịch tiếng Anh.
 
-Next: [Hrdaya Sutra](./hrdayasutra)
+Next: [Hrdaya Sutra](/origin/hrdayasutra)
 
