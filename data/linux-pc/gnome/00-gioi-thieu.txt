@@ -1,0 +1,12 @@
+# Giới Thiệu OpenSuse Tumbleweed Gnome
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/start-up.jpg)
+
+Như vậy là sau bài viết tổng quan của `Topic Linux-PC` thì chúng ta đã cài đặt xong hệ điều hành OpenSuse Tumbleweed với giao diện đồ họa người dùng là `Gnome Desktop` - một trong số những giao diện `Desktop` được sử dụng phổ biến nhất bởi cộng đồng người dùng `Linux`. Và ở đây, chúng ta có `Series` bài viết đầu tiên của `Linux PC` được dành riêng để giới thiệu chi tiết về việc sử dụng và tùy biến `Gnome Desktop`.
+
+## Tổng quan về Gnome Desktop
+
+.
+
+Tiếp theo: [](./)
+

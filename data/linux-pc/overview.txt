@@ -135,5 +135,5 @@ Khi khởi động vào tới màn hình `Desktop` lần đầu tiên thì chún
 
 Như vậy là bài viết giới thiệu tổng quan về việc sử dụng `Linux` cho máy tính cá nhân `PC` đã hoàn thành và tiếp theo chúng ta sẽ đến vài `Series` đầu tiên của `Topic` này với các bài viết tập trung về việc giới thiệu giao diện `Gnome` và các thao tác tùy chỉnh thiết lập từ `A` đến `Z` cho nhu cầu sử dụng máy tính phổ thông. :D
 
-Next: [Linux PC](./gnome)
+Tiếp theo: [Linux PC](./gnome)
 
