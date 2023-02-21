@@ -1,9 +1,9 @@
 [
    {
-      "slug": "",
-      "title": "",
-      "keywords": [],
-      "description"
+      "slug": "00-gioi-thieu",
+      "title": "Giới Thiệu OpenSuse Gnome Desktop",
+      "keywords": [ "linux", "giao diện desktop gnome", "giới thiệu" ],
+      "description": "Giới thiệu giao diện Gnome Desktop cho người mới sử dụng Linux."
    }
 ]
 
