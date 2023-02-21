@@ -1,31 +1,31 @@
 [
    {
       "id": "gnome",
-      "title": "Gnome",
+      "title": "Gnome Desktop",
       "keywords": [ "linux", "unix-like", "desktop environment", "gnome", "applications" ],
       "description": "Introduction to the mainstream desktop environment of Linux Operating System."
    },
    {
       "id": "lireoffice",
-      "title": "LibreOffice",
+      "title": "LibreOffice Suite",
       "keywords": [],
       "description": ""
    },
    {
       "id": "scribus",
-      "title": "Scribus",
+      "title": "Scribus Desktop Publishing",
       "keywords": [],
       "description": ""
    },
    {
       "id": "gimp",
-      "title": "GIMP",
+      "title": "Gimp Photo Editor",
       "keywords": [],
       "description": ""
    },
    {
       "id": "blender",
-      "title": "Blender",
+      "title": "Blender Video Editor",
       "keywords": [],
       "description": ""
    }
