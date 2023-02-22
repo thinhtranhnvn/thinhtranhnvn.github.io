@@ -37,13 +37,13 @@ Thật tuyệt! Chúng ta đang có thêm lựa chọn sử dụng một hệ đ
 [`GIMP Image Editor`](https://www.gimp.org)
 ![ứng dụng chỉnh sửa ảnh GIMP](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gimp-photo-editor.jpg)
 
-Đó là đối với nhu cầu sử dụng PC căn bản. Còn nếu như bạn là một `geeker` luôn có xu hướng tìm học những chủ đề tùy biến giao diện đồ họa người dùng để tự thiết kế môi trường sử dụng riêng thì `Linux` lại càng trở nên tuyệt vời. Lý do đơn giản là bởi vì Microsoft và Apple chỉ cung cấp một số tùy chọn thay đổi áp dụng cho giao diện người dùng như màu sắc chủ đạo và hình nền, vị trí thanh công cụ của Windows và vị trí Dock của Mac. Còn `Linux` thì không có bất kỳ giới hạn nào cả, bạn có thể thực hiện mọi sự tùy chỉnh từ A đến Z cả về mặt giao diện lẫn chức năng của hệ điều hành.
+Đó là đối với nhu cầu sử dụng PC căn bản. Còn nếu như bạn là một `geeker` luôn có xu hướng tìm học những chủ đề tùy biến giao diện đồ họa người dùng để tự thiết kế môi trường sử dụng riêng thì `Linux` lại càng trở nên tuyệt vời. Lý do đơn giản là bởi vì Microsoft chỉ cung cấp một số tùy chọn thay đổi áp dụng cho giao diện người dùng như màu sắc chủ đạo và hình nền và vị trí thanh công cụ Taskbar; Còn `Linux` thì không có bất kỳ giới hạn nào cả, bạn có thể thực hiện mọi sự tùy chỉnh từ A đến Z cả về mặt giao diện lẫn chức năng của hệ điều hành.
 
 ## Chuẩn Bị Bộ Cài
 
-Phương thức căn bản để cài đặt một hệ điều hành bất kỳ `Linux`, Windows, hay Mac, cho máy tính là chúng ta cần tải về và giải nén bộ cài vào một thiết bị lưu trữ như USB, CD/DVD, để một chiếc máy tính bất kỳ sẽ có thể sử dụng làm điểm khởi động tạm thời khi chưa có hệ điều hành.
+Phương thức căn bản để cài đặt một hệ điều hành bất kỳ `Linux` hay Windows, cho máy tính là chúng ta cần tải về và giải nén bộ cài vào một thiết bị lưu trữ như USB, CD/DVD, để một chiếc máy tính bất kỳ sẽ có thể sử dụng làm điểm khởi động tạm thời khi chưa có hệ điều hành.
 
-Bước tiếp theo sau đó là chúng ta chỉ cần khởi động máy tính và chọn thiết bị đang lưu trữ bộ cài đặt để vào tới giao diện hướng dẫn và lần lượt làm theo các chỉ dẫn hiện ra trên màn hình. Ở thời điểm hiện tại thì việc cài đặt các bản phân phối `Linux` phổ biến cũng thực sự rất đơn giản và thậm chí có phần còn nhanh gọn hơn so với việc cài đặt Windows hoặc Mac.
+Bước tiếp theo sau đó là chúng ta chỉ cần khởi động máy tính và chọn thiết bị đang lưu trữ bộ cài đặt để vào tới giao diện hướng dẫn và lần lượt làm theo các chỉ dẫn hiện ra trên màn hình. Ở thời điểm hiện tại thì việc cài đặt các bản phân phối `Linux` phổ biến cũng thực sự rất đơn giản và thậm chí có phần còn nhanh gọn hơn so với việc cài đặt Windows.
 
 Nói về các bản phân phối `Linux` thì xuất phát điểm là bởi vì hệ điều hành `Linux` là một phần mềm mã nguồn mở miễn phí `FOSS` nên bất kỳ cá nhân hay tổ chức nào cũng đều có thể tải về mã nguồn để tạo ra một bản phân phối với tên gọi tự đặt. Các bản phân phối được tạo ra bởi các cộng đồng tình nguyện hay các tổ chức lớn sẽ được tích hợp đầy đủ hơn các chương trình điều khiển các thiết bị phần cứng.
 
@@ -99,7 +99,7 @@ Tiếp đến là màn hình chọn mục đích sử dụng của máy tính đ
 `System Role`
 ![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/opensuse-installation/03.jpg)
 
-Giống với việc cài đặt Windows hay Mac, ở đây chúng ta cũng có giai đoạn thực hiện việc chia tách các phân vùng ổ cứng bên trong máy tính và được gợi ý sẵn như danh sách được in ra. Trong trường hợp bạn muốn biết thêm thông tin để tự tùy chỉnh độ rộng các phân vùng theo ý muốn thì có thể tham khảo phần giải thích bên dưới đây.
+Giống với việc cài đặt Windows, ở đây chúng ta cũng có giai đoạn thực hiện việc chia tách các phân vùng ổ cứng bên trong máy tính và được gợi ý sẵn như danh sách được in ra. Trong trường hợp bạn muốn biết thêm thông tin để tự tùy chỉnh độ rộng các phân vùng theo ý muốn thì có thể tham khảo phần giải thích bên dưới đây.
 
 `Partitioning`
 ![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/opensuse-installation/04.jpg)
@@ -133,7 +133,7 @@ Sau khi tiến trình cài đặt được hoàn tất thì `OpenSuse` sẽ tự
 
 Khi khởi động vào tới màn hình `Desktop` lần đầu tiên thì chúng ta sẽ có một bảng chào mừng `Welcome` của `OpenSuse` với một vài hướng dẫn. Trước khi chọn nút `Close` để đóng cửa sổ này thì bạn có thể bỏ đánh dấu ở ô chữ phía bên trái nút nhấn để hệ điều hành sẽ không tự động hiện lại cửa sổ `Welcome` trong các lần khởi động sau này.
 
-Như vậy là bài viết giới thiệu tổng quan về việc sử dụng `Linux` cho máy tính cá nhân `PC` đã hoàn thành và tiếp theo chúng ta sẽ đến vài `Series` đầu tiên của `Topic` này với các bài viết tập trung về việc giới thiệu giao diện `Gnome` và các thao tác tùy chỉnh thiết lập từ `A` đến `Z` cho nhu cầu sử dụng máy tính phổ thông. :D
+Như vậy là bài viết giới thiệu tổng quan về việc sử dụng `Linux` cho máy tính cá nhân `PC` đã hoàn thành và tiếp theo chúng ta sẽ bắt đầu `Series` đầu tiên của `Topic` này với các bài viết tập trung về việc giới thiệu giao diện `Gnome` và các thao tác tùy chỉnh thiết lập từ `A` đến `Z` cho nhu cầu sử dụng máy tính phổ thông. :D
 
 Tiếp theo: [Giao Diện Desktop Gnome](/linux-pc/gnome)
 

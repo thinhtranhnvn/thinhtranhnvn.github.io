@@ -24,12 +24,6 @@
       "description" : "Chia sẻ kinh nghiệm sử dụng các thiết bị Android."
    },
    {
-      "id": "imagery",
-      "title": "Imagery",
-      "keywords": [ "fujifilm", "camera", "android", "sony", "phone", "fujitsu", "tablet", "photography", "gimp", "image editing", "blender", "video editing" ],
-      "description": "Chia sẻ kiến thức chụp ảnh, quay phim, chỉnh sửa hậu kỳ."
-   },
-   {
       "id": "english",
       "title": "English",
       "keywords": [],

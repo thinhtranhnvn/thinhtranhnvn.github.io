@@ -1,12 +1,83 @@
-# Giới Thiệu OpenSuse Tumbleweed Gnome
+# Giới Thiệu Gnome Desktop
 
+`Gnome Start-up`
 ![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/start-up.jpg)
 
 Như vậy là sau bài viết tổng quan của `Linux-PC` thì chúng ta đã cài đặt xong hệ điều hành OpenSuse Tumbleweed với giao diện đồ họa người dùng là `Gnome Desktop` - một trong số những giao diện `Desktop` được sử dụng phổ biến nhất bởi cộng đồng người dùng `Linux`. Và ở đây chúng ta sẽ bắt đầu `Series` bài viết đầu tiên của `Linux PC` được dành riêng để giới thiệu chi tiết về việc sử dụng và tùy biến `Gnome Desktop`.
 
-## Tổng quan về Gnome Desktop
+## Tổng quan
 
-.
+Nhìn chung, giao diện người dùng do Gnome Desktop cung cấp được đánh giá là có đầy đủ các chức năng tương đương với các gói giao diện người dùng mặc định của Windows. Tuy nhiên, các chức năng được sắp xếp và trình bày với bố cục mặc định gần như ngược lại so với Windows.
 
-Tiếp theo: [](./)
+Như trong ảnh chụp màn hình ở phía trên thì chúng ta có thể thấy là thay vì có một thanh công cụ kiêm đủ mọi chức năng được đặt ở cạnh dưới, thì chúng ta đang có chức năng theo dõi các tác vụ Taskbar được tách riêng vào một khu vực được gọi là `Dash` chỉ bao gồm các biểu tượng ứng dụng ở phía dưới, và thanh điều hướng chính lại được gắn ở cạnh trên của màn hình.
+
+Khi mới khởi động vào hệ điều hành thì chúng ta lại thấy rằng nút `Activities` ở thanh điều hướng chính đang được kích hoạt sẵn, và bố cục mà chúng ta đang nhìn thấy là bố cục tổng quan để có thể quan sát toàn bộ các `Desktop` và các ứng dụng mà chúng ta đã mở trên mỗi `Desktop`. Hiện tại thì chúng ta đang thấy là `Desktop` đầu tiên đang được thu nhỏ và đặt ở giữa màn hình, ở phía bên phải chúng ta còn thấy một phần của `Desktop` tiếp theo để có thể click vào đó và chuyển con trỏ làm việc sang `Desktop` mới.
+
+Thiết kế đa nhiệm với nhiều `Desktop` để hỗ trợ nhóm các tác vụ liên quan thành các nhóm công việc khác nhau như thế này đã có mặt trong `Gnome` sớm hơn khoảng 4-5 năm trước khi Microsoft đem tới Windows 10; Và để tắt/mở bố cục tổng quan thì chúng ta có thể sử dụng nút `Activies` hoặc phím `Logo` bên cạnh phím `Ctrl` trái của bàn phím vật lý.
+
+`Logo-key`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/logo-key.jpg)
+
+Bây giờ, trong bố cục tổng quan, nếu như chúng ta di trỏ chuột vào khu vực ở giữa màn hình và thực hiện thao tác cuộn lên/xuống hoặc trái/phải thì chúng ta sẽ thấy các `Desktop` sẽ được chuyển qua lại trong khung ở giữa màn hình và đang có hai `Desktop` được tạo ra sẵn.
+
+Nếu như chúng ta mở ứng dụng `Firefox` và `Mail - Evolution` trong `Desktop` đầu tiên, sau đó tiếp tục  mở ứng dụng `Word - LibreOffice Writer` và `Files` trong `Desktop` thứ hai; Thì `Gnome` sẽ tiếp tục tự động tạo ra thêm một `Desktop` mới ở phía bên phải để dự phòng trường hợp chúng ta sẽ có thể tạo ra một nhóm công việc mới nữa.
+
+`Activies Overview`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/activities-overview.jpg)
+
+Và đồng thời thì chúng ta còn có thêm một thanh điều hướng giữa các `Desktop` hiện ra ở phía dưới ô tìm kiếm trong bố cục tổng quan `Activites`. Tuy nhiên, từ quan điểm cá nhân thì mình nghĩ rằng sẽ rất thuận tiện cho người mới sử dụng `Gnome` nếu như thanh điều hướng mới xuất hiện kia luôn luôn được hiển thị ngay cả khi chỉ có hai `Desktop`. Vì vậy nên bây giờ chúng ta sẽ thực hiện một chút tùy chỉnh và cũng là để làm quen với công cụ tìm kiếm `Shell Search` cực kỳ mạnh mẽ của `Gnome`.
+
+Bây giờ, khi đang ở chế độ xem tổng quan `Activities`, không cần click vào ô tìm kiếm, chúng ta sẽ gõ thử phím `m`.
+
+`Activies Search`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/activies-search.jpg)
+
+Như vậy là ô tìm kiếm sẽ được tự động kích hoạt khi chúng ta bắt đầu gõ từ khóa và kết quả tìm kiếm sẽ bao gồm hai loại chính: Đầu tiên là các ứng dụng có tên `name` hoặc nội dung mô tả ngắn `description` có chứa từ khóa sẽ được liệt kê trên một hàng ngang duy nhất ngay dưới ô tìm kiếm; Và tiếp theo là nội dung bên trong các ứng dụng đã được cài đặt trong máy nếu như các lập trình viên tạo ra các ứng dụng đó có phát triển đủ tính năng tích hợp với `Gnome Shell`.
+
+Ở đây, nếu như bạn cuộn danh sách kết quả xuống thì sẽ thấy các tùy chọn hệ thống trong ứng dụng `Settings` sẽ được ưu tiên trước, sau đó là đến ứng dụng `Characters` và `Clock`. Và trong nhóm kết quả hiện tại thì chúng ta đang cần thực hiện tùy chỉnh hệ thống có liên quan đến quản lý đa nhiệm `Multitasking` và ở ngay dòng đầu tiên của `Settings`. Bạn có thể click chuột vào dòng đó hoặc sử dụng các phím mũi tên để di chuyển con trỏ bàn phím tới dòng đó rồi nhấn phím `Enter`.
+
+`Multitasking Settings`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/multitasking-settings.jpg)
+
+Ở phần đầu tiên `General` thì chúng ta đang thấy hai chức năng được kích hoạt sẵn: `Hot Corner` là khi chúng ta di trỏ chuột chạm vào góc phía trên bên trái màn hình thì bố cục tổng quan sẽ tự động được kích hoạt mà không cần phải thực hiện click vào nút `Activites`; Và `Active Screen Edges` là khi chúng ta sử dụng trỏ chuột để nhấn giữ và di chuyển một cửa sổ ứng dụng chạm vào các cạnh `trái - trên - phải` của màn hình `Desktop`. Bạn có thể dành chút thời gian để thử các thao tác này, rất đơn giản và hữu dụng.
+
+Ở phần tiếp theo `Workspace` thì chúng ta đã có thể tìm thấy tùy chỉnh cần thực thiện, `Gnome` đang đặt chế độ mặc định là `Dynamic Workspace` để tự động xóa đi các `Desktop` rỗng không có chứa cửa sổ ứng dụng nào, và tự động mở thêm `Desktop` mới nếu như tất cả các `Desktop` hiện tại đã có chứa ít nhất một cửa sổ ứng dụng. Nếu như chúng ta chuyển lựa chọn ở đây xuống dòng `Fixed` thì ô nhập liệu ở bên dưới sẽ cho phép chúng ta cố định số lượng `Desktop` và chủ động hơn trong việc quản lý các `Desktop` thay vì để `Gnome` tự động xử lý.
+
+Ở đây mình thường đặt mặc định là 2 - 3 `Desktop` vì chưa từng có nhu cầu sử dụng nhiều `Desktop` hơn cho việc quản lý đa nhiệm. Thông thường thì mình sẽ nhóm các cửa sổ ứng dụng `Web`, `Mail`, `Chat`, ở `Desktop` đầu tiên; Và các ứng dụng `Office`, `Photo`, `Code` ở `Desktop` thứ hai; Và chỉ khi cần tạo máy ảo để chụp ảnh màn hình cho bài viết hướng dẫn như thế này thì mới cần sử dụng tới `Desktop` thứ ba để tách riêng khỏi hai nhóm tác vụ trước đó.
+
+## Dashboard
+
+Như vậy là từ giao diện tổng quan, chúng ta sẽ có thể di chuyển qua lại giữa các không gian làm việc hay cỏn được gọi là `Desktop` để nhóm các cửa sổ ứng dụng theo một logic quản lý thuận tiện hơn, và chúng ta cũng đã được thấy rằng chức năng tìm kiếm của `Gnome Shell` mạnh mẽ như thế nào.
+
+Tuy nhiên, khi mới sử dụng một hệ điều hành mới thì hiển nhiên chúng ta chưa thể quen với tên gọi của các ứng dụng và tự tin sử dụng công cụ tìm kiếm. Ví dụ như ứng dụng quản lý thư mục và tệp thì Windows gọi đó là `Explorer` nhưng ở đây `Gnome` lại gọi đó là `Files`. Lúc này chúng ta cần xem qua danh sách của `toàn bộ` các ứng dụng đã được cài đặt trong máy tính, và `Gnome` có tạo ra một bố cục khác gọi là `Dashboard` để liệt kê ở dạng lưới giống như giao diện thường thấy trên điện thoại và máy tính bảng.
+
+Để kích hoạt `Dashboard` thì bạn có thể click vào biểu tượng cuối cùng trong `Dash` của `Activities` hoặc nhấn tổ hợp phím `Logo + A` trên bàn phím vật lý
+
+`Activies Dashboard`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/activities-dashboard.jpg)
+
+Lúc này chúng ta có thanh điều hướng phụ giữa các `Desktop` được hiển thị có thêm chi tiết về các cửa sổ ứng dụng đang được mở trong các `Desktop` bởi vì `Overview` đã được ẩn đi; Và phần nội dung chính ở đây là biểu tượng của tất các ứng dụng đã được cài đặt trong máy đang được hiển thị đầy đủ. Ở đây chúng ta có thể chọn chuột phải vào các biểu tượng và chọn `Pin to Dash` để gắn cố định vào thanh `Dash`. Thao tác này khá quan trọng trong giai đoạn mới sử dụng một hệ điều hành mới cho đến khi chúng ta đã quen với tên của các ứng dụng và có thể tự tin sử dụng công cụ tìm kiếm của hệ thống.
+
+## System Tray
+
+Phần cuối cùng mà chúng ta cần quan tâm tới trong bài viết giới thiệu tổng quan về `Gnome` đó là các chức năng điều khiển hệ thống thường thấy ở phía bên phải của thanh Taskbar trong Windows.
+
+Ở vị trí này thì các thao tác mà chúng ta thường quan tâm đến nhiều nhất là:
+
+- Tắt, khởi động lại, hoặc tạm dừng hệ điều hành - Shutdown / Restart / Suspend
+- Tắt mở các kết nối - Wi-Fi / Bluetooth / Mạng có dây
+- Chuyển qua lại giữa các bộ gõ - Tiếng Việt / Ngoại Ngữ  
+
+Tất cả đều được `Gnome` đặt ở bảng điều khiển phụ khi bạn click vào nhóm biểu tượng hệ thống ở góc bên phải của thanh điều hướng chính.
+
+`System Tray`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/system-tray.jpg)
+
+Ở đây chúng ta có một nút nhấn có biểu tượng giống với công tắc tắt mở các thiết bị điện để thực hiện các thao tác ở nhóm thứ nhất, bên cạnh đó là có một nút nhấn hình bánh răng để mở ứng dụng tùy chỉnh hệ thống `Settings`.
+
+Đối với mỗi kiểu kết nối khả dụng ở nhóm thao tác thứ hai thì sẽ có một ô nhỏ biểu thị ở phía dưới thanh điều chỉnh âm lượng loa máy tính. Hiện tại thì mình cài đặt trên máy ảo và vì vậy nên chỉ có duy nhất một kiểu kết nối là dạng có dây `Wired` chứ không có `Wi-Fi` và `Bluetooth`. Tuy nhiên, nhìn chung thì mỗi ô biểu thị kết nối này sẽ đều có một biểu tượng mũi tên gắn ở phía bên phải để mở rộng và liệt kê danh sách các kết nối khả dụng.
+
+Đối với nhóm thao tác cuối cùng là để chuyển đổi qua lại giữa các bộ gõ của các ngôn ngữ khác nhau thì chúng ta chưa thiết lập thêm ngôn ngữ nào ngoài bộ gõ mặc định đang là Tiếng Anh vì vậy nên chưa có biểu thị gì. Bây giờ chúng ta cần cài đặt và kích hoạt bộ gõ Tiếng Việt Unikey để có thể bắt đầu sử dụng các ứng dụng văn phòng. Tuy nhiên, do bài viết giới thiệu mở đầu của `Gnome` tới đây đã khá dài nên chúng ta sẽ để dành chủ đề về các thao tác cài đặt bổ sung ứng dụng cho bài viết tiếp theo.  
+
+Tiếp theo: [Cài Đặt Ứng Dụng](./01-cai-dat-ung-dung)
 
