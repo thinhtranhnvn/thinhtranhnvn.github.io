@@ -49,10 +49,71 @@ Tiếp tục click vào biểu tượng thứ hai có tên hiển thị là `Web
 
 Các phiên bản ứng dụng của `FlatHub` được thiết kế ở dạng sandbox để bảo vệ máy tính của bạn bằng cách khóa bớt một số quyền truy xuất tài nguyên của hệ điều hành. Do đó nên để thuận tiện cho việc sử dụng thì mình khuyến khích là bạn nên chủ động chọn nguồn `OpenSuse Tumbleweed` để cài đặt bất kỳ khi nào có thể. Trong trường hợp ứng dụng mà bạn đang tìm kiếm chỉ có phiên bản của `FlatHub` thì hãy tạm dừng một chút chưa cài đặt vội. Chúng ta sẽ nói thêm về việc tự thực hiện thao tác tải về thủ công và tự quản lý việc cài đặt.
 
-## Google Download
+## Tải về thủ công
 
-Việc sử dụng một ứng dụng quản lý ở dạng cửa hàng ứng dụng như `Gnome Software` rất thuận tiện, nhưng có một điểm giới hạn đó là không phải nhà phát triển phần mềm nào cũng thực hiện việc trưng bày ứng dụng của họ vào các gian hàng điện tử. Và ngay cả khi sử dụng Windows với Microsoft Store đã xuất hiện cách đây nhiều năm thì vẫn có rất nhiều ứng dụng phổ biến không được các nhà phát triển đưa vào đó. Vì vậy nên trong nhiều tình huống, chúng ta sẽ cần phải thực hiện việc tìm kiếm qua Google và tải về tệp cài đặt để thực hiện thao tác cài đặt thủ công.
+Việc sử dụng một ứng dụng quản lý ở dạng cửa hàng ứng dụng như `Gnome Software` rất thuận tiện, nhưng có một điểm giới hạn đó là không phải nhà phát triển phần mềm nào cũng thực hiện việc trưng bày ứng dụng của họ vào các gian hàng điện tử. Và ngay cả khi sử dụng Windows với Microsoft Store đã xuất hiện cách đây nhiều năm thì vẫn có rất nhiều ứng dụng phổ biến không được các nhà phát triển đưa vào đó.
 
+Vì vậy nên trong nhiều tình huống, chúng ta sẽ cần phải thực hiện việc tìm kiếm qua Google và tải về tệp cài đặt để thực hiện thao tác cài đặt thủ công. Và ở đây, việc tải về thủ công các gói cài đặt phần mềm cho `Linux` cũng khá tương đồng với Windows. Để nói thêm về điểm này thì các gói cài đặt phần mềm trên `Linux` có hai dạng đóng gói phổ biến:
 
-Next: [..](#)
+- Các tệp định dạng `.rpm` dành cho bản phân phối `Linux` có tên là `Red Hat` và các bản phân phối khác xây dựng dựa trên `Red Hat` ví dụ như `Fedora`. Đây là định dạng nén được `OpenSuse` hỗ trợ vì lý do lịch sử từ khi vay mượn code của `Red Hat` tuy nhiên `OpenSuse` vẫn được phát triển hầu hết độc lập so với `Red Hat`.
+- Các tệp định dạng `.deb` dành cho bản phân phối `Linux` có tên là `Debian` và các bản phân phối khác xây dựng dựa trên `Debian`. Nhánh này bao gồm một số tên gọi tiêu biểu là `Ubuntu`, `Linux Mint`, `Endless OS`, v.v...
+
+Để làm ví dụ minh họa thì chúng ta sẽ thử tải về trình duyệt [`Google Chrome`](https://www.google.com/chrome) và tiến hành click đúp để cài đặt giống như khi sử dụng Windows. Khi tìm tới trang web của Google để nhấn tải bộ cài đặt Google Chrome thì trang web đó sẽ tự động xác định được hệ điều hành chúng ta đang sử dụng là `Linux` và đưa ra hai lựa chọn tệp tải về là `.deb` và `.rpm`.
+
+`Google Chrome Download`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-software/google-chrome-download.jpg)
+
+Sau khi tải về xong, bạn mở ứng dụng `Files` và chọn lối tắt tới thư mục `Downloads` ở khu vực phía bên trái. Sau đó tiếp tục click đúp vào tệp cài đặt `Google Chrome` để mở trình cài đặt. Lúc này bạn sẽ thấy có yêu cầu nhập mật khẩu để cấp quyền quản trị cho thao tác chạy tệp này.
+
+`Google Chrome Installer`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-software/google-chrome-installer.jpg)
+
+Sau khi nhập đúng mật khẩu và nhấn phím `Enter` để xác nhận cấp quyền thực thi tệp thì hệ điều hành sẽ mở ra một chương trình cài đặt. Đối với các bản phân phối `Linux` khác thì đó sẽ là `Gnome Software` hoặc chương trình quản lý gói phần mềm của các môi trường `Dekstop` khác trong trường hợp bạn có thể sẽ thử dùng `KDE`, `Cinnamon`, v.v... trong tương lai. Tuy nhiên với `OpenSuse` thì chúng ta sẽ thấy sử dụng chương trình quản lý gói phần mềm đặc trưng của hệ điều hành này là `OpenSuse YaST`.
+
+`Google Chrome - YaST`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-software/google-chrome-yast.jpg)
+
+Nhìn chung thì các trình cài đặt sẽ đều làm chung một tác vụ khi mở các gói cài đặt `.rpm` hay `.deb`, đó là dựa vào code khai báo cấu hình yêu cầu để tìm và tải về các gói phần mềm liên quan hỗ trợ cho phần mềm chính. Như trong ảnh chụp màn hình minh hoạ ở phía trên thì chúng ta có gói phần mềm chính ở dòng đầu tiên là phiên bản ổn định `stable` của `Google Chrome`, và các gói phần mềm hỗ trợ được `YaST` tìm thấy và đánh dấu sẵn là sẽ được cài đặt kèm theo. 
+
+Bây giờ chúng ta chỉ cần click vào nút `Accept` và tiếp tục chọn `Continue` để bắt đầu cài đặt. Trong khi tiến trình cài đặt được chạy thì có nhiều trường hợp `YaST` sẽ hiện thông báo là gói cài đặt không còn nguyên vẹn do `YaST` được `OpenSuse` thiết kế với tiến trình kiểm tra rất nghiêm ngặt về mặt hình thức. Thông báo này sẽ đưa ra các tùy chọn hủy cài đặt hoặc cứ tiếp tục tiến hành cài đặt mà không cần phải xử lý vấn đề code khai báo thiếu mã khóa kiểm tra gì đó đại loại như để đảm bảo tính toàn vẹn của tập tin.
+
+`Google Chrome Pinned`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-software/google-chrome-pinned.jpg)
+
+Sau khi thanh tiến trình cài đặt `Google Chome` đã hoàn thành thì chúng ta click vào nút `Finish` để đóng cửa sổ `YaST` và mở `Dashboard` để tìm biểu tượng `Google Chome` và gắn xuống thanh `Dash`. Mình để `Chrome` ở vị trí thứ hai ngay sau `Firefox` trong ảnh chụp màn hình ở trên để không lẫn với các ứng dụng mặc định của `Gnome`.
+
+## YaST Software
+
+Nhân tiện trong thao tác cài đặt vừa rồi chúng ta đã sử dụng tính năng tự động tìm và cài đặt các gói phần mềm hỗ trợ bởi `YaST Software`, ở đây chúng ta sẽ thử nhờ `YaST` tìm kiếm gói `Unikey` để bổ sung thêm bộ gõ Tiếng Việt cho hệ thống.
+
+Trước hết chúng ta cần mở bố cục `Activities` và nhờ `Gnome` tìm kiếm với từ khóa `soft`, và trong kết quả tìm kiếm thì chúng ta sẽ thấy có hai ứng dụng `YaST Software...` có biểu tượng gần giống hệt nhau. Trình quản lý tải về từ nguồn `internet` mà chúng ta đã sử dụng trước đó là biểu tượng có hình mũi tên tải xuống và cái còn lại là để quản lý từ các nguồn lưu trữ tĩnh như DVD hay ổ cứng.
+
+`YaST Software - Gnome Search`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/yast-software/in-shell-search)
+
+Sau khi click vào biểu tượng để mở ứng dụng này thì có thể bạn sẽ thấy một thông báo về nguồn tải về của gói phần mềm `Google Chrome` ở phần trước chưa được xác nhận là đảm bảo an toàn. Lúc này hãy chọn `Trust` để hệ thống đánh dấu nguồn tải về là đáng tin cậy, và như vậy thì `Google Chrome` cũng sẽ được tự động cập nhật khi có phiên bản mới giống như các ứng dụng khác trong hệ thống.
+
+`YaST Software - Google Chrome Trust`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/yast-software/google-chrome-trust.jpg)
+
+Khi cửa sổ chính của `YaST Software` được mở thì chúng ta có thể nhìn thấy thẻ `Search` đang được mở sẵn với ô từ khóa và bảng kết quả trống không. Tiếp tục gõ vào ô từ khóa là `unikey` và nhấn `Enter`, chúng ta sẽ thấy có các gói cài đặt `unikey` để tích hợp vào các phần mềm quản lý bàn phím khác nhau. Ở đây chúng ta chọn click chuột vào ô đánh dấu của `ibus-unikey` vì `Gnome` sử dụng phần mềm quản lý bàn phím mặc định có tên là `iBus`. Sau đó lại nhấn nút `Accept` và `Continue` để bắt đầu cài đặt cho đến khi có thể chọn `Finish`.
+
+Sau khi đã cài đặt xong gói `ibus-unikey`, chúng ta cần đăng xuất và đăng nhập lại để `Gnome` cập nhật danh sách bộ gõ khả dụng, hoặc khởi động lại hệ điều hành cũng được. Sau đó trong bố cục `Activites`, tiếp tục gõ từ khóa `key` để tìm thiết lập `Keyboard` trong ứng dụng tùy chỉnh hệ thống `Settings`.
+
+`Settings Keyboard - Gnome Search`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-keyboard/in-shell-search.jpg)
+
+Trong cửa sổ của ứng dụng `Settings` lúc này chúng ta sẽ thấy ở phần đầu tiên `Input Sources` chỉ có duy nhất bộ gõ Tiếng Anh. Tiếp tục click vào biểu tượng dấu cộng `+` ngay bên dưới để kích hoạt thêm các bộ gõ ngôn ngữ khác thì chúng ta sẽ thấy có một cửa sổ phụ liệt kê danh sách các ngôn ngữ.
+
+`Input Sources - Settings Keyboard`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-keyboard/input-sources.jpg)
+
+Tiếp tục chọn biểu tượng dấu ba chấm sổ dọc ở phía cuối danh sách và gõ từ khóa tìm kiếm `viet` để sàng lọc nhanh và chọn `Vietnamese`. Lúc này chúng ta sẽ thấy trong số các bộ gõ Tiếng Việt khả dụng đã có `Unikey` với chế độ gõ `Telex` quen thuộc kiểu như `o + o = ô` thay vì `o + 6 = ô`... Sau đó click vào nút `Add` ở góc phía trên bên phải để kích hoạt thêm bộ gõ này. Sau đó quan sát ở trên thanh điều hướng chính thì chúng ta sẽ có thêm nút biểu thị bộ gõ có thể chuyển qua lại giữa bộ gõ Tiếng Anh `en` và bộ gõ Tiếng Việt `vi`.
+
+`Input Sources - Top Panel`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-keyboard/system-tray.jpg)
+
+Như vậy là những yếu tố thiết yếu cho nhu cầu sử dụng máy tính phổ thông đã sẵn sàng. Trong các bài viết tiếp theo, chúng ta sẽ nói về một số thao tác tùy chỉnh hệ thống căn bản và sau đó sẽ lần lượt tìm hiểu chi tiết về từng ứng dụng thay thế cho hệ sinh thái của Microsoft Windows.
+
+Next: [Tùy Chỉnh Hệ Chống](./02-tuy-chinh-he-thong)
 
