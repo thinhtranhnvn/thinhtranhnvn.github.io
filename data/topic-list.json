@@ -30,16 +30,16 @@
       "description": "Chia sẻ kinh nghiệm tự học Tiếng Anh."
    },
    {
+      "id": "cantonese",
+      "title": "Cantonese",
+      "keywords": [],
+      "description": "Chia sẻ kinh nghiệm tự học Tiếng Trung."
+   },
+   {
       "id": "nihongo",
       "title": "Nihongo",
       "keywords": [],
       "description": "Chia sẻ kinh nghiệm tự học Tiếng Nhật."
-   },
-   {
-      "id": "mandarin",
-      "title": "Mandarin",
-      "keywords": [],
-      "description": "Chia sẻ kinh nghiệm tự học Tiếng Trung."
    },
    {
       "id": "linguistic",
