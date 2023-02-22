@@ -22,7 +22,7 @@ Bây giờ, trong bố cục tổng quan, nếu như chúng ta di trỏ chuột 
 
 Nếu như chúng ta mở ứng dụng `Firefox` và `Mail - Evolution` trong `Desktop` đầu tiên, sau đó tiếp tục  mở ứng dụng `Word - LibreOffice Writer` và `Files` trong `Desktop` thứ hai; Thì `Gnome` sẽ tiếp tục tự động tạo ra thêm một `Desktop` mới ở phía bên phải để dự phòng trường hợp chúng ta sẽ có thể tạo ra một nhóm công việc mới nữa.
 
-`Activies Overview`
+`Activities Overview`
 ![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/activities-overview.jpg)
 
 Và đồng thời thì chúng ta còn có thêm một thanh điều hướng giữa các `Desktop` hiện ra ở phía dưới ô tìm kiếm trong bố cục tổng quan `Activites`. Tuy nhiên, từ quan điểm cá nhân thì mình nghĩ rằng sẽ rất thuận tiện cho người mới sử dụng `Gnome` nếu như thanh điều hướng mới xuất hiện kia luôn luôn được hiển thị ngay cả khi chỉ có hai `Desktop`. Vì vậy nên bây giờ chúng ta sẽ thực hiện một chút tùy chỉnh và cũng là để làm quen với công cụ tìm kiếm `Shell Search` cực kỳ mạnh mẽ của `Gnome`.
@@ -30,14 +30,14 @@ Và đồng thời thì chúng ta còn có thêm một thanh điều hướng gi
 Bây giờ, khi đang ở chế độ xem tổng quan `Activities`, không cần click vào ô tìm kiếm, chúng ta sẽ gõ thử phím `m`.
 
 `Activies Search`
-![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/activies-search.jpg)
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/activities-search.jpg)
 
 Như vậy là ô tìm kiếm sẽ được tự động kích hoạt khi chúng ta bắt đầu gõ từ khóa và kết quả tìm kiếm sẽ bao gồm hai loại chính: Đầu tiên là các ứng dụng có tên `name` hoặc nội dung mô tả ngắn `description` có chứa từ khóa sẽ được liệt kê trên một hàng ngang duy nhất ngay dưới ô tìm kiếm; Và tiếp theo là nội dung bên trong các ứng dụng đã được cài đặt trong máy nếu như các lập trình viên tạo ra các ứng dụng đó có phát triển đủ tính năng tích hợp với `Gnome Shell`.
 
 Ở đây, nếu như bạn cuộn danh sách kết quả xuống thì sẽ thấy các tùy chọn hệ thống trong ứng dụng `Settings` sẽ được ưu tiên trước, sau đó là đến ứng dụng `Characters` và `Clock`. Và trong nhóm kết quả hiện tại thì chúng ta đang cần thực hiện tùy chỉnh hệ thống có liên quan đến quản lý đa nhiệm `Multitasking` và ở ngay dòng đầu tiên của `Settings`. Bạn có thể click chuột vào dòng đó hoặc sử dụng các phím mũi tên để di chuyển con trỏ bàn phím tới dòng đó rồi nhấn phím `Enter`.
 
 `Multitasking Settings`
-![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/multitasking-settings.jpg)
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop/settings-multitasking.jpg)
 
 Ở phần đầu tiên `General` thì chúng ta đang thấy hai chức năng được kích hoạt sẵn: `Hot Corner` là khi chúng ta di trỏ chuột chạm vào góc phía trên bên trái màn hình thì bố cục tổng quan sẽ tự động được kích hoạt mà không cần phải thực hiện click vào nút `Activites`; Và `Active Screen Edges` là khi chúng ta sử dụng trỏ chuột để nhấn giữ và di chuyển một cửa sổ ứng dụng chạm vào các cạnh `trái - trên - phải` của màn hình `Desktop`. Bạn có thể dành chút thời gian để thử các thao tác này, rất đơn giản và hữu dụng.
 
