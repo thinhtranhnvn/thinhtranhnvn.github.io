@@ -4,6 +4,12 @@
       "title": "Giới Thiệu",
       "keywords": [ "linux", "giao diện desktop gnome", "giới thiệu" ],
       "description": "Giới thiệu giao diện Gnome Desktop cho người mới sử dụng Linux."
+   },
+   {
+      "slug": "01-cai-dat-ung-dung",
+      "title": "Cài Đặt Ứng Dụng",
+      "keywords": [ "linux", "giao diện desktop gnome", "cài đặt và gỡ bỏ ứng dụng" ],
+      "description": "Giới thiệu cửa hàng phần mềm Gnome Store và các phương thức cài đặt phần mềm."
    }
 ]
 

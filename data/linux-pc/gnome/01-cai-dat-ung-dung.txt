@@ -1,5 +1,57 @@
-# Cài Đặt Ứng Dụng
+# Các Thao Tác Cài Đặt Thêm Và Gỡ Bỏ Ứng Dụng Trong Môi Trường OpenSuse Gnome
 
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-software/pre-installed.jpg)
+
+Trước khi nói tới các thao tác cài đặt thêm và gỡ bỏ ứng dụng trong môi trường `OpenSuse Gnome`, chúng ta hãy điểm qua một chút về các ứng dụng đã được cài đặt sẵn kèm theo trong bộ cài của `OpenSuse`. Trong ảnh chụp màn hình ở phía trên thì mình đã cố gắng gắn tất cả những ứng dụng phổ biến vào khu vực `Dash` để bạn có thể kiểm tra theo danh sách liệt kê sau đây. Chúng ta sẽ điểm danh các ứng dụng trên thanh `Dash` theo thứ tự từ trái qua phải:
+
+- `Mozilla Firefox` - Trình duyệt web.
+- `Gnome Evolution` - Quản lý e-mail, tương đương với Microsoft Outlook hoặc `Mozilla Thunderbird`.
+- `Gnome Contacts` - Quản lý danh bạ, có thể đồng bộ với các dịch vụ trực tuyến ví dụ như Google Contacts.
+- `Gnome Files` - Quản lý các thư mục và các tệp, tương đương với Windows Explorer.
+- `Document Viewer` - Đọc các tệp sách e-book có tên gốc là `Gnome Evince`, tương đương với Adobe Acrobat PDF Reader nhưng hỗ trợ nhiều định dạng E-book hơn so với Adobe Acrobat.
+- `Gnome Gedit` - Soạn thảo tệp nội dung thuần văn bản, tương đương với Windows Notepad.
+- `LibreOffice Writer` - Soạn thảo văn bản đa nội dung, tương đương với Microsoft Word.
+- `LibreOffice Impress` - Soạn thảo nội dung trình chiếu, tương đương với Microsoft PowerPoint.
+- `LibreOffice Calc` - Kẻ bảng tính, tương đương với Microsoft Excel.
+- `LibreOffice Base` - Quản lý cơ sở dữ liệu, tương đương với Microsoft Access.
+- `Cheese` - Điều khiển webcam để chụp ảnh hoặc quay phim.
+- `Image Viewer` - Mở và xem các tệp ảnh có tên gốc là `Eye of Gnome`, tương đương với Windows Photo Viewer (Windows 8.1 trở về trước).
+- `Gnome Photos` - Quản lý ảnh theo album, tương đương với Windows Photos.
+- `Gnome Music` - Ứng dụng mở các tệp audio, tương đương với Windows Groove Music.
+- `Gnome Videos` - Ứng dụng mở các tệp video, tương đương với Windows Movies.
+- `GIMP` - Ứng dụng chỉnh sửa ảnh, tương đương với Adobe Photoshop.
+- `Gnome Software` - Cửa hàng ứng dụng online, tương đương với Microsoft Store.
+
+Trong số các tác vụ phổ thông thì ở đây `OpenSuse` đã tích hợp vào bộ cài đặt gần như đầy đủ tất cả vì vậy nên mình cũng không biết bạn sẽ muốn cài đặt thêm ứng dụng nào. Do đó nên chúng ta sẽ lấy ví dụ với các ứng dụng tiện ích nhỏ để bạn nắm được tất cả các cách thức cài đặt ứng dụng trong môi trường `OpenSuse Gnome`. 
+
+## Gnome Software
+
+Đây là cửa ngõ gần nhất và là cách thức đơn giản nhất để kết nói máy tính của bạn với các nhà phát triển ứng dụng dành cho môi trường Linux nói riêng. Việc sử dụng `Gnome Software` rất đơn giản và không yêu cầu người dùng phải đăng ký tài khoản hay cung cấp thông tin xác thực gì cả. Chúng ta chỉ việc mở ứng dụng `Gnome Software` và duyệt qua danh sách các ứng dụng đang được trưng bày ở đó. Chọn đúng ứng dụng có liên quan tới tác vụ cần hỗ trợ và nhấn cài đặt.
+
+`Software Store`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-software/software-store.jpg)
+
+Mặc định khi mới mở ứng dụng `Gnome Software` thì chúng ta đang được xem giao diện trang `Explore` với các ứng dụng phổ biến hoặc đáng chú ý được bày ra trước. Trong trường hợp đã biết trước tên của ứng dụng muốn tìm và cài đặt thì chúng ta có thể sử dụng công cụ tìm kiếm của `Gnome Software` bằng cách nhấn vào biểu tượng tìm kiếm ở góc phía bên trái và bắt đầu gõ từ khóa tìm kiếm.
+
+Ở phía bên phải của thẻ `Explore` thì chúng ta còn có thẻ `Installed` sẽ liệt kê danh sách các ứng dụng đã được cài đặt từ nguồn `Gnome Store`, và thẻ `Updates` để cập nhật các ứng dụng này lên phiên bản mới khi có thông báo gợi ý cập nhật. Bây giờ chúng ta sẽ thử tìm và cài đặt thêm trình duyệt `Gnome Epiphany` bằng cách gõ tìm kiếm với từ khóa `epiphany`.
+
+`Software Search`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-software/software-search.jpg)
+
+Tiếp tục click vào biểu tượng thứ hai có tên hiển thị là `Web` trong kết quả tìm kiếm.
+
+`Software Page`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-software/software-epiphany)
+
+Ở đây chúng ta chỉ cần click vào nút `Isntall` là phần mềm này sẽ được tự động tải về và cài đặt vào hệ điều hành. Tuy nhiên, ở điểm này mình có một chút lưu ý về việc quản lý nguồn ứng dụng của Linux khi cài đặt qua một kênh online như `Gnome Software` ở đây.
+
+Ở phía bên dưới nút `Install` có một nhãn sổ xuống mà mình đã click vào để thể hiện trong ảnh chụp màn hình. Ở đây chúng ta có thể chọn một trong hai nguồn để tải về ứng dụng `Web - Gnome Epiphany`, một là của [`FlatHub.org`](https://flathub.org) và một là của `OpenSuse Tumbleweed`.
+
+Các phiên bản ứng dụng của `FlatHub` được thiết kế ở dạng sandbox để bảo vệ máy tính của bạn bằng cách khóa bớt một số quyền truy xuất tài nguyên của hệ điều hành. Do đó nên để thuận tiện cho việc sử dụng thì mình khuyến khích là bạn nên chủ động chọn nguồn `OpenSuse Tumbleweed` để cài đặt bất kỳ khi nào có thể. Trong trường hợp ứng dụng mà bạn đang tìm kiếm chỉ có phiên bản của `FlatHub` thì hãy tạm dừng một chút chưa cài đặt vội. Chúng ta sẽ nói thêm về việc tự thực hiện thao tác tải về thủ công và tự quản lý việc cài đặt.
+
+## Google Download
+
+Việc sử dụng một ứng dụng quản lý ở dạng cửa hàng ứng dụng như `Gnome Software` rất thuận tiện, nhưng có một điểm giới hạn đó là không phải nhà phát triển phần mềm nào cũng thực hiện việc trưng bày ứng dụng của họ vào các gian hàng điện tử. Và ngay cả khi sử dụng Windows với Microsoft Store đã xuất hiện cách đây nhiều năm thì vẫn có rất nhiều ứng dụng phổ biến không được các nhà phát triển đưa vào đó. Vì vậy nên trong nhiều tình huống, chúng ta sẽ cần phải thực hiện việc tìm kiếm qua Google và tải về tệp cài đặt để thực hiện thao tác cài đặt thủ công.
 
 
 Next: [..](#)
