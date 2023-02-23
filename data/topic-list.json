@@ -6,40 +6,16 @@
       "description": "Tự học cách cài đặt và sử dụng hệ điều hành Linux và các phần mềm ứng dụng thay thế cho hệ sinh thái của Microsoft Windows."
    },
    {
-      "id": "web-dev",
-      "title": "Web Dev_",
-      "keywords": [ "web developement", "tutorial", "beginner", "html", "css", "javascript", "jquery", "c", "nodejs", "xml", "xquery" ],
-      "description": "Tự học lập trình Web một cách thật tự nhiên."
-   },
-   {
-      "id": "app-dev",
-      "title": "App Dev_",
-      "keywords": [ "foss", "app development", "tutorial", "beginner", "java", "awt swing" ],
-      "description": "Tự học lập trình App một cách thật tự nhiên."
-   },
-   {
-      "id": "android",
-      "title": "Android",
-      "keywords": [ "android user", "phone", "tablet", "software", "application", "office", "design", "photography", "video editing", "code" ],
-      "description" : "Chia sẻ kinh nghiệm sử dụng các thiết bị Android."
-   },
-   {
-      "id": "english",
-      "title": "English",
+      "id": "design",
+      "title": "Design",
       "keywords": [],
-      "description": "Chia sẻ kinh nghiệm tự học Tiếng Anh."
+      "description": "Tự học lý thuyết thiết kế đồ họa và thực thể."
    },
    {
-      "id": "cantonese",
-      "title": "Cantonese",
+      "id": "coding",
+      "title": "Coding",
       "keywords": [],
-      "description": "Chia sẻ kinh nghiệm tự học Tiếng Trung."
-   },
-   {
-      "id": "nihongo",
-      "title": "Nihongo",
-      "keywords": [],
-      "description": "Chia sẻ kinh nghiệm tự học Tiếng Nhật."
+      "description": "Tự học lập trình một cách thật tự nhiên."
    },
    {
       "id": "linguistic",
