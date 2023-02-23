@@ -1,0 +1,56 @@
+# Ứng Dụng Gnome Tweaks
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-tweaks/in-shell-search.jpg)
+
+Trong bài viết này chúng ta sẽ lướt nhanh ứng dụng hỗ trợ tùy chỉnh giao diện `Gnome Tweaks` để biết được tiềm năng tùy biến giao diện người dùng mà `Gnome` cung cấp. Rất có thể, sau khi đã quen với việc sử dụng `Gnome` thì bạn sẽ muốn thực hiện điều chỉnh bố cục của `Gnome Desktop` theo ý muốn riêng.
+
+Ứng dụng này cho phép thực hiện một số yếu tố liên quan tới phong cách hiển thị của giao diện người dùng do `Gnome` cung cấp. Ví dụ: kiểu chữ, phong cách hiển thị của các cửa sổ và các biểu tượng ứng dụng, các ứng dụng tự động khởi động cùng hệ thống v.v... Ở đây mình sẽ liệt kê nhanh một số tùy chỉnh ở mỗi nhóm.
+
+## Appearance
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-tweaks/appearance.jpg)
+
+Đầu tiên là mục `Appearance` với các tùy chỉnh cho phép thay đổi phong cách hiển thị của các cửa sổ ứng dụng và gói biểu tượng ứng dụng. Tuy nhiên, tùy chọn thay đổi phong cách hiển thị `Gnome Shell` ở đây sẽ yêu cầu cài đặt thêm một gói hỗ trợ `extension` từ trang web [`extensions.gnome.org`](https://extensions.gnome.org/).
+
+Gợi ý ở đây là bạn sẽ cần mở trang web trên bằng trình duyệt `Firefox` để cài `add-on` tích hợp với trang web và hỗ trợ thao tác tự động cài đặt `extension` bằng các công tắc trong trang web đó. Sau đó chọn cài đặt `extension` có tên là `User Themes`.
+
+Sau đó bạn có thể tiếp tục mở `YaST Software` để tìm cài đặt các gói `yaru` thể hiện phong cách hiển thị của `Ubuntu` và thử nghiệm tính năng này. Cũng rất có thể rằng bạn sẽ thích `Yaru` bởi mình thấy phong cách thiết kế của `Ubuntu` cũng khá độc đáo và đã từng sử dụng bộ phong cách hiển thị `Yaru` trong một thời gian dài.
+
+## Fonts
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-tweaks/fonts.jpg)
+
+Tiếp theo là mục `Fonts` hỗ trợ thay đổi phong cách hiển thị các tiêu đề trong cửa sổ của các ứng dụng và cả nội dung chữ được đọc bởi trình đọc văn bản `Document Viewers - Gnome Evince`. Nếu muốn thử nghiệm nhanh tính năng này, bạn hãy thử chuyển các lựa chọn kiểu chữ sang `Times New Roman` để quan sát. Hiện tại `Gnome` đang sử dụng bộ font mặc định là `Canratell` với thiết kế lược giản bớt các nét phụ họa ở chân các chữ cái và các nét lượn giống như font `Arial` quen thuộc.
+
+Thông thường thì mình sẽ giữ nguyên việc sử dụng font `Canratell` mặc định cho các thành phần như tiêu đề ở thanh ngang phía trên các cửa sổ ứng dụng, tên các thẻ tùy chọn, và các nút nhấn, v.v... Duy nhất có vị trí `Document Text` sẽ thường chuyển sang một font có chi tiết nét nhiều hơn ví dụ như `Times New Roman` hoặc `Google Noto Serif` và chỉnh kích thước chữ tầm `15px - 18px` để có trải nghiệm đọc sách e-book PDF tốt hơn.
+
+Lưu ý, trong trưởng hợp bạn sử dụng máy tính có màn hình lớn và thấy các nội dung hơi nhỏ thì đừng xử lý bằng cách tăng kích thước font chữ ở các tùy chọn trên. Bạn hãy để ý ở dòng cuối cùng trong bảng đó có chỉ số `Scaling Factor`, chỉ số này sẽ giúp đồng thời tăng đều kích thước của các thành phần đồ họa chứ không chỉ các nội dung chữ. Nhờ vậy thì kết quả hiển thị sẽ có sự cân bằng và hài hòa thay vì các dòng chữ lớn được đặt trong các ô hiển thị nhỏ.
+
+## Keyboard & Mouse
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-tweaks/keyboard-mouse.jpg)
+
+Hạng mục tiếp theo `Keyboard & Mouse` không có gì đáng lưu ý, ở đây mình chỉ để kích hoạt `Pointer Location` để con trỏ chuột sẽ phát màu khi nhấn phím `Ctrl` và như vậy sẽ dễ tìm thấy khi mất dấu. Nếu bạn đang sử dụng laptop thì có thể kích hoạt thêm `Touchpad - Disable while typing` để tạm dừng chức năng của khu vực cảm ứng trỏ chuột khi đang gõ phím soạn thảo văn bản.
+
+## Startup Applications
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-tweaks/startup-applications.jpg)
+
+Hạng mục `Startup Applications` giúp quản lý các ứng dụng tự động khởi động cùng hệ điều hành sau khi đăng xuất hay tắt máy và khởi động lại. Trong ảnh minh họa thì mình đã bỏ đi ứng dụng `OpenSuse Welcome`, sau đó chọn `Gnome Web` và `Gnome Evolution` để tự động khởi động cùng hệ thống.
+
+## Top Bar
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-tweaks/top-bar.jpg)
+
+Phần tùy chỉnh cho thanh điều hướng chính `Top Bar` chỉ bao gồm các tùy chọn liên quan tới khu vực hiển thị ngày tháng và đồng hồ. Ở đây có thể bạn sẽ muốn kích hoạt thêm lựa chọn hiển thị đánh số thứ tự tuần trong năm khi nhấn vào khu vực hiển thị ngày giờ để mở xem chi tiết. Đây cũng là khu vực sẽ chứa tất cả các thông báo của hệ thống mà bạn chưa đọc. Các thông báo này tới từ các ứng dụng đã cài đặt hoặc từ các sự kiện của hệ thống ví dụ như gợi ý cập nhật phần mềm.
+
+## Windows Titlebars
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-tweaks/windows-titlebars.jpg)
+
+Phần tùy chỉnh cho thanh tiêu đề của các ứng dụng `Windows Titlebars` thì mình thường dùng thao tác click đúp `Double-Click` vào thanh tiêu đề để mở rộng cửa sổ ứng dụng tới kích thước tối đa; Và thao tác click chuột phải `Secondary-Click` vào thanh tiêu đề để mở menu tùy chỉnh cửa sổ đó. Bên cạnh đó thì mình cảm thấy là nên cho hiển thị thêm nút thu nhỏ `Minimize` bên cạnh nút đóng cửa sổ ứng dụng để hỗ trợ thao tác này khi bàn phím không khả dụng.
+
+Ở hạng mục cuối cùng là `Windows` thì không có gì đáng lưu ý nên mình không chụp ảnh màn hình ở đây. Tuy nhiên cũng có thể bạn sẽ muốn thử kích hoạt tùy chọn `Center New Window` ở đó để `Gnome` sẽ tự động đặt các cửa sổ mới mở vào giữa màn hình. Như vậy thì thao tác sử dụng tiếp theo sẽ là sử dụng trỏ chuột để di chuyển cửa sổ mới mở vào một trong các cạnh của màn hình để sắp xếp song song với một ứng dụng khác hoặc mở rộng kích thước tối đa. 
+
+Next: [Ứng Dụng Gnome Extensions](./04-ung-dung-gnome-extensions)
+

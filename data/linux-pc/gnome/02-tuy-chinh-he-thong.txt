@@ -1,6 +1,84 @@
-# An Article Written in Markdowwn
+# Một Số Thao Tác Tùy Chỉnh Hệ Thống Thường Gặp
 
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-settings/in-shell-search.jpg)
 
+Các thao tác tùy chỉnh hệ thống trong bài viết này chỉ mang tính chất tham khảo và bạn có thể cần cân nhắc trước khi áp dụng mỗi sự điều chỉnh mà mình chia sẻ ở đây. Những thiết lập mà mình bổ sung là để thay đổi những yếu tố giao diện người dùng mà mình cảm thấy rằng rất có thể là `Gnome` có sự tối giản hóa hơi quá mức cần thiết và không hẳn phù hợp với người mới sử dụng; Hoặc một số tùy chỉnh mà cá nhân mình cảm thấy là cần thiết sau một thời gian sử dụng `Gnome` kha khá dài.
 
-Next: [..](#)
+## Tùy Chỉnh Phím Tắt
+
+Các tổ hợp phím tắt rất hữu ích đối với những ai sử dụng máy tính với tần suất nhiều, bởi sau khi đã quen với các chức năng của hệ điều hành và các ứng dụng thì việc thao tác bằng các tổ hợp phím sẽ nhanh hơn rất nhiều so với sử dụng con trỏ chuột.
+
+Để mở thiết lập các phím tắt, chúng ta mở ứng dụng `Settings` và sẽ thấy bảng tùy chọn liên quan tới bàn phím `Keyboard` được mở mặc định do được sử dụng ở lần thiết lập trước đó. Ở đây chúng ta cuộn tới cuối bảng điều khiển ở phía bên phải sẽ thấy có mục `Keyboard Shortcuts` với một lựa chọn duy nhất để mở giao diện tùy chỉnh các bộ phím tắt.
+
+`Settings Keyboard`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-settings/keyboard.jpg)
+
+Sau khi click chọn mở tùy chỉnh `Keyboard Shotcuts`, chúng ta sẽ thấy có thêm một bảng điều khiển nhỏ với các nhóm thao tác có thể gắn kèm phím tắt. Ở đây chúng ta lại có thêm một ô tìm kiếm để sàng lọc nhanh để chọn được thao tác cần gắn phím tắt. Tuy nhiên, hãy dành một chút thời gian để điểm danh qua các nhóm thao tác ở đây.
+
+`Keyboard Shortcuts`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-settings/keyboard-shortcuts.jpg)
+
+- `Accessibilty` - Các thao tác tùy chỉnh giao diện để tăng tính trực quan cho nội dung hiển thị. Ví dụ: tăng hay giảm cỡ chữ, phóng to hay thu nhỏ một phần giao diện bằng hiệu ứng kính lúp, v.v...
+- `Launchers` - Các thao tác hỗ trợ mở nhanh các ứng dụng. Ví dụ: mở nhanh thư mục chứa dữ liệu của người dùng, mở trình duyệt web mặc định, mở ứng dụng quản lý e-mail mặc định, v.v...
+- `Navigation` - Các thao tác hỗ trợ di chuyển nhanh con trỏ làm việc giữa các không gian làm việc `Desktop` và giữa các cửa sổ ứng dụng đang mở.
+- `Screenshots` - Các thao tác hỗ trợ chụp ảnh màn hình và tự động lưu lại thành các tệp ảnh trong thư mục `Pictures`.
+- `Sound and Media` - Các thao tác điều khiển căn bản cho các ứng dụng chạy audio, video.
+- `System` -  Các thao tác tổng quan của hệ thống. Ví dụ: đăng xuất tài khoản người dùng, khóa màn hình, v.v...
+- `Typing` - Các thao tác hỗ trợ chuyển đổi giữa các bộ gõ ngôn ngữ khác nhau.
+- `Windows` - Các thao chung điều khiển một cửa sổ ứng dụng bất kỳ. Ví dụ: ẩn hoặc đóng cửa sổ ứng dụng, mở rộng cửa sổ ứng dụng đầy màn hình hoặc lấp nửa màn hình bên trái hoặc bên phải, v.v...
+- `Custom Shortcuts` - Các thao tác tự bổ sung bởi người dùng bằng cách viết các tệp code tự động các chuỗi thao tác thường gặp trong bằng ngôn ngữ lập trình nền `bash`.
+
+Ok. Như vậy là chúng ta đã biết được tổng quan về các nhóm thao tác có thể gán phím tắt theo ý muốn. Ở đây mình sẽ chỉ liệt kê một vài thao tác mà mình thường gán phím tắt để bạn tham khảo và áp dụng nhanh nếu bạn cũng có thói quen sử dụng tương tự. Lưu ý, phím `Logo` trên bàn phím còn thường được gọi với tên khác là `Super`.
+
+- Nhóm `Launcher`:
+   - `Home folder` - mở thư mục chứa dữ liệu người dùng - phím tắt `Logo + E`
+   - `Launch email client` - khởi động trình duyệt mail mặc định - phím tắt `Logo + M`
+   - `Launch web browser` - khởi động trình duyệt web mặc định - phím tắt `Logo + W`
+- Nhóm `Navigation`:
+   - `Hide all normal windows` - ẩn tất cả các cửa sổ ứng dụng - phím tắt `Logo + D`
+   - `Switch application` - chuyển con trỏ hoạt động sang ứng dụng khác - phím tắt `Logo + Tab`
+   - `Switch window of an application` - chuyển cửa sổ của một ứng dụng - phím tắt `Logo + \``
+- Nhóm `Screenshot`:
+   - `Take a screenshot` - chụp ảnh toàn bộ màn hình - phím tắt `PrintScreen`
+   - `Take a screenshot of a window` - chụp ảnh một cửa sổ ứng dụng - phím tát `Logo + PrintScreen`
+   - `Take a screenshot intractively` - khoanh vùng một phần của màn hình để chụp ảnh - phím tắt `Shift + PrintScreen`
+- Nhóm `System`:
+   - `Show the run command prompt` - hiển thị khung chạy một lệnh terminal đơn - phím tắt `Logo + C`
+- Nhòm `Windows`:
+   - `Close window` - đóng một cửa sổ ứng dụng - phím tắt `Logo + Q`
+   - `Hide window` - ẩn một cửa sổ ứng dụng - phím tắt `Logo + H`
+
+## Tích hợp các tài khoản online
+
+Các ứng dụng quản lý mặc định của Gnome hỗ trợ tính năng tích hợp với khá nhiều loại tài khoản online. Đơn cử như ứng dụng quản lý mail `Gnome Evolution`, ứng dụng quản lý lịch sự kiện `Gnome Calendar`, ứng dụng quản lý danh bạ `Gnome Contacts`, v.v... có thể kết nối với một hoặc nhiều tài khoản Google, Microsoft, Microsoft Exchange để quản lý song song. Bạn có thể thực hiện thao tác đăng nhập tổng quan để `Gnome` có thể tự động gắn các tài khoản vào các ứng dụng hỗ trợ bằng cách sử dụng mục `Online Accounts` ở thanh điều hướng bên trái của phần mềm `Settings`.
+
+`Settings - Online Accounts`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-settings/online-accounts.jpg)
+
+## Các ứng dụng ưu tiên mặc định
+
+Trong giao diện tùy chỉnh của `Settings` thì `Gnome` có cung cấp một hạng mục `Default Applications` để thiết lập mặc định một số ứng dụng căn bản của hệ điều hành bao gồm:
+
+- Trình duyệt web mặc định
+- Trình duyệt mail mặc định
+- Trình quản lý lịch sự kiện
+- Trình chạy các tệp audio
+- Trình chạy các tệp video
+- Trình mở các tệp ảnh
+
+`Settings - Default Applications`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-settings/defaut-applications.jpg)
+
+Khi chạm tới phần tùy chỉnh này mình mới nhớ ra rằng `OpenSuse` không cài đặt sẵn `Gnome Calendar` và ứng dụng `Gnome Music` hiện tại vẫn chưa tích hợp hoàn toàn tốt với hệ thống so với phiên bản tiền nhiệm có tên là `Rhythmbox`. Bạn có thể mở `Gnome Software` để tìm kiếm và tải về hai ứng dụng này; Sau đó quay lại thực hiện tùy chỉnh mục `Default Apps` ở đây.
+
+## Ngày tháng & Thời gian
+
+Ngay bên dưới mục `Default Apps` là hạng mục `Date & Time` hỗ trợ một vài thiết lập về ngày tháng và thời gian. Ở đây chúng ta sẽ cần nhấn vào biểu tượng ổ khóa ở góc phía trên bên phải để nhập mật khẩu, trước khi thực hiện các tùy chỉnh ở mục này. Nhìn chung thì chúng ta chỉ cần đảm bảo rằng tính năng tự động đông bộ thông tin thời gian qua nguồn online được kích hoạt. Ngoài ra thì mình thường chuyển đồng hồ sang dạng `AM/PM` để không phải nhẩm tính giờ chiều tối bằng cách trừ đi 12 giờ của pha sáng `AM`.
+
+`Settings - Date & Time`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-settings/date-time.jpg)
+
+Đó là những tùy chỉnh quan trọng liên quan tới chức năng chung của một hệ điều hành bất kỳ. Trong bài viết tiếp theo, chúng ta sẽ nói về hai ứng dụng tùy chỉnh khác liên quan tới giao diện hiển thị của `Gnome Desktop` nói riêng.
+
+Next: [Ứng Dụng Gnome Tweaks](./03-ung-dung-gnome-tweaks)
 

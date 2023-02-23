@@ -10,6 +10,24 @@
       "title": "Cài Đặt Ứng Dụng",
       "keywords": [ "linux", "giao diện desktop gnome", "cài đặt và gỡ bỏ ứng dụng" ],
       "description": "Giới thiệu cửa hàng phần mềm Gnome Store và các phương thức cài đặt phần mềm."
+   },
+   {
+      "slug": "02-tuy-chinh-he-thong",
+      "title": "Tùy Chỉnh Hệ Thống",
+      "keywords": [ "linux", "giao diện desktop gnome", "tùy chỉnh hệ thống" ],
+      "description": "Hướng dẫn tùy chỉnh một số chức năng hệ thống phổ biến bằng ứng dụng Gnome Settings."
+   },
+   {
+      "slug": "03-ung-dung-gnome-tweaks",
+      "title": "Ứng Dụng Gnome Tweaks",
+      "keywords": [ "linux", "giao diện desktop gnome", "ứng dụng gnome tweaks" ],
+      "description": "Hướng dẫn tùy chỉnh một số yếu tố trong giao diện người dùng của Gnome bằng Gnome Tweaks."
+   },
+   {
+      "slug": "04-ung-dung-gnome-extensions",
+      "title": "Ứng Dụng Gnome Extensions",
+      "keywords": [ "linux", "giao diện desktop gnome", "ứng dụng gnome extensions" ],
+      "description": "Hướng dẫn tùy chỉnh một số yếu tố trong giao diện người dùng của Gnome bằng Gnome Extensions."
    }
 ]
 

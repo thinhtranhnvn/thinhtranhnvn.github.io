@@ -1,0 +1,54 @@
+# Ứng Dụng Gnome Extensions
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-extensions/in-shell-search.jpg)
+
+Ở bài viết trước chúng ta cũng đã nhắc đến việc cài thêm một gói phần mềm mở rộng tiện ích `extension` cho `Gnome` đó là `User Theme`. Nếu như bạn đã thử nghiệm cài đặt thành công kèm theo bộ phong cách hiển thị `Yaru` thì có lẽ là bài viết này không có gì đáng lưu ý nhiều. Ở đây mình sẽ chỉ liệt kê một số `extension` khá hữu ích mà mình đã từng sử dụng, mặc dù có hai `extension` trong số đó vẫn chưa được cập nhật để tương thích với phiên bản `Gnome` mới nhất mà `OpenSuse Tumblewweed` đang sử dụng.
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-extensions/installed-extensions.jpg)
+
+Chúng ta có thể nhìn thấy rằng ở đây có khá nhiều `extension` đã được cài đặt sẵn được liệt kê ở phần `Built-In`. Trong danh sách này đang có `Desktop Icons` được đánh dấu là không tương thích với phiên bản `Gnome` mới nhất mà `OpenSuse Tumbleweed` đang khởi động. Chúng ta sẽ thử tìm một `extension` khác có tính năng tương tự để hiển thị các biểu tượng như thư mục người dùng và các tệp của thư mục `~/Desktop` trên ảnh nền `Desktop`.
+
+Ồ, nói tới đây thì mình mới nhớ ra là hồi đầu khi `Gnome` mới bắt đầu không hỗ trợ tùy chỉnh để hiển thị nội dung của thư mục `Desktop` ra ngoài màn hình thì mình thấy cũng khá kì lạ. Tuy nhiên, việc bày sẵn các tệp dữ liệu của `project` bất kỳ đang thực hiện ra màn hình nền rất thuận tiện cho thao các sử dụng bởi chúng ta có thể kéo thả và tạm thời nhóm riêng những tệp liên quan nhất với nhau về hai phía của màn hình. Kèm theo đó là thao tác `Logo + D` để ẩn/hiện tất cả các cửa sổ ứng dụng sẽ rất thuận tiện để thao tác nhanh với các tệp này mà không cần mở một cửa sổ ứng dụng `Files` để duy trì gốc xuất phát là thư mục gốc của `project`.
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-extensions/in-gnome-website.jpg)
+
+Để cài đặt thêm `extension` thì đầu tiên chúng ta cần sử dụng trình duyệt `Firefox` đã cài đặt sẵn để truy cập vào trang web [extensions.gnome.org](https://extensions.gnome.org/). Lúc này chúng ta sẽ nhìn thấy ở phần đầu của trang web đang có gợi ý cài đặt `add-on` của `Gnome` cho `Firefox` để hỗ trợ thao tác cài đặt nhanh mà không cần phải tải về thủ công tệp nén `extension`.
+
+Sau khi click vào liên kết cài `add-on` cho `Firefox`, ở cửa sổ `pop-up` nhỏ mới hiện ra, chúng ta chọn `Continue` và tiếp tục chọn `Add` để xác nhận cài đặt. Sau khi `add-on` đã được cài đặt xong, chúng ta tải lại trang [extensions.gnome.org](https://extensions.gnome.org/) bằng cách nhấn `Ctrl + R` hoặc click vào biểu tượng mũi tên xoay vòng trên thanh công cụ của `Firefox`.
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-extensions/desktop-icons-search.jpg)
+
+Trong ô tìm kiếm của website hiện tại, chúng ta gõ từ khóa `desktop icons`, sau đó chọn phiên bản `Desktop Icons NG` của nhà phát triển `rastersoft`.
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-extensions/desktop-icons-ng.jpg)
+
+Lúc này, trong trang web mô tả `extension` sẽ có hiển thị một công tắc nhỏ ở góc phía bên phải được tạo ra bởi `add-on` đã cài đặt trước đó. Chúng ta chỉ cần click chuột vào để kích hoạt công tắc này và chọn nút `Install` khi `Gnome` hỏi xác nhận, sau đó chờ thêm vài giây để tiến trình cài đặt hoàn tất.
+
+Do thao tác cài đặt này không có thông báo hay thanh trạng thái nên chúng ta sẽ cần phải tắt mở lại ứng dụng `Gnome Extensions` cho đến khi nhìn thấy `extension` mới được hiển thị trong danh sách.
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-extensions/desktop-icons-installed.jpg)
+
+Như vậy là phiên bản `Desktop Icons NG` đã được cài đặt thành công, trên màn hình `Desktop` đang hiển thị thư mục chứa dữ liệu người dùng và một biểu tượng thùng rác chứa các tệp đã xóa. Ở đây mình đang chạy máy ảo với kích thước màn hình `1280 x 800` để giả lập màn hình laptop cỡ trung bình và thấy rằng kích thước các biểu tượng hơi lớn; Và quyết định mở `Settings` của `extension` này thao tác tùy chỉnh trong ứng dụng `Gnome Extensions` để tùy chỉnh.
+
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-extensions/desktop-icons-settings.jpg)
+
+Thông thường thì mình sẽ không hiện các biểu tượng thư mục đặc trưng nào đó hoặc thư mục thùng rác, mà chỉ để `Desktop` trống và có thể sẵn sàng bày ra một `project` đơn giản, hoặc một vài `project` có liên quan với nhau.
+
+Như vậy là chúng ta đã thực hiện cài đặt thành công một `extension` nhỏ để tùy biến chức năng hiển thị của giao diện `Gnome`. Bạn có thể lướt qua nội dung của trang web cung cấp các `extension` để chọn ra một vài thứ muốn bổ sung hoặc cứ tạm sử dụng `Gnome` với thiết kế mặc định cho đến khi muốn thay đổi. Ở đây mình chỉ đưa ra gợi ý về hai `extension` khá đơn giản và phổ biến.
+
+`Dash to Dock`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-extensions/dash-to-dock.jpg)
+
+Thanh `Dash` trong giao diện tổng quan `Activities` có chứa các ứng dụng đang chạy và các ứng dụng được gắn cố định sẽ trở nên dễ sử dụng hơn nếu được hiển thị cả trong giao diện `Desktop`. Tiện ích `Dash to Dock` sẽ hỗ trợ tùy chỉnh này và tự động ẩn `Dock` trong trường hợp có cửa sổ ứng dụng nào đó mở rộng toàn màn hình hoặc chạm tới khu vực hiển thị của `Dock`.
+
+`Dash to Panel`
+![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-extensions/dash-to-panel.jpg)
+
+Trong trường hợp bạn muốn tùy chỉnh giao diện `Gnome` theo lối quen thuộc hơn với thói quen sử dụng Windows thì `Dash to Panel` kết hợp với `Applications Menu` hoặc `Arc Menu` sẽ có thể giúp đỡ. Các `extension` này đều được cập nhật rất thường xuyên và theo sát phiên bản cập nhật mới của môi trường `Gnome Shell`.
+
+Bên cạnh đó thì còn có một số tiện ích nhỏ ví dụ như `Translate Text` để tích hợp `Google Translate` vào giao diện tìm kiếm `Gnome Search`. Chức năng tra từ điển cũng có thể được xử lý bằng cách tìm và tải về dữ liệu để nạp cho chương trình từ điển `Gnome Dictionary`; Sau đó khi chúng ta gõ tìm kiếm trong `Gnome Search` thì kết quả tìm kiếm sẽ có hiển thị kèm nội dung tìm thấy trong từ điển `Gnome Dictionary`, giống với khi chúng ta gõ vào đó một phép tính thì `Gnome Search` sẽ tự động sử dụng chức năng của phần mềm `Gnome Calculator` để hiện kết quả luôn ở đó.
+
+Như vậy là chúng ta đã đi qua các thao tác tùy chỉnh tổng quan trong môi trường `Gnome Desktop`. Trong các bài viết tiếp theo, chúng ta sẽ nói về việc tùy chỉnh và sử dụng từng ứng dụng phổ biến bao gồm `Files`, bộ `LibreOffice`, `GIMP`, v.v... để đáp ứng công việc hằng ngày. 
+
+Next: [Trình duyệt dữ liệu Gnome Files](./05-trinh-duyet-du-lieu-gnome-files)
+
