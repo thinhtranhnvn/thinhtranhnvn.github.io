@@ -1,4 +1,4 @@
-# Một Số Thao Tác Tùy Chỉnh Hệ Thống Thường Gặp
+# Một Số Thao Tác Tùy Chỉnh Hệ Thống
 
 ![](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-settings/in-shell-search.jpg)
 
