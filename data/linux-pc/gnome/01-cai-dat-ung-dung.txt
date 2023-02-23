@@ -115,5 +115,5 @@ Tiếp tục chọn biểu tượng dấu ba chấm sổ dọc ở phía cuối 
 
 Như vậy là những yếu tố thiết yếu cho nhu cầu sử dụng máy tính phổ thông đã sẵn sàng. Trong các bài viết tiếp theo, chúng ta sẽ nói về một số thao tác tùy chỉnh hệ thống căn bản và sau đó sẽ lần lượt tìm hiểu chi tiết về từng ứng dụng thay thế cho hệ sinh thái của Microsoft Windows.
 
-Next: [Tùy Chỉnh Hệ Chống](./02-tuy-chinh-he-thong)
+Next: [Tùy Chỉnh Hệ Thống](./02-tuy-chinh-he-thong)
 
