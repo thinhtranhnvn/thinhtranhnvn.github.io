@@ -25,6 +25,7 @@ h1 { font-size: 45px
 img
    { width: 100%
    ; height: auto
+   ; border: 1px solid lightgrey
    }
 
 code, [contenteditable]
