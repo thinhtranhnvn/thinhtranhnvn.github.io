@@ -50,5 +50,5 @@ Bên cạnh đó thì còn có một số tiện ích nhỏ ví dụ như `Trans
 
 Như vậy là chúng ta đã đi qua các thao tác tùy chỉnh tổng quan trong môi trường `Gnome Desktop`. Trong các bài viết tiếp theo, chúng ta sẽ nói về việc tùy chỉnh và sử dụng từng ứng dụng phổ biến bao gồm `Files`, bộ `LibreOffice`, `GIMP`, v.v... để đáp ứng công việc hằng ngày. 
 
-Next: [Trình duyệt dữ liệu Gnome Files](./05-trinh-duyet-du-lieu-gnome-files)
+Next: [Ứng Dụng Gnome Files](./05-ung-dung-gnome-files)
 
