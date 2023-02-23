@@ -1,8 +1,8 @@
 [
    {
-      "id": "linux-pc",
-      "title": "Linux PC",
-      "keywords": [ "linux pc", "foss", "tutorial", "daily computing", "normal user", "software", "applications", "office", "design", "photography", "video editing", "code" ],
+      "id": "linux",
+      "title": "Linux",
+      "keywords": [ "linux", "foss", "tutorial", "daily computing", "normal user", "software", "applications", "office", "design", "photography", "video editing", "android" ],
       "description": "Tự học cách cài đặt và sử dụng hệ điều hành Linux và các phần mềm ứng dụng thay thế cho hệ sinh thái của Microsoft Windows."
    },
    {
