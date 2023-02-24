@@ -2,20 +2,20 @@
    {
       "id": "linux",
       "title": "Linux",
-      "keywords": [ "linux", "foss", "tutorial", "daily computing", "normal user", "software", "applications", "office", "design", "photography", "video editing", "android" ],
+      "keywords": [ "linux", "foss", "tutorial", "daily computing", "normal user", "software", "applications", "office", "design", "photography", "video editing", "coding" ],
       "description": "Tự học cách cài đặt và sử dụng hệ điều hành Linux và các phần mềm ứng dụng thay thế cho hệ sinh thái của Microsoft Windows."
-   },
-   {
-      "id": "design",
-      "title": "Design",
-      "keywords": [],
-      "description": "Tự học lý thuyết thiết kế đồ họa và thực thể."
    },
    {
       "id": "coding",
       "title": "Coding",
       "keywords": [],
       "description": "Tự học lập trình một cách thật tự nhiên."
+   },
+   {
+      "id": "design",
+      "title": "Design",
+      "keywords": [],
+      "description": "Tự học lý thuyết thiết kế đồ họa và thực thể."
    },
    {
       "id": "linguistic",

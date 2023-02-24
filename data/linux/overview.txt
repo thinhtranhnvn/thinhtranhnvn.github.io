@@ -1,4 +1,4 @@
-# Linux PC
+# Sử Dụng Linux PC
 
 Tiếp theo ngay sau `Origin` thì `Linux` là `Topic` đầu tiên trong blog cá nhân này được tạo ra với mục đích chia sẻ những kiến thức mà mình lượm lặt sưu tầm được trong kiếp sống hiện tại. `Topic` này cũng là nơi mình giải phóng ước mơ chia kẻ kiến thức sử dụng các phần mềm mã nguồn mở miễn phí `FOSS - Free and OpenSource Software` để thay thế cho các phần mềm trong hệ sinh thái phần mềm của Microsoft.
 
