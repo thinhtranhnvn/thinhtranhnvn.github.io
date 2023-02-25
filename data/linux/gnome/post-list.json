@@ -12,8 +12,8 @@
       "description": "Giới thiệu cửa hàng phần mềm Gnome Store và các phương thức cài đặt phần mềm."
    },
    {
-      "slug": "02-tuy-chinh-he-thong",
-      "title": "Tùy Chỉnh Hệ Thống",
+      "slug": "02-ung-dung-gnome-settings",
+      "title": "Ứng Dụng Gnome Settings",
       "keywords": [ "linux", "giao diện desktop gnome", "tùy chỉnh hệ thống" ],
       "description": "Hướng dẫn tùy chỉnh một số chức năng hệ thống phổ biến bằng ứng dụng Gnome Settings."
    },
