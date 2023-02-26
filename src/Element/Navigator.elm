@@ -1,28 +1,12 @@
 module Element.Navigator exposing (..)
 
+import Route exposing (Route(..))
+import Context
 import Data.Topic as Topic exposing (Topic)
-import Json.Decode as Json
-import Route exposing (Route)
 
-import Browser
-import Url exposing (Url)
-import Http exposing (Error)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events as Events exposing (..)
-
-import Extension.Http.Error as HttpError
-
-
--- main - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-main : Program String Model Msg
-main =
-   let
-      nav = Navigator (init) (view) (update) (subscriptions)
-   in
-      Browser.element (nav)
 
 
 -- Navigator - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -40,9 +24,7 @@ type alias Navigator =
 
 
 type alias Model =
-   { route : Route
-     --
-   , topicList : List Topic
+   { context : Context.Model
      --
    , collapsed : Bool
    }
@@ -51,9 +33,7 @@ type alias Model =
 -- Msg - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-type Msg = UrlChanged String
-           --
-         | GotTopicListResponse (Result (Http.Error) (List Topic))
+type Msg = ContextChanged (Context.Model)
            --
          | ToggleFolder
          | CollapseFolder
@@ -62,25 +42,15 @@ type Msg = UrlChanged String
 -- init - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-init : String -> ( Model, Cmd Msg )
-init urlStr =
+init : Context.Model -> ( Model, Cmd Msg )
+init context =
    let
-      route = Route.fromUrlString (urlStr)
-      --
-      topicList = []
-      collapsed = True
-      --
-      model = Model (route) (topicList) (collapsed)
-      cmd = getTopicList
+      model = 
+         { context = context
+         , collapsed = True
+         }
    in
-      ( model, cmd )
-
---
-getTopicList : Cmd Msg
-getTopicList =
-   Http.get { url = Route.toTopicListFileUrl ()
-            , expect = Http.expectJson (GotTopicListResponse) (Json.list Topic.jsonDecoder)
-            }
+      ( model, Cmd.none )
 
 
 -- view - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -112,7 +82,7 @@ view model =
       
          div [ class (folderClass) ] [
             div [ class "Folder Container" ]
-               (List.map (navLink model.route) (model.topicList))
+               (List.map (navLink model.context.route) (model.context.topicList))
             -- div.Folder.Container
          ], -- div.Navigator.Folder
       
@@ -144,31 +114,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model = case (msg) of
    
    --
-   UrlChanged newUrlStr ->
-      let
-         newRoute = Route.fromUrlString (newUrlStr)
-         --
-         updatedModel = { model | route = newRoute }
-      in
-         ( updatedModel, Cmd.none )
-   
-   --
-   GotTopicListResponse res -> case (res) of
-      --
-      (Err error) ->
-         let
-            emptyTopic = Topic.empty
-            errorTopic = { emptyTopic | title = "# " ++ (HttpError.toString error) }
-            newTopicList = [ errorTopic, emptyTopic ]
-            updatedModel = { model | topicList = newTopicList }
-         in
-            ( updatedModel, Cmd.none )
-      --
-      (Ok data) ->
-         let
-            updatedModel = { model | topicList = data }
-         in
-            ( updatedModel, Cmd.none )
+   ContextChanged newCtx -> init (newCtx)
    
    --
    ToggleFolder ->

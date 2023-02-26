@@ -12,14 +12,26 @@
       "description": ""
    },
    {
-      "id": "inkscape",
-      "title": "Inkscape",
+      "id": "darktable",
+      "title": "DarkTable",
       "keywords": [],
       "description": ""
    },
    {
       "id": "gimp",
       "title": "Gimp",
+      "keywords": [],
+      "description": ""
+   },
+   {
+      "id": "inkscape",
+      "title": "Inkscape",
+      "keywords": [],
+      "description": ""
+   },
+   {
+      "id": "scribus",
+      "title": "Scribus",
       "keywords": [],
       "description": ""
    },

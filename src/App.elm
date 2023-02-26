@@ -1,6 +1,7 @@
 module App exposing (main)
 
 import Route exposing (Route(..))
+import Context
 --
 import Element.Navigator as Navigator
 import Element.Overview as Overview
@@ -46,6 +47,7 @@ type alias Model =
    , key : Key
      --
    , route : Route
+   , context : Context.Model
      --
    , navigator : Navigator.Model
    , overview  : Overview.Model
@@ -58,10 +60,10 @@ type alias Model =
 -- Msg - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-type Msg = PortJson String
-           --
-         | GotUrlRequest UrlRequest
+type Msg = GotUrlRequest UrlRequest
          | UrlChanged Url
+           --
+         | CtxMsg Context.Msg
            --
          | NavMsg Navigator.Msg
          | OvrMsg Overview.Msg
@@ -77,33 +79,28 @@ init : () -> Url -> Key -> ( Model, Cmd Msg )
 init _ url key =
    let
       route = Route.fromUrl (url)
+      ( ctxModel, ctxCmd ) = Context.init (Url.toString url)
       --
-      ( navModel, navCmd ) = Navigator.init (Url.toString url)
-      ( ovrModel, ovrCmd ) = Overview.init (Url.toString url)
-      ( idxModel, idxCmd ) = Indexer.init (Url.toString url)
-      ( rdrModel, rdrCmd ) = Reader.init (Url.toString url)
-      ( mtdModel, mtdCmd ) = Metadata.init (Url.toString url)
+      ( navModel, _ ) = Navigator.init (ctxModel)
+      ( ovrModel, _ ) = Overview.init  (ctxModel)
+      ( idxModel, _ ) = Indexer.init   (ctxModel)
+      ( rdrModel, _ ) = Reader.init    (ctxModel)
+      ( mtdModel, _ ) = Metadata.init  (ctxModel)
       --
       model =
          { url = url
          , key = key
            --
          , route = route
+         , context = ctxModel
            --
          , navigator = navModel
-         , overview = ovrModel
-         , indexer = idxModel
-         , reader = rdrModel
-         , metadata = mtdModel
+         , overview  = ovrModel
+         , indexer   = idxModel
+         , reader    = rdrModel
+         , metadata  = mtdModel
          }
-      --
-      cmd =
-         Cmd.batch [ Cmd.map (NavMsg) (navCmd)
-                   , Cmd.map (OvrMsg) (ovrCmd)
-                   , Cmd.map (IdxMsg) (idxCmd)
-                   , Cmd.map (RdrMsg) (rdrCmd)
-                   , Cmd.map (MtdMsg) (mtdCmd)
-                   ]
+      cmd = Cmd.map (CtxMsg) (ctxCmd)
    --
    in
       ( model, cmd )
@@ -116,10 +113,10 @@ view : Model -> Document Msg
 view model =
    let
       navHtml = Navigator.view (model.navigator)
-      ovrHtml = Overview.view (model.overview)
-      idxHtml = Indexer.view (model.indexer)
-      rdrHtml = Reader.view (model.reader)
-      mtdHtml = Metadata.view (model.metadata)
+      ovrHtml = Overview.view  (model.overview)
+      idxHtml = Indexer.view   (model.indexer)
+      rdrHtml = Reader.view    (model.reader)
+      mtdHtml = Metadata.view  (model.metadata)
       --
       pageHtml = case (model.route) of
          --
@@ -149,9 +146,6 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model = case (msg) of
    
    --
-   PortJson _ -> ( model, Cmd.none )
-   
-   --
    GotUrlRequest req -> case (req) of
       --
       Browser.External href ->
@@ -176,80 +170,85 @@ update msg model = case (msg) of
          newRoute = Route.fromUrl (newUrl)
          --
          newUrlStr = Url.toString (newUrl)
-         ( navModel, navCmd ) = Navigator.update (Navigator.UrlChanged newUrlStr) (model.navigator)
-         ( ovrModel, ovrCmd ) = Overview.update (Overview.UrlChanged newUrlStr) (model.overview)
-         ( idxModel, idxCmd ) = Indexer.update (Indexer.UrlChanged newUrlStr) (model.indexer)
-         ( rdrModel, rdrCmd ) = Reader.update (Reader.UrlChanged newUrlStr) (model.reader)
-         ( mtdModel, mtdCmd ) = Metadata.update (Metadata.UrlChanged newUrlStr) (model.metadata)
+         ( ctxModel, ctxCmd ) = Context.update (Context.UrlChanged newUrlStr) (model.context)
          --
          updatedModel = { model | url = newUrl
-                        , route = newRoute
                           --
-                        , navigator = navModel
-                        , overview = ovrModel
-                        , indexer = idxModel
-                        , reader = rdrModel
-                        , metadata = mtdModel
+                        , route = newRoute
+                        , context = ctxModel
                         }
-         cmd = Cmd.batch [ Cmd.map (NavMsg) (navCmd)
-                         , Cmd.map (OvrMsg) (ovrCmd)
-                         , Cmd.map (IdxMsg) (idxCmd)
-                         , Cmd.map (RdrMsg) (rdrCmd)
-                         , Cmd.map (MtdMsg) (mtdCmd)
-                         ]
+         cmd = Cmd.map (CtxMsg) (ctxCmd)
       --
       in
          ( updatedModel, cmd )
    
    --
-   NavMsg navMsg ->
+   CtxMsg ctxMsg ->
       let
-         ( updatedNavModel, navCmd) = Navigator.update (navMsg) (model.navigator)
+         ( ctxModel, ctxCmd ) = Context.update (ctxMsg) (model.context)
          --
-         updatedAppModel = { model | navigator = updatedNavModel }
-         cmd = Cmd.map (NavMsg) (navCmd)
+         ( navModel, _ ) = Navigator.update (Navigator.ContextChanged ctxModel) (model.navigator)
+         ( ovrModel, _ ) = Overview.update  (Overview.ContextChanged  ctxModel) (model.overview)
+         ( rdrModel, _ ) = Reader.update    (Reader.ContextChanged    ctxModel) (model.reader)
+         ( idxModel, _ ) = Indexer.update   (Indexer.ContextChanged   ctxModel) (model.indexer)
+         ( mtdModel, _ ) = Metadata.update  (Metadata.ContextChanged  ctxModel) (model.metadata)
+         --
+         updatedAppModel = { model | context = ctxModel
+                                     --
+                                   , navigator = navModel
+                                   , overview = ovrModel
+                                   , reader = rdrModel
+                                   , indexer = idxModel
+                                   , metadata = mtdModel
+                           }
+         cmd = Cmd.map (CtxMsg) (ctxCmd)
       in
          ( updatedAppModel, cmd )
+   
+   --
+   NavMsg navMsg ->
+      let
+         ( updatedNavModel, _ ) = Navigator.update (navMsg) (model.navigator)
+         --
+         updatedAppModel = { model | navigator = updatedNavModel }
+      in
+         ( updatedAppModel, Cmd.none )
    
    --
    OvrMsg ovrMsg ->
       let
-         ( updatedOvrModel, ovrCmd) = Overview.update (ovrMsg) (model.overview)
+         ( updatedOvrModel, _ ) = Overview.update (ovrMsg) (model.overview)
          --
          updatedAppModel = { model | overview = updatedOvrModel }
-         cmd = Cmd.map (OvrMsg) (ovrCmd)
       in
-         ( updatedAppModel, cmd )
+         ( updatedAppModel, Cmd.none )
    
    --
    IdxMsg idxMsg ->
       let
-         ( updatedIdxModel, idxCmd) = Indexer.update (idxMsg) (model.indexer)
+         ( updatedIdxModel, _ ) = Indexer.update (idxMsg) (model.indexer)
          --
          updatedAppModel = { model | indexer = updatedIdxModel }
-         cmd = Cmd.map (IdxMsg) (idxCmd)
       in
-         ( updatedAppModel, cmd )
+         ( updatedAppModel, Cmd.none )
    
    --
    RdrMsg rdrMsg ->
       let
-         ( updatedRdrModel, rdrCmd ) = Reader.update (rdrMsg) (model.reader)
+         ( updatedRdrModel, _ ) = Reader.update (rdrMsg) (model.reader)
          --
          updatedAppModel = { model | reader = updatedRdrModel }
-         cmd = Cmd.map (RdrMsg) (rdrCmd)
       in
-         ( updatedAppModel, cmd )
+         ( updatedAppModel, Cmd.none )
          
    --
    MtdMsg mtdMsg ->
       let
-         ( updatedMtdModel, mtdCmd ) = Metadata.update (mtdMsg) (model.metadata)
+         ( updatedMtdModel, _ ) = Metadata.update (mtdMsg) (model.metadata)
          --
          updatedAppModel = { model | metadata = updatedMtdModel }
-         cmd = Cmd.map (MtdMsg) (mtdCmd)
       in
-         ( updatedAppModel, cmd )
+         ( updatedAppModel, Cmd.none )
 
 
 -- subscriptions - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

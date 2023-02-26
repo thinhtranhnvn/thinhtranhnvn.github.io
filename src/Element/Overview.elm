@@ -1,35 +1,19 @@
 module Element.Overview exposing (..)
 
+import Route exposing (Route(..))
+import Context
 import Data.Series as Series exposing (Series)
-import Route exposing (Route)
 
-import Browser
-import Http exposing (Error)
-import Url exposing (Url)
-import Json.Decode as Json
 import Html exposing (..)
 import Html.Attributes as Html exposing (..)
 import Html.Events as Html exposing (..)
-
-import Extension.Http.Error as HttpError
-
-
--- main - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-main : Program String Model Msg
-main =
-   let
-      ovr = Overview (init) (view) (update) (subscriptions)
-   in
-      Browser.element (ovr)
 
 
 -- Overview - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 type alias Overview =
-   { init : String -> ( Model, Cmd Msg )
+   { init : Context.Model -> ( Model, Cmd Msg )
    , view : Model -> Html Msg
    , update : Msg -> Model -> ( Model, Cmd Msg )
    , subscriptions : Model -> Sub Msg
@@ -39,41 +23,20 @@ type alias Overview =
 -- Model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-type alias Model =
-   { route : Route
-     --
-   , seriesList : List Series
-   }
+type alias Model = Context.Model
 
 
 -- Msg - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-type Msg = UrlChanged String
-           --
-         | GotSeriesListResponse (Result (Http.Error) (List Series))
+type Msg = ContextChanged (Context.Model)
 
 
 -- init - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-init : String -> ( Model, Cmd Msg )
-init urlStr =
-   let
-      route = Route.fromUrlString (urlStr)
-      seriesList = []
-      --
-      model = Model (route) (seriesList)
-      cmd = getSeriesList (route)
-   in
-      ( model, cmd )
-
---
-getSeriesList : Route -> Cmd Msg
-getSeriesList route =
-   Http.get { url = Route.toSeriesListFileUrl (route)
-            , expect = Http.expectJson (GotSeriesListResponse) (Json.list Series.jsonDecoder)
-            }
+init : Context.Model -> ( Model, Cmd Msg )
+init context = ( context, Cmd.none )
 
 
 -- view - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -115,43 +78,8 @@ ovrLink route series =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model = case (msg) of
-   
    --
-   UrlChanged newUrlStr ->
-      let
-         newRoute = Route.fromUrlString (newUrlStr)
-         oldTopicId = Route.toTopicId (model.route)
-         newTopicId = Route.toTopicId (newRoute)
-      in
-         case (compare (newTopicId) (oldTopicId)) of
-            EQ ->
-               let
-                  updatedModel = { model | route = newRoute }
-               in
-                  ( updatedModel, Cmd.none )
-            --
-            _  ->
-               init (newUrlStr)
-   
-   --
-   GotSeriesListResponse res -> case (res) of
-      --
-      (Err error) ->
-         let 
-            errMsg = HttpError.toString (error)
-            emptySeries = Series.empty
-            errorSeries = { emptySeries | title = errMsg }
-            newSeriesList = [ errorSeries, emptySeries ]
-            --
-            updatedModel = { model | seriesList = newSeriesList } 
-         in
-            ( updatedModel, Cmd.none )
-      --
-      (Ok data) ->
-         let
-            updatedModel = { model | seriesList = data }
-         in
-            ( updatedModel, Cmd.none )
+   ContextChanged newCtx -> init (newCtx)
 
 
 -- subscriptions - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

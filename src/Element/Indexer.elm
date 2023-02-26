@@ -1,35 +1,20 @@
 module Element.Indexer exposing (..)
 
+import Route exposing (Route(..))
+import Context
 import Data.Series as Series exposing (Series)
 import Data.Post as Post exposing (Post)
-import Route exposing (Route(..))
 
-import Browser
-import Http exposing (Error)
-import Json.Decode as Json
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events as Events exposing (..)
-
-import Extension.Http.Error as HttpError
-
-
--- main - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-main : Program String Model Msg
-main =
-   let
-      idx = Indexer (init) (view) (update) (subscriptions)
-   in
-      Browser.element (idx)
 
 
 -- Indexer - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 type alias Indexer =
-   { init : String -> ( Model, Cmd Msg )
+   { init : Context.Model -> ( Model, Cmd Msg )
    , view : Model -> Html Msg
    , update : Msg -> Model -> ( Model, Cmd Msg )
    , subscriptions : Model -> Sub Msg
@@ -39,56 +24,20 @@ type alias Indexer =
 -- Model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-type alias Model =
-   { route : Route
-     --
-   , seriesList : List Series
-   , postList : List Post
-   }
+type alias Model = Context.Model
 
 
 -- Msg - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-type Msg = UrlChanged String
-           --
-         | GotSeriesListResponse (Result (Http.Error) (List Series))
-         | GotPostListResponse (Result (Http.Error) (List Post))
+type Msg = ContextChanged (Context.Model)
 
 
 -- init - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-init : String -> ( Model, Cmd Msg )
-init urlStr =
-   let
-      route = Route.fromUrlString (urlStr)
-      seriesList = []
-      postList = []
-      --
-      model = Model (route) (seriesList) (postList)
-      cmd = case (model.route) of
-         SeriesPage _ _ ->
-            Cmd.batch [ getSeriesList (route)
-                      , getPostList (route)
-                      ]
-         _ -> Cmd.none
-   in
-      ( model, cmd )
-
---
-getSeriesList : Route -> Cmd Msg
-getSeriesList route =
-   Http.get { url = Route.toSeriesListFileUrl (route)
-            , expect = Http.expectJson (GotSeriesListResponse) (Json.list Series.jsonDecoder)
-            }
-
---
-getPostList : Route -> Cmd Msg
-getPostList route =
-   Http.get { url = Route.toPostListFileUrl (route)
-            , expect = Http.expectJson (GotPostListResponse) (Json.list Post.jsonDecoder)
-            }
+init : Context.Model -> ( Model, Cmd Msg )
+init context = ( context, Cmd.none )
 
 
 -- view - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -137,47 +86,8 @@ idxLink route post =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model = case (msg) of
-
    --
-   UrlChanged newUrlStr -> init (newUrlStr)
-   
-   --
-   GotSeriesListResponse res -> case (res) of
-      --
-      (Err error) ->
-         let
-            emptySeries = Series.empty
-            errorSeries = { emptySeries | id = Route.toSeriesId (model.route)
-                                        , title = HttpError.toString error }
-            newSeriesList = [ errorSeries, emptySeries ]
-            --
-            updatedModel = { model | seriesList = newSeriesList }
-         in
-            ( updatedModel, Cmd.none ) 
-      --
-      (Ok data) ->
-         let
-            updatedModel = { model | seriesList = data }
-         in
-            ( updatedModel, Cmd.none )
-   
-   --
-   GotPostListResponse res -> case (res) of
-      --
-      (Err error) ->
-         let
-            emptyPost = Post.empty
-            errorPost = { emptyPost | title = HttpError.toString error }
-            newPostList = [ errorPost, emptyPost ]
-            updatedModel = { model | postList = newPostList }
-         in
-            ( updatedModel, Cmd.none )
-      --
-      (Ok data) ->
-         let
-            updatedModel = { model | postList = data }
-         in
-            ( updatedModel, Cmd.none )
+   ContextChanged newCtx -> init (newCtx)
 
 
 -- subscriptions - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
