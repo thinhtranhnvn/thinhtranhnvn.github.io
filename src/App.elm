@@ -208,47 +208,14 @@ update msg model = case (msg) of
    --
    NavMsg navMsg ->
       let
-         ( updatedNavModel, _ ) = Navigator.update (navMsg) (model.navigator)
+         ( navModel, _ ) = Navigator.update (navMsg) (model.navigator)
          --
-         updatedAppModel = { model | navigator = updatedNavModel }
+         updatedAppModel = { model | navigator = navModel }
       in
          ( updatedAppModel, Cmd.none )
    
    --
-   OvrMsg ovrMsg ->
-      let
-         ( updatedOvrModel, _ ) = Overview.update (ovrMsg) (model.overview)
-         --
-         updatedAppModel = { model | overview = updatedOvrModel }
-      in
-         ( updatedAppModel, Cmd.none )
-   
-   --
-   IdxMsg idxMsg ->
-      let
-         ( updatedIdxModel, _ ) = Indexer.update (idxMsg) (model.indexer)
-         --
-         updatedAppModel = { model | indexer = updatedIdxModel }
-      in
-         ( updatedAppModel, Cmd.none )
-   
-   --
-   RdrMsg rdrMsg ->
-      let
-         ( updatedRdrModel, _ ) = Reader.update (rdrMsg) (model.reader)
-         --
-         updatedAppModel = { model | reader = updatedRdrModel }
-      in
-         ( updatedAppModel, Cmd.none )
-         
-   --
-   MtdMsg mtdMsg ->
-      let
-         ( updatedMtdModel, _ ) = Metadata.update (mtdMsg) (model.metadata)
-         --
-         updatedAppModel = { model | metadata = updatedMtdModel }
-      in
-         ( updatedAppModel, Cmd.none )
+   _ -> ( model, Cmd.none )
 
 
 -- subscriptions - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

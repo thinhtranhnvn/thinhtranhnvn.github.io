@@ -7242,43 +7242,13 @@ var $author$project$App$update = F2(
 			case 'NavMsg':
 				var navMsg = msg.a;
 				var _v10 = A2($author$project$Element$Navigator$update, navMsg, model.navigator);
-				var updatedNavModel = _v10.a;
+				var navModel = _v10.a;
 				var updatedAppModel = _Utils_update(
 					model,
-					{navigator: updatedNavModel});
-				return _Utils_Tuple2(updatedAppModel, $elm$core$Platform$Cmd$none);
-			case 'OvrMsg':
-				var ovrMsg = msg.a;
-				var _v11 = A2($author$project$Element$Overview$update, ovrMsg, model.overview);
-				var updatedOvrModel = _v11.a;
-				var updatedAppModel = _Utils_update(
-					model,
-					{overview: updatedOvrModel});
-				return _Utils_Tuple2(updatedAppModel, $elm$core$Platform$Cmd$none);
-			case 'IdxMsg':
-				var idxMsg = msg.a;
-				var _v12 = A2($author$project$Element$Indexer$update, idxMsg, model.indexer);
-				var updatedIdxModel = _v12.a;
-				var updatedAppModel = _Utils_update(
-					model,
-					{indexer: updatedIdxModel});
-				return _Utils_Tuple2(updatedAppModel, $elm$core$Platform$Cmd$none);
-			case 'RdrMsg':
-				var rdrMsg = msg.a;
-				var _v13 = A2($author$project$Element$Reader$update, rdrMsg, model.reader);
-				var updatedRdrModel = _v13.a;
-				var updatedAppModel = _Utils_update(
-					model,
-					{reader: updatedRdrModel});
+					{navigator: navModel});
 				return _Utils_Tuple2(updatedAppModel, $elm$core$Platform$Cmd$none);
 			default:
-				var mtdMsg = msg.a;
-				var _v14 = A2($author$project$Element$Metadata$update, mtdMsg, model.metadata);
-				var updatedMtdModel = _v14.a;
-				var updatedAppModel = _Utils_update(
-					model,
-					{metadata: updatedMtdModel});
-				return _Utils_Tuple2(updatedAppModel, $elm$core$Platform$Cmd$none);
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
 	});
 var $author$project$App$IdxMsg = function (a) {
