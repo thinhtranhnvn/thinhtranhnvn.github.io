@@ -25,12 +25,12 @@ Vì vậy nên xuất phát điểm của một `Topic` dành riêng cho việc 
 Việc sử dụng `Linux` trên máy tính cá nhân bắt đầu bùng nổ và trở nên thực sự phổ biến vào khoảng cuối năm 2019 với các môi trường giao diện đồ họa người dùng xuất hiện ngày một nhiều; Và trong số đó thì [`Gnome`](https://www.gnome.org/) đang là môi trường giao diện đồ họa được sử dụng làm tùy chọn mặc định của phần lớn các bản phân phối Linux phổ biến.
 
 [`Gnome Desktop Environment`](https://www.gnome.org)
-![giao diện đồ họa Desktop Gnome](https://www.gnome.org/wp-content/uploads/2021/03/wgo-splash-40-1024x546.png)
+![giao diện đồ họa Desktop Gnome](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/gnome-desktop-environment.jpg)
 
 Kèm theo đó là các ứng dụng `FOSS` tương ứng với Microsoft Office hay Adobe Suite cũng đã đạt tới ngưỡng hoàn thiện với đầy đủ các tính năng thiết yếu và khả năng tương thích tốt với các sản phẩm của Microsoft và Adobe.
 
 [`LibreOffice Suite`](https://www.libreoffice.org)
-![bộ ứng dụng văn phòng LibreOffice](https://www.libreoffice.org/themes/libreofficenew/img/screenshots.png)
+![bộ ứng dụng văn phòng LibreOffice](https://raw.githubusercontent.com/thinhtranhnvn/thinhtranhnvn.github.io/main/data/image/libreoffice-applications.jpg)
 
 Thật tuyệt! Chúng ta đang có thêm lựa chọn sử dụng một hệ điều hành miễn phí được phát triển bởi các cộng đồng lập trình viên tình nguyện, với giao diện người dùng đẹp mắt, và các ứng dụng có khả năng làm việc với các tệp văn bản, ảnh, audio, video được tạo ra bởi các phần mềm tương tự của `Microsoft`, `Adobe`, và cả những thương hiệu khác nữa.
 
