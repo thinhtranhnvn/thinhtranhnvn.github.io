@@ -7178,16 +7178,11 @@ var $author$project$App$update = F2(
 				} else {
 					var newUrl = req.a;
 					var urlStr = $elm$url$Url$toString(newUrl);
-					var cmd2 = A2($elm$browser$Browser$Navigation$pushUrl, model.key, urlStr);
+					var cmd = A2($elm$browser$Browser$Navigation$pushUrl, model.key, urlStr);
 					var appMsg = $author$project$App$NavMsg($author$project$Element$Navigator$CollapseFolder);
 					var _v2 = A2($author$project$App$update, appMsg, model);
 					var updatedModel = _v2.a;
-					var cmd1 = _v2.b;
-					return _Utils_Tuple2(
-						updatedModel,
-						$elm$core$Platform$Cmd$batch(
-							_List_fromArray(
-								[cmd1, cmd2])));
+					return _Utils_Tuple2(updatedModel, cmd);
 				}
 			case 'UrlChanged':
 				var newUrl = msg.a;
@@ -7696,18 +7691,18 @@ var $author$project$App$view = function (model) {
 		if (_v0.$ === 'SeriesPage') {
 			return _List_fromArray(
 				[
+					A2($elm$html$Html$map, $author$project$App$MtdMsg, mtdHtml),
 					A2($elm$html$Html$map, $author$project$App$NavMsg, navHtml),
 					A2($elm$html$Html$map, $author$project$App$OvrMsg, ovrHtml),
-					A2($elm$html$Html$map, $author$project$App$IdxMsg, idxHtml),
-					A2($elm$html$Html$map, $author$project$App$MtdMsg, mtdHtml)
+					A2($elm$html$Html$map, $author$project$App$IdxMsg, idxHtml)
 				]);
 		} else {
 			return _List_fromArray(
 				[
+					A2($elm$html$Html$map, $author$project$App$MtdMsg, mtdHtml),
 					A2($elm$html$Html$map, $author$project$App$NavMsg, navHtml),
 					A2($elm$html$Html$map, $author$project$App$OvrMsg, ovrHtml),
-					A2($elm$html$Html$map, $author$project$App$RdrMsg, rdrHtml),
-					A2($elm$html$Html$map, $author$project$App$MtdMsg, mtdHtml)
+					A2($elm$html$Html$map, $author$project$App$RdrMsg, rdrHtml)
 				]);
 		}
 	}();

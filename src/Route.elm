@@ -6,7 +6,7 @@ import Url.Parser as UrlParser exposing (Parser, parse, oneOf, string, top, (</>
 
 -- Url Example:
 -- https://thinhtranhnvn.github.io/origin/heart-sutra/00-the-first-preface
--- topicId = origin
+-- topicId  = origin
 -- seriesId = heart-sutra
 -- postSlug = 00-the-first-preface
 
@@ -15,9 +15,25 @@ import Url.Parser as UrlParser exposing (Parser, parse, oneOf, string, top, (</>
 
 
 type Route = HomePage
-           | TopicPage  String
-           | SeriesPage String String
-           | PostPage   String String String
+           | TopicPage  (TopicId)
+           | SeriesPage (TopicId) (SeriesId)
+           | PostPage   (TopicId) (SeriesId) (PostSlug)
+
+type alias TopicId  = String
+type alias SeriesId = String
+type alias PostSlug = String
+
+
+-- parser - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+parser : Parser (Route -> a) a
+parser =
+   oneOf [ UrlParser.map (HomePage)   (top)
+         , UrlParser.map (TopicPage)  (string)
+         , UrlParser.map (SeriesPage) (string </> string)
+         , UrlParser.map (PostPage)   (string </> string </> string)
+         ]
 
 
 -- map - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -78,18 +94,6 @@ toPostSlug route = case (route) of
    SeriesPage _ _ -> ""
    --
    PostPage   _ _ postSlug -> postSlug
-
-
--- parser - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
-parser : Parser (Route -> a) a
-parser =
-   oneOf [ UrlParser.map (HomePage)   (top)
-         , UrlParser.map (TopicPage)  (string)
-         , UrlParser.map (SeriesPage) (string </> string)
-         , UrlParser.map (PostPage)   (string </> string </> string)
-         ]
 
 
 -- fromUrl - - - - - - - - - - - - - - - - - - - - - - - - - - -

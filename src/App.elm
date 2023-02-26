@@ -3,11 +3,11 @@ module App exposing (main)
 import Route exposing (Route(..))
 import Context
 --
+import Element.Metadata as Metadata
 import Element.Navigator as Navigator
 import Element.Overview as Overview
 import Element.Indexer as Indexer
 import Element.Reader as Reader
-import Element.Metadata as Metadata
 
 import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Browser exposing (Key)
@@ -49,11 +49,11 @@ type alias Model =
    , route : Route
    , context : Context.Model
      --
+   , metadata  : Metadata.Model
    , navigator : Navigator.Model
    , overview  : Overview.Model
-   , indexer   : Indexer.Model
    , reader    : Reader.Model
-   , metadata  : Metadata.Model
+   , indexer   : Indexer.Model
    }
 
 
@@ -65,11 +65,11 @@ type Msg = GotUrlRequest UrlRequest
            --
          | CtxMsg Context.Msg
            --
+         | MtdMsg Metadata.Msg
          | NavMsg Navigator.Msg
          | OvrMsg Overview.Msg
-         | IdxMsg Indexer.Msg
          | RdrMsg Reader.Msg
-         | MtdMsg Metadata.Msg
+         | IdxMsg Indexer.Msg
 
 
 -- init - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -81,11 +81,11 @@ init _ url key =
       route = Route.fromUrl (url)
       ( ctxModel, ctxCmd ) = Context.init (Url.toString url)
       --
+      ( mtdModel, _ ) = Metadata.init  (ctxModel)
       ( navModel, _ ) = Navigator.init (ctxModel)
       ( ovrModel, _ ) = Overview.init  (ctxModel)
-      ( idxModel, _ ) = Indexer.init   (ctxModel)
       ( rdrModel, _ ) = Reader.init    (ctxModel)
-      ( mtdModel, _ ) = Metadata.init  (ctxModel)
+      ( idxModel, _ ) = Indexer.init   (ctxModel)
       --
       model =
          { url = url
@@ -94,11 +94,11 @@ init _ url key =
          , route = route
          , context = ctxModel
            --
+         , metadata  = mtdModel
          , navigator = navModel
          , overview  = ovrModel
-         , indexer   = idxModel
          , reader    = rdrModel
-         , metadata  = mtdModel
+         , indexer   = idxModel
          }
       cmd = Cmd.map (CtxMsg) (ctxCmd)
    --
@@ -112,25 +112,25 @@ init _ url key =
 view : Model -> Document Msg
 view model =
    let
+      mtdHtml = Metadata.view  (model.metadata)
       navHtml = Navigator.view (model.navigator)
       ovrHtml = Overview.view  (model.overview)
-      idxHtml = Indexer.view   (model.indexer)
       rdrHtml = Reader.view    (model.reader)
-      mtdHtml = Metadata.view  (model.metadata)
+      idxHtml = Indexer.view   (model.indexer)
       --
       pageHtml = case (model.route) of
          --
          SeriesPage _ _ ->
-            [ Html.map (NavMsg) (navHtml)
+            [ Html.map (MtdMsg) (mtdHtml)
+            , Html.map (NavMsg) (navHtml)
             , Html.map (OvrMsg) (ovrHtml)
             , Html.map (IdxMsg) (idxHtml)
-            , Html.map (MtdMsg) (mtdHtml)
             ]
          --
-         _ -> [ Html.map (NavMsg) (navHtml)
+         _ -> [ Html.map (MtdMsg) (mtdHtml)
+              , Html.map (NavMsg) (navHtml)
               , Html.map (OvrMsg) (ovrHtml)
               , Html.map (RdrMsg) (rdrHtml)
-              , Html.map (MtdMsg) (mtdHtml)
               ]
    --
    in
@@ -157,12 +157,12 @@ update msg model = case (msg) of
       Browser.Internal newUrl ->
          let
             appMsg = NavMsg (Navigator.CollapseFolder)
-            ( updatedModel, cmd1 ) = update (appMsg) (model)
+            ( updatedModel, _ ) = update (appMsg) (model)
             --
             urlStr = Url.toString (newUrl)
-            cmd2 = Browser.pushUrl (model.key) (urlStr) 
+            cmd = Browser.pushUrl (model.key) (urlStr)
          in
-            ( updatedModel, Cmd.batch [ cmd1, cmd2 ] )
+            ( updatedModel, cmd )
    
    --
    UrlChanged newUrl ->
@@ -187,19 +187,19 @@ update msg model = case (msg) of
       let
          ( ctxModel, ctxCmd ) = Context.update (ctxMsg) (model.context)
          --
+         ( mtdModel, _ ) = Metadata.update  (Metadata.ContextChanged  ctxModel) (model.metadata)
          ( navModel, _ ) = Navigator.update (Navigator.ContextChanged ctxModel) (model.navigator)
          ( ovrModel, _ ) = Overview.update  (Overview.ContextChanged  ctxModel) (model.overview)
          ( rdrModel, _ ) = Reader.update    (Reader.ContextChanged    ctxModel) (model.reader)
          ( idxModel, _ ) = Indexer.update   (Indexer.ContextChanged   ctxModel) (model.indexer)
-         ( mtdModel, _ ) = Metadata.update  (Metadata.ContextChanged  ctxModel) (model.metadata)
          --
          updatedAppModel = { model | context = ctxModel
-                                     --
-                                   , navigator = navModel
-                                   , overview = ovrModel
-                                   , reader = rdrModel
-                                   , indexer = idxModel
-                                   , metadata = mtdModel
+                             --
+                           , metadata  = mtdModel
+                           , navigator = navModel
+                           , overview  = ovrModel
+                           , reader    = rdrModel
+                           , indexer   = idxModel
                            }
          cmd = Cmd.map (CtxMsg) (ctxCmd)
       in
