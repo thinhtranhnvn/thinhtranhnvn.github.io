@@ -1,8 +1,8 @@
-# Chào bạn !
+# Chào Bạn !
 
 Đây là blog cá nhân của Semi Dev. Trang blog này bao gồm những bài viết chia sẻ kiến thức căn bản về sử dụng phần mềm máy tính, lập trình, ngoại ngữ, thủ công nghiệp nói chung, được sưu tầm và trình bày lại với Lộ Trình Học Tập Tự Nhiên.
 
-## Lộ Trình Học Tập Tự Nhiên ?
+> Lộ Trình Học Tập Tự Nhiên ?
 
 À, để giải thích đơn giản thì kiểu lộ trình này có tên gọi xuất phát từ Series "Tự Học Lập Trình Web Một Cách Thật Tự Nhiên" mà mình đã chia sẻ trên nền tảng blog [Viblo.asia](https://viblo.asia/s/Wj53OQQP56m).
 
