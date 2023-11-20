@@ -1,0 +1,44 @@
+
+{% if page.layout == "home" %}
+   {% assign ttl = page.title %}
+   {% assign msg = page.description %}
+   {% assign url = "/begin/" %}
+   {% assign btn = "Start Here" %}
+{% elsif page.layout == "category" %}
+   {% for category in site.data.map.categories %}
+      {% if category.id == page.category %}
+         {% assign ttl = category.title %}
+      {% endif %}
+   {% endfor %}
+   {% assign msg = page.description %}
+   {% assign url = "#main" %}
+   {% assign btn = "Explore" %}
+{% elsif page.layout == "post" %}
+   {% for category in site.data.map.categories %}
+      {% if category.id == page.category %}
+         {% assign ttl = category.title %}
+      {% endif %}
+   {% endfor %}
+   {% assign msg = page.description %}
+   {% assign url = "#main" %}
+   {% assign btn = "Start Reading" %}
+{% elsif page.layout == "oops" %}
+   {% assign ttl = page.title %}
+   {% assign msg = page.description %}
+   {% assign url = "/" %}
+   {% assign btn = "Back to HomePage" %}
+{% else %} {% endif %}
+
+<header id="display" class="bg-faded">
+   <div class="container">
+      <div class="row">
+         <div class="col-sm-8">
+            <h2 class="ttl">{{ ttl }}</h2>
+            <p class="msg">{{ msg }}</p>
+            <a class="btn font-ui text-white bg-primary" href="{{ url }}">
+               {{ btn }} ;
+            </a>
+         </div><!-- .col-sm-8 -->
+      </div><!-- .row -->
+   </div><!-- .container -->
+</header>

@@ -1,0 +1,17 @@
+
+<section id="entry" class="content col-sm-8">
+   <h1 class="hidden">codenart.github.io</h1>
+
+{% for post in site.posts reversed %}
+   {% if post.category == page.category %}
+   <section class="party">
+      <a class="party-util text-primary" href="{{ post.url }}">
+         <i class="fa fa-tag" aria-hidden="true"></i> <span>{{ post.category }}<span>
+      </a>
+      <h2>{{ post.title }}</h2>
+      <div><p>{{ post.content | truncatewords: 63 }}</p></div>
+      <a class="btn text-primary" href="{{ post.url }}">Read More ;</a>
+   </section>
+   {% endif %}
+{% endfor %}
+</section>

@@ -1,2 +1,2 @@
-# thinhtranhnvn.github.io
- A simple blog
+# codenart.github.io
+Personal Blog

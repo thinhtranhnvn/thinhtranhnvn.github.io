@@ -1,0 +1,16 @@
+# Site
+title: Code Nart
+author: Kei Nart
+
+# Linked
+freecodecamp: https://freecodecamp.org/codenart
+codepen: https://codepen.io/codenart
+github: https://github.com/codenart
+youtube: https://youtube.com/keinart
+facebook: https://www.facebook.com/keinart7
+
+# Preference
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed

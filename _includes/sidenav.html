@@ -1,0 +1,40 @@
+<aside id="sidenav" class="ui col-sm-4 col-lg-offset-1 col-lg-3 bg-white">
+   <button class="collapse-toggle text-white bg-primary visible-xs-block" type="button"
+           data-toggle="collapse" data-target="#subnav" aria-expanded="false">
+      <i class="fa fa-list" aria-hidden="true"></i>
+   </button>
+
+   <div id="subnav" class="collapse bg-white" aria-expanded="false">
+      <div class="input-group">
+         <input class="form-control text-white bg-primary" name="filter"
+                type="text" placeholder="Filter tutorials ...">
+         <span class="input-group-addon text-white bg-primary">
+            <i class="fa fa-filter" aria-hidden="true"></i>
+         </span>
+      </div>
+
+      <ul class="nav nav-pills nav-stacked">
+      {% for category in site.data.map.categories %}
+         <li>
+            <a class="nav-heading text-inverse">
+               {{ category.title }}
+            </a>
+            <ol class="nav-list">
+            {% assign postCount = 0 %}
+            {% for post in site.categories[category[id]] reversed %}
+               {% assign postCount = postCount | plus: 1 %}
+               <li>
+                  <a class="nav-link text-primary" href="{{ post.url }}">
+                     {{ postCount }}. {{ post.short }}
+                     <span class="hidden">
+                        {{ post.category}} - {{ post.title }} {{ post.keywords }}
+                     </span>
+                  </a>
+               </li>
+            {% endfor %}
+            </ol>
+         </li>
+      {% endfor %}
+      </ul>
+   </div><!-- .collapse -->
+</aside>
