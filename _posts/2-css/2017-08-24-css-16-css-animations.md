@@ -87,7 +87,7 @@ Let's change our HTML and CSS snippets a little bit to see how this works.
 
 `Result:` [Click here to see the result](https://codepen.io/codenart/full/POKQZY/ "ext")
 
-Our tutorial about [CSS Animations](https://codenart.github.io{{ page.url }} "ext")
+Our tutorial about [CSS Animations](https://thinhtranhnvn.github.io{{ page.url }} "ext")
 has finished. This is also the last tutorial of my CSS for beginners series. For
 further learning, please checkout these resources:
 

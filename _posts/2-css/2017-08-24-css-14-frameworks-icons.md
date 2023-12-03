@@ -65,7 +65,7 @@ You can start learning Bootstrap right now even though our CSS series will be
 continued with few more tutorials to cover basic knowledge about creating
 transition effects for interactive components and animations.
 
-[Start learning Bootstrap here!](https://codenart.github.io/magic/ "ext")
+[Start learning Bootstrap here!](https://thinhtranhnvn.github.io/magic/ "ext")
 
 ## Using icons
 
@@ -106,6 +106,6 @@ Let's create a simple footer with some social links to use on your website.
 </p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-Our tutorial about [Frameworks & Icons](https://codenart.github.io{{ page.url }})
+Our tutorial about [Frameworks & Icons](https://thinhtranhnvn.github.io{{ page.url }})
 has finished. In the next tutorial, we'll talk about creating transition effects
 for interactive components.

@@ -196,4 +196,4 @@ know that HTML and CSS are 2 of 3 must-learn languages. The third language is
 JavaScript which is considered as the next version of English. :D
 
 Wanna learn to speak JavaScript? :D  
-[Click here to join me learning JavaScript.](http://codenart.github.io/smart/ "ext")
+[Click here to join me learning JavaScript.](http://thinhtranhnvn.github.io/smart/ "ext")

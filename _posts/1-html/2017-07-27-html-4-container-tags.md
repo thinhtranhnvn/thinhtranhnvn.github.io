@@ -93,7 +93,7 @@ other HTML elements and produce no effect on the output.
 Add the line of code below to the top of your HTML document (before the `<nav>`);
 Save file and refresh your web browser again.
 
-`<link rel="stylesheet" href="https://codenart.github.io/css/atree.css">`
+`<link rel="stylesheet" href="https://thinhtranhnvn.github.io/css/atree.css">`
 
 How about this time? Do you see a magic? :D  
 That is CSS!
@@ -179,4 +179,4 @@ Our tutorial about HTML containers has finished! It's time for
 > everything in absolute abundance and beauty.  
 > \_\_Sadhguru
 
-[Start learning CSS here!](https://codenart.github.io/beauty/ "ext")
+[Start learning CSS here!](https://thinhtranhnvn.github.io/beauty/ "ext")

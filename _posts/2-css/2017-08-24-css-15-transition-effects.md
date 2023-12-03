@@ -94,5 +94,5 @@ change with the transition effect.
 </p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-Our tutorial about [Transition Effects](https://codenart.github.io{{ page.url }} "ext")
+Our tutorial about [Transition Effects](https://thinhtranhnvn.github.io{{ page.url }} "ext")
 has finished. In the next tutorial, we'll talk about creating Animations.

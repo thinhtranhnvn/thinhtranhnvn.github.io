@@ -15,8 +15,8 @@ keywords: web development, beginner, non-coder, kei nart, free, tutorial, coding
 date: 2017-08-28 05:00:00
 ---
 
-Unlike [HTML](https://codenart.github.io/begin/ "ext") and
-[CSS](https://codenart.github.io/beauty/ "ext"), JavaScript is a programming
+Unlike [HTML](https://thinhtranhnvn.github.io/begin/ "ext") and
+[CSS](https://thinhtranhnvn.github.io/beauty/ "ext"), JavaScript is a programming
 language. With JavaScript, you can teach the computer to think and make decision
 based on certain situation.
 

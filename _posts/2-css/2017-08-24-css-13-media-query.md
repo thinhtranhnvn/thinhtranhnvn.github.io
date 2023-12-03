@@ -63,7 +63,7 @@ To keep this post simple and purely focus on introducing media query syntax, I
 have to move this section to a single article. So, please keep this tab open and
 click on the link below to go to the article:
 
-Tutorial: [Creating a responsive navigation bar](https://codenart.github.io/sample/2017/09/03/sample-2-responsive-navbar.html "ext")
+Tutorial: [Creating a responsive navigation bar](https://thinhtranhnvn.github.io/sample/2017/09/03/sample-2-responsive-navbar.html "ext")
 
 Have you finished the tutorial and successfully created a responsive navigation
 bar? :D  
